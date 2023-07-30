@@ -1,0 +1,116 @@
+disabled_rules:
+  - opening_brace
+  - first_where
+  - object_literal
+  - trailing_whitespace
+  - notification_center_detachment
+# Временное выключение из-за https://github.com/realm/SwiftLint/issues/1573
+  - vertical_parameter_alignment_on_call
+  - vertical_parameter_alignment
+
+ 
+opt_in_rules:
+  - identifier_name
+  - closure_spacing
+  - empty_count
+  - explicit_init
+  - fatal_error_message
+  - force_unwrapping
+  - implicit_return
+  - overridden_super_call
+  - prohibited_super_call
+  - redundant_nil_coalescing
+  - operator_usage_whitespace
+  - function_default_parameter_at_end
+
+  - array_init
+  - contains_over_first_not_nil
+  - joined_default_parameter
+  - line_length
+  - literal_expression_end_indentation
+  - multiline_parameters
+  - override_in_extension
+  - pattern_matching_keywords
+  - redundant_string_enum_value
+  - sorted_first_last
+  - unneeded_parentheses_in_closure_argument
+
+  - nimble_operator
+  - quick_discouraged_call
+  - quick_discouraged_focused_test
+  - quick_discouraged_pending_test
+  - single_test_class
+
+  # TODO: maybe turn it on one day... (a lot of fixes)
+  - closure_end_indentation
+  - let_var_whitespace
+  - implicitly_unwrapped_optional
+  - private_outlet
+  - sorted_imports
+  - strict_fileprivate
+  - switch_case_on_newline
+#  - attributes
+
+cyclomatic_complexity:
+  warning: 25
+  error: 30
+
+type_body_length:
+  warning: 500
+  error: 700
+
+file_length:
+  warning: 1000
+  error: 1300
+
+line_length:
+  ignores_comments: true
+  warning: 180
+  error: 200
+
+large_tuple: 
+  warning: 4
+
+type_name:
+  min_length: 3
+  max_length:
+    warning: 50
+    error: 60
+  excluded:
+    - Id
+    - Ad
+
+identifier_name:
+  excluded:
+    - id
+    - kp
+
+function_body_length:
+  warning: 60
+  error: 150
+
+function_parameter_count:
+  warning: 7
+  error: 10
+
+nesting:
+  type_level:
+    warning: 10
+    error: 15
+
+empty_count:
+  severity: warning
+
+#trailing_whitespace:
+#  ignores_empty_lines: true
+#  ignores_comments: true
+#
+#attributes:
+#  always_on_same_line: ["@IBAction", "@IBOutlet", "@IBInspectable"]
+#  always_on_line_above: ["@IBDesignable", "@UIApplicationMain", "@discardableResult", "@objc"]
+
+superfluous_disable_command: warning
+trailing_semicolon: error
+
+reporter: "xcode"
+
