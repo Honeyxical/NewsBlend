@@ -23,6 +23,13 @@
 		698339DA2A76857F00909649 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 698339D92A76857F00909649 /* Alamofire */; };
 		69833A082A76A6E100909649 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69833A072A76A6E100909649 /* NewsModel.swift */; };
 		69833A3D2A76AEA400909649 /* FeedContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69833A3C2A76AEA400909649 /* FeedContracts.swift */; };
+		69BB2B2F2A7984AE00B5BDE1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B2E2A7984AE00B5BDE1 /* SettingsView.swift */; };
+		69BB2B322A7984E200B5BDE1 /* SettingCoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B312A7984E200B5BDE1 /* SettingCoreDataService.swift */; };
+		69BB2B342A7984F400B5BDE1 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B332A7984F400B5BDE1 /* SettingsRouter.swift */; };
+		69BB2B362A79850B00B5BDE1 /* SettingsPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B352A79850B00B5BDE1 /* SettingsPresentor.swift */; };
+		69BB2B382A79851D00B5BDE1 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B372A79851D00B5BDE1 /* SettingsInteractor.swift */; };
+		69BB2B3A2A79853C00B5BDE1 /* SettingsContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B392A79853C00B5BDE1 /* SettingsContracts.swift */; };
+		69BB2B3C2A79855000B5BDE1 /* SettingsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B3B2A79855000B5BDE1 /* SettingsAssembly.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +48,13 @@
 		698339CB2A767DB900909649 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69833A072A76A6E100909649 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		69833A3C2A76AEA400909649 /* FeedContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContracts.swift; sourceTree = "<group>"; };
+		69BB2B2E2A7984AE00B5BDE1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		69BB2B312A7984E200B5BDE1 /* SettingCoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoreDataService.swift; sourceTree = "<group>"; };
+		69BB2B332A7984F400B5BDE1 /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
+		69BB2B352A79850B00B5BDE1 /* SettingsPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresentor.swift; sourceTree = "<group>"; };
+		69BB2B372A79851D00B5BDE1 /* SettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
+		69BB2B392A79853C00B5BDE1 /* SettingsContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsContracts.swift; sourceTree = "<group>"; };
+		69BB2B3B2A79855000B5BDE1 /* SettingsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAssembly.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +117,8 @@
 				698339DB2A76882C00909649 /* Application */,
 				69833A332A76AE0700909649 /* DetailModule */,
 				69833A322A76ADFC00909649 /* FeedModule */,
-				698339DC2A76884400909649 /* Resources */,
 				69833A342A76AE1100909649 /* SettingModule */,
+				698339DC2A76884400909649 /* Resources */,
 			);
 			path = NewsBlend;
 			sourceTree = "<group>";
@@ -231,6 +245,7 @@
 		69833A3E2A76B15B00909649 /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
+				69BB2B3B2A79855000B5BDE1 /* SettingsAssembly.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -238,6 +253,7 @@
 		69833A3F2A76B16400909649 /* Contracts */ = {
 			isa = PBXGroup;
 			children = (
+				69BB2B392A79853C00B5BDE1 /* SettingsContracts.swift */,
 			);
 			path = Contracts;
 			sourceTree = "<group>";
@@ -245,6 +261,7 @@
 		69833A402A76B16B00909649 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				69BB2B372A79851D00B5BDE1 /* SettingsInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -252,6 +269,7 @@
 		69833A412A76B17300909649 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				69BB2B352A79850B00B5BDE1 /* SettingsPresentor.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -259,6 +277,7 @@
 		69833A422A76B17A00909649 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				69BB2B332A7984F400B5BDE1 /* SettingsRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -266,6 +285,7 @@
 		69833A432A76B18000909649 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				69BB2B302A7984C400B5BDE1 /* CoreData */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -273,6 +293,7 @@
 		69833A442A76B18B00909649 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				69BB2B2E2A7984AE00B5BDE1 /* SettingsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -324,6 +345,14 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		69BB2B302A7984C400B5BDE1 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				69BB2B312A7984E200B5BDE1 /* SettingCoreDataService.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -426,18 +455,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69BB2B3C2A79855000B5BDE1 /* SettingsAssembly.swift in Sources */,
 				69796EC82A78FBE500EB6714 /* FeedCellView.swift in Sources */,
+				69BB2B362A79850B00B5BDE1 /* SettingsPresentor.swift in Sources */,
 				69833A3D2A76AEA400909649 /* FeedContracts.swift in Sources */,
 				69796EBE2A78CA5000EB6714 /* FeedAssembly.swift in Sources */,
+				69BB2B3A2A79853C00B5BDE1 /* SettingsContracts.swift in Sources */,
 				6917487C2A77F92E003F00D6 /* FeedNetworkService.swift in Sources */,
 				69796EC42A78D55600EB6714 /* FeedViewController.swift in Sources */,
 				69833A082A76A6E100909649 /* NewsModel.swift in Sources */,
 				698339BE2A767DB800909649 /* AppDelegate.swift in Sources */,
 				69796EC22A78D0BC00EB6714 /* FeedInteractor.swift in Sources */,
 				69796EC62A78E35B00EB6714 /* FeedRouter.swift in Sources */,
+				69BB2B342A7984F400B5BDE1 /* SettingsRouter.swift in Sources */,
 				698339C02A767DB800909649 /* SceneDelegate.swift in Sources */,
+				69BB2B2F2A7984AE00B5BDE1 /* SettingsView.swift in Sources */,
+				69BB2B382A79851D00B5BDE1 /* SettingsInteractor.swift in Sources */,
 				691748802A77F967003F00D6 /* FeedCoreDataService.swift in Sources */,
 				69796EC02A78CF9E00EB6714 /* FeedPresentor.swift in Sources */,
+				69BB2B322A7984E200B5BDE1 /* SettingCoreDataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

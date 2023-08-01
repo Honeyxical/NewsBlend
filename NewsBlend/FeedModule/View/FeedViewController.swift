@@ -71,7 +71,7 @@ extension FeedViewController: FeedViewInputProtocol {
     }
 
     func showLoader() {
-
+        
     }
 
     func hideLoader() {
