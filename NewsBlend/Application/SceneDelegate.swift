@@ -1,9 +1,4 @@
-//
-//  SceneDelegate.swift
-//  NewsBlend
-//
 //  Created by илья on 30.07.23.
-//
 
 import UIKit
 
@@ -15,7 +10,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: windowScene)
-        let navigationController = UINavigationController(rootViewController: ViewController())
+        let navigationController = UINavigationController(rootViewController: FeedAssembly.build())
         self.window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }

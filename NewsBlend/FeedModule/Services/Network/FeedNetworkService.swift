@@ -1,0 +1,17 @@
+//  Created by илья on 31.07.23.
+
+import Alamofire
+import Foundation
+
+class FeedNetworkService: FeedNetworkServiceProtocol {
+    private let APIKey = "71ecb82f10374ce28448c08a38e5afda"
+    
+    func getNewsFromNewsApi(completiton: @escaping(Data) -> Void) {
+        AF.request("https://newsapi.org/v2/everything?domains=techcrunch.com&pageSize=1&apiKey=\(APIKey)").response { response in
+            guard let data = response.data else { return }
+            DispatchQueue.main.async {
+                completiton(data)
+            }
+        }
+    }
+}

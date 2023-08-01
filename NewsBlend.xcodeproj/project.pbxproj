@@ -7,22 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6917487C2A77F92E003F00D6 /* FeedNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917487B2A77F92E003F00D6 /* FeedNetworkService.swift */; };
+		691748802A77F967003F00D6 /* FeedCoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917487F2A77F967003F00D6 /* FeedCoreDataService.swift */; };
+		69796EBE2A78CA5000EB6714 /* FeedAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69796EBD2A78CA5000EB6714 /* FeedAssembly.swift */; };
+		69796EC02A78CF9E00EB6714 /* FeedPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69796EBF2A78CF9E00EB6714 /* FeedPresentor.swift */; };
+		69796EC22A78D0BC00EB6714 /* FeedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69796EC12A78D0BC00EB6714 /* FeedInteractor.swift */; };
+		69796EC42A78D55600EB6714 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69796EC32A78D55600EB6714 /* FeedViewController.swift */; };
+		69796EC62A78E35B00EB6714 /* FeedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69796EC52A78E35B00EB6714 /* FeedRouter.swift */; };
+		69796EC82A78FBE500EB6714 /* FeedCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69796EC72A78FBE500EB6714 /* FeedCellView.swift */; };
 		698339BE2A767DB800909649 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698339BD2A767DB800909649 /* AppDelegate.swift */; };
 		698339C02A767DB800909649 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698339BF2A767DB800909649 /* SceneDelegate.swift */; };
-		698339C22A767DB800909649 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698339C12A767DB800909649 /* ViewController.swift */; };
 		698339C72A767DB900909649 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 698339C62A767DB900909649 /* Assets.xcassets */; };
 		698339D42A7684E200909649 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 698339D32A7684E200909649 /* SnapKit */; };
 		698339D72A76856A00909649 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 698339D62A76856A00909649 /* Kingfisher */; };
 		698339DA2A76857F00909649 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 698339D92A76857F00909649 /* Alamofire */; };
+		69833A082A76A6E100909649 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69833A072A76A6E100909649 /* NewsModel.swift */; };
+		69833A3D2A76AEA400909649 /* FeedContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69833A3C2A76AEA400909649 /* FeedContracts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6917487B2A77F92E003F00D6 /* FeedNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedNetworkService.swift; sourceTree = "<group>"; };
+		6917487F2A77F967003F00D6 /* FeedCoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoreDataService.swift; sourceTree = "<group>"; };
+		69796EBD2A78CA5000EB6714 /* FeedAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAssembly.swift; sourceTree = "<group>"; };
+		69796EBF2A78CF9E00EB6714 /* FeedPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresentor.swift; sourceTree = "<group>"; };
+		69796EC12A78D0BC00EB6714 /* FeedInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedInteractor.swift; sourceTree = "<group>"; };
+		69796EC32A78D55600EB6714 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		69796EC52A78E35B00EB6714 /* FeedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRouter.swift; sourceTree = "<group>"; };
+		69796EC72A78FBE500EB6714 /* FeedCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCellView.swift; sourceTree = "<group>"; };
 		698339BA2A767DB800909649 /* NewsBlend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsBlend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		698339BD2A767DB800909649 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		698339BF2A767DB800909649 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		698339C12A767DB800909649 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		698339C62A767DB900909649 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		698339CB2A767DB900909649 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69833A072A76A6E100909649 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
+		69833A3C2A76AEA400909649 /* FeedContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContracts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +57,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6917487D2A77F942003F00D6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6917487B2A77F92E003F00D6 /* FeedNetworkService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		6917487E2A77F947003F00D6 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				6917487F2A77F967003F00D6 /* FeedCoreDataService.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		69796EC92A78FCC300EB6714 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				69796EC72A78FBE500EB6714 /* FeedCellView.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		698339B12A767DB800909649 = {
 			isa = PBXGroup;
 			children = (
@@ -58,13 +100,230 @@
 		698339BC2A767DB800909649 /* NewsBlend */ = {
 			isa = PBXGroup;
 			children = (
-				698339BD2A767DB800909649 /* AppDelegate.swift */,
+				698339DB2A76882C00909649 /* Application */,
+				69833A332A76AE0700909649 /* DetailModule */,
+				69833A322A76ADFC00909649 /* FeedModule */,
+				698339DC2A76884400909649 /* Resources */,
+				69833A342A76AE1100909649 /* SettingModule */,
+			);
+			path = NewsBlend;
+			sourceTree = "<group>";
+		};
+		698339DB2A76882C00909649 /* Application */ = {
+			isa = PBXGroup;
+			children = (
 				698339BF2A767DB800909649 /* SceneDelegate.swift */,
-				698339C12A767DB800909649 /* ViewController.swift */,
+				698339BD2A767DB800909649 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		698339DC2A76884400909649 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				698339C62A767DB900909649 /* Assets.xcassets */,
 				698339CB2A767DB900909649 /* Info.plist */,
 			);
-			path = NewsBlend;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		69833A322A76ADFC00909649 /* FeedModule */ = {
+			isa = PBXGroup;
+			children = (
+				69833A3B2A76AE7400909649 /* Assembly */,
+				69833A3A2A76AE6B00909649 /* Contracts */,
+				69833A392A76AE6300909649 /* Interactor */,
+				69833A382A76AE5900909649 /* Presenter */,
+				69833A372A76AE5200909649 /* Router */,
+				69833A362A76AE4B00909649 /* Services */,
+				69833A352A76AE4000909649 /* View */,
+			);
+			path = FeedModule;
+			sourceTree = "<group>";
+		};
+		69833A332A76AE0700909649 /* DetailModule */ = {
+			isa = PBXGroup;
+			children = (
+				69833A452A76B19F00909649 /* Assembly */,
+				69833A462A76B1A500909649 /* Contracts */,
+				69833A472A76B1AC00909649 /* Interactor */,
+				69833A482A76B1B300909649 /* Presenter */,
+				69833A492A76B1BA00909649 /* Router */,
+				69833A4A2A76B1C000909649 /* Services */,
+				69833A4B2A76B1C900909649 /* View */,
+			);
+			path = DetailModule;
+			sourceTree = "<group>";
+		};
+		69833A342A76AE1100909649 /* SettingModule */ = {
+			isa = PBXGroup;
+			children = (
+				69833A3E2A76B15B00909649 /* Assembly */,
+				69833A3F2A76B16400909649 /* Contracts */,
+				69833A402A76B16B00909649 /* Interactor */,
+				69833A412A76B17300909649 /* Presenter */,
+				69833A422A76B17A00909649 /* Router */,
+				69833A432A76B18000909649 /* Services */,
+				69833A442A76B18B00909649 /* View */,
+			);
+			path = SettingModule;
+			sourceTree = "<group>";
+		};
+		69833A352A76AE4000909649 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				69796EC92A78FCC300EB6714 /* Cells */,
+				69796EC32A78D55600EB6714 /* FeedViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		69833A362A76AE4B00909649 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				6917487E2A77F947003F00D6 /* CoreData */,
+				6917487D2A77F942003F00D6 /* Network */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		69833A372A76AE5200909649 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				69796EC52A78E35B00EB6714 /* FeedRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		69833A382A76AE5900909649 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				69796EBF2A78CF9E00EB6714 /* FeedPresentor.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		69833A392A76AE6300909649 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				69796EC12A78D0BC00EB6714 /* FeedInteractor.swift */,
+				69833A072A76A6E100909649 /* NewsModel.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		69833A3A2A76AE6B00909649 /* Contracts */ = {
+			isa = PBXGroup;
+			children = (
+				69833A3C2A76AEA400909649 /* FeedContracts.swift */,
+			);
+			path = Contracts;
+			sourceTree = "<group>";
+		};
+		69833A3B2A76AE7400909649 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				69796EBD2A78CA5000EB6714 /* FeedAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		69833A3E2A76B15B00909649 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		69833A3F2A76B16400909649 /* Contracts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Contracts;
+			sourceTree = "<group>";
+		};
+		69833A402A76B16B00909649 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		69833A412A76B17300909649 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		69833A422A76B17A00909649 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		69833A432A76B18000909649 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		69833A442A76B18B00909649 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		69833A452A76B19F00909649 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		69833A462A76B1A500909649 /* Contracts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Contracts;
+			sourceTree = "<group>";
+		};
+		69833A472A76B1AC00909649 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		69833A482A76B1B300909649 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		69833A492A76B1BA00909649 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		69833A4A2A76B1C000909649 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		69833A4B2A76B1C900909649 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,7 +417,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -167,9 +426,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				698339C22A767DB800909649 /* ViewController.swift in Sources */,
+				69796EC82A78FBE500EB6714 /* FeedCellView.swift in Sources */,
+				69833A3D2A76AEA400909649 /* FeedContracts.swift in Sources */,
+				69796EBE2A78CA5000EB6714 /* FeedAssembly.swift in Sources */,
+				6917487C2A77F92E003F00D6 /* FeedNetworkService.swift in Sources */,
+				69796EC42A78D55600EB6714 /* FeedViewController.swift in Sources */,
+				69833A082A76A6E100909649 /* NewsModel.swift in Sources */,
 				698339BE2A767DB800909649 /* AppDelegate.swift in Sources */,
+				69796EC22A78D0BC00EB6714 /* FeedInteractor.swift in Sources */,
+				69796EC62A78E35B00EB6714 /* FeedRouter.swift in Sources */,
 				698339C02A767DB800909649 /* SceneDelegate.swift in Sources */,
+				691748802A77F967003F00D6 /* FeedCoreDataService.swift in Sources */,
+				69796EC02A78CF9E00EB6714 /* FeedPresentor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,7 +567,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9N9JA5WXC4;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NewsBlend/Info.plist;
+				INFOPLIST_FILE = NewsBlend/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "News Blend";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.magazines-and-newspapers";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -331,7 +599,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9N9JA5WXC4;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NewsBlend/Info.plist;
+				INFOPLIST_FILE = NewsBlend/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "News Blend";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.magazines-and-newspapers";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
