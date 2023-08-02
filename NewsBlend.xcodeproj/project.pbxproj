@@ -30,6 +30,7 @@
 		69BB2B382A79851D00B5BDE1 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B372A79851D00B5BDE1 /* SettingsInteractor.swift */; };
 		69BB2B3A2A79853C00B5BDE1 /* SettingsContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B392A79853C00B5BDE1 /* SettingsContracts.swift */; };
 		69BB2B3C2A79855000B5BDE1 /* SettingsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B3B2A79855000B5BDE1 /* SettingsAssembly.swift */; };
+		69BB2B3F2A7A3B1800B5BDE1 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B3E2A7A3B1800B5BDE1 /* Date + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		69BB2B372A79851D00B5BDE1 /* SettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
 		69BB2B392A79853C00B5BDE1 /* SettingsContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsContracts.swift; sourceTree = "<group>"; };
 		69BB2B3B2A79855000B5BDE1 /* SettingsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAssembly.swift; sourceTree = "<group>"; };
+		69BB2B3E2A7A3B1800B5BDE1 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 		698339BC2A767DB800909649 /* NewsBlend */ = {
 			isa = PBXGroup;
 			children = (
+				69BB2B3D2A7A3AF000B5BDE1 /* Extension */,
 				698339DB2A76882C00909649 /* Application */,
 				69833A332A76AE0700909649 /* DetailModule */,
 				69833A322A76ADFC00909649 /* FeedModule */,
@@ -355,6 +358,14 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		69BB2B3D2A7A3AF000B5BDE1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				69BB2B3E2A7A3B1800B5BDE1 /* Date + Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -470,6 +481,7 @@
 				69BB2B342A7984F400B5BDE1 /* SettingsRouter.swift in Sources */,
 				698339C02A767DB800909649 /* SceneDelegate.swift in Sources */,
 				69BB2B2F2A7984AE00B5BDE1 /* SettingsView.swift in Sources */,
+				69BB2B3F2A7A3B1800B5BDE1 /* Date + Extension.swift in Sources */,
 				69BB2B382A79851D00B5BDE1 /* SettingsInteractor.swift in Sources */,
 				691748802A77F967003F00D6 /* FeedCoreDataService.swift in Sources */,
 				69796EC02A78CF9E00EB6714 /* FeedPresentor.swift in Sources */,

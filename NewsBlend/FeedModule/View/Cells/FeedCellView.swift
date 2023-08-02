@@ -1,19 +1,41 @@
 //  Created by илья on 01.08.23.
 
 import Foundation
+import Kingfisher
 import UIKit
 
 class FeedCellView: UICollectionViewCell {
+    private var imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 20
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+
     private var title: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
+        title.numberOfLines = 3
         return title
     }()
 
-    internal var shortDescription: UILabel = {
-        let description = UILabel()
-        description.translatesAutoresizingMaskIntoConstraints = false
-        return description
+    private var author: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .lightGray
+        label.numberOfLines = 2
+        return label
+    }()
+
+    private var publishedTime: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 12, weight: .thin)
+        label.textColor = .systemBlue
+        return label
     }()
 
     override init(frame: CGRect) {
@@ -21,23 +43,32 @@ class FeedCellView: UICollectionViewCell {
         setupLayout()
     }
 
-    func setData(title: String, shortDescription: String) {
+    func setData(title: String, author: String, imageUrl: String, publishedTime: String) {
         self.title.text = title
-        self.shortDescription.text = shortDescription
+        self.author.text = "By " + author
+        self.imageView.kf.setImage(with: URL(string: imageUrl))
+        self.publishedTime.text = publishedTime
     }
 
     private func setupLayout() {
+        addSubview(imageView)
         addSubview(title)
-        addSubview(shortDescription)
+        addSubview(author)
+        addSubview(publishedTime)
 
         NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalTo: topAnchor, constant: 3),
-            title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            title.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 10),
-            title.heightAnchor.constraint(equalToConstant: 15),
-            shortDescription.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10),
-            shortDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            shortDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 10)
+            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 100),
+            title.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
+            title.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            title.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            author.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5),
+            author.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
+            author.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            publishedTime.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            publishedTime.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
         ])
     }
 
