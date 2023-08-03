@@ -19,6 +19,10 @@ extension FeedPresentor: FeedViewOutputProtocol {
     func loadData() {
         interactor.loadData()
     }
+
+    func loadHotData() {
+        interactor.loadHotData()
+    }
 }
 
 extension FeedPresentor: FeedInteractorOutputProtocol {
@@ -27,8 +31,13 @@ extension FeedPresentor: FeedInteractorOutputProtocol {
         view.reloadData()
     }
 
+    func didReceive(hot articles: [Articles]) {
+        view.set(hot: articles)
+        view.reloadData()
+    }
+
     func didReceiveFail() {
-        print("Fail get data")
+        view.displayLotty()
     }
 }
 

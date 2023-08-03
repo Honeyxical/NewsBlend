@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		6917487C2A77F92E003F00D6 /* FeedNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917487B2A77F92E003F00D6 /* FeedNetworkService.swift */; };
 		691748802A77F967003F00D6 /* FeedCoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917487F2A77F967003F00D6 /* FeedCoreDataService.swift */; };
+		691C01672A7B9028004E22FB /* BreakingNewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C01662A7B9028004E22FB /* BreakingNewsView.swift */; };
+		691C01692A7B91FF004E22FB /* TrendingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C01682A7B91FF004E22FB /* TrendingsCell.swift */; };
+		691C016B2A7BA72D004E22FB /* Color + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C016A2A7BA72D004E22FB /* Color + Extension.swift */; };
 		69796EBE2A78CA5000EB6714 /* FeedAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69796EBD2A78CA5000EB6714 /* FeedAssembly.swift */; };
 		69796EC02A78CF9E00EB6714 /* FeedPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69796EBF2A78CF9E00EB6714 /* FeedPresentor.swift */; };
 		69796EC22A78D0BC00EB6714 /* FeedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69796EC12A78D0BC00EB6714 /* FeedInteractor.swift */; };
@@ -36,6 +39,9 @@
 /* Begin PBXFileReference section */
 		6917487B2A77F92E003F00D6 /* FeedNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedNetworkService.swift; sourceTree = "<group>"; };
 		6917487F2A77F967003F00D6 /* FeedCoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoreDataService.swift; sourceTree = "<group>"; };
+		691C01662A7B9028004E22FB /* BreakingNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakingNewsView.swift; sourceTree = "<group>"; };
+		691C01682A7B91FF004E22FB /* TrendingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingsCell.swift; sourceTree = "<group>"; };
+		691C016A2A7BA72D004E22FB /* Color + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + Extension.swift"; sourceTree = "<group>"; };
 		69796EBD2A78CA5000EB6714 /* FeedAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAssembly.swift; sourceTree = "<group>"; };
 		69796EBF2A78CF9E00EB6714 /* FeedPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresentor.swift; sourceTree = "<group>"; };
 		69796EC12A78D0BC00EB6714 /* FeedInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedInteractor.swift; sourceTree = "<group>"; };
@@ -89,10 +95,19 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		691C01652A7B8FED004E22FB /* ChildView */ = {
+			isa = PBXGroup;
+			children = (
+				691C01662A7B9028004E22FB /* BreakingNewsView.swift */,
+			);
+			path = ChildView;
+			sourceTree = "<group>";
+		};
 		69796EC92A78FCC300EB6714 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				69796EC72A78FBE500EB6714 /* FeedCellView.swift */,
+				691C01682A7B91FF004E22FB /* TrendingsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -190,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				69796EC92A78FCC300EB6714 /* Cells */,
+				691C01652A7B8FED004E22FB /* ChildView */,
 				69796EC32A78D55600EB6714 /* FeedViewController.swift */,
 			);
 			path = View;
@@ -362,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				69BB2B3E2A7A3B1800B5BDE1 /* Date + Extension.swift */,
+				691C016A2A7BA72D004E22FB /* Color + Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -470,6 +487,7 @@
 				69796EC82A78FBE500EB6714 /* FeedCellView.swift in Sources */,
 				69BB2B362A79850B00B5BDE1 /* SettingsPresentor.swift in Sources */,
 				69833A3D2A76AEA400909649 /* FeedContracts.swift in Sources */,
+				691C01692A7B91FF004E22FB /* TrendingsCell.swift in Sources */,
 				69796EBE2A78CA5000EB6714 /* FeedAssembly.swift in Sources */,
 				69BB2B3A2A79853C00B5BDE1 /* SettingsContracts.swift in Sources */,
 				6917487C2A77F92E003F00D6 /* FeedNetworkService.swift in Sources */,
@@ -478,8 +496,10 @@
 				698339BE2A767DB800909649 /* AppDelegate.swift in Sources */,
 				69796EC22A78D0BC00EB6714 /* FeedInteractor.swift in Sources */,
 				69796EC62A78E35B00EB6714 /* FeedRouter.swift in Sources */,
+				691C016B2A7BA72D004E22FB /* Color + Extension.swift in Sources */,
 				69BB2B342A7984F400B5BDE1 /* SettingsRouter.swift in Sources */,
 				698339C02A767DB800909649 /* SceneDelegate.swift in Sources */,
+				691C01672A7B9028004E22FB /* BreakingNewsView.swift in Sources */,
 				69BB2B2F2A7984AE00B5BDE1 /* SettingsView.swift in Sources */,
 				69BB2B3F2A7A3B1800B5BDE1 /* Date + Extension.swift in Sources */,
 				69BB2B382A79851D00B5BDE1 /* SettingsInteractor.swift in Sources */,

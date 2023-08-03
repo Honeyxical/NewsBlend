@@ -61,12 +61,15 @@ class FeedCellView: UICollectionViewCell {
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             imageView.widthAnchor.constraint(equalToConstant: 100),
+
             title.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
             title.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             title.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+
             author.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5),
             author.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
             author.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+
             publishedTime.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             publishedTime.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
         ])

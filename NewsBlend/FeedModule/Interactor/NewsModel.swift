@@ -7,8 +7,15 @@ struct NewsModel: Decodable {
 }
 
 struct Articles: Decodable {
-    let author: String
+    let source: Source
+    let author: String?
     let title: String
     let description: String
     let urlToImage: String
+    var publishedAt: String
+}
+
+struct Source: Decodable {
+    let id: String?
+    let name: String
 }
