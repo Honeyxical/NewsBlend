@@ -30,6 +30,7 @@ final class FeedViewController: UIViewController {
         view.backgroundColor = .white
         addChildVC()
         setupLayout()
+        configuringNavigationBar()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +50,13 @@ final class FeedViewController: UIViewController {
             breakingNewsVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             breakingNewsVC.view.heightAnchor.constraint(equalToConstant: view.frame.height / 3)
         ])
+    }
+
+    private func configuringNavigationBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: nil)
     }
 
     private func setupLayout() {
