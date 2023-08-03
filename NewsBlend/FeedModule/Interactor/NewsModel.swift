@@ -3,16 +3,17 @@
 import Foundation
 
 struct NewsModel: Decodable {
-    let articles: [Articles]
+    let articles: [Article]
 }
 
-struct Articles: Decodable {
+struct Article: Decodable {
     let source: Source
     let author: String?
     let title: String
     let description: String
     let urlToImage: String
     var publishedAt: String
+    let content: String
 }
 
 struct Source: Decodable {

@@ -5,7 +5,7 @@ import UIKit
 
 class BreakingNewsView: UIViewController {
 
-    private var articles: [Articles] = []
+    private var articles: [Article] = []
 
     private let sectionName: UILabel = {
         let title = UILabel()
@@ -72,7 +72,7 @@ extension BreakingNewsView: UICollectionViewDelegate, UICollectionViewDataSource
         return layout
     }
 
-    func setData(articles: [Articles]) {
+    func setData(articles: [Article]) {
         self.articles = articles
         reloadData()
     }

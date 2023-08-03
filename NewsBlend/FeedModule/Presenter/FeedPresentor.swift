@@ -26,12 +26,12 @@ extension FeedPresentor: FeedViewOutputProtocol {
 }
 
 extension FeedPresentor: FeedInteractorOutputProtocol {
-    func didReceive(articles: [Articles]) {
+    func didReceive(articles: [Article]) {
         view.set(articles: articles)
         view.reloadData()
     }
 
-    func didReceive(hot articles: [Articles]) {
+    func didReceive(hot articles: [Article]) {
         view.set(hot: articles)
         view.reloadData()
     }

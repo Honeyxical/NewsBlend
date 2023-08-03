@@ -6,7 +6,7 @@ import UIKit
 final class FeedViewController: UIViewController {
     var output: FeedViewOutputProtocol?
     private lazy var breakingNewsVC = BreakingNewsView() // Need to remove strong link
-    private var articles: [Articles] = []
+    private var articles: [Article] = []
 
     private let sectionName: UILabel = {
         let title = UILabel()
@@ -102,11 +102,11 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 extension FeedViewController: FeedViewInputProtocol {
-    func set(hot articles: [Articles]) {
+    func set(hot articles: [Article]) {
         breakingNewsVC.setData(articles: articles)
     }
 
-    func set(articles: [Articles]) {
+    func set(articles: [Article]) {
         self.articles = articles
     }
 

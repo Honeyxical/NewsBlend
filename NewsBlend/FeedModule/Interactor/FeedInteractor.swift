@@ -34,7 +34,7 @@ extension FeedInteractor: FeedInteractorInputProtocol {
         }
     }
     
-    private func setDate(articles: [Articles]) -> [Articles]{
+    private func setDate(articles: [Article]) -> [Article]{
         var articles = articles
         for counter in 0...articles.count - 1 {
             articles[counter].publishedAt = Date().getDifferenceFromNowAndDate( articles[counter].publishedAt) ?? ""
