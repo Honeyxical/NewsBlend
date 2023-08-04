@@ -4,16 +4,17 @@ import Foundation
 import UIKit
 
 class DetailAssembly {
-    static func build() -> UIViewController {
+    static func build(artile: Article) -> UIViewController {
         let view = DetailView()
         let interactor = DetailInteractor(detailDataService: DetailCoreDataService())
         let router = DetailRouter()
         let presentor = DetailPresentor(view: view,
                                         interactor: interactor,
-                                        router: router)
+                                        router: router, article: artile)
         router.output = presentor
         interactor.output = presentor
         view.output = presentor
+        router.feedRouter = FeedRouter()
         return view
     }
 }

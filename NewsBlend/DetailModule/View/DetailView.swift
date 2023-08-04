@@ -81,6 +81,7 @@ class DetailView: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         scrollView.contentSize = contentRect.size
+        output?.loadData()
     }
 
     func setupLayout() {
@@ -101,10 +102,6 @@ extension DetailView: DetailViewInputProtocol {
         self.content.text = article.content
         self.author.text = article.author
         self.publishedAt.text = article.publishedAt
-    }
-
-    func reloadData() {
-
     }
 
     func showLoader() {

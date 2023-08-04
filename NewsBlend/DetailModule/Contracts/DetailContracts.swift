@@ -31,7 +31,7 @@ import Foundation
 
     // Interactor Output
     protocol DetailInteractorOutputProtocol: AnyObject {
-        func didReceive(article: Article)
+        func didReceive()
         func didReceiveFail()
     }
 

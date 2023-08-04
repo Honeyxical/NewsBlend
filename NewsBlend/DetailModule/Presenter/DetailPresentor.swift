@@ -6,17 +6,18 @@ class DetailPresentor {
     let view: DetailViewInputProtocol
     let interactor: DetailInteractorInputProtocol
     let router: DetailRouterInputProtocol
+    let article: Article
 
-    init(view: DetailViewInputProtocol, interactor: DetailInteractorInputProtocol, router: DetailRouterInputProtocol) {
+    init(view: DetailViewInputProtocol, interactor: DetailInteractorInputProtocol, router: DetailRouterInputProtocol, article: Article) {
         self.view = view
         self.interactor = interactor
         self.router = router
+        self.article = article
     }
 }
 
 extension DetailPresentor: DetailInteractorOutputProtocol {
-    func didReceive(article: Article) {
-
+    func didReceive() {
     }
 
     func didReceiveFail() {
@@ -26,7 +27,7 @@ extension DetailPresentor: DetailInteractorOutputProtocol {
 
 extension DetailPresentor: DetailViewOutputProtocol {
     func loadData() {
-
+        view.set(article: article)
     }
 }
 
