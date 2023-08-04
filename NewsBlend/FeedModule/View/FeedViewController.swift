@@ -6,14 +6,8 @@ import UIKit
 final class FeedViewController: UIViewController {
     var output: FeedViewOutputProtocol?
     private lazy var breakingNewsVC = BreakingNewsView() // Need to remove strong link
+    private lazy var loader = ReusableViews.getLoader(view: self.view)
     private var articles: [Article] = []
-
-    private lazy var loader: UIActivityIndicatorView = {
-        let loader = UIActivityIndicatorView(frame: view.frame)
-        loader.style = .medium
-        loader.startAnimating()
-        return loader
-    }()
 
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
