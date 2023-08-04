@@ -21,7 +21,7 @@ import Foundation
 
     // View Output
     protocol DetailViewOutputProtocol {
-        func loadData()
+        func viewDidAppear()
     }
 
     // Interactor Input

@@ -7,6 +7,8 @@ import UIKit
 class DetailView: UIViewController {
     var output: DetailViewOutputProtocol?
 
+    private lazy var loader = ReusableViews.getLoader(view: view)
+
     private lazy var contentRect: CGRect = scrollView.subviews.reduce(into: .zero) { rect, view in
         rect = rect.union(view.frame)
     }
@@ -72,14 +74,14 @@ class DetailView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLayout()
-        setupScrollView()
+        view.backgroundColor = .white
+        showLoader()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         scrollView.contentSize = contentRect.size
-        output?.loadData()
+        output?.viewDidAppear()
     }
 
     func setupLayout() {
@@ -103,10 +105,13 @@ extension DetailView: DetailViewInputProtocol {
     }
 
     func showLoader() {
-
+        view.addSubview(loader)
     }
 
     func hideLoader() {
+        loader.removeFromSuperview()
+        setupLayout()
+        setupScrollView()
 
     }
 
