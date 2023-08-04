@@ -8,6 +8,15 @@ final class FeedViewController: UIViewController {
     private lazy var breakingNewsVC = BreakingNewsView() // Need to remove strong link
     private var articles: [Article] = []
 
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.delegate = self
+        scrollView.contentSize = CGSize(width: view.frame.width, height: 1025)
+        return scrollView
+    }()
+
     private let sectionName: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
@@ -21,59 +30,27 @@ final class FeedViewController: UIViewController {
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.register(FeedCellView.self, forCellWithReuseIdentifier: "Item")
         collection.dataSource = self
+        collection.delegate = self
         collection.showsVerticalScrollIndicator = false
+        collection.isScrollEnabled = false
         return collection
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        addChildVC()
         setupLayout()
         configuringNavigationBar()
+        addChild(breakingNewsVC)
+        breakingNewsVC.view.translatesAutoresizingMaskIntoConstraints = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         output?.loadData()
         output?.loadHotData()
+        breakingNewsVC.output = output
     }
-
-    private func addChildVC() {
-        addChild(breakingNewsVC)
-        view.addSubview(breakingNewsVC.view)
-        breakingNewsVC.view.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            breakingNewsVC.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            breakingNewsVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            breakingNewsVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            breakingNewsVC.view.heightAnchor.constraint(equalToConstant: view.frame.height / 3)
-        ])
-    }
-
-    private func configuringNavigationBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"),
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: nil)
-    }
-
-    private func setupLayout() {
-        view.addSubview(newsCollection)
-        view.addSubview(sectionName)
-
-        NSLayoutConstraint.activate([
-            sectionName.topAnchor.constraint(equalTo: breakingNewsVC.view.bottomAnchor, constant: 30),
-            sectionName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-
-            newsCollection.topAnchor.constraint(equalTo: sectionName.bottomAnchor, constant: 15),
-            newsCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            newsCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            newsCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-    }
-
 }
 
 extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -90,6 +67,10 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
                      imageUrl: articles[indexPath.item].urlToImage,
                      publishedTime: articles[indexPath.item].publishedAt)
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        output?.openArticleDetail(article: articles[indexPath.item])
     }
 
     func collectionLayout() -> UICollectionViewFlowLayout {
@@ -136,5 +117,51 @@ extension FeedViewController: FeedViewInputProtocol {
 
         lotty.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         lotty.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+}
+
+extension FeedViewController {
+    private func configuringNavigationBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: nil)
+    }
+
+    private func setupLayout() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(breakingNewsVC.view)
+        scrollView.addSubview(newsCollection)
+        scrollView.addSubview(sectionName)
+
+        NSLayoutConstraint.activate([
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            breakingNewsVC.view.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            breakingNewsVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            breakingNewsVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            breakingNewsVC.view.heightAnchor.constraint(equalToConstant: view.frame.height / 3),
+
+            sectionName.topAnchor.constraint(equalTo: breakingNewsVC.view.bottomAnchor, constant: 30),
+            sectionName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+
+            newsCollection.topAnchor.constraint(equalTo: sectionName.bottomAnchor, constant: 15),
+            newsCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            newsCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            newsCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30)
+        ])
+    }
+}
+
+extension FeedViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > 205 {
+            newsCollection.isScrollEnabled = true
+        } else {
+            newsCollection.isScrollEnabled = false
+        }
     }
 }

@@ -16,6 +16,10 @@ final class FeedPresentor {
 }
 
 extension FeedPresentor: FeedViewOutputProtocol {
+    func openArticleDetail(article: Article) {
+        router.openArticleDetail(article: article)
+    }
+
     func loadData() {
         interactor.loadData()
     }
@@ -40,7 +44,5 @@ extension FeedPresentor: FeedInteractorOutputProtocol {
         view.displayLotty()
     }
 }
-
-extension FeedPresentor: FeedModuleInputProtocol {}
 
 extension FeedPresentor: FeedRouterOutputProtocol {}

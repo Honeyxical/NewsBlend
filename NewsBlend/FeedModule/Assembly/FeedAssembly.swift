@@ -15,6 +15,7 @@ final class FeedAssembly {
                                       router: router)
         interactor.output = presentor
         view.output = presentor
+        router.viewController = view
         return view
     }
 }

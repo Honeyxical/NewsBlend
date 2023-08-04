@@ -4,8 +4,12 @@ import Foundation
 import UIKit
 
 final class FeedRouter {
+    weak var viewController: UIViewController?
 }
 
 extension FeedRouter: FeedRouterInputProtocol {
-
+    func openArticleDetail(article: Article) {
+        let detailViewController = DetailAssembly.build(artile: article)
+        viewController?.present(detailViewController, animated: true)
+    }
 }

@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 
 class BreakingNewsView: UIViewController {
-
+    var output: FeedViewOutputProtocol?
     private var articles: [Article] = []
 
     private let sectionName: UILabel = {
@@ -29,6 +29,10 @@ class BreakingNewsView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupLayout()
     }
 
@@ -70,6 +74,11 @@ extension BreakingNewsView: UICollectionViewDelegate, UICollectionViewDataSource
         layout.minimumLineSpacing = 15
         layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 15)
         return layout
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        output?.openArticleDetail(article: articles[indexPath.item])
+        print("Selected item: \(indexPath.item)")
     }
 
     func setData(articles: [Article]) {
