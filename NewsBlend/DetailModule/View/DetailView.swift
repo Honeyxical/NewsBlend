@@ -20,9 +20,9 @@ class DetailView: UIViewController {
     }()
 
     private lazy var imageView: UIImageView = {
-        let view = UIImageView(image: UIImage(named: "appleVision"))
+        let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.contentMode = .redraw
+        view.contentMode = .scaleAspectFill
         return view
     }()
 
@@ -31,7 +31,6 @@ class DetailView: UIViewController {
         author.translatesAutoresizingMaskIntoConstraints = false
         author.font = UIFont.systemFont(ofSize: 14)
         author.textColor = .gray
-        author.text = "By author article"
         return author
     }()
 
@@ -39,7 +38,6 @@ class DetailView: UIViewController {
         let publisheAt = UILabel()
         publisheAt.translatesAutoresizingMaskIntoConstraints = false
         publisheAt.font = UIFont.systemFont(ofSize: 12)
-        publisheAt.text = "12 min ago"
         return publisheAt
     }()
 
@@ -100,7 +98,7 @@ extension DetailView: DetailViewInputProtocol {
         self.imageView.kf.setImage(with: URL(string: article.urlToImage))
         self.articleTitle.text = article.title
         self.content.text = article.content
-        self.author.text = article.author
+        self.author.text = "By \(article.author ?? "")"
         self.publishedAt.text = article.publishedAt
     }
 

@@ -15,22 +15,25 @@ final class FeedInteractor {
 
 extension FeedInteractor: FeedInteractorInputProtocol {
     func loadData() {
+        var articles: [Article] = []
+        var hotArticles: [Article] = []
+
+        feedNetworkService.getHotNews(country: "us") { data in
+            guard let hotNews = try? JSONDecoder().decode(NewsModel.self, from: data) else {
+                self.output?.didReceiveFail()
+                return
+            }
+            hotArticles = self.setDate(articles: hotNews.articles)
+            self.output?.didReceive(articles: articles, hotArticles: hotArticles)
+        }
+
         feedNetworkService.getNews { data in
             guard let news = try? JSONDecoder().decode(NewsModel.self, from: data) else {
                 self.output?.didReceiveFail()
                 return
             }
-            self.output?.didReceive(articles: self.setDate(articles: news.articles))
-        }
-    }
-
-    func loadHotData() {
-        feedNetworkService.getHotNews(country: "us") { data in
-            guard let news = try? JSONDecoder().decode(NewsModel.self, from: data) else {
-                self.output?.didReceiveFail()
-                return
-            }
-            self.output?.didReceive(hot: self.setDate(articles: news.articles))
+            articles = self.setDate(articles: news.articles)
+            self.output?.didReceive(articles: articles, hotArticles: hotArticles)
         }
     }
     

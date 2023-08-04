@@ -12,8 +12,7 @@ public protocol FeedModuleOutputProtocol {
 
 // View Input
 protocol FeedViewInputProtocol {
-    func set(articles: [Article])
-    func set(hot articles: [Article])
+    func setData(articles: [Article], hotArticles: [Article])
     func reloadData()
     func showLoader()
     func hideLoader()
@@ -22,21 +21,18 @@ protocol FeedViewInputProtocol {
 
 // View Output
 protocol FeedViewOutputProtocol {
-    func loadData()
-    func loadHotData()
+    func viewWillApear()
     func openArticleDetail(article: Article)
 }
 
 // Interactor Input
 protocol FeedInteractorInputProtocol {
     func loadData()
-    func loadHotData()
 }
 
 // Interactor Output
 protocol FeedInteractorOutputProtocol: AnyObject {
-    func didReceive(articles: [Article])
-    func didReceive(hot articles: [Article])
+    func didReceive(articles: [Article], hotArticles: [Article])
     func didReceiveFail()
 }
 

@@ -3,6 +3,8 @@
 import Foundation
 
 class SettingsRouter {
+    var output: SettingsRouterOutputProtocol?
+    var feedRouter: FeedRouterInputProtocol?
 
 }
 

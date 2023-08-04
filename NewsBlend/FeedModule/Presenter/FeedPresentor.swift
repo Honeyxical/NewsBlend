@@ -16,28 +16,21 @@ final class FeedPresentor {
 }
 
 extension FeedPresentor: FeedViewOutputProtocol {
+    func viewWillApear() {
+        interactor.loadData()
+        view.showLoader()
+    }
+
     func openArticleDetail(article: Article) {
         router.openArticleDetail(article: article)
-    }
-
-    func loadData() {
-        interactor.loadData()
-    }
-
-    func loadHotData() {
-        interactor.loadHotData()
     }
 }
 
 extension FeedPresentor: FeedInteractorOutputProtocol {
-    func didReceive(articles: [Article]) {
-        view.set(articles: articles)
+    func didReceive(articles: [Article], hotArticles: [Article]) {
+        view.setData(articles: articles, hotArticles: hotArticles)
         view.reloadData()
-    }
-
-    func didReceive(hot articles: [Article]) {
-        view.set(hot: articles)
-        view.reloadData()
+        view.hideLoader()
     }
 
     func didReceiveFail() {

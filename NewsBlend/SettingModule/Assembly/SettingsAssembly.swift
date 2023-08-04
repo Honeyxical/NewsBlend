@@ -14,6 +14,8 @@ final class SettingsAssembly {
 
         interactor.output = presentor
         view.output = presentor
+        router.output = presentor
+        router.feedRouter = FeedRouter()
         return view
     }
 }

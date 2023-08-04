@@ -22,6 +22,6 @@ extension SettingsPresentor: SettingsInteractorOutputProtocol {
 
 }
 
-extension SettingsPresentor: SettingsRouterInputProtocol {
+extension SettingsPresentor: SettingsRouterOutputProtocol {
 
 }

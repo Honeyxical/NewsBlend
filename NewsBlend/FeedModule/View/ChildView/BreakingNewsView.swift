@@ -78,7 +78,6 @@ extension BreakingNewsView: UICollectionViewDelegate, UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         output?.openArticleDetail(article: articles[indexPath.item])
-        print("Selected item: \(indexPath.item)")
     }
 
     func setData(articles: [Article]) {

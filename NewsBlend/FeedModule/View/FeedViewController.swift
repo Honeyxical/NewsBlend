@@ -8,12 +8,19 @@ final class FeedViewController: UIViewController {
     private lazy var breakingNewsVC = BreakingNewsView() // Need to remove strong link
     private var articles: [Article] = []
 
+    private lazy var loader: UIActivityIndicatorView = {
+        let loader = UIActivityIndicatorView(frame: view.frame)
+        loader.style = .medium
+        loader.startAnimating()
+        return loader
+    }()
+
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.delegate = self
-        scrollView.contentSize = CGSize(width: view.frame.width, height: 1025)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: 1020)
         return scrollView
     }()
 
@@ -32,24 +39,21 @@ final class FeedViewController: UIViewController {
         collection.dataSource = self
         collection.delegate = self
         collection.showsVerticalScrollIndicator = false
-        collection.isScrollEnabled = false
         return collection
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupLayout()
         configuringNavigationBar()
         addChild(breakingNewsVC)
         breakingNewsVC.view.translatesAutoresizingMaskIntoConstraints = false
+        breakingNewsVC.output = output
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        output?.loadData()
-        output?.loadHotData()
-        breakingNewsVC.output = output
+        output?.viewWillApear()
     }
 }
 
@@ -83,24 +87,23 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 extension FeedViewController: FeedViewInputProtocol {
-    func set(hot articles: [Article]) {
-        breakingNewsVC.setData(articles: articles)
-    }
-
-    func set(articles: [Article]) {
+    func setData(articles: [Article], hotArticles: [Article]) {
         self.articles = articles
+        self.breakingNewsVC.setData(articles: hotArticles)
     }
 
     func reloadData() {
         newsCollection.reloadData()
+        breakingNewsVC.reloadData()
     }
 
     func showLoader() {
-        
+        view.addSubview(loader)
     }
 
     func hideLoader() {
-
+        loader.removeFromSuperview()
+        setupLayout()
     }
 
     func displayLotty() {
@@ -157,11 +160,5 @@ extension FeedViewController {
 }
 
 extension FeedViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 205 {
-            newsCollection.isScrollEnabled = true
-        } else {
-            newsCollection.isScrollEnabled = false
-        }
-    }
+
 }
