@@ -33,6 +33,7 @@ class DetailView: UIViewController {
         author.translatesAutoresizingMaskIntoConstraints = false
         author.font = UIFont.systemFont(ofSize: 14)
         author.textColor = .gray
+        author.numberOfLines = 2
         return author
     }()
 
@@ -137,6 +138,7 @@ extension DetailView {
 
             author.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             author.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
+            author.widthAnchor.constraint(equalToConstant: 300),
 
             publishedAt.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
             publishedAt.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
