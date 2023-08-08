@@ -41,3 +41,8 @@ protocol SettingsRouterOutputProtocol {
 protocol SettingsCoreDataServiceProtocol{
     
 }
+
+protocol SettingNetworkServiceProtocol {
+    func getSources(completion: @escaping (Data) -> Void)
+    func getSourcesByCategory(category: String, completion: @escaping (Data) -> Void)
+}

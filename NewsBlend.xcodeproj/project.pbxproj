@@ -34,6 +34,7 @@
 		698339DA2A76857F00909649 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 698339D92A76857F00909649 /* Alamofire */; };
 		69833A082A76A6E100909649 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69833A072A76A6E100909649 /* NewsModel.swift */; };
 		69833A3D2A76AEA400909649 /* FeedContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69833A3C2A76AEA400909649 /* FeedContracts.swift */; };
+		69B2BFB12A823591000465BC /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B2BFB02A823591000465BC /* SettingsCell.swift */; };
 		69BB2B2F2A7984AE00B5BDE1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B2E2A7984AE00B5BDE1 /* SettingsView.swift */; };
 		69BB2B322A7984E200B5BDE1 /* SettingCoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B312A7984E200B5BDE1 /* SettingCoreDataService.swift */; };
 		69BB2B342A7984F400B5BDE1 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B332A7984F400B5BDE1 /* SettingsRouter.swift */; };
@@ -72,6 +73,7 @@
 		698339CB2A767DB900909649 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69833A072A76A6E100909649 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		69833A3C2A76AEA400909649 /* FeedContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContracts.swift; sourceTree = "<group>"; };
+		69B2BFB02A823591000465BC /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		69BB2B2E2A7984AE00B5BDE1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		69BB2B312A7984E200B5BDE1 /* SettingCoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoreDataService.swift; sourceTree = "<group>"; };
 		69BB2B332A7984F400B5BDE1 /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 		69833A442A76B18B00909649 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				69B2BFAF2A82357B000465BC /* Cell */,
 				69BB2B2E2A7984AE00B5BDE1 /* SettingsView.swift */,
 			);
 			path = View;
@@ -399,6 +402,14 @@
 				691C016C2A7BBC42004E22FB /* DetailView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		69B2BFAF2A82357B000465BC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				69B2BFB02A823591000465BC /* SettingsCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		69BB2B302A7984C400B5BDE1 /* CoreData */ = {
@@ -552,6 +563,7 @@
 				698339C02A767DB800909649 /* SceneDelegate.swift in Sources */,
 				691C01792A7BBD1B004E22FB /* DetailAssembly.swift in Sources */,
 				691C01672A7B9028004E22FB /* BreakingNewsView.swift in Sources */,
+				69B2BFB12A823591000465BC /* SettingsCell.swift in Sources */,
 				69BB2B2F2A7984AE00B5BDE1 /* SettingsView.swift in Sources */,
 				69BB2B3F2A7A3B1800B5BDE1 /* Date + Extension.swift in Sources */,
 				69BB2B382A79851D00B5BDE1 /* SettingsInteractor.swift in Sources */,
