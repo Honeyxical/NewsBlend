@@ -23,6 +23,7 @@ protocol FeedViewInputProtocol {
 protocol FeedViewOutputProtocol {
     func viewWillApear()
     func openArticleDetail(article: Article)
+    func openSettings()
 }
 
 // Interactor Input
@@ -39,6 +40,7 @@ protocol FeedInteractorOutputProtocol: AnyObject {
 // Router Input
 protocol FeedRouterInputProtocol {
     func openArticleDetail(article: Article)
+    func openSettings()
 }
 
 // Router Output
@@ -46,8 +48,8 @@ protocol FeedRouterOutputProtocol {
 }
 
 protocol FeedNetworkServiceProtocol {
-    func getNews(completiton: @escaping(Data) -> Void)
-    func getHotNews(country: String, completiton: @escaping(Data) -> Void)
+    func getNews(completion: @escaping(Data) -> Void)
+    func getHotNews(country: String, completion: @escaping(Data) -> Void)
 }
 
 protocol FeedCoreDataServiceProtocol{}

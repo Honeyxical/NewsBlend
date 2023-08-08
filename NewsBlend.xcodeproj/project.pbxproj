@@ -19,6 +19,7 @@
 		691C01752A7BBCCE004E22FB /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C01742A7BBCCE004E22FB /* DetailInteractor.swift */; };
 		691C01772A7BBCF6004E22FB /* DetailContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C01762A7BBCF6004E22FB /* DetailContracts.swift */; };
 		691C01792A7BBD1B004E22FB /* DetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C01782A7BBD1B004E22FB /* DetailAssembly.swift */; };
+		69771FB52A820C4C007D608F /* SettingNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69771FB42A820C4C007D608F /* SettingNetworkService.swift */; };
 		69796EBE2A78CA5000EB6714 /* FeedAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69796EBD2A78CA5000EB6714 /* FeedAssembly.swift */; };
 		69796EC02A78CF9E00EB6714 /* FeedPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69796EBF2A78CF9E00EB6714 /* FeedPresentor.swift */; };
 		69796EC22A78D0BC00EB6714 /* FeedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69796EC12A78D0BC00EB6714 /* FeedInteractor.swift */; };
@@ -57,6 +58,7 @@
 		691C01742A7BBCCE004E22FB /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
 		691C01762A7BBCF6004E22FB /* DetailContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContracts.swift; sourceTree = "<group>"; };
 		691C01782A7BBD1B004E22FB /* DetailAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAssembly.swift; sourceTree = "<group>"; };
+		69771FB42A820C4C007D608F /* SettingNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingNetworkService.swift; sourceTree = "<group>"; };
 		69796EBD2A78CA5000EB6714 /* FeedAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAssembly.swift; sourceTree = "<group>"; };
 		69796EBF2A78CF9E00EB6714 /* FeedPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresentor.swift; sourceTree = "<group>"; };
 		69796EC12A78D0BC00EB6714 /* FeedInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedInteractor.swift; sourceTree = "<group>"; };
@@ -117,6 +119,14 @@
 				691C01662A7B9028004E22FB /* BreakingNewsView.swift */,
 			);
 			path = ChildView;
+			sourceTree = "<group>";
+		};
+		69771FB32A820C31007D608F /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				69771FB42A820C4C007D608F /* SettingNetworkService.swift */,
+			);
+			path = NetworkService;
 			sourceTree = "<group>";
 		};
 		69796EC92A78FCC300EB6714 /* Cells */ = {
@@ -321,6 +331,7 @@
 		69833A432A76B18000909649 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				69771FB32A820C31007D608F /* NetworkService */,
 				69BB2B302A7984C400B5BDE1 /* CoreData */,
 			);
 			path = Services;
@@ -530,6 +541,7 @@
 				691C016F2A7BBC74004E22FB /* DetailCoreDataService.swift in Sources */,
 				69833A082A76A6E100909649 /* NewsModel.swift in Sources */,
 				698339BE2A767DB800909649 /* AppDelegate.swift in Sources */,
+				69771FB52A820C4C007D608F /* SettingNetworkService.swift in Sources */,
 				691C01732A7BBCB2004E22FB /* DetailPresentor.swift in Sources */,
 				69796EC22A78D0BC00EB6714 /* FeedInteractor.swift in Sources */,
 				69796EC62A78E35B00EB6714 /* FeedRouter.swift in Sources */,

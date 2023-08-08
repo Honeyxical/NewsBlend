@@ -16,6 +16,10 @@ final class FeedPresentor {
 }
 
 extension FeedPresentor: FeedViewOutputProtocol {
+    func openSettings() {
+        router.openSettings()
+    }
+
     func viewWillApear() {
         interactor.loadData()
         view.showLoader()

@@ -122,7 +122,11 @@ extension FeedViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"),
                                                             style: .plain,
                                                             target: self,
-                                                            action: nil)
+                                                            action: #selector(openSettings) )
+    }
+
+    @objc private func openSettings() {
+        output?.openSettings()
     }
 
     private func setupLayout() {

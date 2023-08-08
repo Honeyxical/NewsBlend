@@ -8,6 +8,11 @@ final class FeedRouter {
 }
 
 extension FeedRouter: FeedRouterInputProtocol {
+    func openSettings() {
+        let settingsViewController = SettingsAssembly.build()
+        viewController?.navigationController?.pushViewController(settingsViewController, animated: true)
+    }
+
     func openArticleDetail(article: Article) {
         let detailViewController = DetailAssembly.build(artile: article)
         viewController?.navigationController?.pushViewController(detailViewController, animated: true)
