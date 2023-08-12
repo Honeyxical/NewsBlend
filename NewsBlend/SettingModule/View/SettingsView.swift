@@ -5,7 +5,7 @@ import UIKit
 
 class SettingsView: UIViewController {
     var output: SettingsViewOutputProtocol?
-    var newsSettingView: SettingsViewInputProtocol?
+    var newsSettingView: UIViewController?
 
     private let sections = ["Profile", "Security", "News"]
     private let sectionProfile = ["Personal data", "Notification"]
@@ -101,7 +101,8 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         if indexPath.section == 2 && indexPath.row == 0 {
-            navigationController?.pushViewController(NewsSettingView(), animated: true)
+            guard let newsSettingView = newsSettingView else { return }
+            navigationController?.pushViewController(newsSettingView, animated: true)
         }
     }
 }
