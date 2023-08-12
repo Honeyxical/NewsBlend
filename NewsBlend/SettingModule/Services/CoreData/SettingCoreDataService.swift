@@ -14,6 +14,7 @@ final class SettingsCoreDataService: SettingsDBServiceProtocol {
         Data()
     }
     
-    func setSource(source: SourceModel) {
+    func setSource(sources source: Data) {
+
     }
 }

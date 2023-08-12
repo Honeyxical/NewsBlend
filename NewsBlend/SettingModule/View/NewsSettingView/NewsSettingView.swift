@@ -160,4 +160,9 @@ extension NewsSettingView: UICollectionViewDelegate, UICollectionViewDataSource 
         cell.setSourceName(name: sources[indexPath.item].name, isSelected: sources[indexPath.item].isSelected)
         return cell
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        output?.setFollowedSource(source: sources[indexPath.item])
+        collectionView.reloadData()
+    }
 }

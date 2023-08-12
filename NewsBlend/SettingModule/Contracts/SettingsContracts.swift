@@ -24,15 +24,16 @@ protocol SettingsViewInputProtocol {
 protocol SettingsViewOutputProtocol {
     func viewWillAppear()
     func setInterval(interval: Int)
-    func setFollowedSources(sources: [SourceModel])
+    func setFollowedSource(source: SourceModel)
 }
 
 // Interactor Input
 protocol SettingsInteractorInputProtocol {
     func getAllSources()
     func getIntervals()
-    func getFollowedSources()
+    func getFollowedSources() -> [SourceModel]
     func setInterval(interval: Int)
+    func setFollowedSource(source: SourceModel)
 }
 
 // Interactor Output
@@ -54,7 +55,7 @@ protocol SettingsDBServiceProtocol{
     func getUpdateInterval() -> Int
     func setUpdateUnterval(interval pos: Int)
     func getSources() -> Data
-    func setSource(source: SourceModel)
+    func setSource(sources: Data)
 }
 
 protocol SettingNetworkServiceProtocol {

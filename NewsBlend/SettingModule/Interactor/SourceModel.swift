@@ -28,7 +28,7 @@ class SourceModel: NSObject {
         self.category = coder.decodeObject(forKey: "category") as? String ?? ""
         self.language = coder.decodeObject(forKey: "language") as? String ?? ""
         self.country = coder.decodeObject(forKey: "country") as? String ?? ""
-        self.isSelected = coder.decodeObject(forKey: "isSelected") as? Bool ?? false
+        self.isSelected = coder.decodeBool(forKey: "isSelected")
     }
 }
 

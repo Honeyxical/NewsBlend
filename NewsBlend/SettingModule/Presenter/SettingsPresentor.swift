@@ -22,14 +22,13 @@ extension SettingsPresentor: SettingsViewOutputProtocol {
         interactor.setInterval(interval: interval)
     }
 
-    func setFollowedSources(sources: [SourceModel]) {
-        
+    func setFollowedSource(source: SourceModel) {
+        interactor.setFollowedSource(source: source)
     }
 
     func viewWillAppear() {
         newsSettingsView.showLoader()
         interactor.getAllSources()
-        interactor.getFollowedSources()
     }
 }
 

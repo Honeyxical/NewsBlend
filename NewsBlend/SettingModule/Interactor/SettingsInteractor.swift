@@ -20,7 +20,8 @@ extension SettingsInteractor: SettingsInteractorInputProtocol {
                 self.output?.didReceiveFail()
                 return
             }
-            self.output?.didReceive(sources: self.transferObject(sources: engSources.sources))
+            let sources = self.transferObject(sources: engSources.sources)
+            self.output?.didReceive(sources: self.combiningResults(storage: self.getFollowedSources(), network: sources))
         }
     }
 
@@ -28,12 +29,20 @@ extension SettingsInteractor: SettingsInteractorInputProtocol {
         output?.didReceive(interval: dataService.getUpdateInterval())
     }
 
-    func getFollowedSources() {
-
+    func getFollowedSources() -> [SourceModel] {
+        let unarchive = decodeObjects(data: dataService.getSources())
+        return unarchive
     }
 
     func setInterval(interval: Int) {
         dataService.setUpdateUnterval(interval: interval)
+    }
+
+    func setFollowedSource(source: SourceModel) {
+        source.isSelected = source.isSelected == false ? true : false
+        var sources = getFollowedSources()
+        sources.append(source)
+        dataService.setSource(sources: encodeObjects(sourceModels: sources))
     }
 }
 
@@ -44,5 +53,32 @@ extension SettingsInteractor {
             sourceModels.append(source.map(source: source))
         }
         return sourceModels
+    }
+
+    private func decodeObjects(data: Data) -> [SourceModel] {
+        guard let source = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [SourceModel] else { return []}
+        return source
+    }
+
+    private func encodeObjects(sourceModels: [SourceModel]) -> Data {
+        let models = try? NSKeyedArchiver.archivedData(withRootObject: sourceModels, requiringSecureCoding: false)
+        guard let models: Data = models else {
+            return Data()
+        }
+        return models
+    }
+
+    private func combiningResults(storage: [SourceModel], network: [SourceModel]) -> [SourceModel] {
+        if storage.count < 1 {
+            return network
+        }
+        for counterS in 0...storage.count - 1 {
+            for counterN in 0...network.count - 1{
+                if network[counterN].name == storage[counterS].name && network[counterN].isSelected != storage[counterS].isSelected {
+                    network[counterN].isSelected = storage[counterS].isSelected
+                }
+            }
+        }
+        return network
     }
 }

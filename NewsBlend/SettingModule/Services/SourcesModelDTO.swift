@@ -3,7 +3,7 @@
 import Foundation
 
 struct SourcesModelDTO: Decodable {
-    let sources: [Sources]
+    var sources: [Sources]
 }
 
 struct Sources: Decodable {

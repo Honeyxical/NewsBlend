@@ -6,9 +6,7 @@ class UserDefaultsService: SettingsDBServiceProtocol {
     private let userDefaults = UserDefaults.standard
 
     func getUpdateInterval() -> Int {
-        let aaaa = userDefaults.integer(forKey: "updateInterval")
-        print(aaaa)
-        return aaaa
+        userDefaults.integer(forKey: "updateInterval")
     }
 
     func setUpdateUnterval(interval pos: Int) {
@@ -19,8 +17,8 @@ class UserDefaultsService: SettingsDBServiceProtocol {
         userDefaults.data(forKey: "sources") ?? Data()
     }
 
-    func setSource(source: SourceModel) {
-        userDefaults.set(source, forKey: "source")
+    func setSource(sources: Data) {
+        userDefaults.set(sources, forKey: "sources")
     }
 
 }
