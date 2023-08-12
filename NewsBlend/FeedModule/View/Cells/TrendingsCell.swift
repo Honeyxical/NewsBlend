@@ -45,9 +45,9 @@ class TrendingCell: UICollectionViewCell {
         setupLayout()
     }
 
-    func setData(title: String, publishedTime: String, imageUrl: String) {
+    func setData(title: String, timeSincePublication: String, imageUrl: String) {
         self.title.text = title
-        self.publishedTime.text = publishedTime
+        self.publishedTime.text = timeSincePublication
         self.imageView.kf.setImage(with: URL(string: imageUrl))
     }
 

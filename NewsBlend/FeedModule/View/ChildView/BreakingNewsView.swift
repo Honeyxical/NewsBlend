@@ -5,7 +5,7 @@ import UIKit
 
 class BreakingNewsView: UIViewController {
     var output: FeedViewOutputProtocol?
-    private var articles: [Article] = []
+    private var articles: [ArticleModel] = []
 
     private let sectionName: UILabel = {
         let title = UILabel()
@@ -62,7 +62,7 @@ extension BreakingNewsView: UICollectionViewDelegate, UICollectionViewDataSource
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item", for: indexPath) as? TrendingCell else {
             return UICollectionViewCell()
         }
-        cell.setData(title: articles[indexPath.item].title, publishedTime: articles[indexPath.item].publishedAt, imageUrl: articles[indexPath.item].urlToImage)
+        cell.setData(title: articles[indexPath.item].title, timeSincePublication: articles[indexPath.item].timeSincePublication, imageUrl: articles[indexPath.item].urlToImage)
 
         return cell
     }
@@ -80,7 +80,7 @@ extension BreakingNewsView: UICollectionViewDelegate, UICollectionViewDataSource
         output?.openArticleDetail(article: articles[indexPath.item])
     }
 
-    func setData(articles: [Article]) {
+    func setData(articles: [ArticleModel]) {
         self.articles = articles
         reloadData()
     }

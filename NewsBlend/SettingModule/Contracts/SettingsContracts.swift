@@ -43,8 +43,11 @@ protocol SettingsRouterInputProtocol {
 protocol SettingsRouterOutputProtocol {
 }
 
-protocol SettingsCoreDataServiceProtocol{
-    
+protocol SettingsDBServiceProtocol{
+    func getUpdateInterval() -> Int
+    func setUpdateUnterval(interval pos: Int)
+    func getSources() -> [Sources]
+    func setSource(source: Source)
 }
 
 protocol SettingNetworkServiceProtocol {

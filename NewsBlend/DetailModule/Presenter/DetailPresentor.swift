@@ -6,9 +6,9 @@ class DetailPresentor {
     let view: DetailViewInputProtocol
     let interactor: DetailInteractorInputProtocol
     let router: DetailRouterInputProtocol
-    let article: Article
+    let article: ArticleModel
 
-    init(view: DetailViewInputProtocol, interactor: DetailInteractorInputProtocol, router: DetailRouterInputProtocol, article: Article) {
+    init(view: DetailViewInputProtocol, interactor: DetailInteractorInputProtocol, router: DetailRouterInputProtocol, article: ArticleModel) {
         self.view = view
         self.interactor = interactor
         self.router = router

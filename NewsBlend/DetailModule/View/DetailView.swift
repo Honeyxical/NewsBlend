@@ -95,11 +95,11 @@ class DetailView: UIViewController {
 }
 
 extension DetailView: DetailViewInputProtocol {
-    func set(article: Article) {
+    func set(article: ArticleModel) {
         self.imageView.kf.setImage(with: URL(string: article.urlToImage))
         self.articleTitle.text = article.title
         self.content.text = article.content
-        self.author.text = "By \(article.author ?? "")"
+        self.author.text = "By \(article.author)"
         self.publishedAt.text = article.publishedAt
     }
 

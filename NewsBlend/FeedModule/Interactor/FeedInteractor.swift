@@ -15,34 +15,44 @@ final class FeedInteractor {
 
 extension FeedInteractor: FeedInteractorInputProtocol {
     func loadData() {
-        var articles: [Article] = []
-        var hotArticles: [Article] = []
+        var articles: [ArticleModel] = []
+        var hotArticles: [ArticleModel] = []
 
         feedNetworkService.getHotNews(country: "us") { data in
-            guard let hotNews = try? JSONDecoder().decode(NewsModel.self, from: data) else {
+            guard let hotNews = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else {
                 self.output?.didReceiveFail()
                 return
             }
-            hotArticles = self.setDate(articles: hotNews.articles)
+            hotArticles = self.transferDTOtoModel(articlesArray: hotNews.articles)
+            hotArticles = self.setDate(articles: hotArticles)
             self.output?.didReceive(articles: articles, hotArticles: hotArticles)
         }
 
         feedNetworkService.getNews { data in
-            guard let news = try? JSONDecoder().decode(NewsModel.self, from: data) else {
+            guard let news = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else {
                 self.output?.didReceiveFail()
                 return
             }
-            articles = self.setDate(articles: news.articles)
+            articles = self.transferDTOtoModel(articlesArray: news.articles)
+            articles = self.setDate(articles: articles)
             self.output?.didReceive(articles: articles, hotArticles: hotArticles)
         }
     }
-    
-    private func setDate(articles: [Article]) -> [Article]{
-        var articles = articles
+}
+
+extension FeedInteractor {
+    private func setDate(articles: [ArticleModel]) -> [ArticleModel]{
         for counter in 0...articles.count - 1 {
-            articles[counter].publishedAt = Date().getDifferenceFromNowAndDate( articles[counter].publishedAt) ?? ""
+            articles[counter].timeSincePublication = Date().getDifferenceFromNowAndDate( articles[counter].publishedAt) ?? ""
         }
         return articles
     }
-    
+
+    private func transferDTOtoModel(articlesArray: [Article]) -> [ArticleModel] {
+        var articleModels: [ArticleModel] = []
+        for article in articlesArray {
+            articleModels.append(article.map(article: article))
+        }
+        return articleModels
+    }
 }

@@ -7,7 +7,7 @@ final class FeedViewController: UIViewController {
     var output: FeedViewOutputProtocol?
     private lazy var breakingNewsVC = BreakingNewsView() // Need to remove strong link
     private lazy var loader = ReusableViews.getLoader(view: self.view)
-    private var articles: [Article] = []
+    private var articles: [ArticleModel] = []
 
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -61,9 +61,9 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return UICollectionViewCell()
         }
         cell.setData(title: articles[indexPath.item].title,
-                     author: articles[indexPath.item].author ?? "",
+                     author: articles[indexPath.item].author,
                      imageUrl: articles[indexPath.item].urlToImage,
-                     publishedTime: articles[indexPath.item].publishedAt)
+                     publishedTime: articles[indexPath.item].timeSincePublication)
         return cell
     }
 
@@ -81,7 +81,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 extension FeedViewController: FeedViewInputProtocol {
-    func setData(articles: [Article], hotArticles: [Article]) {
+    func setData(articles: [ArticleModel], hotArticles: [ArticleModel]) {
         self.articles = articles
         self.breakingNewsVC.setData(articles: hotArticles)
     }
@@ -155,8 +155,4 @@ extension FeedViewController {
             newsCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30)
         ])
     }
-}
-
-extension FeedViewController: UIScrollViewDelegate {
-
 }

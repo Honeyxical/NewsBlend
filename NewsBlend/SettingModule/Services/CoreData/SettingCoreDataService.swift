@@ -2,6 +2,18 @@
 
 import Foundation
 
-final class SettingsCoreDataService: SettingsCoreDataServiceProtocol {
+final class SettingsCoreDataService: SettingsDBServiceProtocol {
+    func getUpdateInterval() -> Int {
+        0
+    }
     
+    func setUpdateUnterval(interval pos: Int) {
+    }
+    
+    func getSources() -> [Sources] {
+        []
+    }
+    
+    func setSource(source: Source) {
+    }
 }

@@ -13,7 +13,7 @@ import Foundation
 
     // View Input
     protocol DetailViewInputProtocol {
-        func set(article: Article)
+        func set(article: ArticleModel)
         func showLoader()
         func hideLoader()
         func displayLotty()

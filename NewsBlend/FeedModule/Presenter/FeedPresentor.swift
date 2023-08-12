@@ -25,13 +25,13 @@ extension FeedPresentor: FeedViewOutputProtocol {
         view.showLoader()
     }
 
-    func openArticleDetail(article: Article) {
+    func openArticleDetail(article: ArticleModel) {
         router.openArticleDetail(article: article)
     }
 }
 
 extension FeedPresentor: FeedInteractorOutputProtocol {
-    func didReceive(articles: [Article], hotArticles: [Article]) {
+    func didReceive(articles: [ArticleModel], hotArticles: [ArticleModel]) {
         view.setData(articles: articles, hotArticles: hotArticles)
         view.reloadData()
         view.hideLoader()

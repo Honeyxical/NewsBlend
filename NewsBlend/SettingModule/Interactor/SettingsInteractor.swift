@@ -4,10 +4,10 @@ import Foundation
 
 class SettingsInteractor {
     weak var output: SettingsInteractorOutputProtocol?
-    let settingsDataService: SettingsCoreDataServiceProtocol
+    let settingsDataService: SettingsDBServiceProtocol
     let settingNetworkService: SettingNetworkServiceProtocol
 
-    init(settingsDataService: SettingsCoreDataServiceProtocol, settingNetworkService: SettingNetworkServiceProtocol) {
+    init(settingsDataService: SettingsDBServiceProtocol, settingNetworkService: SettingNetworkServiceProtocol) {
         self.settingNetworkService = settingNetworkService
         self.settingsDataService = settingsDataService
     }
