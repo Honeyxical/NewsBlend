@@ -100,7 +100,7 @@ extension DetailView: DetailViewInputProtocol {
         self.articleTitle.text = article.title
         self.content.text = article.content
         self.author.text = "By \(article.author)"
-        self.publishedAt.text = article.publishedAt
+        self.publishedAt.text = article.timeSincePublication
     }
 
     func showLoader() {
