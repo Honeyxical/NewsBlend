@@ -23,4 +23,13 @@ class SettingNetworkService: SettingNetworkServiceProtocol {
             }
         }
     }
+
+    func getEngSources(completion: @escaping (Data) -> Void) {
+        AF.request("https://newsapi.org/v2/top-headlines/sources?language=en&apiKey=" + APIKey).response { response in
+            guard let data = response.data else { return }
+            DispatchQueue.main.async {
+                completion(data)
+            }
+        }
+    }
 }

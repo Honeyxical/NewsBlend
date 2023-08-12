@@ -12,22 +12,27 @@ public protocol SettingsModuleOutputProtocol {
 
 // View Input
 protocol SettingsViewInputProtocol {
-    func set()
+    func set(source: [Sources])
     func reloadData()
     func showLoader()
     func hideLoader()
+    func displayLotty()
 }
 
 // View Output
 protocol SettingsViewOutputProtocol {
+    func viewWillAppear()
 }
 
 // Interactor Input
 protocol SettingsInteractorInputProtocol {
+    func getAllSources()
 }
 
 // Interactor Output
 protocol SettingsInteractorOutputProtocol: AnyObject {
+    func didReceive(sources: [Sources])
+    func didReceiveFail()
 }
 
 // Router Input
@@ -43,6 +48,8 @@ protocol SettingsCoreDataServiceProtocol{
 }
 
 protocol SettingNetworkServiceProtocol {
-    func getSources(completion: @escaping (Data) -> Void)
-    func getSourcesByCategory(category: String, completion: @escaping (Data) -> Void)
+    func getEngSources(completion: @escaping (Data) -> Void)
+}
+
+protocol MenuViewProtocol {
 }
