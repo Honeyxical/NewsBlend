@@ -6,9 +6,7 @@ import UIKit
 
 class DetailView: UIViewController {
     var output: DetailViewOutputProtocol?
-
     private lazy var loader = ReusableViews.getLoader(view: view)
-
     private lazy var contentRect: CGRect = scrollView.subviews.reduce(into: .zero) { rect, view in
         rect = rect.union(view.frame)
     }
@@ -113,11 +111,9 @@ extension DetailView: DetailViewInputProtocol {
         loader.removeFromSuperview()
         setupLayout()
         setupScrollView()
-
     }
 
     func displayLotty() {
-
     }
 }
 

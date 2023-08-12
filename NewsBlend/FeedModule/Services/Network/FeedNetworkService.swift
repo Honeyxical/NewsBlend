@@ -8,7 +8,6 @@ class FeedNetworkService: FeedNetworkServiceProtocol {
 
     func getHotNews(country: String, completion: @escaping (Data) -> Void) {
         AF.request("https://newsapi.org/v2/top-headlines?country=\(country)&pageSize=3&apiKey=\(APIKey)").response { response in
-            debugPrint(response)
             guard let data = response.data else { return }
             DispatchQueue.main.async {
                 completion(data)
@@ -18,7 +17,6 @@ class FeedNetworkService: FeedNetworkServiceProtocol {
 
     func getNews(completion: @escaping(Data) -> Void) {
         AF.request("https://newsapi.org/v2/everything?domains=techcrunch.com&pageSize=10&apiKey=\(APIKey)").response { response in
-            debugPrint(response)
             guard let data = response.data else { return }
             DispatchQueue.main.async {
                 completion(data)
