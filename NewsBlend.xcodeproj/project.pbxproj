@@ -340,7 +340,6 @@
 		69833A412A76B17300909649 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				69B59F9D2A877C2500B80CD4 /* NewsSettingPresentor */,
 				69BB2B352A79850B00B5BDE1 /* SettingsPresentor.swift */,
 			);
 			path = Presenter;
@@ -437,13 +436,6 @@
 				69B2BFB02A823591000465BC /* SettingsCell.swift */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		69B59F9D2A877C2500B80CD4 /* NewsSettingPresentor */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NewsSettingPresentor;
 			sourceTree = "<group>";
 		};
 		69B59FA22A87C24A00B80CD4 /* UserDefaults */ = {

@@ -18,14 +18,28 @@ class SettingsPresentor {
 }
 
 extension SettingsPresentor: SettingsViewOutputProtocol {
+    func setInterval(interval: Int) {
+        interactor.setInterval(interval: interval)
+    }
+
+    func setFollowedSources(sources: [SourceModel]) {
+        
+    }
+
     func viewWillAppear() {
         newsSettingsView.showLoader()
         interactor.getAllSources()
+        interactor.getFollowedSources()
     }
 }
 
 extension SettingsPresentor: SettingsInteractorOutputProtocol {
+    func didReceive(interval: Int) {
+        newsSettingsView.set(interval: interval)
+    }
+
     func didReceive(sources: [SourceModel]) {
+        interactor.getIntervals()
         newsSettingsView.set(source: sources)
         newsSettingsView.hideLoader()
     }

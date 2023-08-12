@@ -6,19 +6,21 @@ class UserDefaultsService: SettingsDBServiceProtocol {
     private let userDefaults = UserDefaults.standard
 
     func getUpdateInterval() -> Int {
-        userDefaults.integer(forKey: "updateInterval")
+        let aaaa = userDefaults.integer(forKey: "updateInterval")
+        print(aaaa)
+        return aaaa
     }
 
     func setUpdateUnterval(interval pos: Int) {
         userDefaults.set(pos, forKey: "updateInterval")
     }
 
-    func getSources() -> [SourceModel] {
-        []
+    func getSources() -> Data {
+        userDefaults.data(forKey: "sources") ?? Data()
     }
 
     func setSource(source: SourceModel) {
-        
+        userDefaults.set(source, forKey: "source")
     }
 
 }

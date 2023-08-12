@@ -4,24 +4,36 @@ import Foundation
 
 class SettingsInteractor {
     weak var output: SettingsInteractorOutputProtocol?
-    let settingsDataService: SettingsDBServiceProtocol
-    let settingNetworkService: SettingNetworkServiceProtocol
+    let dataService: SettingsDBServiceProtocol
+    let networkService: SettingNetworkServiceProtocol
 
     init(settingsDataService: SettingsDBServiceProtocol, settingNetworkService: SettingNetworkServiceProtocol) {
-        self.settingNetworkService = settingNetworkService
-        self.settingsDataService = settingsDataService
+        self.networkService = settingNetworkService
+        self.dataService = settingsDataService
     }
 }
 
 extension SettingsInteractor: SettingsInteractorInputProtocol {
     func getAllSources() {
-        settingNetworkService.getEngSources { data in
+        networkService.getEngSources { data in
             guard let engSources = try? JSONDecoder().decode(SourcesModelDTO.self, from: data) else {
                 self.output?.didReceiveFail()
                 return
             }
             self.output?.didReceive(sources: self.transferObject(sources: engSources.sources))
         }
+    }
+
+    func getIntervals() {
+        output?.didReceive(interval: dataService.getUpdateInterval())
+    }
+
+    func getFollowedSources() {
+
+    }
+
+    func setInterval(interval: Int) {
+        dataService.setUpdateUnterval(interval: interval)
     }
 }
 

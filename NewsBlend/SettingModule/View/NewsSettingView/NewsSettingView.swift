@@ -7,7 +7,7 @@ class NewsSettingView: UIViewController {
     var output: SettingsViewOutputProtocol?
     var sources: [SourceModel] = []
     private let updatesIntervals = ["1 min", "3 min", "5 min", "10 min", "15 min"]
-    private lazy var loader = ReusableViews.getLoader(view: sourcesCollection)
+    private lazy var loader = ReusableViews.getLoader(view: view)
 
     private let untervalsLabel: UILabel = {
         let label = UILabel()
@@ -48,7 +48,6 @@ class NewsSettingView: UIViewController {
         super.viewDidLoad()
         title = "News Settings"
         view.backgroundColor = .white
-        setupLayout()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +97,10 @@ extension NewsSettingView {
 }
 
 extension NewsSettingView: SettingsViewInputProtocol {
+    func set(interval: Int) {
+        pickerView.selectRow(interval, inComponent: 0, animated: true)
+    }
+
     func displayLotty() {
 
     }
@@ -117,6 +120,7 @@ extension NewsSettingView: SettingsViewInputProtocol {
     func hideLoader() {
         loader.removeFromSuperview()
         sourcesCollection.reloadData()
+        setupLayout()
     }
 
 }
@@ -137,10 +141,12 @@ extension NewsSettingView: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        output?.setInterval(interval: row)
     }
 }
 
 // MARK: Collection Delegate / DataSource
+
 extension NewsSettingView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         sources.count
@@ -151,7 +157,7 @@ extension NewsSettingView: UICollectionViewDelegate, UICollectionViewDataSource 
             return UICollectionViewCell()
         }
 
-        cell.setSourceName(name: sources[indexPath.item].name)
+        cell.setSourceName(name: sources[indexPath.item].name, isSelected: sources[indexPath.item].isSelected)
         return cell
     }
 }
