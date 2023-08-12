@@ -10,10 +10,10 @@ final class SettingsCoreDataService: SettingsDBServiceProtocol {
     func setUpdateUnterval(interval pos: Int) {
     }
     
-    func getSources() -> [Sources] {
+    func getSources() -> [SourceModel] {
         []
     }
     
-    func setSource(source: Source) {
+    func setSource(source: SourceModel) {
     }
 }

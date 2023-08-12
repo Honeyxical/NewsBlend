@@ -5,7 +5,7 @@ import UIKit
 
 class NewsSettingView: UIViewController {
     var output: SettingsViewOutputProtocol?
-    var sources: [Sources] = []
+    var sources: [SourceModel] = []
     private let updatesIntervals = ["1 min", "3 min", "5 min", "10 min", "15 min"]
     private lazy var loader = ReusableViews.getLoader(view: sourcesCollection)
 
@@ -102,7 +102,7 @@ extension NewsSettingView: SettingsViewInputProtocol {
 
     }
 
-    func set(source: [Sources]) {
+    func set(source: [SourceModel]) {
         self.sources = source
     }
 

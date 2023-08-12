@@ -12,7 +12,7 @@ public protocol SettingsModuleOutputProtocol {
 
 // View Input
 protocol SettingsViewInputProtocol {
-    func set(source: [Sources])
+    func set(source: [SourceModel])
     func reloadData()
     func showLoader()
     func hideLoader()
@@ -31,7 +31,7 @@ protocol SettingsInteractorInputProtocol {
 
 // Interactor Output
 protocol SettingsInteractorOutputProtocol: AnyObject {
-    func didReceive(sources: [Sources])
+    func didReceive(sources: [SourceModel])
     func didReceiveFail()
 }
 
@@ -46,8 +46,8 @@ protocol SettingsRouterOutputProtocol {
 protocol SettingsDBServiceProtocol{
     func getUpdateInterval() -> Int
     func setUpdateUnterval(interval pos: Int)
-    func getSources() -> [Sources]
-    func setSource(source: Source)
+    func getSources() -> [SourceModel]
+    func setSource(source: SourceModel)
 }
 
 protocol SettingNetworkServiceProtocol {

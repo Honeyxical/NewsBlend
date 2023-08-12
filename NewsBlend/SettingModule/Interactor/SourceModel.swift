@@ -1,12 +1,8 @@
-//  Created by илья on 09.08.23.
+//  Created by илья on 12.08.23.
 
 import Foundation
 
-struct SourcesModel: Decodable {
-    let sources: [Sources]
-}
-
-struct Sources: Decodable {
+struct SourceModel {
     let id: String
     let name: String
     let category: String

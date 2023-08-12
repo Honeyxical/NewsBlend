@@ -25,7 +25,7 @@ extension SettingsPresentor: SettingsViewOutputProtocol {
 }
 
 extension SettingsPresentor: SettingsInteractorOutputProtocol {
-    func didReceive(sources: [Sources]) {
+    func didReceive(sources: [SourceModel]) {
         newsSettingsView.set(source: sources)
         newsSettingsView.hideLoader()
     }

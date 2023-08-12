@@ -13,11 +13,12 @@ class UserDefaultsService: SettingsDBServiceProtocol {
         userDefaults.set(pos, forKey: "updateInterval")
     }
 
-    func getSources() -> [Sources] {
+    func getSources() -> [SourceModel] {
         []
     }
 
-    func setSource(source: Source) {
+    func setSource(source: SourceModel) {
+        
     }
 
 }
