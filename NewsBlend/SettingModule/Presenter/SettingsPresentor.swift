@@ -18,6 +18,10 @@ class SettingsPresentor {
 }
 
 extension SettingsPresentor: SettingsViewOutputProtocol {
+    func deleteFollowedSource(source: SourceModel) {
+        interactor.deleteFollowedSource(source: source)
+    }
+
     func setInterval(interval: Int) {
         interactor.setInterval(interval: interval)
     }

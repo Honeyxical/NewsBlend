@@ -5,7 +5,7 @@ import UIKit
 
 final class FeedViewController: UIViewController {
     var output: FeedViewOutputProtocol?
-    private lazy var breakingNewsVC = BreakingNewsView() // Need to remove strong link
+    private let childView: UIViewController
     private lazy var loader = ReusableViews.getLoader(view: self.view)
     private var articles: [ArticleModel] = []
 
@@ -21,18 +21,19 @@ final class FeedViewController: UIViewController {
     private let sectionName: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
-        title.text = "Trending News"
+        title.text = "Hot News"
         title.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        title.textColor = .systemBlue
         return title
     }()
 
     private lazy var newsCollection: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout())
         collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.register(FeedCellView.self, forCellWithReuseIdentifier: "Item")
+        collection.register(TrendingCell.self, forCellWithReuseIdentifier: "Item")
         collection.dataSource = self
         collection.delegate = self
-        collection.showsVerticalScrollIndicator = false
+        collection.showsHorizontalScrollIndicator = false
         return collection
     }()
 
@@ -40,14 +41,21 @@ final class FeedViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         configuringNavigationBar()
-        addChild(breakingNewsVC)
-        breakingNewsVC.view.translatesAutoresizingMaskIntoConstraints = false
-        breakingNewsVC.output = output
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         output?.viewWillApear()
+        childView.viewWillAppear(true)
+    }
+
+    init(childView: UIViewController) {
+        self.childView = childView
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -57,13 +65,10 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item", for: indexPath) as? FeedCellView else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item", for: indexPath) as? TrendingCell else {
             return UICollectionViewCell()
         }
-        cell.setData(title: articles[indexPath.item].title,
-                     author: articles[indexPath.item].author,
-                     imageUrl: articles[indexPath.item].urlToImage,
-                     publishedTime: articles[indexPath.item].timeSincePublication)
+        cell.setData(title: articles[indexPath.item].title, timeSincePublication: articles[indexPath.item].timeSincePublication, imageUrl: articles[indexPath.item].urlToImage)
         return cell
     }
 
@@ -73,9 +78,10 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
     func collectionLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: view.bounds.width - 20, height: 130)
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: view.bounds.width - 50, height: view.frame.height / 3.5)
         layout.minimumLineSpacing = 15
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 15)
         return layout
     }
 }
@@ -83,12 +89,10 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
 extension FeedViewController: FeedViewInputProtocol {
     func setData(articles: [ArticleModel], hotArticles: [ArticleModel]) {
         self.articles = articles
-        self.breakingNewsVC.setData(articles: hotArticles)
     }
 
     func reloadData() {
         newsCollection.reloadData()
-        breakingNewsVC.reloadData()
     }
 
     func showLoader() {
@@ -108,7 +112,6 @@ extension FeedViewController: FeedViewInputProtocol {
 
         newsCollection.removeFromSuperview()
         sectionName.removeFromSuperview()
-        breakingNewsVC.view.removeFromSuperview()
 
         view.addSubview(lotty)
 
@@ -131,7 +134,7 @@ extension FeedViewController {
 
     private func setupLayout() {
         view.addSubview(scrollView)
-        scrollView.addSubview(breakingNewsVC.view)
+        scrollView.addSubview(childView.view)
         scrollView.addSubview(newsCollection)
         scrollView.addSubview(sectionName)
 
@@ -141,18 +144,18 @@ extension FeedViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-            breakingNewsVC.view.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            breakingNewsVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            breakingNewsVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            breakingNewsVC.view.heightAnchor.constraint(equalToConstant: view.frame.height / 3),
-
-            sectionName.topAnchor.constraint(equalTo: breakingNewsVC.view.bottomAnchor, constant: 30),
+            sectionName.topAnchor.constraint(equalTo: scrollView.topAnchor),
             sectionName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
 
-            newsCollection.topAnchor.constraint(equalTo: sectionName.bottomAnchor, constant: 15),
+            newsCollection.topAnchor.constraint(equalTo: sectionName.bottomAnchor),
             newsCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             newsCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            newsCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30)
+            newsCollection.heightAnchor.constraint(equalToConstant: view.frame.height / 3),
+
+            childView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            childView.view.topAnchor.constraint(equalTo: newsCollection.bottomAnchor),
+            childView.view.widthAnchor.constraint(equalToConstant: view.frame.width),
+            childView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 15)
         ])
     }
 }

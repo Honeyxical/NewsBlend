@@ -6,7 +6,7 @@ import UIKit
 final class FeedAssembly {
 
     static func build() -> UIViewController {
-        let view = FeedViewController()
+        let view = FeedViewController(childView: NBSAssembly.build())
         let interactor = FeedInteractor(feedNetworkService: FeedNetworkService(),
                                         feedDataService: FeedCoreDataService())
         let router = FeedRouter()

@@ -15,8 +15,8 @@ class NBSPresentor {
 }
 
 extension NBSPresentor: NBSInteractorOutputProtocol {
-    func didReceive() {
-
+    func didReceive(sources: [SourceModel]) {
+        view.set(sources: sources)
     }
 
     func didReceiveFail() {
@@ -25,8 +25,12 @@ extension NBSPresentor: NBSInteractorOutputProtocol {
 }
 
 extension NBSPresentor: NBSViewOutputProtocol {
+    func viewDidLoad() {
+        viewDidAppear()
+    }
+
     func viewDidAppear() {
-        
+        interactor.getSources()
     }
 }
 

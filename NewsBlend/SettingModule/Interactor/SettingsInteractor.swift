@@ -44,6 +44,12 @@ extension SettingsInteractor: SettingsInteractorInputProtocol {
         sources.append(source)
         dataService.setSource(sources: encodeObjects(sourceModels: sources))
     }
+
+    func deleteFollowedSource(source: SourceModel) {
+        var sources = getFollowedSources()
+        sources.remove(at: sources.firstIndex(of: source) ?? 0)
+        dataService.saveChangedListSources(sources: encodeObjects(sourceModels: sources))
+    }
 }
 
 extension SettingsInteractor {

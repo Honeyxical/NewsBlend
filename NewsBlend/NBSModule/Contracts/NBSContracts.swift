@@ -13,25 +13,28 @@ public protocol NBSModuleOutputProtocol {
 
 // View Input
 protocol NBSViewInputProtocol {
-    func set(article: ArticleModel)
+    func set(sources: [SourceModel])
     func showLoader()
     func hideLoader()
     func displayLotty()
+    func reloadData()
 }
 
 // View Output
 protocol NBSViewOutputProtocol {
     func viewDidAppear()
+    func viewDidLoad()
 }
 
 // Interactor Input
 protocol NBSInteractorInputProtocol {
-    func loadData()
+    func getSources()
+    func getArticles()
 }
 
 // Interactor Output
 protocol NBSInteractorOutputProtocol: AnyObject {
-    func didReceive()
+    func didReceive(sources: [SourceModel])
     func didReceiveFail()
 }
 
@@ -45,7 +48,7 @@ protocol NBSRouterOutputProtocol {
 
 // Data
 protocol NBSDataServiceProtocol{
-
+    func getSources() -> Data
 }
 
 // Network

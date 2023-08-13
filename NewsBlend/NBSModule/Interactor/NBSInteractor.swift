@@ -14,7 +14,26 @@ class NBSInteractor {
 }
 
 extension NBSInteractor: NBSInteractorInputProtocol {
-    func loadData() {
-        
+    func getSources() {
+        output?.didReceive(sources: decodeObjects(data: storageService.getSources()))
+    }
+
+    func getArticles() {
+
+    }
+}
+
+extension NBSInteractor {
+    private func decodeObjects(data: Data) -> [SourceModel] {
+        guard let source = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [SourceModel] else { return []}
+        return source
+    }
+
+    private func encodeObjects(sourceModels: [SourceModel]) -> Data {
+        let models = try? NSKeyedArchiver.archivedData(withRootObject: sourceModels, requiringSecureCoding: false)
+        guard let models: Data = models else {
+            return Data()
+        }
+        return models
     }
 }

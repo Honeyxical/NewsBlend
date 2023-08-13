@@ -21,4 +21,7 @@ class UserDefaultsService: SettingsDBServiceProtocol {
         userDefaults.set(sources, forKey: "sources")
     }
 
+    func saveChangedListSources(sources: Data) {
+        userDefaults.set(sources, forKey: "sources")
+    }
 }

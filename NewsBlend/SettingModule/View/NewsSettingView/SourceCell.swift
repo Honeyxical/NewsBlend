@@ -7,7 +7,7 @@ class SourceCell: UICollectionViewCell {
     private let indicator: UIImageView = {
         let indicator = UIImageView()
         indicator.translatesAutoresizingMaskIntoConstraints = false
-        indicator.tintColor = .blue
+        indicator.tintColor = .systemBlue
         return indicator
     }()
 
@@ -39,7 +39,7 @@ class SourceCell: UICollectionViewCell {
         addSubview(indicator)
 
         layer.borderWidth = 1
-        layer.borderColor = UIColor.link.cgColor
+        layer.borderColor = UIColor.systemBlue.cgColor
         layer.cornerRadius = 10
 
         NSLayoutConstraint.activate([
@@ -50,8 +50,8 @@ class SourceCell: UICollectionViewCell {
 
             sourceName.centerYAnchor.constraint(equalTo: centerYAnchor),
             sourceName.centerXAnchor.constraint(equalTo: centerXAnchor),
-            sourceName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            sourceName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5)
+            sourceName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            sourceName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
 }

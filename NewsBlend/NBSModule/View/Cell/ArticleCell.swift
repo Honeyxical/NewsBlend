@@ -4,7 +4,7 @@ import Foundation
 import Kingfisher
 import UIKit
 
-class FeedCellView: UICollectionViewCell {
+class ArticleCell: UICollectionViewCell {
     private var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
