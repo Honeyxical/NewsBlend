@@ -17,6 +17,7 @@ class ArticleCell: UICollectionViewCell {
     private var title: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
+        title.font = UIFont.systemFont(ofSize: 14)
         title.numberOfLines = 3
         return title
     }()
@@ -24,7 +25,7 @@ class ArticleCell: UICollectionViewCell {
     private var author: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 11)
         label.textColor = .lightGray
         label.numberOfLines = 2
         return label

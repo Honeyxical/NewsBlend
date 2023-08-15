@@ -14,6 +14,19 @@ class NBSInteractor {
 }
 
 extension NBSInteractor: NBSInteractorInputProtocol {
+    func getArticlesBySource(source: SourceModel) {
+        var articles: [ArticleModel] = []
+        networkService.getArticlesBySource(source: source) { data in
+            guard let articlesParsed = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else {
+                self.output?.didReceiveFail()
+                return
+            }
+            articles = self.transferDTOtoModel(articlesArray: articlesParsed.articles)
+            articles = self.setDate(articles: articles)
+            self.output?.didReceive(articles: articles)
+        }
+    }
+
     func getSources() {
         output?.didReceive(sources: decodeObjects(data: storageService.getSources()))
     }
@@ -35,5 +48,20 @@ extension NBSInteractor {
             return Data()
         }
         return models
+    }
+
+    private func transferDTOtoModel(articlesArray: [Article]) -> [ArticleModel] {
+        var articleModels: [ArticleModel] = []
+        for article in articlesArray {
+            articleModels.append(article.map(article: article))
+        }
+        return articleModels
+    }
+
+    private func setDate(articles: [ArticleModel]) -> [ArticleModel]{
+        for counter in 0...articles.count - 1 {
+            articles[counter].timeSincePublication = Date().getDifferenceFromNowAndDate( articles[counter].publishedAt) ?? ""
+        }
+        return articles
     }
 }

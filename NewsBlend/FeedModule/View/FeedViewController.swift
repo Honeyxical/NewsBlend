@@ -14,7 +14,7 @@ final class FeedViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.delegate = self
-        scrollView.contentSize = CGSize(width: view.frame.width, height: 1020)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: 1060)
         return scrollView
     }()
 

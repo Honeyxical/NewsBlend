@@ -6,7 +6,8 @@ import UIKit
 class NBSView: UIViewController {
     var output: NBSViewOutputProtocol?
     private var sources: [SourceModel] = []
-    private var articles: [ArticleModel] = []
+
+    private lazy var loader = ReusableViews.getLoader(view: view)
 
     private let sectionName: UILabel = {
         let label = UILabel()
@@ -31,20 +32,23 @@ class NBSView: UIViewController {
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.dataSource = self
         collection.delegate = self
-        collection.register(ArticleCell.self, forCellWithReuseIdentifier: "articleCell")
+        collection.register(ArticleBySourceCell.self, forCellWithReuseIdentifier: "articleCell")
         collection.showsVerticalScrollIndicator = false
+        collection.isPagingEnabled = true
         return collection
     }()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         output?.viewDidAppear()
+        reloadData()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         output?.viewDidAppear()
         setupLayout()
+
     }
 }
 
@@ -56,20 +60,26 @@ extension NBSView: NBSViewInputProtocol {
 
     func set(sources: [SourceModel]) {
         self.sources = []
-        self.sources += [SourceModel(id: "",
-                                     name: "All",
-                                     category: "",
-                                     language: "",
-                                     country: "")]
+//        self.sources += [SourceModel(id: "",
+//                                     name: "All",
+//                                     category: "",
+//                                     language: "",
+//                                     country: "")]
         self.sources += sources
         sourcesCollection.reloadData()
     }
 
-    func showLoader() {
+    func setArticle(articles: [ArticleModel]) {
+        let cell = articlesCollection.cellForItem(at: articlesCollection.indexPathsForVisibleItems.first ?? IndexPath()) as? ArticleBySourceCell
+        cell?.setArticle(articles: articles)
+    }
 
+    func showLoader() {
+        view.addSubview(loader)
     }
 
     func hideLoader() {
+        loader.removeFromSuperview()
 
     }
 
@@ -80,32 +90,40 @@ extension NBSView: NBSViewInputProtocol {
 
 extension NBSView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == sourcesCollection {
-            return sources.count
-        } else {
-            return articles.count
-        }
+        sources.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView {
+
         case sourcesCollection:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sourceCell", for: indexPath) as? SourcesCell else {
                 return UICollectionViewCell()
             }
             cell.setSourceName(name: sources[indexPath.item].name)
             return cell
+
         case articlesCollection:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as? ArticleCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as? ArticleBySourceCell else {
                 return UICollectionViewCell()
             }
-            cell.setData(title: articles[indexPath.item].title,
-                         author: articles[indexPath.item].author,
-                         imageUrl: articles[indexPath.item].urlToImage,
-                         publishedTime: articles[indexPath.item].timeSincePublication)
+            output?.getArticlesBySource(source: sources[indexPath.item])
             return cell
+
         default:
             return UICollectionViewCell()
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch collectionView {
+        case sourcesCollection:
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+            articlesCollection.scrollToItem(at: indexPath,
+                                            at: .centeredHorizontally,
+                                            animated: true)
+        default:
+            return
         }
     }
 
@@ -120,9 +138,9 @@ extension NBSView: UICollectionViewDelegate, UICollectionViewDataSource {
 
     private func collectionArticlesLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: view.frame.width - 20, height: 100)
-        layout.minimumLineSpacing = 15
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: view.frame.width, height: 650)
+        layout.minimumLineSpacing = 0
         return layout
     }
 }
@@ -145,7 +163,7 @@ extension NBSView {
             articlesCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             articlesCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             articlesCollection.topAnchor.constraint(equalTo: sourcesCollection.bottomAnchor, constant: 15),
-            articlesCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30)
+            articlesCollection.heightAnchor.constraint(equalToConstant: 650)
         ])
     }
 }

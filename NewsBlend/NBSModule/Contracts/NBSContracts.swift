@@ -14,6 +14,7 @@ public protocol NBSModuleOutputProtocol {
 // View Input
 protocol NBSViewInputProtocol {
     func set(sources: [SourceModel])
+    func setArticle(articles: [ArticleModel])
     func showLoader()
     func hideLoader()
     func displayLotty()
@@ -24,17 +25,20 @@ protocol NBSViewInputProtocol {
 protocol NBSViewOutputProtocol {
     func viewDidAppear()
     func viewDidLoad()
+    func getArticlesBySource(source: SourceModel)
 }
 
 // Interactor Input
 protocol NBSInteractorInputProtocol {
     func getSources()
     func getArticles()
+    func getArticlesBySource(source: SourceModel)
 }
 
 // Interactor Output
 protocol NBSInteractorOutputProtocol: AnyObject {
     func didReceive(sources: [SourceModel])
+    func didReceive(articles: [ArticleModel])
     func didReceiveFail()
 }
 
@@ -54,5 +58,5 @@ protocol NBSDataServiceProtocol{
 // Network
 
 protocol NBSNetworkServiceProtocol {
-
+    func getArticlesBySource(source: SourceModel, completion: @escaping (Data) -> Void)
 }
