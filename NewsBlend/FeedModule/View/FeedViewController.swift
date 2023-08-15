@@ -45,8 +45,8 @@ final class FeedViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        addChild(childView)
         output?.viewWillApear()
-        childView.viewWillAppear(true)
     }
 
     init(childView: UIViewController) {
@@ -154,7 +154,7 @@ extension FeedViewController {
 
             childView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             childView.view.topAnchor.constraint(equalTo: newsCollection.bottomAnchor),
-            childView.view.widthAnchor.constraint(equalToConstant: view.frame.width),
+            childView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             childView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 15)
         ])
     }
