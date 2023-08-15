@@ -27,7 +27,7 @@ final class FeedViewController: UIViewController {
         return title
     }()
 
-    private lazy var newsCollection: UICollectionView = {
+    private lazy var hotNewsCollection: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout())
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.register(TrendingCell.self, forCellWithReuseIdentifier: "Item")
@@ -79,7 +79,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: view.bounds.width - 50, height: view.frame.height / 3.5)
+        layout.itemSize = CGSize(width: view.frame.width - 50, height: view.frame.height / 3.5)
         layout.minimumLineSpacing = 15
         layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 15)
         return layout
@@ -92,7 +92,7 @@ extension FeedViewController: FeedViewInputProtocol {
     }
 
     func reloadData() {
-        newsCollection.reloadData()
+        hotNewsCollection.reloadData()
     }
 
     func showLoader() {
@@ -110,7 +110,7 @@ extension FeedViewController: FeedViewInputProtocol {
         lotty.text = "Fail get data"
         lotty.font = UIFont.systemFont(ofSize: 36)
 
-        newsCollection.removeFromSuperview()
+        hotNewsCollection.removeFromSuperview()
         sectionName.removeFromSuperview()
 
         view.addSubview(lotty)
@@ -135,8 +135,9 @@ extension FeedViewController {
     private func setupLayout() {
         view.addSubview(scrollView)
         scrollView.addSubview(childView.view)
-        scrollView.addSubview(newsCollection)
+        scrollView.addSubview(hotNewsCollection)
         scrollView.addSubview(sectionName)
+        childView.view.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -147,15 +148,16 @@ extension FeedViewController {
             sectionName.topAnchor.constraint(equalTo: scrollView.topAnchor),
             sectionName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
 
-            newsCollection.topAnchor.constraint(equalTo: sectionName.bottomAnchor),
-            newsCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            newsCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            newsCollection.heightAnchor.constraint(equalToConstant: view.frame.height / 3),
+            hotNewsCollection.topAnchor.constraint(equalTo: sectionName.bottomAnchor),
+            hotNewsCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            hotNewsCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            hotNewsCollection.heightAnchor.constraint(equalToConstant: view.frame.height / 3),
 
             childView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            childView.view.topAnchor.constraint(equalTo: newsCollection.bottomAnchor),
+            childView.view.topAnchor.constraint(equalTo: hotNewsCollection.bottomAnchor),
             childView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            childView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 15)
+            childView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 15),
+            childView.view.widthAnchor.constraint(equalToConstant: view.frame.width)
         ])
     }
 }

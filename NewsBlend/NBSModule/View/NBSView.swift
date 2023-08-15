@@ -121,16 +121,14 @@ extension NBSView: UICollectionViewDelegate, UICollectionViewDataSource {
     private func collectionArticlesLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: view.frame.width - 30, height: 100)
+        layout.itemSize = CGSize(width: view.frame.width - 20, height: 100)
         layout.minimumLineSpacing = 15
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 15)
         return layout
     }
 }
 
 extension NBSView {
     private func setupLayout() {
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(sectionName)
         view.addSubview(sourcesCollection)
         view.addSubview(articlesCollection)
