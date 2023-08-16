@@ -21,6 +21,8 @@ final class FeedAssembly {
         return view
     }
 
+    // сделано через !вилкойВГлаз. На будущее: Нужно вынести в модуль конфигурации
+    // Так же сделать дефолтное вермя для таймера 
     private static func prepareApp(interactor: FeedInteractorInputProtocol) {
         interactor.setSourceIfNeed()
     }
