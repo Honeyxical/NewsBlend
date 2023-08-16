@@ -1,6 +1,6 @@
 //  Created by илья on 13.08.23.
 
-import Foundation
+import UIKit
 
 // Module Input
 public protocol NBSModuleInputProtocol {
@@ -26,6 +26,7 @@ protocol NBSViewOutputProtocol {
     func viewDidAppear()
     func viewDidLoad()
     func getArticlesBySource(source: SourceModel)
+    func openArticleDetail(article: ArticleModel, controller: UIViewController)
 }
 
 // Interactor Input
@@ -44,6 +45,7 @@ protocol NBSInteractorOutputProtocol: AnyObject {
 
 // Router Input
 protocol NBSRouterInputProtocol {
+    func openArticleDetail(article: ArticleModel, controller: UIViewController)
 }
 
 // Router Output

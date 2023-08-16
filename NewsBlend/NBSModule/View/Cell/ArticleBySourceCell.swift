@@ -3,8 +3,10 @@
 import UIKit
 
 class ArticleBySourceCell: UICollectionViewCell {
+    var output: NBSViewOutputProtocol?
     private var articles: [ArticleModel] = []
     private lazy var loader = ReusableViews.getLoader(view: self.collection)
+    private var controller: UIViewController?
 
     private lazy var collection: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout())
@@ -26,8 +28,10 @@ class ArticleBySourceCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setArticle(articles: [ArticleModel]) {
+    func setArticle(articles: [ArticleModel], output: NBSViewOutputProtocol, controller: UIViewController) {
         self.articles = articles
+        self.output = output
+        self.controller = controller
         setupLayout()
         loader.removeFromSuperview()
     }
@@ -58,6 +62,11 @@ extension ArticleBySourceCell: UICollectionViewDelegate, UICollectionViewDataSou
                      imageUrl: articles[indexPath.item].urlToImage,
                      publishedTime: articles[indexPath.item].timeSincePublication)
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let controller = controller else { return }
+        output?.openArticleDetail(article: articles[indexPath.item], controller: controller)
     }
 
     private func collectionLayout() -> UICollectionViewLayout {

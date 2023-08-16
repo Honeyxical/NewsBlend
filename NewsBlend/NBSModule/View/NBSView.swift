@@ -72,7 +72,8 @@ extension NBSView: NBSViewInputProtocol {
 
     func setArticle(articles: [ArticleModel]) {
         let cell = articlesCollection.cellForItem(at: articlesCollection.indexPathsForVisibleItems.first ?? IndexPath()) as? ArticleBySourceCell
-        cell?.setArticle(articles: articles)
+        guard let output = output else { return }
+        cell?.setArticle(articles: articles, output: output, controller: self)
     }
 
     func showLoader() {

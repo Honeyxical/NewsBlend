@@ -1,6 +1,6 @@
 //  Created by илья on 13.08.23.
 
-import Foundation
+import UIKit
 
 class NBSPresentor {
     let interactor: NBSInteractorInputProtocol
@@ -34,6 +34,10 @@ extension NBSPresentor: NBSInteractorOutputProtocol {
 }
 
 extension NBSPresentor: NBSViewOutputProtocol {
+    func openArticleDetail(article: ArticleModel, controller: UIViewController) {
+        router.openArticleDetail(article: article, controller: controller)
+    }
+
     func getArticlesBySource(source: SourceModel){
         interactor.getArticlesBySource(source: source)
     }

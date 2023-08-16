@@ -105,6 +105,7 @@ extension DetailView: DetailViewInputProtocol {
 
     func showLoader() {
         view.addSubview(loader)
+        setupLoaderLayout()
     }
 
     func hideLoader() {
@@ -150,6 +151,13 @@ extension DetailView {
             content.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             content.topAnchor.constraint(equalTo: tagStack.bottomAnchor, constant: 20),
             content.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        ])
+    }
+
+    private func setupLoaderLayout() {
+        NSLayoutConstraint.activate([
+            loader.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 }
