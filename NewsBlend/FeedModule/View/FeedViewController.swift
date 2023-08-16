@@ -97,6 +97,7 @@ extension FeedViewController: FeedViewInputProtocol {
 
     func showLoader() {
         view.addSubview(loader)
+        setupLoaderLayout()
     }
 
     func hideLoader() {
@@ -158,6 +159,13 @@ extension FeedViewController {
             childView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             childView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 15),
             childView.view.widthAnchor.constraint(equalToConstant: view.frame.width)
+        ])
+    }
+
+    private func setupLoaderLayout() {
+        NSLayoutConstraint.activate([
+            loader.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 }

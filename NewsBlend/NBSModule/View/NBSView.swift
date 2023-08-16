@@ -34,6 +34,7 @@ class NBSView: UIViewController {
         collection.delegate = self
         collection.register(ArticleBySourceCell.self, forCellWithReuseIdentifier: "articleCell")
         collection.showsVerticalScrollIndicator = false
+        collection.showsHorizontalScrollIndicator = false
         collection.isPagingEnabled = true
         return collection
     }()

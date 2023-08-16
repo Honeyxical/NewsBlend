@@ -4,6 +4,7 @@ import UIKit
 
 class ArticleBySourceCell: UICollectionViewCell {
     private var articles: [ArticleModel] = []
+    private lazy var loader = ReusableViews.getLoader(view: self.collection)
 
     private lazy var collection: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout())
@@ -17,7 +18,8 @@ class ArticleBySourceCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupLayout()
+        addSubview(loader)
+        setupLoaderLayout()
     }
 
     required init?(coder: NSCoder) {
@@ -26,11 +28,11 @@ class ArticleBySourceCell: UICollectionViewCell {
 
     func setArticle(articles: [ArticleModel]) {
         self.articles = articles
-        collection.reloadData()
+        setupLayout()
+        loader.removeFromSuperview()
     }
 
     private func setupLayout() {
-        print("setup layout articleby source")
         addSubview(collection)
 
         NSLayoutConstraint.activate([
@@ -64,5 +66,14 @@ extension ArticleBySourceCell: UICollectionViewDelegate, UICollectionViewDataSou
         layout.itemSize = CGSize(width: frame.width, height: 120)
         layout.minimumLineSpacing = 15
         return layout
+    }
+}
+
+extension ArticleBySourceCell {
+    private func setupLoaderLayout() {
+        NSLayoutConstraint.activate([
+            loader.centerXAnchor.constraint(equalTo: centerXAnchor),
+            loader.topAnchor.constraint(equalTo: topAnchor, constant: 150)
+        ])
     }
 }
