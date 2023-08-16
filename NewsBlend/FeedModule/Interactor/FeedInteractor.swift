@@ -6,6 +6,7 @@ final class FeedInteractor {
     weak var output: FeedInteractorOutputProtocol?
     let feedNetworkService: FeedNetworkServiceProtocol
     let feedDataService: FeedCoreDataServiceProtocol
+    private let initialSource = SourceModel(id: "abc-news", name: "ABC News", category: "", language: "", country: "", isSelected: true)
     
     init(feedNetworkService: FeedNetworkServiceProtocol, feedDataService: FeedCoreDataServiceProtocol) {
         self.feedNetworkService = feedNetworkService
@@ -38,6 +39,13 @@ extension FeedInteractor: FeedInteractorInputProtocol {
             self.output?.didReceive(articles: articles, hotArticles: hotArticles)
         }
     }
+
+    func setSourceIfNeed() {
+        if decodeSource(data: feedDataService.getSource()).isEmpty {
+            let initialSource = encodeObjects(sourceModel: [initialSource])
+            feedDataService.setSource(data: initialSource)
+        }
+    }
 }
 
 extension FeedInteractor {
@@ -54,5 +62,18 @@ extension FeedInteractor {
             articleModels.append(article.map(article: article))
         }
         return articleModels
+    }
+
+    private func decodeSource(data: Data) -> [SourceModel] {
+        guard let source = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [SourceModel] else { return []}
+        return source
+    }
+
+    private func encodeObjects(sourceModel: [SourceModel]) -> Data {
+        let models = try? NSKeyedArchiver.archivedData(withRootObject: sourceModel, requiringSecureCoding: false)
+        guard let models: Data = models else {
+            return Data()
+        }
+        return models
     }
 }

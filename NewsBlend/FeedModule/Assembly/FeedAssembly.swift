@@ -6,6 +6,7 @@ import UIKit
 final class FeedAssembly {
 
     static func build() -> UIViewController {
+
         let view = FeedViewController(childView: NBSAssembly.build())
         let interactor = FeedInteractor(feedNetworkService: FeedNetworkService(),
                                         feedDataService: FeedCoreDataService())
@@ -16,6 +17,11 @@ final class FeedAssembly {
         interactor.output = presentor
         view.output = presentor
         router.viewController = view
+        prepareApp(interactor: interactor)
         return view
+    }
+
+    private static func prepareApp(interactor: FeedInteractorInputProtocol) {
+        interactor.setSourceIfNeed()
     }
 }

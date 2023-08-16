@@ -29,6 +29,7 @@ protocol FeedViewOutputProtocol {
 // Interactor Input
 protocol FeedInteractorInputProtocol {
     func loadData()
+    func setSourceIfNeed()
 }
 
 // Interactor Output
@@ -52,4 +53,7 @@ protocol FeedNetworkServiceProtocol {
     func getHotNews(country: String, completion: @escaping(Data) -> Void)
 }
 
-protocol FeedCoreDataServiceProtocol{}
+protocol FeedCoreDataServiceProtocol{
+    func getSource() -> Data
+    func setSource(data: Data)
+}

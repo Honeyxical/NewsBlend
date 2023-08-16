@@ -18,6 +18,7 @@ struct Sources: Decodable {
                     name: name ?? "",
                     category: category ?? "",
                     language: language ?? "",
-                    country: country ?? "")
+                    country: country ?? "",
+                    isSelected: false)
     }
 }

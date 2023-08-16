@@ -43,13 +43,7 @@ class NBSView: UIViewController {
         super.viewWillAppear(animated)
         output?.viewDidAppear()
         reloadData()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        output?.viewDidAppear()
         setupLayout()
-
     }
 }
 

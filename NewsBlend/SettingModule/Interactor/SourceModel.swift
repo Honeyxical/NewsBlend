@@ -8,18 +8,20 @@ class SourceModel: NSObject {
     var category: String
     var language: String
     var country: String
-    var isSelected = false
+    var isSelected: Bool
 
     init(id: String,
          name: String,
          category: String,
          language: String,
-         country: String) {
+         country: String,
+         isSelected: Bool) {
         self.id = id
         self.name = name
         self.category = category
         self.language = language
         self.country = country
+        self.isSelected = isSelected
     }
 
     required init?(coder: NSCoder) {
