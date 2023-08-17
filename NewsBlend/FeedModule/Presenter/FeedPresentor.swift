@@ -56,8 +56,8 @@ extension FeedPresentor {
     private func startUpdateDemon() {
         asyncThread.async {
             repeat {
-                self.interactor.loadData()
                 sleep(UInt32(self.interactor.getUpdateInterval()))
+                self.interactor.loadData()
             } while (true)
         }
     }

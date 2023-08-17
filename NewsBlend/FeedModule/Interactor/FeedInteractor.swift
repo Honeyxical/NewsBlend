@@ -47,12 +47,18 @@ extension FeedInteractor: FeedInteractorInputProtocol {
 
     func getUpdateInterval() -> Int {
         switch feedDataService.getInterval() {
-        case 0: return 60
-        case 1: return 180
-        case 2: return 300
-        case 3: return 600
-        case 4: return 900
-        default: return 600
+        case 0:
+            return 60
+        case 1:
+            return 180
+        case 2:
+            return 300
+        case 3:
+            return 600
+        case 4:
+            return 900
+        default:
+            return 600
         }
     }
 }

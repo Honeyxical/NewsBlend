@@ -34,6 +34,7 @@ protocol NBSInteractorInputProtocol {
     func getSources()
     func getArticles()
     func getArticlesBySource(source: SourceModel)
+    func getArticlesByAllSource()
 }
 
 // Interactor Output
