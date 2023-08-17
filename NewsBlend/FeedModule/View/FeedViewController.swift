@@ -87,7 +87,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 extension FeedViewController: FeedViewInputProtocol {
-    func setData(articles: [ArticleModel], hotArticles: [ArticleModel]) {
+    func setData(articles: [ArticleModel]) {
         self.articles = articles
     }
 

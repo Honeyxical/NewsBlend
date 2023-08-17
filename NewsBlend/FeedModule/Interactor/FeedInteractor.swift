@@ -18,18 +18,6 @@ final class FeedInteractor {
 extension FeedInteractor: FeedInteractorInputProtocol {
     func loadData() {
         var articles: [ArticleModel] = []
-        var hotArticles: [ArticleModel] = []
-
-        feedNetworkService.getHotNews(country: "us") { data in
-            guard let hotNews = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else {
-                self.output?.didReceiveFail()
-                return
-            }
-            hotArticles = Converter.transferDTOtoModel(articlesArray: hotNews.articles)
-            hotArticles = Converter.setDate(articles: hotArticles)
-            self.output?.didReceive(articles: articles, hotArticles: hotArticles)
-        }
-
         feedNetworkService.getNews { data in
             guard let news = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else {
                 self.output?.didReceiveFail()
@@ -37,7 +25,7 @@ extension FeedInteractor: FeedInteractorInputProtocol {
             }
             articles = Converter.transferDTOtoModel(articlesArray: news.articles)
             articles = Converter.setDate(articles: articles)
-            self.output?.didReceive(articles: articles, hotArticles: hotArticles)
+            self.output?.didReceive(articles: articles)
         }
     }
 
@@ -55,5 +43,16 @@ extension FeedInteractor: FeedInteractorInputProtocol {
 
     func setUpdateInterval(interval: Int) {
         feedDataService.setInterval(interval: defaultUpdateInterval)
+    }
+
+    func getUpdateInterval() -> Int {
+        switch feedDataService.getInterval() {
+        case 0: return 60
+        case 1: return 180
+        case 2: return 300
+        case 3: return 600
+        case 4: return 900
+        default: return 600
+        }
     }
 }

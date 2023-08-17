@@ -7,12 +7,13 @@ final class FeedPresentor {
     let view: FeedViewInputProtocol
     let interactor: FeedInteractorInputProtocol
     let router: FeedRouterInputProtocol
+    private let asyncThread = DispatchQueue.global(qos: .background)
 
     init(view: FeedViewInputProtocol, interactor: FeedInteractorInputProtocol, router: FeedRouterInputProtocol) {
         self.view = view
         self.interactor = interactor
         self.router = router
-        
+        startUpdateDemon()
     }
 }
 
@@ -32,8 +33,8 @@ extension FeedPresentor: FeedViewOutputProtocol {
 }
 
 extension FeedPresentor: FeedInteractorOutputProtocol {
-    func didReceive(articles: [ArticleModel], hotArticles: [ArticleModel]) {
-        view.setData(articles: articles, hotArticles: hotArticles)
+    func didReceive(articles: [ArticleModel]) {
+        view.setData(articles: articles)
         view.reloadData()
         view.hideLoader()
     }
@@ -50,3 +51,14 @@ extension FeedPresentor {
 }
 
 extension FeedPresentor: FeedRouterOutputProtocol {}
+
+extension FeedPresentor {
+    private func startUpdateDemon() {
+        asyncThread.async {
+            repeat {
+                self.interactor.loadData()
+                sleep(UInt32(self.interactor.getUpdateInterval()))
+            } while (true)
+        }
+    }
+}
