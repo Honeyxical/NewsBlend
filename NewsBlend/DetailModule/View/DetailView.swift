@@ -129,7 +129,7 @@ extension DetailView {
 
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -100),
+            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 350),
 
