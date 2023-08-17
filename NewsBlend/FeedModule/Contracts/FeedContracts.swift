@@ -29,7 +29,9 @@ protocol FeedViewOutputProtocol {
 // Interactor Input
 protocol FeedInteractorInputProtocol {
     func loadData()
-    func setSourceIfNeed()
+    func isFirstStart()
+    func setSource(sources: [SourceModel])
+    func setUpdateInterval(interval: Int)
 }
 
 // Interactor Output
@@ -56,4 +58,8 @@ protocol FeedNetworkServiceProtocol {
 protocol FeedCoreDataServiceProtocol{
     func getSource() -> Data
     func setSource(data: Data)
+    func getInterval() -> Int
+    func setInterval(interval: Int)
+    func getInitValue() -> Bool
+    func setInitValue(initValue: Bool)
 }

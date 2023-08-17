@@ -7,7 +7,7 @@ final class SettingsAssembly {
     static func build() -> UIViewController {
         let newsSettingsView = NewsSettingView()
         let view = SettingsView()
-        let interactor = SettingsInteractor(settingsDataService: UserDefaultsService(), settingNetworkService: SettingNetworkService())
+        let interactor = SettingsInteractor(settingsDataService: SettingsUserDefaultsService(), settingNetworkService: SettingNetworkService())
         let router = SettingsRouter()
         let presentor = SettingsPresentor(view: view,
                                           interactor: interactor,

@@ -2,7 +2,7 @@
 
 import Foundation
 
-class UserDefaultsService: SettingsDBServiceProtocol {
+class SettingsUserDefaultsService: SettingsDBServiceProtocol {
     private let userDefaults = UserDefaults.standard
 
     func getUpdateInterval() -> Int {

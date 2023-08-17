@@ -9,7 +9,7 @@ final class FeedAssembly {
 
         let view = FeedViewController(childView: NBSAssembly.build())
         let interactor = FeedInteractor(feedNetworkService: FeedNetworkService(),
-                                        feedDataService: FeedCoreDataService())
+                                        feedDataService: FeedUserDefaultsService())
         let router = FeedRouter()
         let presentor = FeedPresentor(view: view,
                                       interactor: interactor,
@@ -17,13 +17,13 @@ final class FeedAssembly {
         interactor.output = presentor
         view.output = presentor
         router.viewController = view
-        prepareApp(interactor: interactor)
+        isFirstStart(interactor: interactor)
         return view
     }
 
     // сделано через !вилкойВГлаз. На будущее: Нужно вынести в модуль конфигурации
     // Так же сделать дефолтное вермя для таймера 
-    private static func prepareApp(interactor: FeedInteractorInputProtocol) {
-        interactor.setSourceIfNeed()
+    private static func isFirstStart(interactor: FeedInteractorInputProtocol) {
+        interactor.isFirstStart()
     }
 }

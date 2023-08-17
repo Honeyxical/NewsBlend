@@ -30,7 +30,6 @@ extension NBSPresentor: NBSInteractorOutputProtocol {
 
     func didReceiveFail() {
         print("Fail")
-
     }
 }
 

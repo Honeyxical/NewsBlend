@@ -43,4 +43,10 @@ extension FeedPresentor: FeedInteractorOutputProtocol {
     }
 }
 
+extension FeedPresentor {
+    func startUpdateTimer() {
+        
+    }
+}
+
 extension FeedPresentor: FeedRouterOutputProtocol {}

@@ -7,6 +7,7 @@ final class FeedInteractor {
     let feedNetworkService: FeedNetworkServiceProtocol
     let feedDataService: FeedCoreDataServiceProtocol
     private let initialSource = SourceModel(id: "abc-news", name: "ABC News", category: "", language: "", country: "", isSelected: true)
+    private let defaultUpdateInterval = 4
     
     init(feedNetworkService: FeedNetworkServiceProtocol, feedDataService: FeedCoreDataServiceProtocol) {
         self.feedNetworkService = feedNetworkService
@@ -24,8 +25,8 @@ extension FeedInteractor: FeedInteractorInputProtocol {
                 self.output?.didReceiveFail()
                 return
             }
-            hotArticles = self.transferDTOtoModel(articlesArray: hotNews.articles)
-            hotArticles = self.setDate(articles: hotArticles)
+            hotArticles = Converter.transferDTOtoModel(articlesArray: hotNews.articles)
+            hotArticles = Converter.setDate(articles: hotArticles)
             self.output?.didReceive(articles: articles, hotArticles: hotArticles)
         }
 
@@ -34,46 +35,25 @@ extension FeedInteractor: FeedInteractorInputProtocol {
                 self.output?.didReceiveFail()
                 return
             }
-            articles = self.transferDTOtoModel(articlesArray: news.articles)
-            articles = self.setDate(articles: articles)
+            articles = Converter.transferDTOtoModel(articlesArray: news.articles)
+            articles = Converter.setDate(articles: articles)
             self.output?.didReceive(articles: articles, hotArticles: hotArticles)
         }
     }
 
-    func setSourceIfNeed() {
-        if decodeSource(data: feedDataService.getSource()).isEmpty {
-            let initialSource = encodeObjects(sourceModel: [initialSource])
-            feedDataService.setSource(data: initialSource)
+    func isFirstStart() {
+        if feedDataService.getInitValue() == false {
+            feedDataService.setInitValue(initValue: true)
+            setSource(sources: [initialSource])
+            setUpdateInterval(interval: defaultUpdateInterval)
         }
     }
-}
 
-extension FeedInteractor {
-    private func setDate(articles: [ArticleModel]) -> [ArticleModel]{
-        for counter in 0...articles.count - 1 {
-            articles[counter].timeSincePublication = Date().getDifferenceFromNowAndDate( articles[counter].publishedAt) ?? ""
-        }
-        return articles
+    func setSource(sources: [SourceModel]) {
+        feedDataService.setSource(data: Converter.encodeSourceObjects(sourceModels: sources))
     }
 
-    private func transferDTOtoModel(articlesArray: [Article]) -> [ArticleModel] {
-        var articleModels: [ArticleModel] = []
-        for article in articlesArray {
-            articleModels.append(article.map(article: article))
-        }
-        return articleModels
-    }
-
-    private func decodeSource(data: Data) -> [SourceModel] {
-        guard let source = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [SourceModel] else { return []}
-        return source
-    }
-
-    private func encodeObjects(sourceModel: [SourceModel]) -> Data {
-        let models = try? NSKeyedArchiver.archivedData(withRootObject: sourceModel, requiringSecureCoding: false)
-        guard let models: Data = models else {
-            return Data()
-        }
-        return models
+    func setUpdateInterval(interval: Int) {
+        feedDataService.setInterval(interval: defaultUpdateInterval)
     }
 }
