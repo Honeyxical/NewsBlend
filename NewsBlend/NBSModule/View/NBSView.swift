@@ -39,7 +39,7 @@ class NBSView: UIViewController {
         return collection
     }()
 
-    private let cellType: UIButton = {
+    private lazy var cellType: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10

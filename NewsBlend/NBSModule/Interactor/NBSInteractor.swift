@@ -46,7 +46,7 @@ extension NBSInteractor: NBSInteractorInputProtocol {
             }
         }
         group.notify(queue: DispatchQueue.main) {
-            self.output?.didReceive(articles: articles.sorted {$0.publishedAt > $1.publishedAt})
+            self.output?.didReceive(articles: articles.sorted { $0.publishedAt > $1.publishedAt })
         }
     }
 
