@@ -7,12 +7,14 @@ class ArticleBySourceCell: UICollectionViewCell {
     private var articles: [ArticleModel] = []
     private lazy var loader = ReusableViews.getLoader(view: self.collection)
     private var controller: UIViewController? // Придумать способ получше ибо это херня
+    private var isDefaultCell = true
 
     private lazy var collection: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout())
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.dataSource = self
         collection.delegate = self
+        collection.register(ArticleShortCell.self, forCellWithReuseIdentifier: "shortArticleCell")
         collection.register(ArticleCell.self, forCellWithReuseIdentifier: "articleCell")
         collection.showsVerticalScrollIndicator = false
         return collection
@@ -36,6 +38,11 @@ class ArticleBySourceCell: UICollectionViewCell {
         loader.removeFromSuperview()
     }
 
+    func changeCellView(isDefaultCell: Bool) {
+        self.isDefaultCell = isDefaultCell
+        collection.reloadData()
+    }
+
     private func setupLayout() {
         addSubview(collection)
 
@@ -54,14 +61,22 @@ extension ArticleBySourceCell: UICollectionViewDelegate, UICollectionViewDataSou
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as? ArticleCell else {
-            return UICollectionViewCell()
+        if isDefaultCell {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "shortArticleCell", for: indexPath) as? ArticleShortCell else {
+                return UICollectionViewCell()
+            }
+            cell.setData(articleTitle: articles[indexPath.item].title, articleAuthor: articles[indexPath.item].author, publishedAt: articles[indexPath.item].timeSincePublication)
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as? ArticleCell else {
+                return UICollectionViewCell()
+            }
+            cell.setData(title: articles[indexPath.item].title,
+                         author: articles[indexPath.item].author,
+                         imageUrl: articles[indexPath.item].urlToImage,
+                         publishedTime: articles[indexPath.item].timeSincePublication)
+            return cell
         }
-        cell.setData(title: articles[indexPath.item].title,
-                     author: articles[indexPath.item].author,
-                     imageUrl: articles[indexPath.item].urlToImage,
-                     publishedTime: articles[indexPath.item].timeSincePublication)
-        return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

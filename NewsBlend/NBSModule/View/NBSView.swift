@@ -39,6 +39,18 @@ class NBSView: UIViewController {
         return collection
     }()
 
+    private let cellType: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10
+        button.layer.borderColor = UIColor.systemBlue.cgColor
+        button.layer.borderWidth = 1
+        button.setTitle("Full", for: .normal)
+        button.tintColor = .lightGray
+        button.addTarget(self, action: #selector(changeViewMode), for: .touchUpInside)
+        return button
+    }()
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         output?.viewDidAppear()
@@ -55,12 +67,12 @@ extension NBSView: NBSViewInputProtocol {
 
     func set(sources: [SourceModel]) {
         self.sources = []
-        self.sources += [SourceModel(id: "",
-                                     name: "All",
-                                     category: "",
-                                     language: "",
-                                     country: "",
-                                     isSelected: true)]
+//        self.sources += [SourceModel(id: "",
+//                                     name: "All",
+//                                     category: "",
+//                                     language: "",
+//                                     country: "",
+//                                     isSelected: true)]
         self.sources += sources
         sourcesCollection.reloadData()
     }
@@ -145,12 +157,18 @@ extension NBSView: UICollectionViewDelegate, UICollectionViewDataSource {
 extension NBSView {
     private func setupLayout() {
         view.addSubview(sectionName)
+        view.addSubview(cellType)
         view.addSubview(sourcesCollection)
         view.addSubview(articlesCollection)
 
         NSLayoutConstraint.activate([
             sectionName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             sectionName.topAnchor.constraint(equalTo: view.topAnchor),
+
+            cellType.topAnchor.constraint(equalTo: view.topAnchor),
+            cellType.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            cellType.heightAnchor.constraint(equalToConstant: 25),
+            cellType.widthAnchor.constraint(equalToConstant: 45),
 
             sourcesCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             sourcesCollection.topAnchor.constraint(equalTo: sectionName.bottomAnchor, constant: 10),
@@ -162,5 +180,18 @@ extension NBSView {
             articlesCollection.topAnchor.constraint(equalTo: sourcesCollection.bottomAnchor, constant: 15),
             articlesCollection.heightAnchor.constraint(equalToConstant: 650)
         ])
+    }
+
+    @objc private func changeViewMode() {
+        guard let cell = articlesCollection.visibleCells.first as? ArticleBySourceCell else {
+            return
+        }
+        if cellType.title(for: .normal) == "Full" {
+            cellType.setTitle("Short", for: .normal)
+            cell.changeCellView(isDefaultCell: false)
+        } else {
+            cellType.setTitle("Full", for: .normal)
+            cell.changeCellView(isDefaultCell: true)
+        }
     }
 }
