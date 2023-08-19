@@ -7,13 +7,12 @@ final class FeedPresentor {
     let view: FeedViewInputProtocol
     let interactor: FeedInteractorInputProtocol
     let router: FeedRouterInputProtocol
-    private let asyncThread = DispatchQueue.global(qos: .background)
 
     init(view: FeedViewInputProtocol, interactor: FeedInteractorInputProtocol, router: FeedRouterInputProtocol) {
         self.view = view
         self.interactor = interactor
         self.router = router
-        startUpdateDemon()
+        interactor.startUpdateDemon()
     }
 }
 
@@ -44,21 +43,4 @@ extension FeedPresentor: FeedInteractorOutputProtocol {
     }
 }
 
-extension FeedPresentor {
-    func startUpdateTimer() {
-        
-    }
-}
-
 extension FeedPresentor: FeedRouterOutputProtocol {}
-
-extension FeedPresentor {
-    private func startUpdateDemon() {
-        asyncThread.async {
-            repeat {
-                sleep(UInt32(self.interactor.getUpdateInterval()))
-                self.interactor.loadData()
-            } while (true)
-        }
-    }
-}

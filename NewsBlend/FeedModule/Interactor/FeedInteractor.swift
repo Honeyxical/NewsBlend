@@ -57,4 +57,11 @@ extension FeedInteractor: FeedInteractorInputProtocol {
     func getUpdateInterval() -> Int {
         UpdateInterval(rawValue: feedDataService.getInterval())?.rawValue ?? UpdateInterval.tenMinutes.rawValue
     }
+    
+    func startUpdateDemon() {
+        let timer = Timer.scheduledTimer(withTimeInterval: Double(getUpdateInterval()), repeats: true) { _ in
+            self.loadData()
+        }
+        RunLoop.current.add(timer, forMode: .common)
+    }
 }
