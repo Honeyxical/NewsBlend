@@ -35,7 +35,9 @@ extension NBSInteractor: NBSInteractorInputProtocol {
     }
 
     func getSources() {
-        output?.didReceive(sources: Converter.decodeSourceObjects(data: storageService.getSources()))
+        var sources = [SourceModel(id: "", name: "All", category: "", language: "", country: "", isSelected: true)]
+        sources += Converter.decodeSourceObjects(data: storageService.getSources())
+        output?.didReceive(sources: sources)
     }
 
     func getArticles() {

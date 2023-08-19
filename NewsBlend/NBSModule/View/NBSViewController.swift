@@ -66,14 +66,7 @@ extension NBSViewController: NBSViewInputProtocol {
     }
 
     func set(sources: [SourceModel]) {
-        self.sources = []
-        self.sources += [SourceModel(id: "",
-                                     name: "All",
-                                     category: "",
-                                     language: "",
-                                     country: "",
-                                     isSelected: true)]
-        self.sources += sources
+        self.sources = sources
         sourcesCollection.reloadData()
     }
 

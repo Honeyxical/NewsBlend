@@ -19,10 +19,6 @@ extension NBSPresentor: NBSInteractorOutputProtocol {
         view.setArticle(articles: articles)
     }
 
-    func didReceiveArticles(articles: [ArticleModel]) {
-        view.setArticle(articles: articles)
-    }
-
     func didReceive(sources: [SourceModel]) {
         view.set(sources: sources)
     }
