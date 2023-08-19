@@ -2,12 +2,20 @@
 
 import Foundation
 
+enum UpdateInterval: Int {
+    case oneMinute = 60
+    case threeMinutes = 180
+    case fiveMinutes = 300
+    case tenMinutes = 600
+    case fifteenMinutes = 900
+}
+
 final class FeedInteractor {
     weak var output: FeedInteractorOutputProtocol?
     let feedNetworkService: FeedNetworkServiceProtocol
     let feedDataService: FeedCoreDataServiceProtocol
     private let initialSource = SourceModel(id: "abc-news", name: "ABC News", category: "", language: "", country: "", isSelected: true)
-    private let defaultUpdateInterval = 4
+    private let defaultUpdateInterval = UpdateInterval.fifteenMinutes.rawValue
     
     init(feedNetworkService: FeedNetworkServiceProtocol, feedDataService: FeedCoreDataServiceProtocol) {
         self.feedNetworkService = feedNetworkService
@@ -46,19 +54,6 @@ extension FeedInteractor: FeedInteractorInputProtocol {
     }
 
     func getUpdateInterval() -> Int {
-        switch feedDataService.getInterval() {
-        case 0:
-            return 60
-        case 1:
-            return 180
-        case 2:
-            return 300
-        case 3:
-            return 600
-        case 4:
-            return 900
-        default:
-            return 600
-        }
+        UpdateInterval(rawValue: feedDataService.getInterval())?.rawValue ?? UpdateInterval.tenMinutes.rawValue
     }
 }
