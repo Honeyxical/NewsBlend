@@ -15,9 +15,6 @@ class NBSInteractor {
 
 extension NBSInteractor: NBSInteractorInputProtocol {
     func getArticlesBySource(source: SourceModel) {
-        if source.name == "All" {
-
-        }
         var articles: [ArticleModel] = []
         networkService.getArticlesBySource(source: source) { data in
             guard let articlesParsed = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else {
@@ -31,22 +28,9 @@ extension NBSInteractor: NBSInteractorInputProtocol {
     }
 
     func getArticlesByAllSource() {
-        let group = DispatchGroup()
         let sources = Converter.decodeSourceObjects(data: storageService.getSources())
-        var articles: [ArticleModel] = []
-        for source in sources {
-            group.enter()
-            self.networkService.getArticlesBySource(source: source) { data in
-                guard let articlesParsed = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else {
-                    self.output?.didReceiveFail()
-                    return
-                }
-                articles += Converter.setDate(articles: Converter.transferDTOtoModel(articlesArray: articlesParsed.articles))
-                group.leave()
-            }
-        }
-        group.notify(queue: DispatchQueue.main) {
-            self.output?.didReceive(articles: articles.sorted { $0.publishedAt > $1.publishedAt })
+        Parser.parseAllSource(sources: sources, networkService: networkService) { articles in
+            self.output?.didReceive(articles: articles)
         }
     }
 

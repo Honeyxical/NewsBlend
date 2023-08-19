@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		094CD27E2A91081800C3DFB4 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094CD27D2A91081800C3DFB4 /* Parser.swift */; };
 		6917487C2A77F92E003F00D6 /* FeedNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917487B2A77F92E003F00D6 /* FeedNetworkService.swift */; };
 		691748802A77F967003F00D6 /* FeedUserDefaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917487F2A77F967003F00D6 /* FeedUserDefaultService.swift */; };
 		691C01692A7B91FF004E22FB /* TrendingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C01682A7B91FF004E22FB /* TrendingsCell.swift */; };
@@ -63,6 +64,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		094CD27D2A91081800C3DFB4 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		6917487B2A77F92E003F00D6 /* FeedNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedNetworkService.swift; sourceTree = "<group>"; };
 		6917487F2A77F967003F00D6 /* FeedUserDefaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUserDefaultService.swift; sourceTree = "<group>"; };
 		691C01682A7B91FF004E22FB /* TrendingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingsCell.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				694012BD2A8E135C0099F727 /* Converter.swift */,
+				094CD27D2A91081800C3DFB4 /* Parser.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -731,6 +734,7 @@
 				694012BE2A8E135C0099F727 /* Converter.swift in Sources */,
 				69242EFF2A88C007008F040E /* NBSPresentor.swift in Sources */,
 				69242F082A8907F4008F040E /* SourcesCell.swift in Sources */,
+				094CD27E2A91081800C3DFB4 /* Parser.swift in Sources */,
 				69B59FA42A87C26700B80CD4 /* SettingsUserDefaultsService.swift in Sources */,
 				69BB2B2F2A7984AE00B5BDE1 /* SettingsViewController.swift in Sources */,
 				69BB2B3F2A7A3B1800B5BDE1 /* Date + Extension.swift in Sources */,
