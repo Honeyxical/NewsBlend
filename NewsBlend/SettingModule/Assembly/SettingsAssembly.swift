@@ -5,18 +5,18 @@ import UIKit
 
 final class SettingsAssembly {
     static func build() -> UIViewController {
-        let newsSettingsView = NewsSettingView()
-        let view = SettingsView()
+        let newsSettingsViewController = NewsSettingViewController()
+        let view = SettingsViewController()
         let interactor = SettingsInteractor(settingsDataService: SettingsUserDefaultsService(), settingNetworkService: SettingNetworkService())
         let router = SettingsRouter()
         let presentor = SettingsPresentor(view: view,
                                           interactor: interactor,
                                           router: router,
-                                          newsSettingsProtocol: newsSettingsView)
+                                          newsSettingsProtocol: newsSettingsViewController)
 
         interactor.output = presentor
-        newsSettingsView.output = presentor
-        view.newsSettingView = newsSettingsView
+        newsSettingsViewController.output = presentor
+        view.newsSettingView = newsSettingsViewController
         view.output = presentor
         router.output = presentor
         router.feedRouter = FeedRouter()

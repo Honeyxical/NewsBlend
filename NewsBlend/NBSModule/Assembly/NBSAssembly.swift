@@ -6,7 +6,7 @@ import UIKit
 class NBSAssembly {
     static func build() -> UIViewController {
         let interactor = NBSInteractor(networkService: NBSNetworService(), storageService: NBSUserDefaultsService())
-        let view = NBSView()
+        let view = NBSViewController()
         let router = NBSRouter()
         let presentor = NBSPresentor(interactor: interactor, router: router, view: view)
 

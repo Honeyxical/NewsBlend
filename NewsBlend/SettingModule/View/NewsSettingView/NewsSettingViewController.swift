@@ -3,7 +3,7 @@
 import Foundation
 import UIKit
 
-class NewsSettingView: UIViewController {
+class NewsSettingViewController: UIViewController {
     var output: SettingsViewOutputProtocol?
     var sources: [SourceModel] = []
     private let updatesIntervals = ["1 min", "3 min", "5 min", "10 min", "15 min"]
@@ -57,7 +57,7 @@ class NewsSettingView: UIViewController {
 
 }
 
-extension NewsSettingView {
+extension NewsSettingViewController {
     private func setupLayout() {
         view.addSubview(untervalsLabel)
         view.addSubview(pickerView)
@@ -96,7 +96,7 @@ extension NewsSettingView {
     }
 }
 
-extension NewsSettingView: SettingsViewInputProtocol {
+extension NewsSettingViewController: SettingsViewInputProtocol {
     func set(interval: Int) {
         pickerView.selectRow(interval, inComponent: 0, animated: true)
     }
@@ -127,7 +127,7 @@ extension NewsSettingView: SettingsViewInputProtocol {
 
 // MARK: Picker Delegate / DataSource
 
-extension NewsSettingView: UIPickerViewDataSource, UIPickerViewDelegate {
+extension NewsSettingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         1
     }
@@ -147,7 +147,7 @@ extension NewsSettingView: UIPickerViewDataSource, UIPickerViewDelegate {
 
 // MARK: Collection Delegate / DataSource
 
-extension NewsSettingView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension NewsSettingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         sources.count
     }

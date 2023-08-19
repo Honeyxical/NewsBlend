@@ -3,7 +3,7 @@
 import Foundation
 import UIKit
 
-class NBSView: UIViewController {
+class NBSViewController: UIViewController {
     var output: NBSViewOutputProtocol?
     private var sources: [SourceModel] = []
 
@@ -59,7 +59,7 @@ class NBSView: UIViewController {
     }
 }
 
-extension NBSView: NBSViewInputProtocol {
+extension NBSViewController: NBSViewInputProtocol {
     func reloadData() {
         articlesCollection.reloadData()
         sourcesCollection.reloadData()
@@ -97,7 +97,7 @@ extension NBSView: NBSViewInputProtocol {
     }
 }
 
-extension NBSView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension NBSViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         sources.count
     }
@@ -154,7 +154,7 @@ extension NBSView: UICollectionViewDelegate, UICollectionViewDataSource {
     }
 }
 
-extension NBSView {
+extension NBSViewController {
     private func setupLayout() {
         view.addSubview(sectionName)
         view.addSubview(cellType)

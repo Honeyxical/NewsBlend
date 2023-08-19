@@ -3,7 +3,7 @@
 import Foundation
 import UIKit
 
-class SettingsView: UIViewController {
+class SettingsViewController: UIViewController {
     var output: SettingsViewOutputProtocol?
     var newsSettingView: UIViewController?
 
@@ -51,7 +51,7 @@ class SettingsView: UIViewController {
     }
 }
 
-extension SettingsView: UITableViewDelegate, UITableViewDataSource {
+extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return sectionProfile.count
@@ -107,10 +107,10 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension SettingsView: MenuViewProtocol {
+extension SettingsViewController: MenuViewProtocol {
 }
 
-extension SettingsView {
+extension SettingsViewController {
     private func setupLayout() {
         view.addSubview(screenTitle)
         view.addSubview(userView)

@@ -4,7 +4,7 @@ import Foundation
 import Kingfisher
 import UIKit
 
-class DetailView: UIViewController {
+class DetailViewController: UIViewController {
     var output: DetailViewOutputProtocol?
     private lazy var loader = ReusableViews.getLoader(view: view)
     private lazy var contentRect: CGRect = scrollView.subviews.reduce(into: .zero) { rect, view in
@@ -94,7 +94,7 @@ class DetailView: UIViewController {
     }
 }
 
-extension DetailView: DetailViewInputProtocol {
+extension DetailViewController: DetailViewInputProtocol {
     func set(article: ArticleModel) {
         self.imageView.kf.setImage(with: URL(string: article.urlToImage))
         self.articleTitle.text = article.title
@@ -118,7 +118,7 @@ extension DetailView: DetailViewInputProtocol {
     }
 }
 
-extension DetailView {
+extension DetailViewController {
     private func setupScrollView() {
         scrollView.addSubview(imageView)
         scrollView.addSubview(author)
