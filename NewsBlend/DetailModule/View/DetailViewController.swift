@@ -104,12 +104,16 @@ extension DetailViewController: DetailViewInputProtocol {
     }
 
     func showLoader() {
-        view.addSubview(loader)
-        setupLoaderLayout()
+        if loader.isHidden {
+            loader.isHidden = false
+        } else {
+            view.addSubview(loader)
+            setupLoaderLayout()
+        }
     }
 
     func hideLoader() {
-        loader.removeFromSuperview()
+        loader.isHidden = true
         setupLayout()
         setupScrollView()
     }

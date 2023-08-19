@@ -114,11 +114,15 @@ extension NewsSettingViewController: SettingsViewInputProtocol {
     }
 
     func showLoader() {
-        view.addSubview(loader)
+        if loader.isHidden {
+            loader.isHidden = false
+        } else {
+            view.addSubview(loader)
+        }
     }
 
     func hideLoader() {
-        loader.removeFromSuperview()
+        loader.isHidden = true
         sourcesCollection.reloadData()
         setupLayout()
     }
