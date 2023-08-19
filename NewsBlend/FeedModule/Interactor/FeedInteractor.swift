@@ -14,12 +14,13 @@ final class FeedInteractor {
     weak var output: FeedInteractorOutputProtocol?
     let feedNetworkService: FeedNetworkServiceProtocol
     let feedDataService: FeedCoreDataServiceProtocol
-    private let initialSource = SourceModel(id: "abc-news", name: "ABC News", category: "", language: "", country: "", isSelected: true)
-    private let defaultUpdateInterval = UpdateInterval.fifteenMinutes.rawValue
+    private let initialSource: SourceModel
+    private let defaultUpdateInterval = 4
     
-    init(feedNetworkService: FeedNetworkServiceProtocol, feedDataService: FeedCoreDataServiceProtocol) {
+    init(feedNetworkService: FeedNetworkServiceProtocol, feedDataService: FeedCoreDataServiceProtocol, initialSource: SourceModel) {
         self.feedNetworkService = feedNetworkService
         self.feedDataService = feedDataService
+        self.initialSource = initialSource
     }
 }
 
