@@ -15,13 +15,14 @@ class SettingsInteractor {
 
 extension SettingsInteractor: SettingsInteractorInputProtocol {
     func getAllSources() {
-        networkService.getEngSources { data in
-            guard let engSources = try? JSONDecoder().decode(SourcesModelDTO.self, from: data) else {
-                self.output?.didReceiveFail()
-                return
+        let sourcesFromCahce = Converter.decodeSourceObjects(data: dataService.getSources())
+        Parser.parseSource(network: networkService) { sourcesFromNetwork in
+            if sourcesFromNetwork.isEmpty {
+                self.output?.didReceive(sources: sourcesFromCahce)
+            } else {
+                self.output?.didReceive(sources: Converter.combiningSourceResults(storage: sourcesFromCahce,
+                                                                                  network: sourcesFromNetwork))
             }
-            let sources = Converter.transferSourceObject(sources: engSources.sources)
-            self.output?.didReceive(sources: Converter.combiningSourceResults(storage: self.getFollowedSources(), network: sources))
         }
     }
 

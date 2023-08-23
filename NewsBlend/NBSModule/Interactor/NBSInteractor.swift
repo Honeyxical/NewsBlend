@@ -15,29 +15,35 @@ class NBSInteractor {
 
 extension NBSInteractor: NBSInteractorInputProtocol {
     func getArticlesBySource(source: SourceModel) {
-        var articles: [ArticleModel] = []
-        networkService.getArticlesBySource(source: source) { data in
-            guard let articlesParsed = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else {
-                self.output?.didReceiveFail()
-                return
+        let articlesFromCache = Converter.decodeArticleObjects(data: storageService.getArticles())
+        Parser.parseNBSArticlesBySource(source: source, network: networkService) { articlesFromNetwork in
+            if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
+                print("setim v storage (NBS)")
+                self.storageService.setArtcles(data: Converter.encodeArticleObjects(articles: articlesFromNetwork))
+                self.output?.didReceive(articles: articlesFromNetwork)
+            } else {
+                self.output?.didReceive(articles: articlesFromCache)
             }
-            articles = Converter.transferDTOtoModel(articlesArray: articlesParsed.articles)
-            articles = Converter.setDate(articles: articles)
-            self.output?.didReceive(articles: articles)
         }
     }
 
     func getArticlesByAllSource() {
         let sources = Converter.decodeSourceObjects(data: storageService.getSources())
-        Parser.parseAllSource(sources: sources, networkService: networkService) { articles in
-            self.output?.didReceive(articles: articles)
+        let articlesFromCache = Converter.decodeArticleObjects(data: storageService.getArticlesByAllSource())
+        Parser.parseArticlesByAllSource(sources: sources, networkService: networkService) { articlesFromNetwork in
+            if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
+                self.storageService.setArticlesByAllSource(data: Converter.encodeArticleObjects(articles: articlesFromNetwork))
+                self.output?.didReceive(articles: articlesFromNetwork)
+            } else {
+                self.output?.didReceive(articles: articlesFromCache)
+            }
         }
     }
 
     func getSources() {
-        var sources = [SourceModel(id: "", name: "All", category: "", language: "", country: "", isSelected: true)]
-        sources += Converter.decodeSourceObjects(data: storageService.getSources())
-        output?.didReceive(sources: sources)
+        var sourcesFromCache = [SourceModel(id: "", name: "All", category: "", language: "", country: "", isSelected: true)]
+        sourcesFromCache += Converter.decodeSourceObjects(data: storageService.getSources())
+        output?.didReceive(sources: sourcesFromCache)
     }
 
     func getArticles() {

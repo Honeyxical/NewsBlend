@@ -54,7 +54,6 @@ protocol FeedRouterOutputProtocol {
 
 protocol FeedNetworkServiceProtocol {
     func getNews(completion: @escaping(Data) -> Void)
-//    func getHotNews(country: String, completion: @escaping(Data) -> Void)
 }
 
 protocol FeedCoreDataServiceProtocol{
@@ -64,4 +63,6 @@ protocol FeedCoreDataServiceProtocol{
     func setInterval(interval: Int)
     func getInitValue() -> Bool
     func setInitValue(initValue: Bool)
+    func setArticles(data: Data)
+    func getArticles() -> Data
 }

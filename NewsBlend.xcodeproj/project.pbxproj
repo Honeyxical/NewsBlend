@@ -191,7 +191,6 @@
 			isa = PBXGroup;
 			children = (
 				69242EF52A88BE3B008F040E /* UserDefaults */,
-				69242EF42A88BE2C008F040E /* CoreData */,
 				69242EF32A88BE09008F040E /* Network */,
 			);
 			path = Services;
@@ -220,13 +219,6 @@
 				69242EF62A88BE9C008F040E /* NBSNetworkService.swift */,
 			);
 			path = Network;
-			sourceTree = "<group>";
-		};
-		69242EF42A88BE2C008F040E /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CoreData;
 			sourceTree = "<group>";
 		};
 		69242EF52A88BE3B008F040E /* UserDefaults */ = {

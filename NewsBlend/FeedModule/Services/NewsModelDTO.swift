@@ -17,7 +17,12 @@ struct Article: Decodable {
 
     func map(article: Article) -> ArticleModel {
         ArticleModel(
-            source: source ?? Source(id: "", name: ""),
+            source: SourceModel(id: source?.id ?? "",
+                                name: source?.name ?? "",
+                                category: "",
+                                language: "",
+                                country: "",
+                                isSelected: false),
             author: author ?? "",
             title: title ?? "",
             desctiption: description ?? "",
@@ -28,7 +33,11 @@ struct Article: Decodable {
     }
 }
 
-struct Source: Decodable {
+struct Source: Decodable, Equatable {
     let id: String?
     let name: String?
+    
+    static func == (lhs: Source, rhs: Source) -> Bool {
+        lhs.id == rhs.id && lhs.name == rhs.name
+    }
 }

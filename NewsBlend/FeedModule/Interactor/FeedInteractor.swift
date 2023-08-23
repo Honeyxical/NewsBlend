@@ -26,15 +26,14 @@ final class FeedInteractor {
 
 extension FeedInteractor: FeedInteractorInputProtocol {
     func loadData() {
-        var articles: [ArticleModel] = []
-        feedNetworkService.getNews { data in
-            guard let news = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else {
-                self.output?.didReceiveFail()
-                return
+        let articlesFromCache = Converter.decodeArticleObjects(data: feedDataService.getArticles())
+        Parser.parseFeedSource(network: feedNetworkService) { articlesFromNetwork in
+            if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
+                self.cacheArticles(articles: articlesFromNetwork)
+                self.output?.didReceive(articles: articlesFromNetwork)
+            } else {
+                self.output?.didReceive(articles: articlesFromCache)
             }
-            articles = Converter.transferDTOtoModel(articlesArray: news.articles)
-            articles = Converter.setDate(articles: articles)
-            self.output?.didReceive(articles: articles)
         }
     }
 
@@ -63,5 +62,9 @@ extension FeedInteractor: FeedInteractorInputProtocol {
             self.loadData()
         }
         RunLoop.current.add(timer, forMode: .common)
+    }
+    
+    private func cacheArticles(articles: [ArticleModel]) {
+        feedDataService.setArticles(data: Converter.encodeArticleObjects(articles: articles))
     }
 }

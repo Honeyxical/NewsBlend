@@ -58,6 +58,7 @@ class Converter {
         for article in articlesArray {
             articleModels.append(article.map(article: article))
         }
+        articleModels = setDate(articles: articleModels)
         return articleModels
     }
 

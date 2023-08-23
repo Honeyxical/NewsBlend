@@ -8,9 +8,14 @@ class NBSNetworService: NBSNetworkServiceProtocol {
 
     func getArticlesBySource(source: SourceModel, completion: @escaping (Data) -> Void) {
         AF.request("https://newsapi.org/v2/top-headlines?sources=\(source.id)&apiKey=" + APIKey).response { response in
-            guard let data = response.data else { return }
-            DispatchQueue.main.async {
-                completion(data)
+            switch response.result {
+            case .success:
+                guard let data = response.data else { return }
+                DispatchQueue.main.async {
+                    completion(data)
+                }
+            case .failure:
+                completion(Data())
             }
         }
     }

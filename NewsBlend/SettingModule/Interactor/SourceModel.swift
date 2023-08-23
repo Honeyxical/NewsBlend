@@ -32,6 +32,14 @@ class SourceModel: NSObject {
         self.country = coder.decodeObject(forKey: "country") as? String ?? ""
         self.isSelected = coder.decodeBool(forKey: "isSelected")
     }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        if let otherSource = object as? SourceModel {
+            return id == otherSource.id &&
+                   name == otherSource.name
+        }
+        return false
+    }
 }
 
 extension SourceModel: NSCoding {

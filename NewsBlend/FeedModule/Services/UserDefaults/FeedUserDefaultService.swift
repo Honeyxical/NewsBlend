@@ -29,4 +29,13 @@ class FeedUserDefaultsService: FeedCoreDataServiceProtocol {
     func setInitValue(initValue: Bool) {
         userDefaults.set(initValue, forKey: "isInitNeeded")
     }
+    
+    func setArticles(data: Data) {
+        userDefaults.set(data, forKey: "articlesFeed")
+    }
+    
+    func getArticles() -> Data {
+        guard let data = userDefaults.data(forKey: "articlesFeed") else { return Data() }
+        return data
+    }
 }

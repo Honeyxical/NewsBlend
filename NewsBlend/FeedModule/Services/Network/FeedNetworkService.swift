@@ -8,9 +8,14 @@ class FeedNetworkService: FeedNetworkServiceProtocol {
 
     func getNews(completion: @escaping(Data) -> Void) {
         AF.request("https://newsapi.org/v2/everything?domains=techcrunch.com&pageSize=5&apiKey=\(APIKey)").response { response in
-            guard let data = response.data else { return }
-            DispatchQueue.main.async {
-                completion(data)
+            switch response.result {
+            case .success:
+                guard let data = response.data else { return }
+                DispatchQueue.main.async {
+                    completion(data)
+                }
+            case .failure:
+                completion(Data())
             }
         }
     }
