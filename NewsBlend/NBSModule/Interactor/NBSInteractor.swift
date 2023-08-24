@@ -18,7 +18,6 @@ extension NBSInteractor: NBSInteractorInputProtocol {
         let articlesFromCache = Converter.decodeArticleObjects(data: storageService.getArticles())
         Parser.parseNBSArticlesBySource(source: source, network: networkService) { articlesFromNetwork in
             if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
-                print("setim v storage (NBS)")
                 self.storageService.setArtcles(data: Converter.encodeArticleObjects(articles: articlesFromNetwork))
                 self.output?.didReceive(articles: articlesFromNetwork)
             } else {
