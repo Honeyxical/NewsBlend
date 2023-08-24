@@ -12,21 +12,12 @@ class NBSUserDefaultsService: NBSDataServiceProtocol {
         return data
     }
     
-    func setArtcles(data: Data) {
-        userDefaults.set(data, forKey: "articlesNBS")
+    func setArtcles(data: Data, source: String) {
+        userDefaults.set(data, forKey: source)
     }
     
-    func getArticles() -> Data {
-        guard let articles = userDefaults.data(forKey: "articlesNBS") else { return Data() }
-        return articles
-    }
-    
-    func setArticlesByAllSource(data: Data) {
-        userDefaults.set(data, forKey: "articleByAllSourceNBS")
-    }
-    
-    func getArticlesByAllSource() -> Data {
-        guard let articles = userDefaults.data(forKey: "articleByAllSourceNBS") else { return Data() }
+    func getArticles(source: String) -> Data {
+        guard let articles = userDefaults.data(forKey: source) else { return Data() }
         return articles
     }
 }

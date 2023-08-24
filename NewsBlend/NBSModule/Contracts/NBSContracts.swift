@@ -55,10 +55,8 @@ protocol NBSRouterOutputProtocol {
 // Data
 protocol NBSDataServiceProtocol{
     func getSources() -> Data
-    func setArtcles(data: Data)
-    func getArticles() -> Data
-    func setArticlesByAllSource(data: Data)
-    func getArticlesByAllSource() -> Data
+    func setArtcles(data: Data, source: String)
+    func getArticles(source: String) -> Data
 }
 
 // Network

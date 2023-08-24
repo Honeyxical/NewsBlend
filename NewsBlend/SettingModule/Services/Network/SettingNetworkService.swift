@@ -10,7 +10,8 @@ class SettingNetworkService: SettingNetworkServiceProtocol {
         components.host = "newsapi.org"
         components.path = "/v2/top-headlines/sources"
         components.queryItems = [
-            URLQueryItem(name: "apiKey", value: "71ecb82f10374ce28448c08a38e5afda"),
+//            URLQueryItem(name: "apiKey", value: "71ecb82f10374ce28448c08a38e5afda"),
+            URLQueryItem(name: "apiKey", value: "bc613432d94c448da6d678dad9c8806e"),
             URLQueryItem(name: "language", value: "en")
         ]
         return components
