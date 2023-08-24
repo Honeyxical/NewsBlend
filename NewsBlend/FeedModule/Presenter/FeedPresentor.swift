@@ -33,7 +33,7 @@ extension FeedPresentor: FeedViewOutputProtocol {
 
 extension FeedPresentor: FeedInteractorOutputProtocol {
     func didReceive(articles: [ArticleModel]) {
-        view.setData(articles: articles)
+        view.setArticles(articles: articles)
         view.reloadData()
         view.hideLoader()
     }

@@ -8,8 +8,8 @@ final class FeedAssembly {
     static func build() -> UIViewController {
 
         let view = FeedViewController(childView: NBSAssembly.build())
-        let interactor = FeedInteractor(feedNetworkService: FeedNetworkService(),
-                                        feedDataService: FeedUserDefaultsService(),
+        let interactor = FeedInteractor(networkService: FeedNetworkService(),
+                                        cacheService: FeedUserDefaultsService(),
                                         initialSource: SourceModel(id: "abc-news",
                                                                    name: "ABC News",
                                                                    category: "",

@@ -12,24 +12,24 @@ enum UpdateInterval: Int {
 
 final class FeedInteractor {
     weak var output: FeedInteractorOutputProtocol?
-    let feedNetworkService: FeedNetworkServiceProtocol
-    let feedDataService: FeedCoreDataServiceProtocol
+    let networkService: FeedNetworkServiceProtocol
+    let cacheService: FeedCoreDataServiceProtocol
     private let initialSource: SourceModel
     private let defaultUpdateInterval = 4
     
-    init(feedNetworkService: FeedNetworkServiceProtocol, feedDataService: FeedCoreDataServiceProtocol, initialSource: SourceModel) {
-        self.feedNetworkService = feedNetworkService
-        self.feedDataService = feedDataService
+    init(networkService: FeedNetworkServiceProtocol, cacheService: FeedCoreDataServiceProtocol, initialSource: SourceModel) {
+        self.networkService = networkService
+        self.cacheService = cacheService
         self.initialSource = initialSource
     }
 }
 
 extension FeedInteractor: FeedInteractorInputProtocol {
     func loadData() {
-        let articlesFromCache = Converter.decodeArticleObjects(data: feedDataService.getArticles())
-        Parser.parseFeedSource(network: feedNetworkService) { articlesFromNetwork in
+        let articlesFromCache = Converter.decodeArticleObjects(data: cacheService.getArticles())
+        Parser.parseFeedSource(network: networkService) { articlesFromNetwork in
             if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
-                self.cacheArticles(articles: articlesFromNetwork)
+                self.setArticlesIntoCache(articles: articlesFromNetwork)
                 self.output?.didReceive(articles: articlesFromNetwork)
             } else {
                 self.output?.didReceive(articles: articlesFromCache)
@@ -38,23 +38,23 @@ extension FeedInteractor: FeedInteractorInputProtocol {
     }
 
     func isFirstStart() {
-        if feedDataService.getInitValue() == false {
-            feedDataService.setInitValue(initValue: true)
+        if cacheService.getInitValue() == false {
+            cacheService.setInitValue(initValue: true)
             setSource(sources: [initialSource])
             setUpdateInterval(interval: defaultUpdateInterval)
         }
     }
 
     func setSource(sources: [SourceModel]) {
-        feedDataService.setSource(data: Converter.encodeSourceObjects(sourceModels: sources))
+        cacheService.setSource(data: Converter.encodeSourceObjects(sourceModels: sources))
     }
 
     func setUpdateInterval(interval: Int) {
-        feedDataService.setInterval(interval: defaultUpdateInterval)
+        cacheService.setInterval(interval: defaultUpdateInterval)
     }
 
     func getUpdateInterval() -> Int {
-        UpdateInterval(rawValue: feedDataService.getInterval())?.rawValue ?? UpdateInterval.tenMinutes.rawValue
+        UpdateInterval(rawValue: cacheService.getInterval())?.rawValue ?? UpdateInterval.tenMinutes.rawValue
     }
     
     func startUpdateDemon() {
@@ -64,7 +64,7 @@ extension FeedInteractor: FeedInteractorInputProtocol {
         RunLoop.current.add(timer, forMode: .common)
     }
     
-    private func cacheArticles(articles: [ArticleModel]) {
-        feedDataService.setArticles(data: Converter.encodeArticleObjects(articles: articles))
+    private func setArticlesIntoCache(articles: [ArticleModel]) {
+        cacheService.setArticles(data: Converter.encodeArticleObjects(articles: articles))
     }
 }

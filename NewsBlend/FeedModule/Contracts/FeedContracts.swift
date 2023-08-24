@@ -12,7 +12,7 @@ public protocol FeedModuleOutputProtocol {
 
 // View Input
 protocol FeedViewInputProtocol {
-    func setData(articles: [ArticleModel])
+    func setArticles(articles: [ArticleModel])
     func reloadData()
     func showLoader()
     func hideLoader()
