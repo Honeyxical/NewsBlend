@@ -4,18 +4,18 @@ import Foundation
 
 class SettingsInteractor {
     weak var output: SettingsInteractorOutputProtocol?
-    let dataService: SettingsDBServiceProtocol
+    let cacheService: SettingsDBServiceProtocol
     let networkService: SettingNetworkServiceProtocol
 
-    init(settingsDataService: SettingsDBServiceProtocol, settingNetworkService: SettingNetworkServiceProtocol) {
-        self.networkService = settingNetworkService
-        self.dataService = settingsDataService
+    init(cacheService: SettingsDBServiceProtocol, networkService: SettingNetworkServiceProtocol) {
+        self.networkService = networkService
+        self.cacheService = cacheService
     }
 }
 
 extension SettingsInteractor: SettingsInteractorInputProtocol {
     func getAllSources() {
-        let sourcesFromCahce = Converter.decodeSourceObjects(data: dataService.getSources())
+        let sourcesFromCahce = Converter.decodeSourceObjects(data: cacheService.getSources())
         Parser.parseSource(network: networkService) { sourcesFromNetwork in
             if sourcesFromNetwork.isEmpty {
                 self.output?.didReceive(sources: sourcesFromCahce)
@@ -27,28 +27,28 @@ extension SettingsInteractor: SettingsInteractorInputProtocol {
     }
 
     func getIntervals() {
-        output?.didReceive(interval: dataService.getUpdateInterval())
+        output?.didReceive(interval: cacheService.getUpdateInterval())
     }
 
     func getFollowedSources() -> [SourceModel] {
-        let unarchive = Converter.decodeSourceObjects(data: dataService.getSources())
+        let unarchive = Converter.decodeSourceObjects(data: cacheService.getSources())
         return unarchive
     }
 
     func setInterval(interval: Int) {
-        dataService.setUpdateUnterval(interval: interval)
+        cacheService.setUpdateUnterval(interval: interval)
     }
 
     func setFollowedSource(source: SourceModel) {
         source.isSelected = source.isSelected == false ? true : false
         var sources = getFollowedSources()
         sources.append(source)
-        dataService.setSource(sources: Converter.encodeSourceObjects(sourceModels: sources))
+        cacheService.setSource(sources: Converter.encodeSourceObjects(sourceModels: sources))
     }
 
     func deleteFollowedSource(source: SourceModel) {
         var sources = getFollowedSources()
         sources.remove(at: sources.firstIndex(of: source) ?? 0)
-        dataService.saveChangedListSources(sources: Converter.encodeSourceObjects(sourceModels: sources))
+        cacheService.saveChangedListSources(sources: Converter.encodeSourceObjects(sourceModels: sources))
     }
 }
