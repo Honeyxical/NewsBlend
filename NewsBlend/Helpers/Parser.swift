@@ -31,7 +31,7 @@ class Parser {
         let group = DispatchGroup()
         
         group.enter()
-        network.getNews { data in
+        network.getArticles { data in
             if data.isEmpty {
                 group.leave()
             }
@@ -71,7 +71,7 @@ class Parser {
         let group = DispatchGroup()
         
         group.enter()
-        network.getEngSources { data in
+        network.getSources { data in
             if data.isEmpty {
                 group.leave()
             }

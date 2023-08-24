@@ -4,10 +4,20 @@ import Alamofire
 import Foundation
 
 class SettingNetworkService: SettingNetworkServiceProtocol {
-    let APIKey = "71ecb82f10374ce28448c08a38e5afda"
-
-    func getEngSources(completion: @escaping (Data) -> Void) {
-        AF.request("https://newsapi.org/v2/top-headlines/sources?language=en&apiKey=" + APIKey).response { response in
+    private var urlComponents: URLComponents = {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "newsapi.org"
+        components.path = "/v2/top-headlines/sources"
+        components.queryItems = [
+            URLQueryItem(name: "apiKey", value: "71ecb82f10374ce28448c08a38e5afda"),
+            URLQueryItem(name: "language", value: "en")
+        ]
+        return components
+    }()
+    
+    func getSources(completion: @escaping (Data) -> Void) {
+        AF.request(urlComponents.url ?? "").response { response in
             switch response.result {
             case .success:
                 guard let data = response.data else { return }
