@@ -95,7 +95,7 @@ class DetailViewController: UIViewController {
 }
 
 extension DetailViewController: DetailViewInputProtocol {
-    func set(article: ArticleModel) {
+    func setArticle(article: ArticleModel) {
         self.imageView.kf.setImage(with: URL(string: article.urlToImage))
         self.articleTitle.text = article.title
         self.content.text = article.content

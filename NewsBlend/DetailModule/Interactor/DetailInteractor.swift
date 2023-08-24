@@ -4,10 +4,10 @@ import Foundation
 
 class DetailInteractor {
     var output: DetailInteractorOutputProtocol?
-    let detailDataService: DetailCoreDataServiceProtocol
+    let cacheService: DetailCoreDataServiceProtocol
 
-    init(detailDataService: DetailCoreDataServiceProtocol) {
-        self.detailDataService = detailDataService
+    init(cacheService: DetailCoreDataServiceProtocol) {
+        self.cacheService = cacheService
     }
 }
 
