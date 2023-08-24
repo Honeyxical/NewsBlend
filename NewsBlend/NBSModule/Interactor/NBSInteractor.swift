@@ -5,20 +5,20 @@ import Foundation
 class NBSInteractor {
     var output: NBSInteractorOutputProtocol?
     let networkService: NBSNetworkServiceProtocol
-    let storageService: NBSDataServiceProtocol
+    let cacheService: NBSDataServiceProtocol
 
-    init(networkService: NBSNetworkServiceProtocol, storageService: NBSDataServiceProtocol) {
+    init(networkService: NBSNetworkServiceProtocol, cacheService: NBSDataServiceProtocol) {
         self.networkService = networkService
-        self.storageService = storageService
+        self.cacheService = cacheService
     }
 }
 
 extension NBSInteractor: NBSInteractorInputProtocol {
     func getArticlesBySource(source: SourceModel) {
-        let articlesFromCache = Converter.decodeArticleObjects(data: storageService.getArticles())
+        let articlesFromCache = Converter.decodeArticleObjects(data: cacheService.getArticles())
         Parser.parseNBSArticlesBySource(source: source, network: networkService) { articlesFromNetwork in
             if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
-                self.storageService.setArtcles(data: Converter.encodeArticleObjects(articles: articlesFromNetwork))
+                self.cacheService.setArtcles(data: Converter.encodeArticleObjects(articles: articlesFromNetwork))
                 self.output?.didReceive(articles: articlesFromNetwork)
             } else {
                 self.output?.didReceive(articles: articlesFromCache)
@@ -27,11 +27,11 @@ extension NBSInteractor: NBSInteractorInputProtocol {
     }
 
     func getArticlesByAllSource() {
-        let sources = Converter.decodeSourceObjects(data: storageService.getSources())
-        let articlesFromCache = Converter.decodeArticleObjects(data: storageService.getArticlesByAllSource())
+        let sources = Converter.decodeSourceObjects(data: cacheService.getSources())
+        let articlesFromCache = Converter.decodeArticleObjects(data: cacheService.getArticlesByAllSource())
         Parser.parseArticlesByAllSource(sources: sources, networkService: networkService) { articlesFromNetwork in
             if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
-                self.storageService.setArticlesByAllSource(data: Converter.encodeArticleObjects(articles: articlesFromNetwork))
+                self.cacheService.setArticlesByAllSource(data: Converter.encodeArticleObjects(articles: articlesFromNetwork))
                 self.output?.didReceive(articles: articlesFromNetwork)
             } else {
                 self.output?.didReceive(articles: articlesFromCache)
@@ -41,15 +41,7 @@ extension NBSInteractor: NBSInteractorInputProtocol {
 
     func getSources() {
         var sourcesFromCache = [SourceModel(id: "", name: "All", category: "", language: "", country: "", isSelected: true)]
-        sourcesFromCache += Converter.decodeSourceObjects(data: storageService.getSources())
+        sourcesFromCache += Converter.decodeSourceObjects(data: cacheService.getSources())
         output?.didReceive(sources: sourcesFromCache)
     }
-
-    func getArticles() {
-
-    }
-}
-
-extension NBSInteractor {
-
 }

@@ -20,7 +20,7 @@ extension NBSPresentor: NBSInteractorOutputProtocol {
     }
 
     func didReceive(sources: [SourceModel]) {
-        view.set(sources: sources)
+        view.setSources(sources: sources)
     }
 
     func didReceiveFail() {

@@ -13,7 +13,7 @@ public protocol NBSModuleOutputProtocol {
 
 // View Input
 protocol NBSViewInputProtocol {
-    func set(sources: [SourceModel])
+    func setSources(sources: [SourceModel])
     func setArticle(articles: [ArticleModel])
     func showLoader()
     func hideLoader()
@@ -32,7 +32,6 @@ protocol NBSViewOutputProtocol {
 // Interactor Input
 protocol NBSInteractorInputProtocol {
     func getSources()
-    func getArticles()
     func getArticlesBySource(source: SourceModel)
     func getArticlesByAllSource()
 }

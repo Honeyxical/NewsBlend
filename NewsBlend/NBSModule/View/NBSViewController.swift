@@ -65,7 +65,7 @@ extension NBSViewController: NBSViewInputProtocol {
         sourcesCollection.reloadData()
     }
 
-    func set(sources: [SourceModel]) {
+    func setSources(sources: [SourceModel]) {
         self.sources = sources
         sourcesCollection.reloadData()
     }
