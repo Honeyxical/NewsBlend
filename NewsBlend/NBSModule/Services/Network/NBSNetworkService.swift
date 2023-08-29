@@ -3,24 +3,13 @@
 import Alamofire
 import Foundation
 
-class NBSNetworService: NBSNetworkServiceProtocol {
-    private var urlComponents: URLComponents = {
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = "newsapi.org"
-        components.path = "/v2/top-headlines/"
-        components.queryItems = [
-//            URLQueryItem(name: "apiKey", value: "71ecb82f10374ce28448c08a38e5afda"),
-            URLQueryItem(name: "apiKey", value: "bc613432d94c448da6d678dad9c8806e"),
-            URLQueryItem(name: "pageSize", value: "10")
-        ]
-        return components
-    }()
+enum NBSPaths: String {
+    case topHeadlines = "https://newsapi.org/v2/top-headlines/"
+}
 
-    func getArticlesBySource(source: SourceModel, completion: @escaping (Data) -> Void) {
-        urlComponents.queryItems?.append(URLQueryItem(name: "sources", value: source.id))
-        AF.request(urlComponents.url ?? "").response { response in
-            self.urlComponents.queryItems?.removeLast()
+class NBSNetworService: NBSNetworkServiceProtocol {
+    func getArticlesBySource(queryItems: [URLQueryItem], completion: @escaping (Data) -> Void) {
+        AF.request(URL(string: NBSPaths.topHeadlines.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in
             switch response.result {
             case .success:
                 guard let data = response.data else { return }
