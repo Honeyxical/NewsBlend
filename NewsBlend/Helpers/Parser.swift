@@ -33,7 +33,8 @@ class Parser {
         group.enter()
         network.getArticles(queryItems: [
             URLQueryItem(name: "domains", value: "techcrunch.com"),
-            URLQueryItem(name: "pageSize", value: "5")
+            URLQueryItem(name: "pageSize", value: "5"),
+            URLQueryItem(name: "apiKey", value: "bc613432d94c448da6d678dad9c8806e")
         ]) { data in
             if data.isEmpty {
                 group.leave()
