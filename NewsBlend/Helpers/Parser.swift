@@ -31,7 +31,10 @@ class Parser {
         let group = DispatchGroup()
         
         group.enter()
-        network.getArticles { data in
+        network.getArticles(queryItems: [
+            URLQueryItem(name: "domains", value: "techcrunch.com"),
+            URLQueryItem(name: "pageSize", value: "5")
+        ]) { data in
             if data.isEmpty {
                 group.leave()
             }

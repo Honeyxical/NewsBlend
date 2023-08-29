@@ -53,7 +53,7 @@ protocol FeedRouterOutputProtocol {
 }
 
 protocol FeedNetworkServiceProtocol {
-    func getArticles(completion: @escaping(Data) -> Void)
+    func getArticles(queryItems: [URLQueryItem], completion: @escaping(Data) -> Void)
 }
 
 protocol FeedCoreDataServiceProtocol{
