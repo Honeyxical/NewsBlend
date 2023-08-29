@@ -3,13 +3,13 @@
 import Alamofire
 import Foundation
 
-enum Paths: String {
+enum FeedPaths: String {
     case everything = "https://newsapi.org/v2/everything"
 }
 
 class FeedNetworkService: FeedNetworkServiceProtocol {
     func getArticles(queryItems: [URLQueryItem], completion: @escaping(Data) -> Void) {
-        AF.request(URL(string: Paths.everything.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in
+        AF.request(URL(string: FeedPaths.everything.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in
             debugPrint(response)
             switch response.result {
             case .success:

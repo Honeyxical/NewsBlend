@@ -3,14 +3,17 @@
 import Foundation
 
 class Parser {
-    
     static func parseArticlesByAllSource(sources: [SourceModel], networkService: NBSNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void) {
         let group = DispatchGroup()
         var articles: [ArticleModel] = []
         
         for source in sources {
             group.enter()
-            networkService.getArticlesBySource(source: source) { data in
+            networkService.getArticlesBySource(queryItems: [
+                URLQueryItem(name: "apiKey", value: "bc613432d94c448da6d678dad9c8806e"),
+                URLQueryItem(name: "pageSize", value: "10"),
+                URLQueryItem(name: "sources", value: source.id)
+            ]) { data in
                 if data.isEmpty {
                     group.leave()
                 }
@@ -55,7 +58,11 @@ class Parser {
         let group = DispatchGroup()
         
         group.enter()
-        network.getArticlesBySource(source: source) { data in
+        network.getArticlesBySource(queryItems: [
+            URLQueryItem(name: "apiKey", value: "bc613432d94c448da6d678dad9c8806e"),
+            URLQueryItem(name: "pageSize", value: "10"),
+            URLQueryItem(name: "sources", value: source.id)
+        ]) { data in
             if data.isEmpty {
                 group.leave()
             }
@@ -75,7 +82,10 @@ class Parser {
         let group = DispatchGroup()
         
         group.enter()
-        network.getSources { data in
+        network.getSources(queryItems: [
+            URLQueryItem(name: "apiKey", value: "bc613432d94c448da6d678dad9c8806e"),
+            URLQueryItem(name: "language", value: "en")
+        ]) { data in
             if data.isEmpty {
                 group.leave()
             }
