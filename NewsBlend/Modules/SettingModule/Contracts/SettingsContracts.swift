@@ -62,7 +62,7 @@ protocol SettingsDBServiceProtocol{
 }
 
 protocol SettingNetworkServiceProtocol {
-    func getSources(queryItems: [URLQueryItem], completion: @escaping (Data) -> Void)
+    func getSources(sourceLanguage: String, completion: @escaping (Data) -> Void)
 }
 
 protocol MenuViewProtocol {

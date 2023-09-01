@@ -62,5 +62,5 @@ protocol NBSDataServiceProtocol{
 // Network
 
 protocol NBSNetworkServiceProtocol {
-    func getArticlesBySource(queryItems: [URLQueryItem], completion: @escaping (Data) -> Void)
+    func getArticlesBySource(source: SourceModel, pageSize: Int, completion: @escaping (Data) -> Void)
 }

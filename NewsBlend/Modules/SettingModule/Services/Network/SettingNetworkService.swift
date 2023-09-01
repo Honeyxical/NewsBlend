@@ -8,7 +8,13 @@ enum SettingsPaths: String {
 }
 
 class SettingNetworkService: SettingNetworkServiceProtocol {
-    func getSources(queryItems: [URLQueryItem], completion: @escaping (Data) -> Void) {
+    private let apiKey = "bc613432d94c448da6d678dad9c8806e"
+
+    func getSources(sourceLanguage: String, completion: @escaping (Data) -> Void) {
+        let queryItems = [
+            URLQueryItem(name: "apiKey", value: apiKey),
+            URLQueryItem(name: "language", value: sourceLanguage)
+        ]
         AF.request(URL(string: SettingsPaths.sources.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in
             switch response.result {
             case .success:

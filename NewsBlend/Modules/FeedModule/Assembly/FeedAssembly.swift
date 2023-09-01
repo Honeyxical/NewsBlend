@@ -15,7 +15,13 @@ final class FeedAssembly {
                                                                    category: "",
                                                                    language: "",
                                                                    country: "",
-                                                                   isSelected: true))
+                                                                   isSelected: true),
+                                        defaultSourceHotNews: SourceModel(id: "techcrunch.com",
+                                                                          name: "",
+                                                                          category: "",
+                                                                          language: "",
+                                                                          country: "",
+                                                                          isSelected: false))
         let router = FeedRouter()
         let presentor = FeedPresentor(view: view,
                                       interactor: interactor,

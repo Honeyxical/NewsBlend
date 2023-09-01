@@ -3,17 +3,13 @@
 import Foundation
 
 class Parser {
-    static func parseArticlesByAllSource(sources: [SourceModel], networkService: NBSNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void) {
+    static func parseArticlesByAllSource(sources: [SourceModel], pageSize: Int, networkService: NBSNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void) {
         let group = DispatchGroup()
         var articles: [ArticleModel] = []
         
         for source in sources {
             group.enter()
-            networkService.getArticlesBySource(queryItems: [
-                URLQueryItem(name: "apiKey", value: "bc613432d94c448da6d678dad9c8806e"),
-                URLQueryItem(name: "pageSize", value: "10"),
-                URLQueryItem(name: "sources", value: source.id)
-            ]) { data in
+            networkService.getArticlesBySource(source: source, pageSize: pageSize) { data in
                 if data.isEmpty {
                     group.leave()
                 }
@@ -29,16 +25,12 @@ class Parser {
         }
     }
     
-    static func parseFeedSource(network: FeedNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void){
+    static func parseFeedSource(source: SourceModel, articlesCount: Int, network: FeedNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void){
         var articles: [ArticleModel] = []
         let group = DispatchGroup()
         
         group.enter()
-        network.getArticles(queryItems: [
-            URLQueryItem(name: "domains", value: "techcrunch.com"),
-            URLQueryItem(name: "pageSize", value: "5"),
-            URLQueryItem(name: "apiKey", value: "bc613432d94c448da6d678dad9c8806e")
-        ]) { data in
+        network.getArticles(source: source, articlesCount: articlesCount){ data in
             if data.isEmpty {
                 group.leave()
             }
@@ -53,16 +45,12 @@ class Parser {
         }
     }
     
-    static func parseNBSArticlesBySource(source: SourceModel, network: NBSNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void) {
+    static func parseNBSArticlesBySource(source: SourceModel, pageSize: Int, network: NBSNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void) {
         var articles: [ArticleModel] = []
         let group = DispatchGroup()
         
         group.enter()
-        network.getArticlesBySource(queryItems: [
-            URLQueryItem(name: "apiKey", value: "bc613432d94c448da6d678dad9c8806e"),
-            URLQueryItem(name: "pageSize", value: "10"),
-            URLQueryItem(name: "sources", value: source.id)
-        ]) { data in
+        network.getArticlesBySource(source: source, pageSize: pageSize) { data in
             if data.isEmpty {
                 group.leave()
             }
@@ -77,15 +65,12 @@ class Parser {
         }
     }
     
-    static func parseSource(network: SettingNetworkServiceProtocol, completion: @escaping ([SourceModel]) -> Void) {
+    static func parseSource(defaultLanguage: String, network: SettingNetworkServiceProtocol, completion: @escaping ([SourceModel]) -> Void) {
         var sources: [SourceModel] = []
         let group = DispatchGroup()
         
         group.enter()
-        network.getSources(queryItems: [
-            URLQueryItem(name: "apiKey", value: "bc613432d94c448da6d678dad9c8806e"),
-            URLQueryItem(name: "language", value: "en")
-        ]) { data in
+        network.getSources(sourceLanguage: defaultLanguage) { data in
             if data.isEmpty {
                 group.leave()
             }

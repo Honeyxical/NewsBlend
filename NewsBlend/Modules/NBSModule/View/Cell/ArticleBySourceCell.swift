@@ -7,7 +7,7 @@ class ArticleBySourceCell: UICollectionViewCell {
     private var articles: [ArticleModel] = []
     private lazy var loader = ReusableViews.getLoader(view: self.collection)
     private var controller: UIViewController? // Придумать способ получше ибо это херня
-    private var isDefaultCell = true
+    var isDefaultCell = true
 
     private lazy var collection: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout())

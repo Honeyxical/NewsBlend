@@ -8,7 +8,14 @@ enum NBSPaths: String {
 }
 
 class NBSNetworService: NBSNetworkServiceProtocol {
-    func getArticlesBySource(queryItems: [URLQueryItem], completion: @escaping (Data) -> Void) {
+    private let apiKey = "bc613432d94c448da6d678dad9c8806e"
+    
+    func getArticlesBySource(source: SourceModel, pageSize: Int, completion: @escaping (Data) -> Void) {
+        let queryItems = [
+            URLQueryItem(name: "apiKey", value: apiKey),
+            URLQueryItem(name: "pageSize", value: pageSize.description),
+            URLQueryItem(name: "sources", value: source.id)
+        ]
         AF.request(URL(string: NBSPaths.topHeadlines.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in
             switch response.result {
             case .success:

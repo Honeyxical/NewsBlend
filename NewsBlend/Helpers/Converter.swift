@@ -45,6 +45,9 @@ class Converter {
     // MARK: Date methods
 
     static func setDate(articles: [ArticleModel]) -> [ArticleModel]{
+        if articles.isEmpty {
+            return articles
+        }
         for counter in 0...articles.count - 1 {
             articles[counter].timeSincePublication = Date().getDifferenceFromNowAndDate( articles[counter].publishedAt) ?? ""
         }

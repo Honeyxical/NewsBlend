@@ -122,15 +122,10 @@ extension NBSViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch collectionView {
-        case sourcesCollection:
-            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-            articlesCollection.scrollToItem(at: indexPath,
-                                            at: .centeredHorizontally,
-                                            animated: true)
-        default:
-            return
-        }
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+        articlesCollection.scrollToItem(at: indexPath,
+                                        at: .centeredHorizontally,
+                                        animated: true)
     }
 
     private func collectionSourcesLayout() -> UICollectionViewLayout {
@@ -183,7 +178,7 @@ extension NBSViewController {
         guard let cell = articlesCollection.visibleCells.first as? ArticleBySourceCell else {
             return
         }
-        if cellType.title(for: .normal) == "Full" {
+        if cell.isDefaultCell == true {
             cellType.setTitle("Short", for: .normal)
             cell.changeCellView(isDefaultCell: false)
         } else {

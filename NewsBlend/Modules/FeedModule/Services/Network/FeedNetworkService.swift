@@ -8,9 +8,16 @@ enum FeedPaths: String {
 }
 
 class FeedNetworkService: FeedNetworkServiceProtocol {
-    func getArticles(queryItems: [URLQueryItem], completion: @escaping(Data) -> Void) {
+    private let apiKey = "bc613432d94c448da6d678dad9c8806e"
+
+    func getArticles(source: SourceModel, articlesCount: Int, completion: @escaping(Data) -> Void) {
+        let queryItems = [
+            URLQueryItem(name: "domains", value: source.id),
+            URLQueryItem(name: "pageSize", value: articlesCount.description),
+            URLQueryItem(name: "apiKey", value: apiKey)
+        ]
         AF.request(URL(string: FeedPaths.everything.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in
-            debugPrint(response)
+
             switch response.result {
             case .success:
                 guard let data = response.data else { return }

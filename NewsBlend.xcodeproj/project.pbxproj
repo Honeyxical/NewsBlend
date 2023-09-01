@@ -266,6 +266,17 @@
 			path = NewsSettingView;
 			sourceTree = "<group>";
 		};
+		697270E42AA1C67A002F6A10 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				69833A332A76AE0700909649 /* DetailModule */,
+				69833A322A76ADFC00909649 /* FeedModule */,
+				69242EE52A88B869008F040E /* NBSModule */,
+				69833A342A76AE1100909649 /* SettingModule */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
 		69771FB32A820C31007D608F /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,15 +312,12 @@
 		698339BC2A767DB800909649 /* NewsBlend */ = {
 			isa = PBXGroup;
 			children = (
+				697270E42AA1C67A002F6A10 /* Modules */,
 				694012BB2A8E12E90099F727 /* Helpers */,
 				698339DB2A76882C00909649 /* Application */,
-				69833A332A76AE0700909649 /* DetailModule */,
 				69BB2B3D2A7A3AF000B5BDE1 /* Extension */,
-				69833A322A76ADFC00909649 /* FeedModule */,
-				69242EE52A88B869008F040E /* NBSModule */,
 				698339DC2A76884400909649 /* Resources */,
 				69E298B12A7D0DFE001BFBB4 /* ReusableViews */,
-				69833A342A76AE1100909649 /* SettingModule */,
 			);
 			path = NewsBlend;
 			sourceTree = "<group>";
