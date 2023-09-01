@@ -3,6 +3,10 @@
 import Alamofire
 import Foundation
 
+protocol SettingNetworkServiceProtocol {
+    func getSources(sourceLanguage: String, completion: @escaping (Data) -> Void)
+}
+
 enum SettingsPaths: String {
     case sources = "https://newsapi.org/v2/top-headlines/sources"
 }

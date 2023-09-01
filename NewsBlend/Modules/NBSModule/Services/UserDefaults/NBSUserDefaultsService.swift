@@ -2,7 +2,13 @@
 
 import Foundation
 
-class NBSUserDefaultsService: NBSDataServiceProtocol {
+protocol NBSStorageProtocol{
+    func getSources() -> Data
+    func setArtcles(data: Data, source: String)
+    func getArticles(source: String) -> Data
+}
+
+class NBSUserDefaultsService: NBSStorageProtocol {
     private let userDefaults = UserDefaults.standard
 
     func getSources() -> Data {

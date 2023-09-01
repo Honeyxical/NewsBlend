@@ -2,7 +2,18 @@
 
 import Foundation
 
-class FeedUserDefaultsService: FeedCoreDataServiceProtocol {
+protocol FeedStorageProtocol{
+    func getSource() -> Data
+    func setSource(data: Data)
+    func getInterval() -> Int
+    func setInterval(interval: Int)
+    func getInitValue() -> Bool
+    func setInitValue(initValue: Bool)
+    func setArticles(data: Data)
+    func getArticles() -> Data
+}
+
+class FeedUserDefaultsService: FeedStorageProtocol {
     private let userDefaults = UserDefaults.standard
 
     func getInterval() -> Int {

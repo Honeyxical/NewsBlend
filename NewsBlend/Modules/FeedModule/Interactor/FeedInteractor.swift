@@ -13,14 +13,14 @@ enum UpdateInterval: Int {
 final class FeedInteractor {
     weak var output: FeedInteractorOutputProtocol?
     let networkService: FeedNetworkServiceProtocol
-    let cacheService: FeedCoreDataServiceProtocol
+    let cacheService: FeedStorageProtocol
     let parser = Parser()
     private let initialSource: SourceModel
     private let defaultSourceHotNews: SourceModel
     private let defaultUpdateInterval = 4
     private let articlesEstimate = 5
     
-    init(networkService: FeedNetworkServiceProtocol, cacheService: FeedCoreDataServiceProtocol, initialSource: SourceModel, defaultSourceHotNews: SourceModel) {
+    init(networkService: FeedNetworkServiceProtocol, cacheService: FeedStorageProtocol, initialSource: SourceModel, defaultSourceHotNews: SourceModel) {
         self.networkService = networkService
         self.cacheService = cacheService
         self.initialSource = initialSource

@@ -4,12 +4,12 @@ import Foundation
 
 class SettingsInteractor {
     weak var output: SettingsInteractorOutputProtocol?
-    let cacheService: SettingsDBServiceProtocol
+    let cacheService: SettingStorageProtocol
     let networkService: SettingNetworkServiceProtocol
     let parser = Parser()
     let defaultLanguage = "en"
 
-    init(cacheService: SettingsDBServiceProtocol, networkService: SettingNetworkServiceProtocol) {
+    init(cacheService: SettingStorageProtocol, networkService: SettingNetworkServiceProtocol) {
         self.networkService = networkService
         self.cacheService = cacheService
     }

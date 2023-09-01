@@ -53,17 +53,5 @@ protocol SettingsRouterInputProtocol {
 protocol SettingsRouterOutputProtocol {
 }
 
-protocol SettingsDBServiceProtocol{
-    func getUpdateInterval() -> Int
-    func setUpdateUnterval(interval pos: Int)
-    func getSources() -> Data
-    func setSource(sources: Data)
-    func saveChangedListSources(sources: Data)
-}
-
-protocol SettingNetworkServiceProtocol {
-    func getSources(sourceLanguage: String, completion: @escaping (Data) -> Void)
-}
-
 protocol MenuViewProtocol {
 }

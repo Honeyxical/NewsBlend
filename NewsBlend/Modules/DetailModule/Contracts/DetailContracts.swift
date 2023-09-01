@@ -42,7 +42,3 @@ import Foundation
     // Router Output
     protocol DetailRouterOutputProtocol {
     }
-
-    protocol DetailCoreDataServiceProtocol{
-
-    }

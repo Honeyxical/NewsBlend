@@ -52,18 +52,3 @@ protocol FeedRouterInputProtocol {
 // Router Output
 protocol FeedRouterOutputProtocol {
 }
-
-protocol FeedNetworkServiceProtocol {
-    func getArticles(source: SourceModel, articlesCount: Int, completion: @escaping(Data) -> Void)
-}
-
-protocol FeedCoreDataServiceProtocol{
-    func getSource() -> Data
-    func setSource(data: Data)
-    func getInterval() -> Int
-    func setInterval(interval: Int)
-    func getInitValue() -> Bool
-    func setInitValue(initValue: Bool)
-    func setArticles(data: Data)
-    func getArticles() -> Data
-}

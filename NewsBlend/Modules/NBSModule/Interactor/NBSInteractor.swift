@@ -5,11 +5,11 @@ import Foundation
 class NBSInteractor {
     var output: NBSInteractorOutputProtocol?
     let networkService: NBSNetworkServiceProtocol
-    let cacheService: NBSDataServiceProtocol
+    let cacheService: NBSStorageProtocol
     let parser = Parser()
     private let defaultPageSize = 10
 
-    init(networkService: NBSNetworkServiceProtocol, cacheService: NBSDataServiceProtocol) {
+    init(networkService: NBSNetworkServiceProtocol, cacheService: NBSStorageProtocol) {
         self.networkService = networkService
         self.cacheService = cacheService
     }

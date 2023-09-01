@@ -3,6 +3,10 @@
 import Alamofire
 import Foundation
 
+protocol NBSNetworkServiceProtocol {
+    func getArticlesBySource(source: SourceModel, pageSize: Int, completion: @escaping (Data) -> Void)
+}
+
 enum NBSPaths: String {
     case topHeadlines = "https://newsapi.org/v2/top-headlines/"
 }

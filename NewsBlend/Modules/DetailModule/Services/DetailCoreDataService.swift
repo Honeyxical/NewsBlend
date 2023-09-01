@@ -2,6 +2,10 @@
 
 import Foundation
 
+protocol DetailCoreDataServiceProtocol {
+    
+}
+
 class DetailCoreDataService: DetailCoreDataServiceProtocol {
     
 }

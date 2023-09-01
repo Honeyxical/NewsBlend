@@ -2,7 +2,15 @@
 
 import Foundation
 
-class SettingsUserDefaultsService: SettingsDBServiceProtocol {
+protocol SettingStorageProtocol{
+    func getUpdateInterval() -> Int
+    func setUpdateUnterval(interval pos: Int)
+    func getSources() -> Data
+    func setSource(sources: Data)
+    func saveChangedListSources(sources: Data)
+}
+
+class SettingsUserDefaultsService: SettingStorageProtocol {
     private let userDefaults = UserDefaults.standard
 
     func getUpdateInterval() -> Int {

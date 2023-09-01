@@ -3,6 +3,10 @@
 import Alamofire
 import Foundation
 
+protocol FeedNetworkServiceProtocol {
+    func getArticles(source: SourceModel, articlesCount: Int, completion: @escaping(Data) -> Void)
+}
+
 enum FeedPaths: String {
     case everything = "https://newsapi.org/v2/everything"
 }

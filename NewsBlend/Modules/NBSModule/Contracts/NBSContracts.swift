@@ -51,16 +51,3 @@ protocol NBSRouterInputProtocol {
 // Router Output
 protocol NBSRouterOutputProtocol {
 }
-
-// Data
-protocol NBSDataServiceProtocol{
-    func getSources() -> Data
-    func setArtcles(data: Data, source: String)
-    func getArticles(source: String) -> Data
-}
-
-// Network
-
-protocol NBSNetworkServiceProtocol {
-    func getArticlesBySource(source: SourceModel, pageSize: Int, completion: @escaping (Data) -> Void)
-}
