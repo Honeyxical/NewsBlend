@@ -6,6 +6,7 @@ class SettingsInteractor {
     weak var output: SettingsInteractorOutputProtocol?
     let cacheService: SettingsDBServiceProtocol
     let networkService: SettingNetworkServiceProtocol
+    let parser = Parser()
     let defaultLanguage = "en"
 
     init(cacheService: SettingsDBServiceProtocol, networkService: SettingNetworkServiceProtocol) {
@@ -17,7 +18,7 @@ class SettingsInteractor {
 extension SettingsInteractor: SettingsInteractorInputProtocol {
     func getAllSources() {
         let sourcesFromCahce = Converter.decodeSourceObjects(data: cacheService.getSources())
-        Parser.parseSource(defaultLanguage: defaultLanguage, network: networkService) { sourcesFromNetwork in
+        parser.parseSource(defaultLanguage: defaultLanguage, network: networkService) { sourcesFromNetwork in
             if sourcesFromNetwork.isEmpty {
                 self.output?.didReceive(sources: sourcesFromCahce)
             } else {

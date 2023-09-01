@@ -3,7 +3,8 @@
 import Foundation
 
 class Parser {
-    static func parseArticlesByAllSource(sources: [SourceModel], pageSize: Int, networkService: NBSNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void) {
+
+    func parseArticlesByAllSource(sources: [SourceModel], pageSize: Int, networkService: NBSNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void) {
         let group = DispatchGroup()
         var articles: [ArticleModel] = []
         
@@ -25,7 +26,7 @@ class Parser {
         }
     }
     
-    static func parseFeedSource(source: SourceModel, articlesCount: Int, network: FeedNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void){
+    func parseFeedSource(source: SourceModel, articlesCount: Int, network: FeedNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void){
         var articles: [ArticleModel] = []
         let group = DispatchGroup()
         
@@ -45,7 +46,7 @@ class Parser {
         }
     }
     
-    static func parseNBSArticlesBySource(source: SourceModel, pageSize: Int, network: NBSNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void) {
+    func parseNBSArticlesBySource(source: SourceModel, pageSize: Int, network: NBSNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void) {
         var articles: [ArticleModel] = []
         let group = DispatchGroup()
         
@@ -65,7 +66,7 @@ class Parser {
         }
     }
     
-    static func parseSource(defaultLanguage: String, network: SettingNetworkServiceProtocol, completion: @escaping ([SourceModel]) -> Void) {
+    func parseSource(defaultLanguage: String, network: SettingNetworkServiceProtocol, completion: @escaping ([SourceModel]) -> Void) {
         var sources: [SourceModel] = []
         let group = DispatchGroup()
         

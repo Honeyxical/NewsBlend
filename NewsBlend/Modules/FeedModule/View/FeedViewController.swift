@@ -41,6 +41,7 @@ final class FeedViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         configuringNavigationBar()
+        output?.viewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {

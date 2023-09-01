@@ -6,6 +6,7 @@ class NBSInteractor {
     var output: NBSInteractorOutputProtocol?
     let networkService: NBSNetworkServiceProtocol
     let cacheService: NBSDataServiceProtocol
+    let parser = Parser()
     private let defaultPageSize = 10
 
     init(networkService: NBSNetworkServiceProtocol, cacheService: NBSDataServiceProtocol) {
@@ -17,7 +18,7 @@ class NBSInteractor {
 extension NBSInteractor: NBSInteractorInputProtocol {
     func getArticlesBySource(source: SourceModel) {
         let articlesFromCache = Converter.decodeArticleObjects(data: cacheService.getArticles(source: source.id))
-        Parser.parseNBSArticlesBySource(source: source, pageSize: defaultPageSize, network: networkService) { articlesFromNetwork in
+        parser.parseNBSArticlesBySource(source: source, pageSize: defaultPageSize, network: networkService) { articlesFromNetwork in
             if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
                 self.cacheService.setArtcles(data: Converter.encodeArticleObjects(articles: articlesFromNetwork), source: source.id)
                 self.output?.didReceive(articles: articlesFromNetwork)
@@ -30,7 +31,7 @@ extension NBSInteractor: NBSInteractorInputProtocol {
     func getArticlesByAllSource() {
         let sources = Converter.decodeSourceObjects(data: cacheService.getSources())
         let articlesFromCache = Converter.decodeArticleObjects(data: cacheService.getArticles(source: "all"))
-        Parser.parseArticlesByAllSource(sources: sources, pageSize: defaultPageSize, networkService: networkService) { articlesFromNetwork in
+        parser.parseArticlesByAllSource(sources: sources, pageSize: defaultPageSize, networkService: networkService) { articlesFromNetwork in
             if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
                 self.cacheService.setArtcles(data: Converter.encodeArticleObjects(articles: articlesFromNetwork), source: "all")
                 self.output?.didReceive(articles: articlesFromNetwork)

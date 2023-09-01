@@ -12,11 +12,14 @@ final class FeedPresentor {
         self.view = view
         self.interactor = interactor
         self.router = router
-        interactor.startUpdateDemon()
     }
 }
 
 extension FeedPresentor: FeedViewOutputProtocol {
+    func viewDidLoad() {
+        interactor.startUpdateDemon()
+    }
+
     func openSettings() {
         router.openSettings()
     }

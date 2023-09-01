@@ -24,6 +24,7 @@ protocol FeedViewOutputProtocol {
     func viewWillApear()
     func openArticleDetail(article: ArticleModel)
     func openSettings()
+    func viewDidLoad()
 }
 
 // Interactor Input

@@ -14,6 +14,7 @@ final class FeedInteractor {
     weak var output: FeedInteractorOutputProtocol?
     let networkService: FeedNetworkServiceProtocol
     let cacheService: FeedCoreDataServiceProtocol
+    let parser = Parser()
     private let initialSource: SourceModel
     private let defaultSourceHotNews: SourceModel
     private let defaultUpdateInterval = 4
@@ -30,7 +31,7 @@ final class FeedInteractor {
 extension FeedInteractor: FeedInteractorInputProtocol {
     func loadData() {
         let articlesFromCache = Converter.decodeArticleObjects(data: cacheService.getArticles())
-        Parser.parseFeedSource(source: defaultSourceHotNews, articlesCount: articlesEstimate, network: networkService) { articlesFromNetwork in
+        parser.parseFeedSource(source: defaultSourceHotNews, articlesCount: articlesEstimate, network: networkService) { articlesFromNetwork in
             if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
                 self.setArticlesIntoCache(articles: articlesFromNetwork)
                 self.output?.didReceive(articles: articlesFromNetwork)
