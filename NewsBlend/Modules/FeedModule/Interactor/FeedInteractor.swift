@@ -14,15 +14,16 @@ final class FeedInteractor {
     weak var output: FeedInteractorOutputProtocol?
     let networkService: FeedNetworkServiceProtocol
     let cacheService: FeedStorageProtocol
-    let parser = Parser()
+    let parser: ParserProtocol
     private let initialSource: SourceModel
     private let defaultSourceHotNews: SourceModel
     private let defaultUpdateInterval = 4
     private let articlesEstimate = 5
     
-    init(networkService: FeedNetworkServiceProtocol, cacheService: FeedStorageProtocol, initialSource: SourceModel, defaultSourceHotNews: SourceModel) {
+    init(networkService: FeedNetworkServiceProtocol, cacheService: FeedStorageProtocol, parser: ParserProtocol, initialSource: SourceModel, defaultSourceHotNews: SourceModel) {
         self.networkService = networkService
         self.cacheService = cacheService
+        self.parser = parser
         self.initialSource = initialSource
         self.defaultSourceHotNews = defaultSourceHotNews
     }

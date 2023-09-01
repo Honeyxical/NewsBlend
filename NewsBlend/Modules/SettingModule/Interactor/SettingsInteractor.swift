@@ -6,12 +6,13 @@ class SettingsInteractor {
     weak var output: SettingsInteractorOutputProtocol?
     let cacheService: SettingStorageProtocol
     let networkService: SettingNetworkServiceProtocol
-    let parser = Parser()
+    let parser: ParserProtocol
     let defaultLanguage = "en"
 
-    init(cacheService: SettingStorageProtocol, networkService: SettingNetworkServiceProtocol) {
+    init(cacheService: SettingStorageProtocol, networkService: SettingNetworkServiceProtocol, parser: ParserProtocol) {
         self.networkService = networkService
         self.cacheService = cacheService
+        self.parser = parser
     }
 }
 

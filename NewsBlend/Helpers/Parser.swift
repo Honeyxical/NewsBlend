@@ -2,8 +2,14 @@
 
 import Foundation
 
-class Parser {
+protocol ParserProtocol {
+    func parseArticlesByAllSource(sources: [SourceModel], pageSize: Int, networkService: NBSNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void)
+    func parseFeedSource(source: SourceModel, articlesCount: Int, network: FeedNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void)
+    func parseNBSArticlesBySource(source: SourceModel, pageSize: Int, network: NBSNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void)
+    func parseSource(defaultLanguage: String, network: SettingNetworkServiceProtocol, completion: @escaping ([SourceModel]) -> Void)
+}
 
+class Parser: ParserProtocol {
     func parseArticlesByAllSource(sources: [SourceModel], pageSize: Int, networkService: NBSNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void) {
         let group = DispatchGroup()
         var articles: [ArticleModel] = []
@@ -26,7 +32,7 @@ class Parser {
         }
     }
     
-    func parseFeedSource(source: SourceModel, articlesCount: Int, network: FeedNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void){
+    func parseFeedSource(source: SourceModel, articlesCount: Int, network: FeedNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void) {
         var articles: [ArticleModel] = []
         let group = DispatchGroup()
         

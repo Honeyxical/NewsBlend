@@ -5,10 +5,14 @@ import UIKit
 
 class NBSAssembly {
     static func build() -> UIViewController {
-        let interactor = NBSInteractor(networkService: NBSNetworService(), cacheService: NBSUserDefaultsService())
+        let interactor = NBSInteractor(networkService: NBSNetworService(),
+                                       cacheService: NBSUserDefaultsService(),
+                                       parser: Parser())
         let view = NBSViewController()
         let router = NBSRouter()
-        let presentor = NBSPresentor(interactor: interactor, router: router, view: view)
+        let presentor = NBSPresentor(interactor: interactor,
+                                     router: router,
+                                     view: view)
 
         view.output = presentor
         interactor.output = presentor

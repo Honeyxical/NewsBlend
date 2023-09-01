@@ -6,12 +6,13 @@ class NBSInteractor {
     var output: NBSInteractorOutputProtocol?
     let networkService: NBSNetworkServiceProtocol
     let cacheService: NBSStorageProtocol
-    let parser = Parser()
+    let parser: ParserProtocol
     private let defaultPageSize = 10
 
-    init(networkService: NBSNetworkServiceProtocol, cacheService: NBSStorageProtocol) {
+    init(networkService: NBSNetworkServiceProtocol, cacheService: NBSStorageProtocol, parser: ParserProtocol) {
         self.networkService = networkService
         self.cacheService = cacheService
+        self.parser = parser
     }
 }
 
