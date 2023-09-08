@@ -43,6 +43,7 @@ extension SettingsInteractor: SettingsInteractorInputProtocol {
     }
 
     func setFollowedSource(source: SourceModel) {
+        var source = source
         source.isSelected = source.isSelected == false ? true : false
         var sources = getFollowedSources()
         sources.append(source)
