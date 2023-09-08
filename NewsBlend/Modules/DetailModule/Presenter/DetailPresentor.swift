@@ -19,9 +19,8 @@ final class DetailPresentor {
 extension DetailPresentor: DetailInteractorOutputProtocol {}
 
 extension DetailPresentor: DetailViewOutputProtocol {
-    func viewDidAppear() {
+    func viewWillAppear() {
         view?.setArticle(article: article)
-        view?.hideLoader()
     }
 }
 

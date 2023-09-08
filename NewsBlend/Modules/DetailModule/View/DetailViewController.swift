@@ -6,7 +6,6 @@ import UIKit
 
 final class DetailViewController: UIViewController {
     var output: DetailViewOutputProtocol?
-    private lazy var loader = ReusableViews.getLoader()
     private lazy var contentRect: CGRect = scrollView.subviews.reduce(into: .zero) { rect, view in
         rect = rect.union(view.frame)
     }
@@ -74,13 +73,14 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        showLoader()
+        setupLayout()
+        setupScrollView()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         scrollView.contentSize = contentRect.size
-        output?.viewDidAppear()
+        output?.viewWillAppear()
     }
 
     func setupLayout() {
@@ -102,21 +102,6 @@ extension DetailViewController: DetailViewInputProtocol {
         author.text = "By \(article.author)"
         publishedAt.text = article.timeSincePublication
     }
-
-    func showLoader() {
-        if loader.isHidden {
-            loader.isHidden = false
-        } else {
-            view.addSubview(loader)
-            setupLoaderLayout()
-        }
-    }
-
-    func hideLoader() {
-        loader.isHidden = true
-        setupLayout()
-        setupScrollView()
-    }
 }
 
 extension DetailViewController {
@@ -130,9 +115,9 @@ extension DetailViewController {
 
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -100),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 350),
+            imageView.heightAnchor.constraint(equalToConstant: 400),
 
             author.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             author.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
@@ -155,10 +140,4 @@ extension DetailViewController {
         ])
     }
 
-    private func setupLoaderLayout() {
-        NSLayoutConstraint.activate([
-            loader.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-    }
 }

@@ -11,13 +11,11 @@ public protocol DetailModuleOutputProtocol {}
 // View Input
 protocol DetailViewInputProtocol: AnyObject {
     func setArticle(article: ArticleModel)
-    func showLoader()
-    func hideLoader()
 }
 
 // View Output
 protocol DetailViewOutputProtocol: AnyObject {
-    func viewDidAppear()
+    func viewWillAppear()
 }
 
 // Interactor Input
