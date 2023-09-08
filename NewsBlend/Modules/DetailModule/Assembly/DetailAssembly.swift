@@ -14,7 +14,6 @@ class DetailAssembly {
         router.output = presentor
         interactor.output = presentor
         view.output = presentor
-        router.feedRouter = FeedRouter()
         return view
     }
 }

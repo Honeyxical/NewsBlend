@@ -2,43 +2,32 @@
 
 import Foundation
 
-    // Module Input
-    public protocol DetailModuleInputProtocol {
+// Module Input
+public protocol DetailModuleInputProtocol {}
 
-    }
+// Module Output
+public protocol DetailModuleOutputProtocol {}
 
-    // Module Output
-    public protocol DetailModuleOutputProtocol {
-    }
+// View Input
+protocol DetailViewInputProtocol: AnyObject {
+    func setArticle(article: ArticleModel)
+    func showLoader()
+    func hideLoader()
+}
 
-    // View Input
-    protocol DetailViewInputProtocol {
-        func setArticle(article: ArticleModel)
-        func showLoader()
-        func hideLoader()
-        func displayLotty()
-    }
+// View Output
+protocol DetailViewOutputProtocol: AnyObject {
+    func viewDidAppear()
+}
 
-    // View Output
-    protocol DetailViewOutputProtocol {
-        func viewDidAppear()
-    }
+// Interactor Input
+protocol DetailInteractorInputProtocol: AnyObject {}
 
-    // Interactor Input
-    protocol DetailInteractorInputProtocol {
-        func loadData()
-    }
+// Interactor Output
+protocol DetailInteractorOutputProtocol: AnyObject {}
 
-    // Interactor Output
-    protocol DetailInteractorOutputProtocol: AnyObject {
-        func didReceive()
-        func didReceiveFail()
-    }
+// Router Input
+protocol DetailRouterInputProtocol: AnyObject {}
 
-    // Router Input
-    protocol DetailRouterInputProtocol {
-    }
-
-    // Router Output
-    protocol DetailRouterOutputProtocol {
-    }
+// Router Output
+protocol DetailRouterOutputProtocol: AnyObject {}

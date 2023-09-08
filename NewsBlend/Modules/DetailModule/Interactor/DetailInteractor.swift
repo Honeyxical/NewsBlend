@@ -3,7 +3,7 @@
 import Foundation
 
 class DetailInteractor {
-    var output: DetailInteractorOutputProtocol?
+    weak var output: DetailInteractorOutputProtocol?
     let cacheService: DetailCoreDataServiceProtocol
 
     init(cacheService: DetailCoreDataServiceProtocol) {
@@ -11,8 +11,4 @@ class DetailInteractor {
     }
 }
 
-extension DetailInteractor: DetailInteractorInputProtocol {
-    func loadData() {
-        
-    }
-}
+extension DetailInteractor: DetailInteractorInputProtocol {}

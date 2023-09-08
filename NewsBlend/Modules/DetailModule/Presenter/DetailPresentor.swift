@@ -3,7 +3,7 @@
 import Foundation
 
 class DetailPresentor {
-    let view: DetailViewInputProtocol
+    weak var view: DetailViewInputProtocol?
     let interactor: DetailInteractorInputProtocol
     let router: DetailRouterInputProtocol
     let article: ArticleModel
@@ -16,22 +16,13 @@ class DetailPresentor {
     }
 }
 
-extension DetailPresentor: DetailInteractorOutputProtocol {
-    func didReceive() {
-    }
-
-    func didReceiveFail() {
-
-    }
-}
+extension DetailPresentor: DetailInteractorOutputProtocol {}
 
 extension DetailPresentor: DetailViewOutputProtocol {
     func viewDidAppear() {
-        view.setArticle(article: article)
-        view.hideLoader()
+        view?.setArticle(article: article)
+        view?.hideLoader()
     }
 }
 
-extension DetailPresentor: DetailRouterOutputProtocol {
-
-}
+extension DetailPresentor: DetailRouterOutputProtocol {}

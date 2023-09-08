@@ -6,12 +6,12 @@ import UIKit
 
 class DetailViewController: UIViewController {
     var output: DetailViewOutputProtocol?
-    private lazy var loader = ReusableViews.getLoader(view: view)
+    private lazy var loader = ReusableViews.getLoader()
     private lazy var contentRect: CGRect = scrollView.subviews.reduce(into: .zero) { rect, view in
         rect = rect.union(view.frame)
     }
 
-    private lazy var scrollView: UIScrollView = {
+    private let scrollView: UIScrollView = {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.showsVerticalScrollIndicator = false
@@ -19,7 +19,7 @@ class DetailViewController: UIViewController {
         return view
     }()
 
-    private lazy var imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentMode = .scaleAspectFill
@@ -96,11 +96,11 @@ class DetailViewController: UIViewController {
 
 extension DetailViewController: DetailViewInputProtocol {
     func setArticle(article: ArticleModel) {
-        self.imageView.kf.setImage(with: URL(string: article.urlToImage))
-        self.articleTitle.text = article.title
-        self.content.text = article.content
-        self.author.text = "By \(article.author)"
-        self.publishedAt.text = article.timeSincePublication
+        imageView.kf.setImage(with: URL(string: article.urlToImage))
+        articleTitle.text = article.title
+        content.text = article.content
+        author.text = "By \(article.author)"
+        publishedAt.text = article.timeSincePublication
     }
 
     func showLoader() {
@@ -116,9 +116,6 @@ extension DetailViewController: DetailViewInputProtocol {
         loader.isHidden = true
         setupLayout()
         setupScrollView()
-    }
-
-    func displayLotty() {
     }
 }
 

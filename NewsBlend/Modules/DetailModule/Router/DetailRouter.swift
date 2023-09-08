@@ -3,11 +3,7 @@
 import Foundation
 
 class DetailRouter {
-    var output: DetailRouterOutputProtocol?
-    var feedRouter: FeedRouterInputProtocol?
+    weak var output: DetailRouterOutputProtocol?
 }
 
-extension DetailRouter: DetailRouterInputProtocol{
-    func openArticle(article: Article) {
-    }
-}
+extension DetailRouter: DetailRouterInputProtocol {}
