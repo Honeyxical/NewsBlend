@@ -5,7 +5,7 @@ import UIKit
 class NBSPresentor {
     let interactor: NBSInteractorInputProtocol
     let router: NBSRouterInputProtocol
-    let view: NBSViewInputProtocol
+    weak var view: NBSViewInputProtocol?
 
     init(interactor: NBSInteractorInputProtocol, router: NBSRouterInputProtocol, view: NBSViewInputProtocol) {
         self.interactor = interactor
@@ -16,11 +16,11 @@ class NBSPresentor {
 
 extension NBSPresentor: NBSInteractorOutputProtocol {
     func didReceive(articles: [ArticleModel]) {
-        view.setArticle(articles: articles)
+        view?.setArticle(articles: articles)
     }
 
     func didReceive(sources: [SourceModel]) {
-        view.setSources(sources: sources)
+        view?.setSources(sources: sources)
     }
 
     func didReceiveFail() {

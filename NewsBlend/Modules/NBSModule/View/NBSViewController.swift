@@ -4,10 +4,10 @@ import Foundation
 import UIKit
 
 class NBSViewController: UIViewController {
-    var output: NBSViewOutputProtocol?
+    weak var output: NBSViewOutputProtocol?
     private var sources: [SourceModel] = []
 
-    private lazy var loader = ReusableViews.getLoader(view: view)
+    private lazy var loader = ReusableViews.getLoader()
 
     private let sectionName: UILabel = {
         let label = UILabel()
@@ -86,11 +86,6 @@ extension NBSViewController: NBSViewInputProtocol {
 
     func hideLoader() {
         loader.isHidden = true
-
-    }
-
-    func displayLotty() {
-        
     }
 }
 
@@ -101,7 +96,6 @@ extension NBSViewController: UICollectionViewDelegate, UICollectionViewDataSourc
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView {
-
         case sourcesCollection:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sourceCell", for: indexPath) as? SourcesCell else {
                 return UICollectionViewCell()

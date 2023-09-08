@@ -5,7 +5,7 @@ import Kingfisher
 import UIKit
 
 class ArticleCell: UICollectionViewCell {
-    private var imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 20
@@ -14,7 +14,7 @@ class ArticleCell: UICollectionViewCell {
         return imageView
     }()
 
-    private var title: UILabel = {
+    private let title: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
         title.font = UIFont.systemFont(ofSize: 14)
@@ -22,7 +22,7 @@ class ArticleCell: UICollectionViewCell {
         return title
     }()
 
-    private var author: UILabel = {
+    private let author: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 11)
@@ -31,7 +31,7 @@ class ArticleCell: UICollectionViewCell {
         return label
     }()
 
-    private var publishedTime: UILabel = {
+    private let publishedTime: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 12, weight: .thin)

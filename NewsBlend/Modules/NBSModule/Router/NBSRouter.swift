@@ -3,7 +3,7 @@
 import UIKit
 
 class NBSRouter {
-    var output: NBSRouterOutputProtocol?
+    weak var output: NBSRouterOutputProtocol?
     weak var viewController: UIViewController?
 }
 

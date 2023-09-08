@@ -3,9 +3,9 @@
 import UIKit
 
 class ArticleBySourceCell: UICollectionViewCell {
-    var output: NBSViewOutputProtocol?
+    weak var output: NBSViewOutputProtocol?
     private var articles: [ArticleModel] = []
-    private lazy var loader = ReusableViews.getLoader(view: self.collection)
+    private lazy var loader = ReusableViews.getLoader()
     private var controller: UIViewController? // Придумать способ получше ибо это херня
     var isDefaultCell = true
 

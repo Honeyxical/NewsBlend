@@ -3,7 +3,7 @@
 import Foundation
 
 class NBSInteractor {
-    var output: NBSInteractorOutputProtocol?
+    weak var output: NBSInteractorOutputProtocol?
     let networkService: NBSNetworkServiceProtocol
     let cacheService: NBSStorageProtocol
     let parser: ParserProtocol

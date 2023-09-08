@@ -3,26 +3,22 @@
 import UIKit
 
 // Module Input
-public protocol NBSModuleInputProtocol {
-
-}
+public protocol NBSModuleInputProtocol {}
 
 // Module Output
-public protocol NBSModuleOutputProtocol {
-}
+public protocol NBSModuleOutputProtocol {}
 
 // View Input
-protocol NBSViewInputProtocol {
+protocol NBSViewInputProtocol: AnyObject {
     func setSources(sources: [SourceModel])
     func setArticle(articles: [ArticleModel])
     func showLoader()
     func hideLoader()
-    func displayLotty()
     func reloadData()
 }
 
 // View Output
-protocol NBSViewOutputProtocol {
+protocol NBSViewOutputProtocol: AnyObject {
     func viewDidAppear()
     func viewDidLoad()
     func getArticlesBySource(source: SourceModel)
@@ -49,5 +45,4 @@ protocol NBSRouterInputProtocol {
 }
 
 // Router Output
-protocol NBSRouterOutputProtocol {
-}
+protocol NBSRouterOutputProtocol: AnyObject {}

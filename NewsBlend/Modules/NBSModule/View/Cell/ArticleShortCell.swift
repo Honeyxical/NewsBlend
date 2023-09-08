@@ -3,7 +3,7 @@
 import UIKit
 
 class ArticleShortCell: UICollectionViewCell {
-    private var articleTitle: UILabel = {
+    private let articleTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 14)
@@ -11,7 +11,7 @@ class ArticleShortCell: UICollectionViewCell {
         return label
     }()
 
-    private var articleAuthor: UILabel = {
+    private let articleAuthor: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 12)
@@ -20,7 +20,7 @@ class ArticleShortCell: UICollectionViewCell {
         return label
     }()
 
-    private var publishedAt: UILabel = {
+    private let publishedAt: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 12, weight: .thin)
