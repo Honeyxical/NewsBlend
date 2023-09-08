@@ -3,7 +3,7 @@
 import Foundation
 import UIKit
 
-class SettingsViewController: UIViewController {
+final class SettingsViewController: UIViewController {
     var output: SettingsViewOutputProtocol?
     var newsSettingView: UIViewController?
 

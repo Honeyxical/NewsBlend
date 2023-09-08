@@ -2,7 +2,7 @@
 
 import UIKit
 
-class NBSPresentor {
+final class NBSPresentor {
     let interactor: NBSInteractorInputProtocol
     let router: NBSRouterInputProtocol
     weak var view: NBSViewInputProtocol?

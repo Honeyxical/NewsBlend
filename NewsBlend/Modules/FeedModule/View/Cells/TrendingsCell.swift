@@ -53,7 +53,8 @@ class TrendingCell: UICollectionViewCell {
     private func layerSetup() {
         layer.cornerRadius = 10
         layer.borderWidth = 1
-        layer.borderColor = UIColor.lightBlue.cgColor
+        let lightBlue = UIColor(red: 230 / 255, green: 237 / 255, blue: 236 / 255, alpha: 1)
+        layer.borderColor = lightBlue.cgColor
     }
 
     private func setupLayout() {

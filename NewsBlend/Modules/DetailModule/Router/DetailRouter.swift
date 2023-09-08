@@ -2,7 +2,7 @@
 
 import Foundation
 
-class DetailRouter {
+final class DetailRouter {
     weak var output: DetailRouterOutputProtocol?
 }
 

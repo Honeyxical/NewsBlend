@@ -2,7 +2,7 @@
 
 import Foundation
 
-class SettingsRouter {
+final class SettingsRouter {
     weak var output: SettingsRouterOutputProtocol?
 }
 

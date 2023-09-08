@@ -11,7 +11,7 @@ enum FeedPaths: String {
     case everything = "https://newsapi.org/v2/everything"
 }
 
-class FeedNetworkService: FeedNetworkServiceProtocol {
+final class FeedNetworkService: FeedNetworkServiceProtocol {
     private let apiKey = "bc613432d94c448da6d678dad9c8806e"
 
     func getArticles(source: SourceModel, articlesCount: Int, completion: @escaping(Data) -> Void) {

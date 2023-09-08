@@ -2,7 +2,7 @@
 
 import Foundation
 
-class SettingsInteractor {
+final class SettingsInteractor {
     weak var output: SettingsInteractorOutputProtocol?
     let cacheService: SettingStorageProtocol
     let networkService: SettingNetworkServiceProtocol

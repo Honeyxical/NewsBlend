@@ -4,4 +4,4 @@ import Foundation
 
 protocol DetailCoreDataServiceProtocol: AnyObject {}
 
-class DetailCoreDataService: DetailCoreDataServiceProtocol {}
+final class DetailCoreDataService: DetailCoreDataServiceProtocol {}

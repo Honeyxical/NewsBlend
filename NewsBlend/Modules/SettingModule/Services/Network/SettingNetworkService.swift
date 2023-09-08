@@ -11,7 +11,7 @@ enum SettingsPaths: String {
     case sources = "https://newsapi.org/v2/top-headlines/sources"
 }
 
-class SettingNetworkService: SettingNetworkServiceProtocol {
+final class SettingNetworkService: SettingNetworkServiceProtocol {
     private let apiKey = "bc613432d94c448da6d678dad9c8806e"
 
     func getSources(sourceLanguage: String, completion: @escaping (Data) -> Void) {

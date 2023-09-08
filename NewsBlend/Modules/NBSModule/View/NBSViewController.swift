@@ -3,7 +3,7 @@
 import Foundation
 import UIKit
 
-class NBSViewController: UIViewController {
+final class NBSViewController: UIViewController {
     var output: NBSViewOutputProtocol?
     private var sources: [SourceModel] = []
 

@@ -10,7 +10,7 @@ protocol SettingStorageProtocol{
     func saveChangedListSources(sources: Data)
 }
 
-class SettingsUserDefaultsService: SettingStorageProtocol {
+final class SettingsUserDefaultsService: SettingStorageProtocol {
     private let userDefaults = UserDefaults.standard
 
     func getUpdateInterval() -> Int {

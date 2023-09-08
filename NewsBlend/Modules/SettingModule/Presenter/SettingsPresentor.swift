@@ -2,7 +2,7 @@
 
 import Foundation
 
-class SettingsPresentor {
+final class SettingsPresentor {
     weak var view: MenuViewProtocol?
     let interactor: SettingsInteractorInputProtocol
     let router: SettingsRouterInputProtocol

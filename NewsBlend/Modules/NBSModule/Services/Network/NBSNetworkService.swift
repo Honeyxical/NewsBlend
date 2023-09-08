@@ -11,7 +11,7 @@ enum NBSPaths: String {
     case topHeadlines = "https://newsapi.org/v2/top-headlines/"
 }
 
-class NBSNetworService: NBSNetworkServiceProtocol {
+final class NBSNetworService: NBSNetworkServiceProtocol {
     private let apiKey = "bc613432d94c448da6d678dad9c8806e"
     
     func getArticlesBySource(source: SourceModel, pageSize: Int, completion: @escaping (Data) -> Void) {

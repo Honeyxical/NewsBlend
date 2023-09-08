@@ -2,7 +2,7 @@
 
 import Foundation
 
-class DetailInteractor {
+final class DetailInteractor {
     weak var output: DetailInteractorOutputProtocol?
     let cacheService: DetailCoreDataServiceProtocol
 

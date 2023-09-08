@@ -4,7 +4,7 @@ import Foundation
 import Kingfisher
 import UIKit
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
     var output: DetailViewOutputProtocol?
     private lazy var loader = ReusableViews.getLoader()
     private lazy var contentRect: CGRect = scrollView.subviews.reduce(into: .zero) { rect, view in

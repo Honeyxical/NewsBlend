@@ -3,7 +3,7 @@
 import Foundation
 import UIKit
 
-class NewsSettingViewController: UIViewController {
+final class NewsSettingViewController: UIViewController {
     var output: SettingsViewOutputProtocol?
     var sources: [SourceModel] = []
     private let updatesIntervals = ["1 min", "3 min", "5 min", "10 min", "15 min"]

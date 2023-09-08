@@ -3,7 +3,7 @@
 import Foundation
 import UIKit
 
-class DetailAssembly {
+final class DetailAssembly {
     static func build(artile: ArticleModel) -> UIViewController {
         let view = DetailViewController()
         let interactor = DetailInteractor(cacheService: DetailCoreDataService())

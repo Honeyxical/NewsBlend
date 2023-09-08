@@ -2,7 +2,7 @@
 
 import Foundation
 
-class DetailPresentor {
+final class DetailPresentor {
     weak var view: DetailViewInputProtocol?
     let interactor: DetailInteractorInputProtocol
     let router: DetailRouterInputProtocol

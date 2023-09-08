@@ -13,7 +13,7 @@ protocol FeedStorageProtocol{
     func getArticles() -> Data
 }
 
-class FeedUserDefaultsService: FeedStorageProtocol {
+final class FeedUserDefaultsService: FeedStorageProtocol {
     private let userDefaults = UserDefaults.standard
 
     func getInterval() -> Int {

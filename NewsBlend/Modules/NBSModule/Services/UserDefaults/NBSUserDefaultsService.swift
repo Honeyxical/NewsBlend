@@ -8,7 +8,7 @@ protocol NBSStorageProtocol{
     func getArticles(source: String) -> Data
 }
 
-class NBSUserDefaultsService: NBSStorageProtocol {
+final class NBSUserDefaultsService: NBSStorageProtocol {
     private let userDefaults = UserDefaults.standard
 
     func getSources() -> Data {
