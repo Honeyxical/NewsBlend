@@ -4,7 +4,7 @@ import Alamofire
 import Foundation
 
 protocol NBSNetworkServiceProtocol {
-    func getArticlesBySource(source: SourceModel, pageSize: Int, completion: @escaping (Data) -> Void)
+    func getArticlesBySource(source: SourceModel, pageSize: Int, completion: @escaping (Data) -> Void, failure: @escaping() -> Void)
 }
 
 enum NBSPaths: String {
@@ -14,7 +14,7 @@ enum NBSPaths: String {
 final class NBSNetworService: NBSNetworkServiceProtocol {
     private let apiKey = "bc613432d94c448da6d678dad9c8806e"
     
-    func getArticlesBySource(source: SourceModel, pageSize: Int, completion: @escaping (Data) -> Void) {
+    func getArticlesBySource(source: SourceModel, pageSize: Int, completion: @escaping (Data) -> Void, failure: @escaping() -> Void) {
         let queryItems = [
             URLQueryItem(name: "apiKey", value: apiKey),
             URLQueryItem(name: "pageSize", value: pageSize.description),
@@ -28,7 +28,7 @@ final class NBSNetworService: NBSNetworkServiceProtocol {
                     completion(data)
                 }
             case .failure:
-                completion(Data())
+                failure()
             }
         }
     }

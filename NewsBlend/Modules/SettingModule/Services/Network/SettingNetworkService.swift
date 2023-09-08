@@ -4,7 +4,7 @@ import Alamofire
 import Foundation
 
 protocol SettingNetworkServiceProtocol {
-    func getSources(sourceLanguage: String, completion: @escaping (Data) -> Void)
+    func getSources(sourceLanguage: String, success: @escaping (Data) -> Void, failure: @escaping () -> Void)
 }
 
 enum SettingsPaths: String {
@@ -14,7 +14,7 @@ enum SettingsPaths: String {
 final class SettingNetworkService: SettingNetworkServiceProtocol {
     private let apiKey = "bc613432d94c448da6d678dad9c8806e"
 
-    func getSources(sourceLanguage: String, completion: @escaping (Data) -> Void) {
+    func getSources(sourceLanguage: String, success: @escaping (Data) -> Void, failure: @escaping () -> Void) {
         let queryItems = [
             URLQueryItem(name: "apiKey", value: apiKey),
             URLQueryItem(name: "language", value: sourceLanguage)
@@ -24,10 +24,10 @@ final class SettingNetworkService: SettingNetworkServiceProtocol {
             case .success:
                 guard let data = response.data else { return }
                 DispatchQueue.main.async {
-                    completion(data)
+                    success(data)
                 }
             case .failure:
-                completion(Data())
+                failure()
             }
         }
     }
