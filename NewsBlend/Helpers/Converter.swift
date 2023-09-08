@@ -15,14 +15,14 @@ class Converter {
     }
 
     static func decodeSourceObjects(data: Data) -> [SourceModel] {
-        guard let source = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [SourceModel] else {
+        guard let source = try? JSONDecoder().decode([SourceModel].self, from: data) else {
             return []
         }
         return source
     }
 
     static func encodeSourceObjects(sourceModels: [SourceModel]) -> Data {
-        guard let models = try? NSKeyedArchiver.archivedData(withRootObject: sourceModels, requiringSecureCoding: false) else {
+        guard let models = try? JSONEncoder().encode(sourceModels) else {
             return Data()
         }
         return models
@@ -32,6 +32,8 @@ class Converter {
         if storage.count < 1 {
             return network
         }
+        var network = network
+
         for counterS in 0...storage.count - 1 {
             for counterN in 0...network.count - 1{
                 if network[counterN].name == storage[counterS].name && network[counterN].isSelected != storage[counterS].isSelected {
@@ -48,6 +50,7 @@ class Converter {
         if articles.isEmpty {
             return articles
         }
+        var articles = articles
         for counter in 0...articles.count - 1 {
             articles[counter].timeSincePublication = Converter.getDifferenceFromNowAndDate(dateString: articles[counter].publishedAt) ?? ""
         }
@@ -66,14 +69,14 @@ class Converter {
     }
 
     static func encodeArticleObjects(articles: [ArticleModel]) -> Data {
-        guard let articles = try? NSKeyedArchiver.archivedData(withRootObject: articles, requiringSecureCoding: false) else {
+        guard let articles = try? JSONEncoder().encode(articles) else {
             return Data()
         }
         return articles
     }
 
     static func decodeArticleObjects(data: Data) -> [ArticleModel] {
-        guard let articles = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [ArticleModel] else {
+        guard let articles = try? JSONDecoder().decode([ArticleModel].self, from: data) else {
             return []
         }
         return articles
