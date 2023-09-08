@@ -14,13 +14,11 @@ protocol NBSViewInputProtocol: AnyObject {
     func setArticle(articles: [ArticleModel])
     func showLoader()
     func hideLoader()
-    func reloadData()
 }
 
 // View Output
 protocol NBSViewOutputProtocol: AnyObject {
-    func viewDidAppear()
-    func viewDidLoad()
+    func viewWillAppear()
     func getArticlesBySource(source: SourceModel)
     func openArticleDetail(article: ArticleModel, controller: UIViewController)
 }

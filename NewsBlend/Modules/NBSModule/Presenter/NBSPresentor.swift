@@ -3,8 +3,8 @@
 import UIKit
 
 final class NBSPresentor {
-    let interactor: NBSInteractorInputProtocol
-    let router: NBSRouterInputProtocol
+    private let interactor: NBSInteractorInputProtocol
+    private let router: NBSRouterInputProtocol
     weak var view: NBSViewInputProtocol?
 
     init(interactor: NBSInteractorInputProtocol, router: NBSRouterInputProtocol, view: NBSViewInputProtocol) {
@@ -37,11 +37,7 @@ extension NBSPresentor: NBSViewOutputProtocol {
         }
     }
 
-    func viewDidLoad() {
-        viewDidAppear()
-    }
-
-    func viewDidAppear() {
+    func viewWillAppear() {
         interactor.getSources()
     }
 }

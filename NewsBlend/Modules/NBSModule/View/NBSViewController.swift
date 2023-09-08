@@ -51,20 +51,18 @@ final class NBSViewController: UIViewController {
         return button
     }()
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupLayout()
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        output?.viewDidAppear()
-        reloadData()
-        setupLayout()
+        output?.viewWillAppear()
     }
 }
 
 extension NBSViewController: NBSViewInputProtocol {
-    func reloadData() {
-        articlesCollection.reloadData()
-        sourcesCollection.reloadData()
-    }
-
     func setSources(sources: [SourceModel]) {
         self.sources = sources
         sourcesCollection.reloadData()

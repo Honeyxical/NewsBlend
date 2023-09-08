@@ -5,7 +5,7 @@ import UIKit
 
 final class FeedViewController: UIViewController {
     var output: FeedViewOutputProtocol?
-    private let childView: UIViewController
+    private let childViewVC: UIViewController
     private lazy var loader = ReusableViews.getLoader()
     private var articles: [ArticleModel] = []
 
@@ -41,17 +41,17 @@ final class FeedViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         configuringNavigationBar()
+        addChild(childViewVC)
         output?.viewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        addChild(childView)
-        output?.viewWillApear()
+        reloadData()
     }
 
     init(childView: UIViewController) {
-        self.childView = childView
+        self.childViewVC = childView
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -140,10 +140,10 @@ extension FeedViewController {
 
     private func setupLayout() {
         view.addSubview(scrollView)
-        scrollView.addSubview(childView.view)
+        scrollView.addSubview(childViewVC.view)
         scrollView.addSubview(hotNewsCollection)
         scrollView.addSubview(sectionName)
-        childView.view.translatesAutoresizingMaskIntoConstraints = false
+        childViewVC.view.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -159,11 +159,11 @@ extension FeedViewController {
             hotNewsCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             hotNewsCollection.heightAnchor.constraint(equalToConstant: view.frame.height / 3),
 
-            childView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            childView.view.topAnchor.constraint(equalTo: hotNewsCollection.bottomAnchor),
-            childView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            childView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 15),
-            childView.view.widthAnchor.constraint(equalToConstant: view.frame.width)
+            childViewVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            childViewVC.view.topAnchor.constraint(equalTo: hotNewsCollection.bottomAnchor),
+            childViewVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            childViewVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 15),
+            childViewVC.view.widthAnchor.constraint(equalToConstant: view.frame.width)
         ])
     }
 

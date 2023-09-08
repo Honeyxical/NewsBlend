@@ -4,9 +4,9 @@ import Foundation
 
 final class FeedInteractor {
     weak var output: FeedInteractorOutputProtocol?
-    let networkService: FeedNetworkServiceProtocol
-    let cacheService: FeedStorageProtocol
-    let parser: ParserProtocol
+    private let networkService: FeedNetworkServiceProtocol
+    private let cacheService: FeedStorageProtocol
+    private let parser: ParserProtocol
     
     private let initialSource: SourceModel
     private let defaultSourceHotNews: SourceModel

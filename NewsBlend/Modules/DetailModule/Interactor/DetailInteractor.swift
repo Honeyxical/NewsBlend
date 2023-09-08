@@ -4,7 +4,7 @@ import Foundation
 
 final class DetailInteractor {
     weak var output: DetailInteractorOutputProtocol?
-    let cacheService: DetailCoreDataServiceProtocol
+    private let cacheService: DetailCoreDataServiceProtocol
 
     init(cacheService: DetailCoreDataServiceProtocol) {
         self.cacheService = cacheService

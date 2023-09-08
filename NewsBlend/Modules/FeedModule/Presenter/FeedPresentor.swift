@@ -5,8 +5,8 @@ import UIKit
 
 final class FeedPresentor {
     weak var view: FeedViewInputProtocol?
-    let interactor: FeedInteractorInputProtocol
-    let router: FeedRouterInputProtocol
+    private let interactor: FeedInteractorInputProtocol
+    private let router: FeedRouterInputProtocol
 
     init(view: FeedViewInputProtocol, interactor: FeedInteractorInputProtocol, router: FeedRouterInputProtocol) {
         self.view = view
@@ -18,15 +18,11 @@ final class FeedPresentor {
 extension FeedPresentor: FeedViewOutputProtocol {
     func viewDidLoad() {
         interactor.startUpdateDemon()
+        interactor.loadData()
     }
 
     func openSettings() {
         router.openSettings()
-    }
-
-    func viewWillApear() {
-        interactor.loadData()
-        view?.showLoader()
     }
 
     func openArticleDetail(article: ArticleModel) {

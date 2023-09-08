@@ -4,9 +4,9 @@ import Foundation
 
 final class NBSInteractor {
     weak var output: NBSInteractorOutputProtocol?
-    let networkService: NBSNetworkServiceProtocol
-    let cacheService: NBSStorageProtocol
-    let parser: ParserProtocol
+    private let networkService: NBSNetworkServiceProtocol
+    private let cacheService: NBSStorageProtocol
+    private let parser: ParserProtocol
     private let defaultPageSize = 10
 
     init(networkService: NBSNetworkServiceProtocol, cacheService: NBSStorageProtocol, parser: ParserProtocol) {

@@ -4,8 +4,8 @@ import Foundation
 
 final class SettingsPresentor {
     weak var view: MenuViewProtocol?
-    let interactor: SettingsInteractorInputProtocol
-    let router: SettingsRouterInputProtocol
+    private let interactor: SettingsInteractorInputProtocol
+    private let router: SettingsRouterInputProtocol
     weak var newsSettingsView: SettingsViewInputProtocol?
 
     init(view: MenuViewProtocol, interactor: SettingsInteractorInputProtocol, router: SettingsRouterInputProtocol, newsSettingsProtocol: SettingsViewInputProtocol) {

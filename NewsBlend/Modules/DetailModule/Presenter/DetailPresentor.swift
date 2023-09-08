@@ -4,9 +4,9 @@ import Foundation
 
 final class DetailPresentor {
     weak var view: DetailViewInputProtocol?
-    let interactor: DetailInteractorInputProtocol
-    let router: DetailRouterInputProtocol
-    let article: ArticleModel
+    private let interactor: DetailInteractorInputProtocol
+    private let router: DetailRouterInputProtocol
+    private let article: ArticleModel
 
     init(view: DetailViewInputProtocol, interactor: DetailInteractorInputProtocol, router: DetailRouterInputProtocol, article: ArticleModel) {
         self.view = view

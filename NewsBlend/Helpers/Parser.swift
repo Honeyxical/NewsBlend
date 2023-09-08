@@ -19,11 +19,15 @@ class Parser: ParserProtocol {
             networkService.getArticlesBySource(source: source, pageSize: pageSize) { data in
                 if data.isEmpty {
                     group.leave()
+                    return
                 }
                 guard let articlesDTO = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else { return }
                 articles += Converter.setDate(articles: Converter.transferDTOtoModel(articlesArray: articlesDTO.articles))
                 group.leave()
             }
+//        }failure: {
+//
+//            }
         }
         
         group.notify(queue: DispatchQueue.main) {
@@ -33,20 +37,13 @@ class Parser: ParserProtocol {
     }
     
     func parseFeedSource(source: SourceModel, articlesCount: Int, network: FeedNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void) {
-        var articles: [ArticleModel] = []
-        let group = DispatchGroup()
-        
-        group.enter()
         network.getArticles(source: source, articlesCount: articlesCount){ data in
+            var articles: [ArticleModel] = []
             if data.isEmpty {
-                group.leave()
+                completion(articles)
             }
             guard let articlesDTO = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else { return }
             articles = Converter.transferDTOtoModel(articlesArray: articlesDTO.articles)
-            group.leave()
-        }
-        
-        group.notify(queue: DispatchQueue.main) {
             articles = articles.sorted { $0.publishedAt > $1.publishedAt }
             completion(articles)
         }
