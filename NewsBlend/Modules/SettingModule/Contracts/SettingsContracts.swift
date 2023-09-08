@@ -3,21 +3,17 @@
 import Foundation
 
 // Module Input
-public protocol SettingsModuleInputProtocol {
-}
+public protocol SettingsModuleInputProtocol {}
 
 // Module Output
-public protocol SettingsModuleOutputProtocol {
-}
+public protocol SettingsModuleOutputProtocol {}
 
 // View Input
-protocol SettingsViewInputProtocol {
+protocol SettingsViewInputProtocol: AnyObject {
     func set(source: [SourceModel])
     func set(interval: Int)
-    func reloadData()
     func showLoader()
     func hideLoader()
-    func displayLotty()
 }
 
 // View Output
@@ -41,17 +37,13 @@ protocol SettingsInteractorInputProtocol {
 // Interactor Output
 protocol SettingsInteractorOutputProtocol: AnyObject {
     func didReceive(sources: [SourceModel])
-    func didReceiveFail()
     func didReceive(interval: Int)
 }
 
 // Router Input
-protocol SettingsRouterInputProtocol {
-}
+protocol SettingsRouterInputProtocol {}
 
 // Router Output
-protocol SettingsRouterOutputProtocol {
-}
+protocol SettingsRouterOutputProtocol: AnyObject {}
 
-protocol MenuViewProtocol {
-}
+protocol MenuViewProtocol: AnyObject {}

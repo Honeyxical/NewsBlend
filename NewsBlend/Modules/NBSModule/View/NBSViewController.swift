@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 
 class NBSViewController: UIViewController {
-    weak var output: NBSViewOutputProtocol?
+    var output: NBSViewOutputProtocol?
     private var sources: [SourceModel] = []
 
     private lazy var loader = ReusableViews.getLoader()

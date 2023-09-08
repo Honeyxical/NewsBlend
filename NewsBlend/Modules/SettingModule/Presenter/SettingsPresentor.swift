@@ -3,11 +3,10 @@
 import Foundation
 
 class SettingsPresentor {
-    let view: MenuViewProtocol
+    weak var view: MenuViewProtocol?
     let interactor: SettingsInteractorInputProtocol
     let router: SettingsRouterInputProtocol
-
-    let newsSettingsView: SettingsViewInputProtocol
+    weak var newsSettingsView: SettingsViewInputProtocol?
 
     init(view: MenuViewProtocol, interactor: SettingsInteractorInputProtocol, router: SettingsRouterInputProtocol, newsSettingsProtocol: SettingsViewInputProtocol) {
         self.view = view
@@ -31,26 +30,21 @@ extension SettingsPresentor: SettingsViewOutputProtocol {
     }
 
     func viewWillAppear() {
-        newsSettingsView.showLoader()
+        newsSettingsView?.showLoader()
         interactor.getAllSources()
     }
 }
 
 extension SettingsPresentor: SettingsInteractorOutputProtocol {
     func didReceive(interval: Int) {
-        newsSettingsView.set(interval: interval)
+        newsSettingsView?.set(interval: interval)
     }
 
     func didReceive(sources: [SourceModel]) {
         interactor.getIntervals()
-        newsSettingsView.set(source: sources)
-        newsSettingsView.hideLoader()
+        newsSettingsView?.set(source: sources)
+        newsSettingsView?.hideLoader()
     }
-
-    func didReceiveFail() {
-    }
-
 }
 
-extension SettingsPresentor: SettingsRouterOutputProtocol {
-}
+extension SettingsPresentor: SettingsRouterOutputProtocol {}

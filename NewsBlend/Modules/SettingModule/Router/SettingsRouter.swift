@@ -3,11 +3,7 @@
 import Foundation
 
 class SettingsRouter {
-    var output: SettingsRouterOutputProtocol?
-    var feedRouter: FeedRouterInputProtocol?
-
+    weak var output: SettingsRouterOutputProtocol?
 }
 
-extension SettingsRouter: SettingsRouterInputProtocol {
-    
-}
+extension SettingsRouter: SettingsRouterInputProtocol {}

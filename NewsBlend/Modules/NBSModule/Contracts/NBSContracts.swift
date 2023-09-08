@@ -36,7 +36,6 @@ protocol NBSInteractorInputProtocol {
 protocol NBSInteractorOutputProtocol: AnyObject {
     func didReceive(sources: [SourceModel])
     func didReceive(articles: [ArticleModel])
-    func didReceiveFail()
 }
 
 // Router Input

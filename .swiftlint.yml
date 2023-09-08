@@ -51,6 +51,10 @@ opt_in_rules:
   - switch_case_on_newline
 #  - attributes
 
+excluded:
+  - "../../Source/Application/Main/App/Sources/DI/NeedleGenerated.swift"
+  - "../../Source/Frameworks/UnitTestsLayer/UnitTestsCommon/Sources/KeyValueStoreNetworkServiceMock.swift"
+
 cyclomatic_complexity:
   warning: 25
   error: 30
@@ -83,7 +87,6 @@ type_name:
 identifier_name:
   excluded:
     - id
-    - kp
 
 function_body_length:
   warning: 60
@@ -114,3 +117,48 @@ trailing_semicolon: error
 
 reporter: "xcode"
 
+custom_rules:
+  not_empty_init_with_coder:
+    include: "*.swift"
+    name: "Not empty `init?(coder aDecoder: NSCoder)`"
+    regex: 'required init\?\(coder aDecoder: NSCoder\) \{\n'
+    message: "Init with coder should be left empty and in 1 line: required init?(coder aDecoder: NSCoder) { fatalError(\"init(coder:) has not been implemented\") }"
+    severity: warning
+  new_line_after_method_signature:
+    include: "*.swift"
+    name: "New line after method signature"
+    regex: '\{\n\s*\n+\s*\w'
+    message: "No new line after curly braces and before code"
+    severity: warning
+  new_line_between_braces:
+    include: "*.swift"
+    name: "New line after }"
+    regex: '\}\n\s*\n+\s*\}'
+    message: "No new line between curly braces"
+    severity: warning
+  # Раскоментировать когда все нетворк сервисы перейдут на NetworkBaseService
+  # network_service_inheritance:
+  #   include: "*.swift"
+  #   name: "NetworkService required inheritance from NetworkBaseService"
+  #   regex: 'import NetworkLayer.+class\s+[a-zA-Z0-9]+Service(?!\:\s+NetworkBaseService)'
+  #   message: "Every network service should be inherited from NetworkBaseService"
+  #   severity: error
+  #not_networks_service_name:
+    include: "*.swift"
+    name: "Network service name"
+    regex: '(class|struct)\s+[a-zA-Z0-9]+NetworkService(?!\:\s+NetworkBaseService)'
+    message: "It's prohibited to name a class, struct `*NetworkService` which is not inherited from `NetworkBaseService`"
+    severity: error
+  #network_service_name:
+    include: "*.swift"
+    name: "Network service name"
+    regex: '(?<!(NetworkService))\:\s*NetworkBaseService'
+    message: "Service inherited from `NetworkBaseService` should be named `*NetworkService`"
+    severity: error
+  creation_empty_collection:
+    include: "*.swift"
+    name: "Creation empty collection"
+    regex: '=\s+\[[:print:]+]\(\)'
+    message: "Creating collections with mandatory type declarations: let array: [String] = []"
+    severity: warning
+    

@@ -7,7 +7,7 @@ class NewsSettingViewController: UIViewController {
     var output: SettingsViewOutputProtocol?
     var sources: [SourceModel] = []
     private let updatesIntervals = ["1 min", "3 min", "5 min", "10 min", "15 min"]
-    private lazy var loader = ReusableViews.getLoader(view: view)
+    private lazy var loader = ReusableViews.getLoader()
 
     private let untervalsLabel: UILabel = {
         let label = UILabel()
@@ -54,7 +54,6 @@ class NewsSettingViewController: UIViewController {
         super.viewWillAppear(animated)
         output?.viewWillAppear()
     }
-
 }
 
 extension NewsSettingViewController {
@@ -101,16 +100,8 @@ extension NewsSettingViewController: SettingsViewInputProtocol {
         pickerView.selectRow(interval, inComponent: 0, animated: true)
     }
 
-    func displayLotty() {
-
-    }
-
     func set(source: [SourceModel]) {
         self.sources = source
-    }
-
-    func reloadData() {
-
     }
 
     func showLoader() {
@@ -126,7 +117,6 @@ extension NewsSettingViewController: SettingsViewInputProtocol {
         sourcesCollection.reloadData()
         setupLayout()
     }
-
 }
 
 // MARK: Picker Delegate / DataSource

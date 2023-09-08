@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 
 final class ReusableViews {
-    static func getLoader(view: UIView) -> UIActivityIndicatorView {
+    static func getLoader() -> UIActivityIndicatorView {
         let loader = UIActivityIndicatorView()
         loader.style = .medium
         loader.startAnimating()

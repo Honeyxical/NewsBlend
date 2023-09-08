@@ -29,7 +29,6 @@ class SettingNetworkService: SettingNetworkServiceProtocol {
             case .failure:
                 completion(Data())
             }
-            
         }
     }
 }

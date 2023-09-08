@@ -22,10 +22,6 @@ extension NBSPresentor: NBSInteractorOutputProtocol {
     func didReceive(sources: [SourceModel]) {
         view?.setSources(sources: sources)
     }
-
-    func didReceiveFail() {
-        print("Fail")
-    }
 }
 
 extension NBSPresentor: NBSViewOutputProtocol {
@@ -50,6 +46,4 @@ extension NBSPresentor: NBSViewOutputProtocol {
     }
 }
 
-extension NBSPresentor: NBSRouterOutputProtocol {
-    
-}
+extension NBSPresentor: NBSRouterOutputProtocol {}

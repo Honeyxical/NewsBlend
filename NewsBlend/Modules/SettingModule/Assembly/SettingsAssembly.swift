@@ -21,7 +21,6 @@ final class SettingsAssembly {
         view.newsSettingView = newsSettingsViewController
         view.output = presentor
         router.output = presentor
-        router.feedRouter = FeedRouter()
         return view
     }
 }

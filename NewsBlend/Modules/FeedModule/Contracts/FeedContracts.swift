@@ -18,7 +18,7 @@ protocol FeedViewInputProtocol: AnyObject {
 }
 
 // View Output
-protocol FeedViewOutputProtocol {
+protocol FeedViewOutputProtocol: AnyObject {
     func viewWillApear()
     func openArticleDetail(article: ArticleModel)
     func openSettings()
