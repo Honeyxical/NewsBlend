@@ -50,6 +50,7 @@ class Parser: ParserProtocol {
         network.getArticlesBySource(source: source, pageSize: pageSize) { data in
             guard let articlesDTO = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else { return }
             articles = Converter.transferDTOtoModel(articlesArray: articlesDTO.articles)
+            completion(articles)
         } failure: {
             completion(articles)
         }
