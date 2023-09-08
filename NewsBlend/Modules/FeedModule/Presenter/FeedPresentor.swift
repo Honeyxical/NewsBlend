@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 
 final class FeedPresentor {
-    let view: FeedViewInputProtocol
+    weak var view: FeedViewInputProtocol?
     let interactor: FeedInteractorInputProtocol
     let router: FeedRouterInputProtocol
 
@@ -26,7 +26,7 @@ extension FeedPresentor: FeedViewOutputProtocol {
 
     func viewWillApear() {
         interactor.loadData()
-        view.showLoader()
+        view?.showLoader()
     }
 
     func openArticleDetail(article: ArticleModel) {
@@ -36,13 +36,13 @@ extension FeedPresentor: FeedViewOutputProtocol {
 
 extension FeedPresentor: FeedInteractorOutputProtocol {
     func didReceive(articles: [ArticleModel]) {
-        view.setArticles(articles: articles)
-        view.reloadData()
-        view.hideLoader()
+        view?.setArticles(articles: articles)
+        view?.reloadData()
+        view?.hideLoader()
     }
 
     func didReceiveFail() {
-        view.displayLotty()
+        view?.displayLotty()
     }
 }
 

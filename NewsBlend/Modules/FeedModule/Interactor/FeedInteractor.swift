@@ -15,6 +15,7 @@ final class FeedInteractor {
     let networkService: FeedNetworkServiceProtocol
     let cacheService: FeedStorageProtocol
     let parser: ParserProtocol
+    
     private let initialSource: SourceModel
     private let defaultSourceHotNews: SourceModel
     private let defaultUpdateInterval = 4

@@ -3,15 +3,13 @@
 import Foundation
 
 // Module Input
-public protocol FeedModuleInputProtocol {
-}
+public protocol FeedModuleInputProtocol {}
 
 // Module Output
-public protocol FeedModuleOutputProtocol {
-}
+public protocol FeedModuleOutputProtocol {}
 
 // View Input
-protocol FeedViewInputProtocol {
+protocol FeedViewInputProtocol: AnyObject {
     func setArticles(articles: [ArticleModel])
     func reloadData()
     func showLoader()
@@ -50,5 +48,4 @@ protocol FeedRouterInputProtocol {
 }
 
 // Router Output
-protocol FeedRouterOutputProtocol {
-}
+protocol FeedRouterOutputProtocol {}

@@ -6,7 +6,7 @@ import UIKit
 final class FeedViewController: UIViewController {
     var output: FeedViewOutputProtocol?
     private let childView: UIViewController
-    private lazy var loader = ReusableViews.getLoader(view: self.view)
+    private lazy var loader = ReusableViews.getLoader()
     private var articles: [ArticleModel] = []
 
     private lazy var scrollView: UIScrollView = {
