@@ -61,6 +61,7 @@ class Parser: ParserProtocol {
         network.getSources(sourceLanguage: defaultLanguage) { data in
             guard let sourcesDTO = try? JSONDecoder().decode(SourcesModelDTO.self, from: data) else { return }
             sources = Converter.transferSourceObject(sources: sourcesDTO.sources)
+            completion(sources)
         } failure: {
             completion(sources)
         }
