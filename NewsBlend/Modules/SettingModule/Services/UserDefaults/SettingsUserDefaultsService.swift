@@ -4,7 +4,7 @@ import Foundation
 
 protocol SettingStorageProtocol{
     func getUpdateInterval() -> Int
-    func setUpdateUnterval(interval pos: Int)
+    func setUpdateUnterval(interval pos: UpdateIntervals)
     func getSources() -> Data
     func setSource(sources: Data)
     func saveChangedListSources(sources: Data)
@@ -17,8 +17,8 @@ final class SettingsUserDefaultsService: SettingStorageProtocol {
         userDefaults.integer(forKey: "updateInterval")
     }
 
-    func setUpdateUnterval(interval pos: Int) {
-        userDefaults.set(pos, forKey: "updateInterval")
+    func setUpdateUnterval(interval pos: UpdateIntervals) {
+        userDefaults.set(pos.rawValue, forKey: "updateInterval")
     }
 
     func getSources() -> Data {

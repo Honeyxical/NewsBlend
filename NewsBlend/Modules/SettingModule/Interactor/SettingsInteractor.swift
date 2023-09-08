@@ -38,7 +38,7 @@ extension SettingsInteractor: SettingsInteractorInputProtocol {
         return unarchive
     }
 
-    func setInterval(interval: Int) {
+    func setInterval(interval: UpdateIntervals) {
         cacheService.setUpdateUnterval(interval: interval)
     }
 

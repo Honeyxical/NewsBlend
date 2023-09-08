@@ -43,8 +43,8 @@ extension NBSInteractor: NBSInteractorInputProtocol {
     }
 
     func getSources() {
-//        var sourcesFromCache = [SourceModel(id: "all", name: "All", category: "", language: "", country: "", isSelected: true)]
-        var sourcesFromCache: [SourceModel] = []
+        var sourcesFromCache = [SourceModel(id: "all", name: "All", category: "", language: "", country: "", isSelected: true)]
+//        var sourcesFromCache: [SourceModel] = []
         sourcesFromCache += Converter.decodeSourceObjects(data: cacheService.getSources())
         output?.didReceive(sources: sourcesFromCache)
     }

@@ -3,13 +3,35 @@
 import Foundation
 import UIKit
 
+enum UpdateIntervals: Int, CaseIterable {
+    case oneMin = 60
+    case threMin = 180
+    case fiveMin = 300
+    case tenMin = 600
+    case fiveteenMin = 1900
+
+    func stringValue() -> String {
+        switch self {
+        case .oneMin:
+            return "1 min"
+        case .threMin:
+            return "3 min"
+        case .fiveMin:
+            return "5 min"
+        case .tenMin:
+            return "10 min"
+        case .fiveteenMin:
+            return "15 min"
+        }
+    }
+}
+
 final class NewsSettingViewController: UIViewController {
     var output: SettingsViewOutputProtocol?
     var sources: [SourceModel] = []
-    private let updatesIntervals = ["1 min", "3 min", "5 min", "10 min", "15 min"]
     private lazy var loader = ReusableViews.getLoader()
 
-    private let untervalsLabel: UILabel = {
+    private let intervalsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Select the news update interval: "
@@ -58,19 +80,19 @@ final class NewsSettingViewController: UIViewController {
 
 extension NewsSettingViewController {
     private func setupLayout() {
-        view.addSubview(untervalsLabel)
+        view.addSubview(intervalsLabel)
         view.addSubview(pickerView)
         view.addSubview(sourcesLabel)
         view.addSubview(sourcesCollection)
 
         NSLayoutConstraint.activate([
-            untervalsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            untervalsLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-            untervalsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            intervalsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            intervalsLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
+            intervalsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
 
             pickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             pickerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            pickerView.topAnchor.constraint(equalTo: untervalsLabel.bottomAnchor, constant: 0),
+            pickerView.topAnchor.constraint(equalTo: intervalsLabel.bottomAnchor, constant: 0),
             pickerView.heightAnchor.constraint(equalToConstant: 100),
 
             sourcesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
@@ -97,7 +119,8 @@ extension NewsSettingViewController {
 
 extension NewsSettingViewController: SettingsViewInputProtocol {
     func set(interval: Int) {
-        pickerView.selectRow(interval, inComponent: 0, animated: true)
+        let intervalValue = UpdateIntervals(rawValue: interval) ?? .tenMin
+        pickerView.selectRow(UpdateIntervals.allCases.firstIndex(of: intervalValue) ?? 0, inComponent: 0, animated: true)
     }
 
     func set(source: [SourceModel]) {
@@ -127,15 +150,15 @@ extension NewsSettingViewController: UIPickerViewDataSource, UIPickerViewDelegat
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        updatesIntervals.count
+        UpdateIntervals.allCases.count
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        updatesIntervals[row]
+        UpdateIntervals.allCases[row].stringValue()
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        output?.setInterval(interval: row)
+        output?.setInterval(interval: UpdateIntervals.allCases[row])
     }
 }
 

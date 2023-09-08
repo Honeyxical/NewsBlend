@@ -2,14 +2,6 @@
 
 import Foundation
 
-enum UpdateInterval: Int {
-    case oneMinute = 60
-    case threeMinutes = 180
-    case fiveMinutes = 300
-    case tenMinutes = 600
-    case fifteenMinutes = 900
-}
-
 final class FeedInteractor {
     weak var output: FeedInteractorOutputProtocol?
     let networkService: FeedNetworkServiceProtocol
@@ -18,7 +10,6 @@ final class FeedInteractor {
     
     private let initialSource: SourceModel
     private let defaultSourceHotNews: SourceModel
-    private let defaultUpdateInterval = 4
     private let articlesEstimate = 5
     
     init(networkService: FeedNetworkServiceProtocol, cacheService: FeedStorageProtocol, parser: ParserProtocol, initialSource: SourceModel, defaultSourceHotNews: SourceModel) {
@@ -47,7 +38,6 @@ extension FeedInteractor: FeedInteractorInputProtocol {
         if cacheService.getInitValue() == false {
             cacheService.setInitValue(initValue: true)
             setSource(sources: [initialSource])
-            setUpdateInterval(interval: defaultUpdateInterval)
         }
     }
 
@@ -55,12 +45,12 @@ extension FeedInteractor: FeedInteractorInputProtocol {
         cacheService.setSource(data: Converter.encodeSourceObjects(sourceModels: sources))
     }
 
-    func setUpdateInterval(interval: Int) {
-        cacheService.setInterval(interval: defaultUpdateInterval)
-    }
-
     func getUpdateInterval() -> Int {
-        UpdateInterval(rawValue: cacheService.getInterval())?.rawValue ?? UpdateInterval.tenMinutes.rawValue
+        let interval = cacheService.getInterval()
+        if interval == 0 {
+            return 600
+        }
+        return interval
     }
     
     func startUpdateDemon() {

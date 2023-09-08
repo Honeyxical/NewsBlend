@@ -19,7 +19,7 @@ protocol SettingsViewInputProtocol: AnyObject {
 // View Output
 protocol SettingsViewOutputProtocol {
     func viewWillAppear()
-    func setInterval(interval: Int)
+    func setInterval(interval: UpdateIntervals)
     func setFollowedSource(source: SourceModel)
     func deleteFollowedSource(source: SourceModel)
 }
@@ -29,7 +29,7 @@ protocol SettingsInteractorInputProtocol {
     func getAllSources()
     func getIntervals()
     func getFollowedSources() -> [SourceModel]
-    func setInterval(interval: Int)
+    func setInterval(interval: UpdateIntervals)
     func setFollowedSource(source: SourceModel)
     func deleteFollowedSource(source: SourceModel)
 }

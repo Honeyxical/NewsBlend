@@ -6,7 +6,7 @@ protocol FeedStorageProtocol{
     func getSource() -> Data
     func setSource(data: Data)
     func getInterval() -> Int
-    func setInterval(interval: Int)
+    func setInterval(interval: UpdateIntervals)
     func getInitValue() -> Bool
     func setInitValue(initValue: Bool)
     func setArticles(data: Data)
@@ -20,7 +20,7 @@ final class FeedUserDefaultsService: FeedStorageProtocol {
         userDefaults.integer(forKey: "updateInterval")
     }
 
-    func setInterval(interval: Int) {
+    func setInterval(interval: UpdateIntervals) {
         userDefaults.set(interval, forKey: "updateInterval")
     }
 

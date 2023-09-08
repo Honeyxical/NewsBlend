@@ -19,7 +19,6 @@ protocol FeedViewInputProtocol: AnyObject {
 
 // View Output
 protocol FeedViewOutputProtocol: AnyObject {
-    func viewWillApear()
     func openArticleDetail(article: ArticleModel)
     func openSettings()
     func viewDidLoad()
@@ -31,7 +30,6 @@ protocol FeedInteractorInputProtocol {
     func startUpdateDemon()
     func isFirstStart()
     func setSource(sources: [SourceModel])
-    func setUpdateInterval(interval: Int)
     func getUpdateInterval() -> Int
 }
 

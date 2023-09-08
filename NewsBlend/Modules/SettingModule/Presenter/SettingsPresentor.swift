@@ -21,7 +21,7 @@ extension SettingsPresentor: SettingsViewOutputProtocol {
         interactor.deleteFollowedSource(source: source)
     }
 
-    func setInterval(interval: Int) {
+    func setInterval(interval: UpdateIntervals) {
         interactor.setInterval(interval: interval)
     }
 
