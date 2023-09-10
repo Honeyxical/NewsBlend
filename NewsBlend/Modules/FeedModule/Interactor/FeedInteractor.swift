@@ -53,7 +53,7 @@ extension FeedInteractor: FeedInteractorInputProtocol {
         return interval
     }
     
-    func startUpdateDemon() {
+    func startUpdateTimer() {
         let timer = Timer.scheduledTimer(withTimeInterval: Double(getUpdateInterval()), repeats: true) { _ in
             self.loadData()
         }
