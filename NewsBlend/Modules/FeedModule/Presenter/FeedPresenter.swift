@@ -19,6 +19,7 @@ extension FeedPresenter: FeedViewOutputProtocol {
     func viewDidLoad() {
         interactor.startUpdateDemon()
         interactor.loadData()
+        interactor.isFirstStart()
     }
 
     func openSettings() {

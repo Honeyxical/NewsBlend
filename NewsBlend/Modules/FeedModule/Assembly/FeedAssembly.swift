@@ -28,12 +28,6 @@ final class FeedAssembly {
         interactor.output = presenter
         view.output = presenter
         router.viewController = view
-        isFirstStart(interactor: interactor)
         return view
-    }
-
-    // сделано через !вилкойВГлаз. На будущее: Нужно вынести в модуль конфигурации
-    private static func isFirstStart(interactor: FeedInteractorInputProtocol) {
-        interactor.isFirstStart()
     }
 }
