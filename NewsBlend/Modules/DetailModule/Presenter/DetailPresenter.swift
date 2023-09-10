@@ -19,7 +19,7 @@ final class DetailPresenter {
 extension DetailPresenter: DetailInteractorOutputProtocol {}
 
 extension DetailPresenter: DetailViewOutputProtocol {
-    func viewWillAppear() {
+    func viewDidLoad() {
         view?.setArticle(article: article)
     }
 }

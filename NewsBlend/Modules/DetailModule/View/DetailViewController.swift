@@ -25,7 +25,7 @@ final class DetailViewController: UIViewController {
         return view
     }()
 
-    private let author: UILabel = {
+    private let authorLabel: UILabel = {
         let author = UILabel()
         author.translatesAutoresizingMaskIntoConstraints = false
         author.font = UIFont.systemFont(ofSize: 14)
@@ -34,14 +34,14 @@ final class DetailViewController: UIViewController {
         return author
     }()
 
-    private let publishedAt: UILabel = {
+    private let publishedAtLabel: UILabel = {
         let publisheAt = UILabel()
         publisheAt.translatesAutoresizingMaskIntoConstraints = false
         publisheAt.font = UIFont.systemFont(ofSize: 12)
         return publisheAt
     }()
 
-    private let articleTitle: UILabel = {
+    private let articleTitleLabel: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
         title.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 24)
@@ -50,12 +50,12 @@ final class DetailViewController: UIViewController {
     }()
 
     private lazy var tagStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [self.tag])
+        let stack = UIStackView(arrangedSubviews: [self.tagLabel])
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
 
-    private let tag: UILabel = {
+    private let tagLabel: UILabel = {
         let tag = UILabel()
         tag.translatesAutoresizingMaskIntoConstraints = false
         tag.font = UIFont.systemFont(ofSize: 12, weight: .thin)
@@ -63,7 +63,7 @@ final class DetailViewController: UIViewController {
         return tag
     }()
 
-    private let content: UILabel = {
+    private let contentLabel: UILabel = {
         let content = UILabel()
         content.translatesAutoresizingMaskIntoConstraints = false
         content.numberOfLines = 0
@@ -73,14 +73,10 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        output?.viewDidLoad()
         setupLayout()
         setupScrollView()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         scrollView.contentSize = contentRect.size
-        output?.viewWillAppear()
     }
 
     func setupLayout() {
@@ -97,21 +93,21 @@ final class DetailViewController: UIViewController {
 extension DetailViewController: DetailViewInputProtocol {
     func setArticle(article: ArticleModel) {
         imageView.kf.setImage(with: URL(string: article.urlToImage))
-        articleTitle.text = article.title
-        content.text = article.content
-        author.text = "By \(article.author)"
-        publishedAt.text = article.timeSincePublication
+        articleTitleLabel.text = article.title
+        contentLabel.text = article.content
+        authorLabel.text = "By \(article.author)"
+        publishedAtLabel.text = article.timeSincePublication
     }
 }
 
 extension DetailViewController {
     private func setupScrollView() {
         scrollView.addSubview(imageView)
-        scrollView.addSubview(author)
-        scrollView.addSubview(publishedAt)
-        scrollView.addSubview(articleTitle)
+        scrollView.addSubview(authorLabel)
+        scrollView.addSubview(publishedAtLabel)
+        scrollView.addSubview(articleTitleLabel)
         scrollView.addSubview(tagStack)
-        scrollView.addSubview(content)
+        scrollView.addSubview(contentLabel)
 
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -119,24 +115,24 @@ extension DetailViewController {
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 400),
 
-            author.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            author.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
-            author.widthAnchor.constraint(equalToConstant: 300),
+            authorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            authorLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
+            authorLabel.widthAnchor.constraint(equalToConstant: 300),
 
-            publishedAt.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
-            publishedAt.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            publishedAtLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
+            publishedAtLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
 
-            articleTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            articleTitle.topAnchor.constraint(equalTo: author.bottomAnchor, constant: 20),
-            articleTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            articleTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            articleTitleLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 20),
+            articleTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
 
             tagStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            tagStack.topAnchor.constraint(equalTo: articleTitle.bottomAnchor, constant: 20),
+            tagStack.topAnchor.constraint(equalTo: articleTitleLabel.bottomAnchor, constant: 20),
             tagStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
 
-            content.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            content.topAnchor.constraint(equalTo: tagStack.bottomAnchor, constant: 20),
-            content.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            contentLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            contentLabel.topAnchor.constraint(equalTo: tagStack.bottomAnchor, constant: 20),
+            contentLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
     }
 

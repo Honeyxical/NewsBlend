@@ -15,7 +15,7 @@ protocol DetailViewInputProtocol: AnyObject {
 
 // View Output
 protocol DetailViewOutputProtocol: AnyObject {
-    func viewWillAppear()
+    func viewDidLoad()
 }
 
 // Interactor Input
