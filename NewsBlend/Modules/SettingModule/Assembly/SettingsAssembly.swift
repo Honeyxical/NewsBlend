@@ -11,16 +11,16 @@ final class SettingsAssembly {
                                             networkService: SettingNetworkService(),
                                             parser: Parser())
         let router = SettingsRouter()
-        let presentor = SettingsPresentor(view: view,
+        let presenter = SettingsPresenter(view: view,
                                           interactor: interactor,
                                           router: router,
                                           newsSettingsProtocol: newsSettingsViewController)
 
-        interactor.output = presentor
-        newsSettingsViewController.output = presentor
+        interactor.output = presenter
+        newsSettingsViewController.output = presenter
         view.newsSettingView = newsSettingsViewController
-        view.output = presentor
-        router.output = presentor
+        view.output = presenter
+        router.output = presenter
         return view
     }
 }

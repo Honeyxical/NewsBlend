@@ -10,13 +10,13 @@ class NBSAssembly {
                                        parser: Parser())
         let view = NBSViewController()
         let router = NBSRouter()
-        let presentor = NBSPresentor(interactor: interactor,
+        let presenter = NBSPresenter(interactor: interactor,
                                      router: router,
                                      view: view)
 
-        view.output = presentor
-        interactor.output = presentor
-        router.output = presentor
+        view.output = presenter
+        interactor.output = presenter
+        router.output = presenter
         return view
     }
 }

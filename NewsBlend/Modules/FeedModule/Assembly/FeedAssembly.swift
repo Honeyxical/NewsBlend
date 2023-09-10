@@ -22,11 +22,11 @@ final class FeedAssembly {
                                                                           country: "",
                                                                           isSelected: false))
         let router = FeedRouter()
-        let presentor = FeedPresentor(view: view,
+        let presenter = FeedPresenter(view: view,
                                       interactor: interactor,
                                       router: router)
-        interactor.output = presentor
-        view.output = presentor
+        interactor.output = presenter
+        view.output = presenter
         router.viewController = view
         isFirstStart(interactor: interactor)
         return view

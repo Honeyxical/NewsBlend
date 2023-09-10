@@ -2,7 +2,7 @@
 
 import Foundation
 
-final class SettingsPresentor {
+final class SettingsPresenter {
     weak var view: MenuViewProtocol?
     private let interactor: SettingsInteractorInputProtocol
     private let router: SettingsRouterInputProtocol
@@ -16,7 +16,7 @@ final class SettingsPresentor {
     }
 }
 
-extension SettingsPresentor: SettingsViewOutputProtocol {
+extension SettingsPresenter: SettingsViewOutputProtocol {
     func deleteFollowedSource(source: SourceModel) {
         interactor.deleteFollowedSource(source: source)
     }
@@ -35,7 +35,7 @@ extension SettingsPresentor: SettingsViewOutputProtocol {
     }
 }
 
-extension SettingsPresentor: SettingsInteractorOutputProtocol {
+extension SettingsPresenter: SettingsInteractorOutputProtocol {
     func didReceive(interval: Int) {
         newsSettingsView?.set(interval: interval)
     }
@@ -47,4 +47,4 @@ extension SettingsPresentor: SettingsInteractorOutputProtocol {
     }
 }
 
-extension SettingsPresentor: SettingsRouterOutputProtocol {}
+extension SettingsPresenter: SettingsRouterOutputProtocol {}

@@ -2,7 +2,7 @@
 
 import Foundation
 
-final class DetailPresentor {
+final class DetailPresenter {
     weak var view: DetailViewInputProtocol?
     private let interactor: DetailInteractorInputProtocol
     private let router: DetailRouterInputProtocol
@@ -16,12 +16,12 @@ final class DetailPresentor {
     }
 }
 
-extension DetailPresentor: DetailInteractorOutputProtocol {}
+extension DetailPresenter: DetailInteractorOutputProtocol {}
 
-extension DetailPresentor: DetailViewOutputProtocol {
+extension DetailPresenter: DetailViewOutputProtocol {
     func viewWillAppear() {
         view?.setArticle(article: article)
     }
 }
 
-extension DetailPresentor: DetailRouterOutputProtocol {}
+extension DetailPresenter: DetailRouterOutputProtocol {}

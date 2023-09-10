@@ -8,12 +8,12 @@ final class DetailAssembly {
         let view = DetailViewController()
         let interactor = DetailInteractor(cacheService: DetailCoreDataService())
         let router = DetailRouter()
-        let presentor = DetailPresentor(view: view,
+        let presenter = DetailPresenter(view: view,
                                         interactor: interactor,
                                         router: router, article: artile)
-        router.output = presentor
-        interactor.output = presentor
-        view.output = presentor
+        router.output = presenter
+        interactor.output = presenter
+        view.output = presenter
         return view
     }
 }

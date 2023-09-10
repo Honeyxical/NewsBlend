@@ -3,7 +3,7 @@
 import Foundation
 import UIKit
 
-final class FeedPresentor {
+final class FeedPresenter {
     weak var view: FeedViewInputProtocol?
     private let interactor: FeedInteractorInputProtocol
     private let router: FeedRouterInputProtocol
@@ -15,7 +15,7 @@ final class FeedPresentor {
     }
 }
 
-extension FeedPresentor: FeedViewOutputProtocol {
+extension FeedPresenter: FeedViewOutputProtocol {
     func viewDidLoad() {
         interactor.startUpdateDemon()
         interactor.loadData()
@@ -30,7 +30,7 @@ extension FeedPresentor: FeedViewOutputProtocol {
     }
 }
 
-extension FeedPresentor: FeedInteractorOutputProtocol {
+extension FeedPresenter: FeedInteractorOutputProtocol {
     func didReceive(articles: [ArticleModel]) {
         view?.setArticles(articles: articles)
         view?.reloadData()
@@ -42,4 +42,4 @@ extension FeedPresentor: FeedInteractorOutputProtocol {
     }
 }
 
-extension FeedPresentor: FeedRouterOutputProtocol {}
+extension FeedPresenter: FeedRouterOutputProtocol {}

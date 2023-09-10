@@ -2,7 +2,7 @@
 
 import UIKit
 
-final class NBSPresentor {
+final class NBSPresenter {
     private let interactor: NBSInteractorInputProtocol
     private let router: NBSRouterInputProtocol
     weak var view: NBSViewInputProtocol?
@@ -14,7 +14,7 @@ final class NBSPresentor {
     }
 }
 
-extension NBSPresentor: NBSInteractorOutputProtocol {
+extension NBSPresenter: NBSInteractorOutputProtocol {
     func didReceive(articles: [ArticleModel]) {
         view?.setArticle(articles: articles)
     }
@@ -24,7 +24,7 @@ extension NBSPresentor: NBSInteractorOutputProtocol {
     }
 }
 
-extension NBSPresentor: NBSViewOutputProtocol {
+extension NBSPresenter: NBSViewOutputProtocol {
     func openArticleDetail(article: ArticleModel, controller: UIViewController) {
         router.openArticleDetail(article: article, controller: controller)
     }
@@ -42,4 +42,4 @@ extension NBSPresentor: NBSViewOutputProtocol {
     }
 }
 
-extension NBSPresentor: NBSRouterOutputProtocol {}
+extension NBSPresenter: NBSRouterOutputProtocol {}
