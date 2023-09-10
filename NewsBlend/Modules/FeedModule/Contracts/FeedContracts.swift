@@ -27,7 +27,7 @@ protocol FeedViewOutputProtocol: AnyObject {
 // Interactor Input
 protocol FeedInteractorInputProtocol {
     func loadData()
-    func startUpdateDemon()
+    func startUpdateTimer()
     func isFirstStart()
     func setSource(sources: [SourceModel])
     func getUpdateInterval() -> Int

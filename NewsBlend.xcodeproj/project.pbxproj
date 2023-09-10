@@ -129,6 +129,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09617C112AADDC2200954FC8 /* CommonModels */ = {
+			isa = PBXGroup;
+			children = (
+				69B59FA72A87D16B00B80CD4 /* SourceModel.swift */,
+				69B59FA52A87C5DE00B80CD4 /* ArticleModel.swift */,
+			);
+			path = CommonModels;
+			sourceTree = "<group>";
+		};
 		6917487D2A77F942003F00D6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +317,7 @@
 		698339BC2A767DB800909649 /* NewsBlend */ = {
 			isa = PBXGroup;
 			children = (
+				09617C112AADDC2200954FC8 /* CommonModels */,
 				697270E42AA1C67A002F6A10 /* Modules */,
 				694012BB2A8E12E90099F727 /* Helpers */,
 				698339DB2A76882C00909649 /* Application */,
@@ -416,7 +426,6 @@
 			isa = PBXGroup;
 			children = (
 				69796EC12A78D0BC00EB6714 /* FeedInteractor.swift */,
-				69B59FA52A87C5DE00B80CD4 /* ArticleModel.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -457,7 +466,6 @@
 			isa = PBXGroup;
 			children = (
 				69BB2B372A79851D00B5BDE1 /* SettingsInteractor.swift */,
-				69B59FA72A87D16B00B80CD4 /* SourceModel.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
