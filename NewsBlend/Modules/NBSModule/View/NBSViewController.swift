@@ -9,7 +9,7 @@ final class NBSViewController: UIViewController {
 
     private lazy var loader = ReusableViews.getLoader()
 
-    private let sectionName: UILabel = {
+    private let sectionNameLabel: UILabel = {
         let label = UILabel()
         label.text = "News"
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
@@ -39,7 +39,7 @@ final class NBSViewController: UIViewController {
         return collection
     }()
 
-    private lazy var cellType: UIButton = {
+    private lazy var cellTypeButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
@@ -140,22 +140,22 @@ extension NBSViewController: UICollectionViewDelegate, UICollectionViewDataSourc
 
 extension NBSViewController {
     private func setupLayout() {
-        view.addSubview(sectionName)
-        view.addSubview(cellType)
+        view.addSubview(sectionNameLabel)
+        view.addSubview(cellTypeButton)
         view.addSubview(sourcesCollection)
         view.addSubview(articlesCollection)
 
         NSLayoutConstraint.activate([
-            sectionName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            sectionName.topAnchor.constraint(equalTo: view.topAnchor),
+            sectionNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            sectionNameLabel.topAnchor.constraint(equalTo: view.topAnchor),
 
-            cellType.topAnchor.constraint(equalTo: view.topAnchor),
-            cellType.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            cellType.heightAnchor.constraint(equalToConstant: 25),
-            cellType.widthAnchor.constraint(equalToConstant: 45),
+            cellTypeButton.topAnchor.constraint(equalTo: view.topAnchor),
+            cellTypeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            cellTypeButton.heightAnchor.constraint(equalToConstant: 25),
+            cellTypeButton.widthAnchor.constraint(equalToConstant: 45),
 
             sourcesCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            sourcesCollection.topAnchor.constraint(equalTo: sectionName.bottomAnchor, constant: 10),
+            sourcesCollection.topAnchor.constraint(equalTo: sectionNameLabel.bottomAnchor, constant: 10),
             sourcesCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             sourcesCollection.heightAnchor.constraint(equalToConstant: 50),
 
@@ -171,10 +171,10 @@ extension NBSViewController {
             return
         }
         if cell.isDefaultCell == true {
-            cellType.setTitle("Short", for: .normal)
+            cellTypeButton.setTitle("Short", for: .normal)
             cell.changeCellView(isDefaultCell: false)
         } else {
-            cellType.setTitle("Full", for: .normal)
+            cellTypeButton.setTitle("Full", for: .normal)
             cell.changeCellView(isDefaultCell: true)
         }
     }

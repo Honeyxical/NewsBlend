@@ -14,7 +14,7 @@ class ArticleCell: UICollectionViewCell {
         return imageView
     }()
 
-    private let title: UILabel = {
+    private let titleLabel: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
         title.font = UIFont.systemFont(ofSize: 14)
@@ -22,7 +22,7 @@ class ArticleCell: UICollectionViewCell {
         return title
     }()
 
-    private let author: UILabel = {
+    private let authorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 11)
@@ -31,7 +31,7 @@ class ArticleCell: UICollectionViewCell {
         return label
     }()
 
-    private let publishedTime: UILabel = {
+    private let publishedTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 12, weight: .thin)
@@ -45,17 +45,17 @@ class ArticleCell: UICollectionViewCell {
     }
 
     func setData(title: String, author: String, imageUrl: String, publishedTime: String) {
-        self.title.text = title
-        self.author.text = "By " + author
+        self.titleLabel.text = title
+        self.authorLabel.text = "By " + author
         self.imageView.kf.setImage(with: URL(string: imageUrl))
-        self.publishedTime.text = publishedTime
+        self.publishedTimeLabel.text = publishedTime
     }
 
     private func setupLayout() {
         addSubview(imageView)
-        addSubview(title)
-        addSubview(author)
-        addSubview(publishedTime)
+        addSubview(titleLabel)
+        addSubview(authorLabel)
+        addSubview(publishedTimeLabel)
 
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor),
@@ -63,16 +63,16 @@ class ArticleCell: UICollectionViewCell {
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             imageView.widthAnchor.constraint(equalToConstant: 100),
 
-            title.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
-            title.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            title.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
 
-            author.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5),
-            author.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
-            author.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
+            authorLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
+            authorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
 
-            publishedTime.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            publishedTime.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
+            publishedTimeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            publishedTimeLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
         ])
     }
 

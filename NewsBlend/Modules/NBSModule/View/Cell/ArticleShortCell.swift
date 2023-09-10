@@ -3,7 +3,7 @@
 import UIKit
 
 class ArticleShortCell: UICollectionViewCell {
-    private let articleTitle: UILabel = {
+    private let articleTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 14)
@@ -11,7 +11,7 @@ class ArticleShortCell: UICollectionViewCell {
         return label
     }()
 
-    private let articleAuthor: UILabel = {
+    private let articleAuthorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 12)
@@ -20,7 +20,7 @@ class ArticleShortCell: UICollectionViewCell {
         return label
     }()
 
-    private let publishedAt: UILabel = {
+    private let publishedAtLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 12, weight: .thin)
@@ -32,28 +32,28 @@ class ArticleShortCell: UICollectionViewCell {
 
 extension ArticleShortCell {
     func setData(articleTitle: String, articleAuthor: String, publishedAt: String) {
-        self.articleTitle.text = articleTitle
-        self.articleAuthor.text = "By " + articleAuthor
-        self.publishedAt.text = publishedAt
+        self.articleTitleLabel.text = articleTitle
+        self.articleAuthorLabel.text = "By " + articleAuthor
+        self.publishedAtLabel.text = publishedAt
         setupLayout()
     }
 
     private func setupLayout() {
-        addSubview(articleTitle)
-        addSubview(articleAuthor)
-        addSubview(publishedAt)
+        addSubview(articleTitleLabel)
+        addSubview(articleAuthorLabel)
+        addSubview(publishedAtLabel)
 
         NSLayoutConstraint.activate([
-            articleTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            articleTitle.topAnchor.constraint(equalTo: topAnchor),
-            articleTitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            articleTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            articleTitleLabel.topAnchor.constraint(equalTo: topAnchor),
+            articleTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
 
-            articleAuthor.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
-            articleAuthor.topAnchor.constraint(equalTo: articleTitle.bottomAnchor, constant: 10),
-            articleAuthor.widthAnchor.constraint(equalToConstant: frame.width / 1.50),
+            articleAuthorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
+            articleAuthorLabel.topAnchor.constraint(equalTo: articleTitleLabel.bottomAnchor, constant: 10),
+            articleAuthorLabel.widthAnchor.constraint(equalToConstant: frame.width / 1.50),
 
-            publishedAt.topAnchor.constraint(equalTo: articleTitle.bottomAnchor, constant: 10),
-            publishedAt.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
+            publishedAtLabel.topAnchor.constraint(equalTo: articleTitleLabel.bottomAnchor, constant: 10),
+            publishedAtLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
         ])
     }
 }
