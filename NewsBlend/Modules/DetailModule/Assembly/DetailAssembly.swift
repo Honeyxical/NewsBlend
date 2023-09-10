@@ -6,7 +6,7 @@ import UIKit
 final class DetailAssembly {
     static func build(artile: ArticleModel) -> UIViewController {
         let view = DetailViewController()
-        let interactor = DetailInteractor(cacheService: DetailCoreDataService())
+        let interactor = DetailInteractor()
         let router = DetailRouter()
         let presenter = DetailPresenter(view: view,
                                         interactor: interactor,
