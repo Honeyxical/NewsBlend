@@ -7,23 +7,25 @@ final class FeedInteractor {
     private let networkService: FeedNetworkServiceProtocol
     private let cacheService: FeedStorageProtocol
     private let parser: ParserProtocol
+    private let converter: ArticleConverterProtocol
     
     private let initialSource: SourceModel
     private let defaultSourceHotNews: SourceModel
     private let articlesEstimate = 5
     
-    init(networkService: FeedNetworkServiceProtocol, cacheService: FeedStorageProtocol, parser: ParserProtocol, initialSource: SourceModel, defaultSourceHotNews: SourceModel) {
+    init(networkService: FeedNetworkServiceProtocol, cacheService: FeedStorageProtocol, parser: ParserProtocol, initialSource: SourceModel, defaultSourceHotNews: SourceModel, converter: ArticleConverterProtocol) {
         self.networkService = networkService
         self.cacheService = cacheService
         self.parser = parser
         self.initialSource = initialSource
         self.defaultSourceHotNews = defaultSourceHotNews
+        self.converter = converter
     }
 }
 
 extension FeedInteractor: FeedInteractorInputProtocol {
     func loadData() {
-        let articlesFromCache = Converter.decodeArticleObjects(data: cacheService.getArticles())
+        let articlesFromCache = converter.decodeArticleObjects(data: cacheService.getArticles())
         parser.parseFeedSource(source: defaultSourceHotNews, articlesCount: articlesEstimate, network: networkService) { articlesFromNetwork in
             if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
                 self.setArticlesIntoCache(articles: articlesFromNetwork)
@@ -42,7 +44,7 @@ extension FeedInteractor: FeedInteractorInputProtocol {
     }
 
     func setSource(sources: [SourceModel]) {
-        cacheService.setSource(data: Converter.encodeSourceObjects(sourceModels: sources))
+        cacheService.setSource(data: SourceConverter().encodeSourceObjects(sourceModels: sources)) // Да, так надо. Чтобы его убрать нужно делать новый модуль с экраном загрузки
     }
 
     func getUpdateInterval() -> Int {
@@ -61,6 +63,6 @@ extension FeedInteractor: FeedInteractorInputProtocol {
     }
     
     private func setArticlesIntoCache(articles: [ArticleModel]) {
-        cacheService.setArticles(data: Converter.encodeArticleObjects(articles: articles))
+        cacheService.setArticles(data: converter.encodeArticleObjects(articles: articles))
     }
 }

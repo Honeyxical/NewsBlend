@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		094CD27E2A91081800C3DFB4 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094CD27D2A91081800C3DFB4 /* Parser.swift */; };
+		09617C152AADEEF900954FC8 /* ArticleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09617C142AADEEF900954FC8 /* ArticleConverter.swift */; };
 		6917487C2A77F92E003F00D6 /* FeedNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917487B2A77F92E003F00D6 /* FeedNetworkService.swift */; };
 		691748802A77F967003F00D6 /* FeedUserDefaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917487F2A77F967003F00D6 /* FeedUserDefaultService.swift */; };
 		691C01692A7B91FF004E22FB /* TrendingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C01682A7B91FF004E22FB /* TrendingsCell.swift */; };
@@ -26,7 +27,7 @@
 		69242F012A88C0E1008F040E /* NBSAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69242F002A88C0E1008F040E /* NBSAssembly.swift */; };
 		69242F042A88C1D5008F040E /* NBSRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69242F032A88C1D5008F040E /* NBSRouter.swift */; };
 		69242F082A8907F4008F040E /* SourcesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69242F072A8907F4008F040E /* SourcesCell.swift */; };
-		694012BE2A8E135C0099F727 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694012BD2A8E135C0099F727 /* Converter.swift */; };
+		694012BE2A8E135C0099F727 /* SourceConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694012BD2A8E135C0099F727 /* SourceConverter.swift */; };
 		695F7FBB2A836BAF003EC2F9 /* NewsSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F7FBA2A836BAF003EC2F9 /* NewsSettingViewController.swift */; };
 		695F7FBD2A836DC8003EC2F9 /* SourcesModelDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F7FBC2A836DC8003EC2F9 /* SourcesModelDTO.swift */; };
 		696197492A8EA62C00602213 /* ArticleShortCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696197482A8EA62C00602213 /* ArticleShortCell.swift */; };
@@ -62,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		094CD27D2A91081800C3DFB4 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		09617C142AADEEF900954FC8 /* ArticleConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleConverter.swift; sourceTree = "<group>"; };
 		6917487B2A77F92E003F00D6 /* FeedNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedNetworkService.swift; sourceTree = "<group>"; };
 		6917487F2A77F967003F00D6 /* FeedUserDefaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUserDefaultService.swift; sourceTree = "<group>"; };
 		691C01682A7B91FF004E22FB /* TrendingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingsCell.swift; sourceTree = "<group>"; };
@@ -80,7 +82,7 @@
 		69242F002A88C0E1008F040E /* NBSAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBSAssembly.swift; sourceTree = "<group>"; };
 		69242F032A88C1D5008F040E /* NBSRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBSRouter.swift; sourceTree = "<group>"; };
 		69242F072A8907F4008F040E /* SourcesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesCell.swift; sourceTree = "<group>"; };
-		694012BD2A8E135C0099F727 /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
+		694012BD2A8E135C0099F727 /* SourceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceConverter.swift; sourceTree = "<group>"; };
 		695F7FBA2A836BAF003EC2F9 /* NewsSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSettingViewController.swift; sourceTree = "<group>"; };
 		695F7FBC2A836DC8003EC2F9 /* SourcesModelDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesModelDTO.swift; sourceTree = "<group>"; };
 		696197482A8EA62C00602213 /* ArticleShortCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleShortCell.swift; sourceTree = "<group>"; };
@@ -134,6 +136,22 @@
 				69B59FA52A87C5DE00B80CD4 /* ArticleModel.swift */,
 			);
 			path = CommonModels;
+			sourceTree = "<group>";
+		};
+		09617C122AADEECF00954FC8 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				694012BD2A8E135C0099F727 /* SourceConverter.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		09617C132AADEEDC00954FC8 /* Article */ = {
+			isa = PBXGroup;
+			children = (
+				09617C142AADEEF900954FC8 /* ArticleConverter.swift */,
+			);
+			path = Article;
 			sourceTree = "<group>";
 		};
 		6917487D2A77F942003F00D6 /* Network */ = {
@@ -254,7 +272,8 @@
 		694012BB2A8E12E90099F727 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				694012BD2A8E135C0099F727 /* Converter.swift */,
+				09617C132AADEEDC00954FC8 /* Article */,
+				09617C122AADEECF00954FC8 /* Source */,
 				094CD27D2A91081800C3DFB4 /* Parser.swift */,
 			);
 			path = Helpers;
@@ -720,7 +739,7 @@
 				69B2BFB12A823591000465BC /* SettingsCell.swift in Sources */,
 				69242F012A88C0E1008F040E /* NBSAssembly.swift in Sources */,
 				69242EF72A88BE9C008F040E /* NBSNetworkService.swift in Sources */,
-				694012BE2A8E135C0099F727 /* Converter.swift in Sources */,
+				694012BE2A8E135C0099F727 /* SourceConverter.swift in Sources */,
 				69242EFF2A88C007008F040E /* NBSPresenter.swift in Sources */,
 				69242F082A8907F4008F040E /* SourcesCell.swift in Sources */,
 				094CD27E2A91081800C3DFB4 /* Parser.swift in Sources */,
@@ -728,6 +747,7 @@
 				69BB2B2F2A7984AE00B5BDE1 /* SettingsViewController.swift in Sources */,
 				69BB2B382A79851D00B5BDE1 /* SettingsInteractor.swift in Sources */,
 				69242EFC2A88BF79008F040E /* NBSInteractor.swift in Sources */,
+				09617C152AADEEF900954FC8 /* ArticleConverter.swift in Sources */,
 				691748802A77F967003F00D6 /* FeedUserDefaultService.swift in Sources */,
 				69796EC02A78CF9E00EB6714 /* FeedPresenter.swift in Sources */,
 			);

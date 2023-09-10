@@ -20,7 +20,8 @@ final class FeedAssembly {
                                                                           category: "",
                                                                           language: "",
                                                                           country: "",
-                                                                          isSelected: false))
+                                                                          isSelected: false),
+                                        converter: ArticleConverter())
         let router = FeedRouter()
         let presenter = FeedPresenter(view: view,
                                       interactor: interactor,
