@@ -11,7 +11,7 @@ class SettingsCell: UITableViewCell {
         return image
     }()
 
-    private let title: UILabel = {
+    private let titleLabel: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
         title.font = UIFont.systemFont(ofSize: 16)
@@ -28,12 +28,12 @@ class SettingsCell: UITableViewCell {
     }
 
     func setData(title: String){
-        self.title.text = title
+        self.titleLabel.text = title
         setImage()
     }
 
     private func setImage() {
-        switch title.text {
+        switch titleLabel.text {
         case "Personal data":
             image.image = UIImage(systemName: "person")
         case "News sources":
@@ -49,7 +49,7 @@ class SettingsCell: UITableViewCell {
 
     private func setupLayout() {
         addSubview(image)
-        addSubview(title)
+        addSubview(titleLabel)
 
         NSLayoutConstraint.activate([
             image.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -57,9 +57,9 @@ class SettingsCell: UITableViewCell {
             image.heightAnchor.constraint(equalToConstant: 25),
             image.widthAnchor.constraint(equalToConstant: 25),
 
-            title.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 15),
-            title.centerYAnchor.constraint(equalTo: centerYAnchor),
-            title.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25)
+            titleLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 15),
+            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25)
         ])
     }
 }

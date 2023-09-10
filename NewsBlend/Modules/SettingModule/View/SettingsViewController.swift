@@ -12,7 +12,7 @@ final class SettingsViewController: UIViewController {
     private let sectionSecurity = ["Password"]
     private let sectionNews = ["News sources"]
 
-    private let screenTitle: UILabel = {
+    private let screenTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Settings"
         label.font = UIFont.systemFont(ofSize: 20)
@@ -112,16 +112,16 @@ extension SettingsViewController: MenuViewProtocol {
 
 extension SettingsViewController {
     private func setupLayout() {
-        view.addSubview(screenTitle)
+        view.addSubview(screenTitleLabel)
         view.addSubview(userView)
         view.addSubview(tableView)
 
         NSLayoutConstraint.activate([
-            screenTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            screenTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            screenTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            screenTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
 
             userView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            userView.topAnchor.constraint(equalTo: screenTitle.bottomAnchor, constant: 15),
+            userView.topAnchor.constraint(equalTo: screenTitleLabel.bottomAnchor, constant: 15),
             userView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             userView.heightAnchor.constraint(equalToConstant: 200),
 

@@ -4,14 +4,14 @@ import Foundation
 import UIKit
 
 class SourceCell: UICollectionViewCell {
-    private let indicator: UIImageView = {
+    private let indicatorIV: UIImageView = {
         let indicator = UIImageView()
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.tintColor = .systemBlue
         return indicator
     }()
 
-    private let sourceName: UILabel = {
+    private let sourceNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "HoeflerText-Italic", size: 16)
@@ -30,28 +30,28 @@ class SourceCell: UICollectionViewCell {
     }
     
     func setSourceName(name: String, isSelected: Bool) {
-        self.sourceName.text = name
-        self.indicator.image = isSelected == false ? UIImage() : UIImage(systemName: "circle.fill")
+        self.sourceNameLabel.text = name
+        self.indicatorIV.image = isSelected == false ? UIImage() : UIImage(systemName: "circle.fill")
     }
 
     private func setupLayout() {
-        addSubview(sourceName)
-        addSubview(indicator)
+        addSubview(sourceNameLabel)
+        addSubview(indicatorIV)
 
         layer.borderWidth = 1
         layer.borderColor = UIColor.systemBlue.cgColor
         layer.cornerRadius = 10
 
         NSLayoutConstraint.activate([
-            indicator.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            indicator.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            indicator.heightAnchor.constraint(equalToConstant: 10),
-            indicator.widthAnchor.constraint(equalToConstant: 10),
+            indicatorIV.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            indicatorIV.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            indicatorIV.heightAnchor.constraint(equalToConstant: 10),
+            indicatorIV.widthAnchor.constraint(equalToConstant: 10),
 
-            sourceName.centerYAnchor.constraint(equalTo: centerYAnchor),
-            sourceName.centerXAnchor.constraint(equalTo: centerXAnchor),
-            sourceName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            sourceName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+            sourceNameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            sourceNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            sourceNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            sourceNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
 }
