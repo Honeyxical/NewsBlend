@@ -14,14 +14,14 @@ class TrendingCell: UICollectionViewCell {
         return image
     }()
 
-    private let title: UILabel = {
+    private let titleLabel: UILabel = {
         let title = UILabel()
         title.numberOfLines = 2
         title.translatesAutoresizingMaskIntoConstraints = false
         return title
     }()
 
-    private let label: UILabel = {
+    private let sectionTitlelabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Trending news"
@@ -30,7 +30,7 @@ class TrendingCell: UICollectionViewCell {
         return label
     }()
 
-    private var publishedTime: UILabel = {
+    private var publishedTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 12, weight: .thin)
@@ -45,8 +45,8 @@ class TrendingCell: UICollectionViewCell {
     }
 
     func setData(title: String, timeSincePublication: String, imageUrl: String) {
-        self.title.text = title
-        self.publishedTime.text = timeSincePublication
+        self.titleLabel.text = title
+        self.publishedTimeLabel.text = timeSincePublication
         self.imageView.kf.setImage(with: URL(string: imageUrl))
     }
 
@@ -59,9 +59,9 @@ class TrendingCell: UICollectionViewCell {
 
     private func setupLayout() {
         addSubview(imageView)
-        addSubview(title)
-        addSubview(label)
-        addSubview(publishedTime)
+        addSubview(titleLabel)
+        addSubview(sectionTitlelabel)
+        addSubview(publishedTimeLabel)
 
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -69,15 +69,15 @@ class TrendingCell: UICollectionViewCell {
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 130),
 
-            title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            title.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 15),
-            title.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 15),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
 
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
+            sectionTitlelabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            sectionTitlelabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
 
-            publishedTime.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            publishedTime.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15)
+            publishedTimeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            publishedTimeLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15)
         ])
     }
 

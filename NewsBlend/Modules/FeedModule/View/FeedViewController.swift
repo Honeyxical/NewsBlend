@@ -18,7 +18,7 @@ final class FeedViewController: UIViewController {
         return scrollView
     }()
 
-    private let sectionName: UILabel = {
+    private let sectionNameLabel: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
         title.text = "Hot News"
@@ -117,7 +117,7 @@ extension FeedViewController: FeedViewInputProtocol {
         lotty.font = UIFont.systemFont(ofSize: 36)
 
         hotNewsCollection.removeFromSuperview()
-        sectionName.removeFromSuperview()
+        sectionNameLabel.removeFromSuperview()
 
         view.addSubview(lotty)
 
@@ -142,7 +142,7 @@ extension FeedViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(childViewVC.view)
         scrollView.addSubview(hotNewsCollection)
-        scrollView.addSubview(sectionName)
+        scrollView.addSubview(sectionNameLabel)
         childViewVC.view.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -151,10 +151,10 @@ extension FeedViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-            sectionName.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            sectionName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            sectionNameLabel.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            sectionNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
 
-            hotNewsCollection.topAnchor.constraint(equalTo: sectionName.bottomAnchor),
+            hotNewsCollection.topAnchor.constraint(equalTo: sectionNameLabel.bottomAnchor),
             hotNewsCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             hotNewsCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             hotNewsCollection.heightAnchor.constraint(equalToConstant: view.frame.height / 3),
