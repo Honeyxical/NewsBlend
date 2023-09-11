@@ -3,10 +3,10 @@
 import Foundation
 
 struct SourceModel: Equatable, Encodable, Decodable {
-    var id: String
-    var name: String
-    var category: String
-    var language: String
-    var country: String
+    let id: String
+    let name: String
+    let category: String
+    let language: String
+    let country: String
     var isSelected: Bool
 }
