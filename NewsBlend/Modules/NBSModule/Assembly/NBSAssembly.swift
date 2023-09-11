@@ -7,7 +7,7 @@ class NBSAssembly {
     static func build() -> UIViewController {
         let interactor = NBSInteractor(networkService: NBSNetworService(),
                                        cacheService: NBSUserDefaultsService(),
-                                       parser: Parser(),
+                                       parser: Parser(articleConverter: ArticleConverter(), sourceConverter: SourceConverter()),
                                        articleConverter: ArticleConverter(),
                                        sourceConverter: SourceConverter())
         let view = NBSViewController()

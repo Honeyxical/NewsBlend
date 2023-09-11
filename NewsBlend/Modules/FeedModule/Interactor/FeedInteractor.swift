@@ -7,25 +7,30 @@ final class FeedInteractor {
     private let networkService: FeedNetworkServiceProtocol
     private let cacheService: FeedStorageProtocol
     private let parser: ParserProtocol
-    private let converter: ArticleConverterProtocol
+    private let articleConverter: ArticleConverterProtocol
     
     private let initialSource: SourceModel
     private let defaultSourceHotNews: SourceModel
     private let articlesEstimate = 5
     
-    init(networkService: FeedNetworkServiceProtocol, cacheService: FeedStorageProtocol, parser: ParserProtocol, initialSource: SourceModel, defaultSourceHotNews: SourceModel, converter: ArticleConverterProtocol) {
+    init(networkService: FeedNetworkServiceProtocol,
+         cacheService: FeedStorageProtocol,
+         parser: ParserProtocol,
+         initialSource: SourceModel,
+         defaultSourceHotNews: SourceModel,
+         articleConverter: ArticleConverterProtocol) {
         self.networkService = networkService
         self.cacheService = cacheService
         self.parser = parser
         self.initialSource = initialSource
         self.defaultSourceHotNews = defaultSourceHotNews
-        self.converter = converter
+        self.articleConverter = articleConverter
     }
 }
 
 extension FeedInteractor: FeedInteractorInputProtocol {
     func loadData() {
-        let articlesFromCache = converter.decodeArticleObjects(data: cacheService.getArticles())
+        let articlesFromCache = articleConverter.decodeArticleObjects(data: cacheService.getArticles())
         parser.parseFeedSource(source: defaultSourceHotNews, articlesCount: articlesEstimate, network: networkService) { articlesFromNetwork in
             if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
                 self.setArticlesIntoCache(articles: articlesFromNetwork)
@@ -63,6 +68,6 @@ extension FeedInteractor: FeedInteractorInputProtocol {
     }
     
     private func setArticlesIntoCache(articles: [ArticleModel]) {
-        cacheService.setArticles(data: converter.encodeArticleObjects(articles: articles))
+        cacheService.setArticles(data: articleConverter.encodeArticleObjects(articles: articles))
     }
 }

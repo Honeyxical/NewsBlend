@@ -9,7 +9,7 @@ final class SettingsAssembly {
         let view = SettingsViewController()
         let interactor = SettingsInteractor(cacheService: SettingsUserDefaultsService(),
                                             networkService: SettingNetworkService(),
-                                            parser: Parser(),
+                                            parser: Parser(articleConverter: ArticleConverter(), sourceConverter: SourceConverter()),
                                             converter: SourceConverter())
         let router = SettingsRouter()
         let presenter = SettingsPresenter(view: view,

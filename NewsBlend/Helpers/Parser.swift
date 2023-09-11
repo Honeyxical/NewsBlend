@@ -9,16 +9,24 @@ protocol ParserProtocol {
     func parseSource(defaultLanguage: String, network: SettingNetworkServiceProtocol, completion: @escaping ([SourceModel]) -> Void)
 }
 
-class Parser: ParserProtocol {
+final class Parser: ParserProtocol {
+    private let articleConverter: ArticleConverterProtocol
+    private let sourceConverter: SourceConverterProtocol
+    
+    init(articleConverter: ArticleConverterProtocol, sourceConverter: SourceConverterProtocol) {
+        self.articleConverter = articleConverter
+        self.sourceConverter = sourceConverter
+    }
+    
     func parseArticlesByAllSource(sources: [SourceModel], pageSize: Int, networkService: NBSNetworkServiceProtocol, completion: @escaping ([ArticleModel]) -> Void) {
         let group = DispatchGroup()
         var articles: [ArticleModel] = []
         
         for source in sources {
             group.enter()
-            networkService.getArticlesBySource(source: source, pageSize: pageSize) { data in
+            networkService.getArticlesBySource(source: source, pageSize: pageSize) { [self] data in
                 guard let articlesDTO = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else { return }
-                articles += Converter.setDate(articles: Converter.transferDTOtoModel(articlesArray: articlesDTO.articles))
+                articles += articleConverter.setDate(articles: articleConverter.transferDTOtoModel(articlesArray: articlesDTO.articles))
                 group.leave()
             } failure: {
                 group.leave()
@@ -36,7 +44,7 @@ class Parser: ParserProtocol {
         network.getArticles(source: source, articlesCount: articlesCount){ data in
             var articles: [ArticleModel] = []
             guard let articlesDTO = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else { return }
-            articles = Converter.transferDTOtoModel(articlesArray: articlesDTO.articles)
+            articles = self.articleConverter.transferDTOtoModel(articlesArray: articlesDTO.articles)
             articles = articles.sorted { $0.publishedAt > $1.publishedAt }
             completion(articles)
         } failure: {
@@ -49,7 +57,7 @@ class Parser: ParserProtocol {
 
         network.getArticlesBySource(source: source, pageSize: pageSize) { data in
             guard let articlesDTO = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else { return }
-            articles = Converter.transferDTOtoModel(articlesArray: articlesDTO.articles)
+            articles = self.articleConverter.transferDTOtoModel(articlesArray: articlesDTO.articles)
             completion(articles)
         } failure: {
             completion(articles)
@@ -61,7 +69,7 @@ class Parser: ParserProtocol {
 
         network.getSources(sourceLanguage: defaultLanguage) { data in
             guard let sourcesDTO = try? JSONDecoder().decode(SourcesModelDTO.self, from: data) else { return }
-            sources = Converter.transferSourceObject(sources: sourcesDTO.sources)
+            sources = self.sourceConverter.transferSourceObject(sources: sourcesDTO.sources)
             completion(sources)
         } failure: {
             completion(sources)

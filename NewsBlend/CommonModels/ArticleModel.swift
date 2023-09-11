@@ -9,6 +9,7 @@ struct ArticleModel: Equatable, Encodable, Decodable {
     let desctiption: String
     let urlToImage: String
     let publishedAt: String
-    var timeSincePublication: String // Время с момента публикации
+    /// The variable "timeSincePublication" stores the time since publication
+    var timeSincePublication: String
     let content: String
 }

@@ -6,6 +6,7 @@ protocol ArticleConverterProtocol {
     func transferDTOtoModel(articlesArray: [Article]) -> [ArticleModel]
     func encodeArticleObjects(articles: [ArticleModel]) -> Data
     func decodeArticleObjects(data: Data) -> [ArticleModel]
+    func setDate(articles: [ArticleModel]) -> [ArticleModel]
 }
 
 final class ArticleConverter: ArticleConverterProtocol {
@@ -32,7 +33,7 @@ final class ArticleConverter: ArticleConverterProtocol {
         return articles
     }
     
-    private func setDate(articles: [ArticleModel]) -> [ArticleModel]{
+    func setDate(articles: [ArticleModel]) -> [ArticleModel]{
         if articles.isEmpty {
             return articles
         }
