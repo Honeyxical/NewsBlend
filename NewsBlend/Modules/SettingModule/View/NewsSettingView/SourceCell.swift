@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 
 class SourceCell: UICollectionViewCell {
-    private let indicatorIV: UIImageView = {
+    private let indicatorImageView: UIImageView = {
         let indicator = UIImageView()
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.tintColor = .systemBlue
@@ -31,22 +31,22 @@ class SourceCell: UICollectionViewCell {
     
     func setSourceName(name: String, isSelected: Bool) {
         self.sourceNameLabel.text = name
-        self.indicatorIV.image = isSelected == false ? UIImage() : UIImage(systemName: "circle.fill")
+        self.indicatorImageView.image = isSelected == false ? UIImage() : UIImage(systemName: "circle.fill")
     }
 
     private func setupLayout() {
         addSubview(sourceNameLabel)
-        addSubview(indicatorIV)
+        addSubview(indicatorImageView)
 
         layer.borderWidth = 1
         layer.borderColor = UIColor.systemBlue.cgColor
         layer.cornerRadius = 10
 
         NSLayoutConstraint.activate([
-            indicatorIV.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            indicatorIV.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            indicatorIV.heightAnchor.constraint(equalToConstant: 10),
-            indicatorIV.widthAnchor.constraint(equalToConstant: 10),
+            indicatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            indicatorImageView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            indicatorImageView.heightAnchor.constraint(equalToConstant: 10),
+            indicatorImageView.widthAnchor.constraint(equalToConstant: 10),
 
             sourceNameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             sourceNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
