@@ -34,15 +34,19 @@ final class FeedInteractor {
 extension FeedInteractor: FeedInteractorInputProtocol {
     func loadData() {
         let articlesFromCache = articleCoder.decodeArticleObjects(data: cacheService.getArticles())
-        output?.didReceive(articles: articlesFromCache)
-//        parser.parseFeedSource(source: defaultSourceHotNews, articlesCount: articlesEstimate, network: networkService) { articlesFromNetwork in
-//            if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
-//                self.setArticlesIntoCache(articles: articlesFromNetwork)
-//                self.output?.didReceive(articles: articlesFromNetwork)
-//            } else {
-//                self.output?.didReceive(articles: articlesFromCache)
-//            }
-//        }
+        networkService.getArticles(source: defaultSourceHotNews, articlesCount: articlesEstimate) { result in
+            guard let data = try? result.get() else {
+                self.output?.didReceive(articles: articlesFromCache)
+                return
+            }
+            let articlesFromNetwork = self.parser.parseArticle(data: data)
+            if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
+                self.setArticlesIntoCache(articles: articlesFromNetwork)
+                self.output?.didReceive(articles: articlesFromNetwork)
+            } else {
+                self.output?.didReceive(articles: articlesFromCache)
+            }
+        }
     }
 
     func isFirstStart() {

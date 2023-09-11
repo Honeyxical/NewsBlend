@@ -38,7 +38,7 @@ extension NBSInteractor: NBSInteractorInputProtocol {
             }
             let articlesFromNetwork = self.parser.parseArticle(data: data)
             if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
-                self.cacheService.setArtcles(data: self.articleCoder.encodeArticleObjects(articles: articlesFromNetwork), source: "all")
+                self.cacheService.setArtcles(data: self.articleCoder.encodeArticleObjects(articles: articlesFromNetwork), source: source.id)
                 self.output?.didReceive(articles: articlesFromNetwork)
             } else {
                 self.output?.didReceive(articles: articlesFromCache)
@@ -50,22 +50,26 @@ extension NBSInteractor: NBSInteractorInputProtocol {
         let sources = sourceCoder.decodeSourceObjects(data: cacheService.getSources())
         let articlesFromCache = articleCoder.decodeArticleObjects(data: cacheService.getArticles(source: "all"))
         let group = DispatchGroup()
-        group.enter()
+        var articlesFromNetwork: [ArticleModel] = []
+
         for source in sources {
-            networkService.getArticlesBySource(source: source, pageSize: 3) { result in
-                guard let data = try? result.get() else {
-                    self.output?.didReceive(articles: articlesFromCache)
-                    return
-                }
-                let articlesFromNetwork = self.parser.parseArticle(data: data)
-                if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
-                    self.cacheService.setArtcles(data: self.articleCoder.encodeArticleObjects(articles: articlesFromNetwork), source: "all")
-                    self.output?.didReceive(articles: articlesFromNetwork)
-                } else {
-                    self.output?.didReceive(articles: articlesFromCache)
-                }
+            group.enter()
+            networkService.getArticlesBySource(source: source, pageSize: defaultPageSize) { result in
+                guard let data = try? result.get() else { return }
+                articlesFromNetwork.append(contentsOf: self.parser.parseArticle(data: data))
             }
+            group.leave()
         }
+        
+        group.notify(queue: .main) {
+            if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
+                self.cacheService.setArtcles(data: self.articleCoder.encodeArticleObjects(articles: articlesFromNetwork), source: "All")
+                self.output?.didReceive(articles: articlesFromNetwork)
+                return
+            }
+            self.output?.didReceive(articles: articlesFromCache)
+        }
+        
     }
 
     func getSources() {
