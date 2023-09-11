@@ -64,7 +64,6 @@
 		69FD968A2AAF28F5007F3A4B /* SourceCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FD96892AAF28F5007F3A4B /* SourceCoding.swift */; };
 		69FD968C2AAF2982007F3A4B /* NBSConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FD968B2AAF2982007F3A4B /* NBSConverter.swift */; };
 		69FD968E2AAF2A55007F3A4B /* SettingConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FD968D2AAF2A55007F3A4B /* SettingConverter.swift */; };
-		69FD96912AAF3599007F3A4B /* PresentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FD96902AAF3599007F3A4B /* PresentModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,7 +123,6 @@
 		69FD96892AAF28F5007F3A4B /* SourceCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCoding.swift; sourceTree = "<group>"; };
 		69FD968B2AAF2982007F3A4B /* NBSConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBSConverter.swift; sourceTree = "<group>"; };
 		69FD968D2AAF2A55007F3A4B /* SettingConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingConverter.swift; sourceTree = "<group>"; };
-		69FD96902AAF3599007F3A4B /* PresentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -377,7 +375,6 @@
 		69833A322A76ADFC00909649 /* FeedModule */ = {
 			isa = PBXGroup;
 			children = (
-				69FD968F2AAF357C007F3A4B /* Model */,
 				69FD96822AAF243C007F3A4B /* Helper */,
 				69833A3B2A76AE7400909649 /* Assembly */,
 				69833A3A2A76AE6B00909649 /* Contracts */,
@@ -644,14 +641,6 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
-		69FD968F2AAF357C007F3A4B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				69FD96902AAF3599007F3A4B /* PresentModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -759,7 +748,6 @@
 				69FD96842AAF244B007F3A4B /* FeedParser.swift in Sources */,
 				69FD967E2AAF16DB007F3A4B /* NBSParser.swift in Sources */,
 				691C016D2A7BBC42004E22FB /* DetailViewController.swift in Sources */,
-				69FD96912AAF3599007F3A4B /* PresentModel.swift in Sources */,
 				69796EC82A78FBE500EB6714 /* ArticleCell.swift in Sources */,
 				69242EF92A88BF26008F040E /* NBSUserDefaultsService.swift in Sources */,
 				69B59FA12A87863C00B80CD4 /* SourceCell.swift in Sources */,
@@ -942,6 +930,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -974,6 +963,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
