@@ -181,6 +181,7 @@ extension NewsSettingViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if sources[indexPath.item].isSelected == false {
             output?.setFollowedSource(source: sources[indexPath.item])
+            sources[indexPath.item].isSelected = true
             collectionView.reloadData()
         } else {
             output?.deleteFollowedSource(source: sources[indexPath.item])

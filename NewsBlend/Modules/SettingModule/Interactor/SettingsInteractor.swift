@@ -54,8 +54,6 @@ extension SettingsInteractor: SettingsInteractorInputProtocol {
     }
 
     func setFollowedSource(source: SourceModel) {
-        var source = source
-        source.isSelected.toggle()
         var sources = getFollowedSources()
         sources.append(source)
         cacheService.setSource(sources: sourceCoder.encodeSourceObjects(sourceModels: sources))
