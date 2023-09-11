@@ -44,10 +44,10 @@ class TrendingCell: UICollectionViewCell {
         setupLayout()
     }
 
-    func setData(title: String, timeSincePublication: String, imageUrl: String) {
-        self.titleLabel.text = title
-        self.publishedTimeLabel.text = timeSincePublication
-        self.imageView.kf.setImage(with: URL(string: imageUrl))
+    func setData(title: String?, timeSincePublication: String?, imageUrl: String) {
+        titleLabel.text = title
+        publishedTimeLabel.text = timeSincePublication
+        imageView.kf.setImage(with: URL(string: imageUrl))
     }
 
     private func layerSetup() {

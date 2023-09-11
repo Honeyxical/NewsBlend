@@ -60,6 +60,7 @@ final class NBSViewController: UIViewController {
         super.viewWillAppear(animated)
         output?.viewWillAppear()
         sourcesCollection.reloadData()
+        articlesCollection.reloadData()
     }
 }
 

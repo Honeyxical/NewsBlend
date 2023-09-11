@@ -4,36 +4,36 @@ import Alamofire
 import Foundation
 
 protocol FeedNetworkServiceProtocol {
-    func getArticles(source: SourceModel, articlesCount: Int, success: @escaping(Data) -> Void, failure: @escaping() -> Void)
+    func getArticles(source: SourceModel, articlesCount: Int, completion: @escaping GetArticlesResponse)
 }
 
-enum FeedPaths: String {
-    case everything = "https://newsapi.org/v2/everything"
-}
-
-enum ResponceErrors: Error {
+enum ArticleResponseErrors: Error {
     case noInternet
 }
-typealias ResponceResult = (Result<Data, ResponceErrors>) -> Void
+
+typealias GetArticlesResponse = (Result<Data, ArticleResponseErrors>) -> Void
 
 final class FeedNetworkService: FeedNetworkServiceProtocol {
-    private let apiKey = "bc613432d94c448da6d678dad9c8806e"
+    private enum NetworkConstants: String {
+        case everything = "https://newsapi.org/v2/everything"
+        case apiKey = "bc613432d94c448da6d678dad9c8806e"
+    }
 
-    func getArticles(source: SourceModel, articlesCount: Int, success: @escaping(Data) -> Void, failure: @escaping() -> Void) {
+    func getArticles(source: SourceModel, articlesCount: Int, completion: @escaping GetArticlesResponse) {
         let queryItems = [
             URLQueryItem(name: "domains", value: source.id),
             URLQueryItem(name: "pageSize", value: articlesCount.description),
-            URLQueryItem(name: "apiKey", value: apiKey)
+            URLQueryItem(name: "apiKey", value: NetworkConstants.apiKey.rawValue)
         ]
-        AF.request(URL(string: FeedPaths.everything.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in
+        AF.request(URL(string: NetworkConstants.everything.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in
             switch response.result {
             case .success:
                 guard let data = response.data else { return }
                 DispatchQueue.main.async {
-                    success(data)
+                    completion(.success(data))
                 }
             case .failure:
-                failure()
+                completion(.failure(.noInternet))
             }
         }
     }

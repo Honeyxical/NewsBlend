@@ -94,8 +94,8 @@ extension DetailViewController: DetailViewInputProtocol {
     func setArticle(article: ArticleModel) {
         imageView.kf.setImage(with: URL(string: article.urlToImage))
         articleTitleLabel.text = article.title
-        contentLabel.text = article.content
-        authorLabel.text = "By \(article.author)"
+        contentLabel.text = article.description
+        authorLabel.text = "By \(article.author ?? "unknown author")"
         publishedAtLabel.text = article.timeSincePublication
     }
 }

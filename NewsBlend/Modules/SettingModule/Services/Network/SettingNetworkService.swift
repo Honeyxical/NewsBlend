@@ -4,30 +4,35 @@ import Alamofire
 import Foundation
 
 protocol SettingNetworkServiceProtocol {
-    func getSources(sourceLanguage: String, success: @escaping (Data) -> Void, failure: @escaping () -> Void)
+    func getSources(sourceLanguage: String, completion: @escaping GetSourcesResponse)
 }
 
-enum SettingsPaths: String {
-    case sources = "https://newsapi.org/v2/top-headlines/sources"
+enum SourceResponceErrors: Error {
+    case noInternet
 }
+
+typealias GetSourcesResponse = (Result<Data, SourceResponceErrors>) -> Void
 
 final class SettingNetworkService: SettingNetworkServiceProtocol {
-    private let apiKey = "bc613432d94c448da6d678dad9c8806e"
+    private enum SettingsConstants: String {
+        case sources = "https://newsapi.org/v2/top-headlines/sources"
+        case apiKey = "bc613432d94c448da6d678dad9c8806e"
+    }
 
-    func getSources(sourceLanguage: String, success: @escaping (Data) -> Void, failure: @escaping () -> Void) {
+    func getSources(sourceLanguage: String, completion: @escaping GetSourcesResponse) {
         let queryItems = [
-            URLQueryItem(name: "apiKey", value: apiKey),
+            URLQueryItem(name: "apiKey", value: SettingsConstants.apiKey.rawValue),
             URLQueryItem(name: "language", value: sourceLanguage)
         ]
-        AF.request(URL(string: SettingsPaths.sources.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in
+        AF.request(URL(string: SettingsConstants.sources.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in
             switch response.result {
             case .success:
                 guard let data = response.data else { return }
                 DispatchQueue.main.async {
-                    success(data)
+                    completion(.success(data))
                 }
             case .failure:
-                failure()
+                completion(.failure(.noInternet))
             }
         }
     }

@@ -31,9 +31,9 @@ class ArticleShortCell: UICollectionViewCell {
 }
 
 extension ArticleShortCell {
-    func setData(articleTitle: String, articleAuthor: String, publishedAt: String) {
+    func setData(articleTitle: String?, articleAuthor: String?, publishedAt: String?) {
         self.articleTitleLabel.text = articleTitle
-        self.articleAuthorLabel.text = "By " + articleAuthor
+        self.articleAuthorLabel.text = "By " + (articleAuthor ?? "unknown author")
         self.publishedAtLabel.text = publishedAt
         setupLayout()
     }

@@ -1,29 +1,20 @@
-//  Created by илья on 17.08.23.
+//  Created by илья on 11.09.23.
 
 import Foundation
 
-protocol SourceConverterProtocol {
-    func transferSourceObject(sources: [Sources]) -> [SourceModel]
+protocol SourceCodingProtocol {
     func decodeSourceObjects(data: Data) -> [SourceModel]
     func encodeSourceObjects(sourceModels: [SourceModel]) -> Data
 }
 
-final class SourceConverter: SourceConverterProtocol {
-    func transferSourceObject(sources: [Sources]) -> [SourceModel] {
-        var sourceModels: [SourceModel] = []
-        for source in sources {
-            sourceModels.append(source.map(source: source))
-        }
-        return sourceModels
-    }
-    
+final class SourceCoding: SourceCodingProtocol {
     func decodeSourceObjects(data: Data) -> [SourceModel] {
         guard let source = try? JSONDecoder().decode([SourceModel].self, from: data) else {
             return []
         }
         return source
     }
-    
+
     func encodeSourceObjects(sourceModels: [SourceModel]) -> Data {
         guard let models = try? JSONEncoder().encode(sourceModels) else {
             return Data()

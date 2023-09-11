@@ -7,6 +7,12 @@ final class FeedPresenter {
     weak var view: FeedViewInputProtocol?
     private let interactor: FeedInteractorInputProtocol
     private let router: FeedRouterInputProtocol
+    private let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.locale = Locale(identifier: "en_US")
+        return dateFormatter
+    }()
 
     init(view: FeedViewInputProtocol, interactor: FeedInteractorInputProtocol, router: FeedRouterInputProtocol) {
         self.view = view
@@ -33,7 +39,8 @@ extension FeedPresenter: FeedViewOutputProtocol {
 
 extension FeedPresenter: FeedInteractorOutputProtocol {
     func didReceive(articles: [ArticleModel]) {
-        view?.setArticles(articles: articles)
+        let preparedArticles = prepareArticles(articles: articles)
+        view?.setArticles(articles: preparedArticles)
         view?.reloadData()
         view?.hideLoader()
     }
@@ -44,3 +51,15 @@ extension FeedPresenter: FeedInteractorOutputProtocol {
 }
 
 extension FeedPresenter: FeedRouterOutputProtocol {}
+
+extension FeedPresenter {
+    private func prepareArticles(articles: [ArticleModel]) -> [ArticleModel] {
+        var articles = articles
+        for (index, var article) in articles.enumerated() {
+            let targetDate = dateFormatter.date(from: article.publishedAt ?? "") ?? Date()
+            article.timeSincePublication = RelativeDateTimeFormatter().localizedString(for: targetDate, relativeTo: Date())
+            articles[index] = article
+        }
+        return articles
+    }
+}

@@ -6,6 +6,12 @@ final class NBSPresenter {
     private let interactor: NBSInteractorInputProtocol
     private let router: NBSRouterInputProtocol
     weak var view: NBSViewInputProtocol?
+    private let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.locale = Locale(identifier: "en_US")
+        return dateFormatter
+    }()
 
     init(interactor: NBSInteractorInputProtocol, router: NBSRouterInputProtocol, view: NBSViewInputProtocol) {
         self.interactor = interactor
@@ -16,7 +22,8 @@ final class NBSPresenter {
 
 extension NBSPresenter: NBSInteractorOutputProtocol {
     func didReceive(articles: [ArticleModel]) {
-        view?.setArticle(articles: articles)
+        let preparedArticles = prepareArticles(articles: articles)
+        view?.setArticle(articles: preparedArticles)
     }
 
     func didReceive(sources: [SourceModel]) {
@@ -43,3 +50,15 @@ extension NBSPresenter: NBSViewOutputProtocol {
 }
 
 extension NBSPresenter: NBSRouterOutputProtocol {}
+
+extension NBSPresenter {
+    private func prepareArticles(articles: [ArticleModel]) -> [ArticleModel] {
+        var articles = articles
+        for (index, var article) in articles.enumerated() {
+            let targetDate = dateFormatter.date(from: article.publishedAt ?? "") ?? Date()
+            article.timeSincePublication = RelativeDateTimeFormatter().localizedString(for: targetDate, relativeTo: Date())
+            articles[index] = article
+        }
+        return articles
+    }
+}

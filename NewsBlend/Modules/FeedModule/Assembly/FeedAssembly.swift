@@ -6,11 +6,11 @@ import UIKit
 final class FeedAssembly {
     static func build() -> UIViewController {
         let view = FeedViewController(childView: NBSAssembly.build())
-        let articleConverter = ArticleConverter()
-        let sourceConverter = SourceConverter()
         let interactor = FeedInteractor(networkService: FeedNetworkService(),
                                         cacheService: FeedUserDefaultsService(),
-                                        parser: Parser(articleConverter: articleConverter, sourceConverter: sourceConverter),
+                                        parser: FeedParser(converter: FeedConverter()),
+                                        articleCoder: ArticleCoding(),
+                                        sourceCoder: SourceCoding(),
                                         initialSource: SourceModel(id: "abc-news",
                                                                    name: "ABC News",
                                                                    category: "",
@@ -22,8 +22,7 @@ final class FeedAssembly {
                                                                           category: "",
                                                                           language: "",
                                                                           country: "",
-                                                                          isSelected: false),
-                                        articleConverter: articleConverter)
+                                                                          isSelected: false))
         let router = FeedRouter()
         let presenter = FeedPresenter(view: view,
                                       interactor: interactor,

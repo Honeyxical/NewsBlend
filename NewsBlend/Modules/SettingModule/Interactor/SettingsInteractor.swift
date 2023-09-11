@@ -6,27 +6,36 @@ final class SettingsInteractor {
     weak var output: SettingsInteractorOutputProtocol?
     private let cacheService: SettingStorageProtocol
     private let networkService: SettingNetworkServiceProtocol
-    private let parser: ParserProtocol
+    private let parser: SettingParserProtocol
     private let defaultLanguage = "en"
-    private let converter: SourceConverterProtocol
+    private let converter: SettingConverterProtocol
+    private let sourceCoder: SourceCodingProtocol
 
-    init(cacheService: SettingStorageProtocol, networkService: SettingNetworkServiceProtocol, parser: ParserProtocol, converter: SourceConverterProtocol) {
-        self.networkService = networkService
+    init(cacheService: SettingStorageProtocol,
+         networkService: SettingNetworkServiceProtocol,
+         parser: SettingParserProtocol,
+         converter: SettingConverterProtocol,
+         sourceCoder: SourceCodingProtocol) {
         self.cacheService = cacheService
+        self.networkService = networkService
         self.parser = parser
         self.converter = converter
+        self.sourceCoder = sourceCoder
     }
 }
 
 extension SettingsInteractor: SettingsInteractorInputProtocol {
     func getAllSources() {
-        let sourcesFromCahce = converter.decodeSourceObjects(data: cacheService.getSources())
-        parser.parseSource(defaultLanguage: defaultLanguage, network: networkService) { sourcesFromNetwork in
-            if sourcesFromNetwork.isEmpty {
+        let sourcesFromCahce = sourceCoder.decodeSourceObjects(data: cacheService.getSources())
+        networkService.getSources(sourceLanguage: defaultLanguage) { result in
+            guard let data = try? result.get() else {
                 self.output?.didReceive(sources: sourcesFromCahce)
-            } else {
+                return
+            }
+            let sourcesFromNetwork = self.parser.parseSource(data: data)
+            if !sourcesFromNetwork.isEmpty {
                 self.output?.didReceive(sources: self.combiningSourceResults(storage: sourcesFromCahce,
-                                                                                  network: sourcesFromNetwork))
+                                                                             network: sourcesFromNetwork))
             }
         }
     }
@@ -36,7 +45,7 @@ extension SettingsInteractor: SettingsInteractorInputProtocol {
     }
 
     func getFollowedSources() -> [SourceModel] {
-        let unarchive = converter.decodeSourceObjects(data: cacheService.getSources())
+        let unarchive = sourceCoder.decodeSourceObjects(data: cacheService.getSources())
         return unarchive
     }
 
@@ -49,13 +58,13 @@ extension SettingsInteractor: SettingsInteractorInputProtocol {
         source.isSelected.toggle()
         var sources = getFollowedSources()
         sources.append(source)
-        cacheService.setSource(sources: converter.encodeSourceObjects(sourceModels: sources))
+        cacheService.setSource(sources: sourceCoder.encodeSourceObjects(sourceModels: sources))
     }
 
     func deleteFollowedSource(source: SourceModel) {
         var sources = getFollowedSources()
         sources.remove(at: sources.firstIndex(of: source) ?? 0)
-        cacheService.saveChangedListSources(sources: converter.encodeSourceObjects(sourceModels: sources))
+        cacheService.saveChangedListSources(sources: sourceCoder.encodeSourceObjects(sourceModels: sources))
     }
     
     private func combiningSourceResults(storage: [SourceModel], network: [SourceModel]) -> [SourceModel] {

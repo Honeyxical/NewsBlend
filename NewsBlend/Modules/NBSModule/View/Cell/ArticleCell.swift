@@ -44,9 +44,9 @@ class ArticleCell: UICollectionViewCell {
         setupLayout()
     }
 
-    func setData(title: String, author: String, imageUrl: String, publishedTime: String) {
+    func setData(title: String?, author: String?, imageUrl: String, publishedTime: String?) {
         self.titleLabel.text = title
-        self.authorLabel.text = "By " + author
+        self.authorLabel.text = "By " + (author ?? "unknown author")
         self.imageView.kf.setImage(with: URL(string: imageUrl))
         self.publishedTimeLabel.text = publishedTime
     }

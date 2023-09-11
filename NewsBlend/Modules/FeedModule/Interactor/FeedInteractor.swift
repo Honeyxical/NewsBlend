@@ -6,8 +6,9 @@ final class FeedInteractor {
     weak var output: FeedInteractorOutputProtocol?
     private let networkService: FeedNetworkServiceProtocol
     private let cacheService: FeedStorageProtocol
-    private let parser: ParserProtocol
-    private let articleConverter: ArticleConverterProtocol
+    private let parser: FeedParserProtocol
+    private let articleCoder: ArticleCodingProtocol
+    private let sourceCoder: SourceCodingProtocol
     
     private let initialSource: SourceModel
     private let defaultSourceHotNews: SourceModel
@@ -15,30 +16,33 @@ final class FeedInteractor {
     
     init(networkService: FeedNetworkServiceProtocol,
          cacheService: FeedStorageProtocol,
-         parser: ParserProtocol,
+         parser: FeedParserProtocol,
+         articleCoder: ArticleCodingProtocol,
+         sourceCoder: SourceCodingProtocol,
          initialSource: SourceModel,
-         defaultSourceHotNews: SourceModel,
-         articleConverter: ArticleConverterProtocol) {
+         defaultSourceHotNews: SourceModel) {
         self.networkService = networkService
         self.cacheService = cacheService
         self.parser = parser
+        self.articleCoder = articleCoder
+        self.sourceCoder = sourceCoder
         self.initialSource = initialSource
         self.defaultSourceHotNews = defaultSourceHotNews
-        self.articleConverter = articleConverter
     }
 }
 
 extension FeedInteractor: FeedInteractorInputProtocol {
     func loadData() {
-        let articlesFromCache = articleConverter.decodeArticleObjects(data: cacheService.getArticles())
-        parser.parseFeedSource(source: defaultSourceHotNews, articlesCount: articlesEstimate, network: networkService) { articlesFromNetwork in
-            if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
-                self.setArticlesIntoCache(articles: articlesFromNetwork)
-                self.output?.didReceive(articles: articlesFromNetwork)
-            } else {
-                self.output?.didReceive(articles: articlesFromCache)
-            }
-        }
+        let articlesFromCache = articleCoder.decodeArticleObjects(data: cacheService.getArticles())
+        output?.didReceive(articles: articlesFromCache)
+//        parser.parseFeedSource(source: defaultSourceHotNews, articlesCount: articlesEstimate, network: networkService) { articlesFromNetwork in
+//            if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
+//                self.setArticlesIntoCache(articles: articlesFromNetwork)
+//                self.output?.didReceive(articles: articlesFromNetwork)
+//            } else {
+//                self.output?.didReceive(articles: articlesFromCache)
+//            }
+//        }
     }
 
     func isFirstStart() {
@@ -49,7 +53,7 @@ extension FeedInteractor: FeedInteractorInputProtocol {
     }
 
     func setSource(sources: [SourceModel]) {
-        cacheService.setSource(data: SourceConverter().encodeSourceObjects(sourceModels: sources)) // Да, так надо. Чтобы его убрать нужно делать новый модуль с экраном загрузки
+        cacheService.setSource(data: sourceCoder.encodeSourceObjects(sourceModels: sources)) // Да, так надо. Чтобы его убрать нужно делать новый модуль с экраном загрузки
     }
 
     func getUpdateInterval() -> Int {
@@ -68,6 +72,6 @@ extension FeedInteractor: FeedInteractorInputProtocol {
     }
     
     private func setArticlesIntoCache(articles: [ArticleModel]) {
-        cacheService.setArticles(data: articleConverter.encodeArticleObjects(articles: articles))
+        cacheService.setArticles(data: articleCoder.encodeArticleObjects(articles: articles))
     }
 }
