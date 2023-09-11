@@ -35,6 +35,7 @@ final class NBSNetworService: NBSNetworkServiceProtocol {
                     return
                 }
                 DispatchQueue.main.async {
+                    debugPrint(response)
                     completion(.success(data))
                 }
             case .failure:

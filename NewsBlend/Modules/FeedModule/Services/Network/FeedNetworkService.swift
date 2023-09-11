@@ -31,7 +31,6 @@ final class FeedNetworkService: FeedNetworkServiceProtocol {
             case .success:
                 guard let data = response.data else { return }
                 DispatchQueue.main.async {
-                    debugPrint(response)
                     completion(.success(data))
                 }
             case .failure:

@@ -57,8 +57,8 @@ extension NBSInteractor: NBSInteractorInputProtocol {
             networkService.getArticlesBySource(source: source, pageSize: defaultPageSize) { result in
                 guard let data = try? result.get() else { return }
                 articlesFromNetwork.append(contentsOf: self.parser.parseArticle(data: data))
+                group.leave()
             }
-            group.leave()
         }
         
         group.notify(queue: .main) {
