@@ -55,15 +55,21 @@ extension NBSInteractor: NBSInteractorInputProtocol {
         for source in sources {
             group.enter()
             networkService.getArticlesBySource(source: source, pageSize: defaultPageSize) { result in
-                guard let data = try? result.get() else { return }
-                articlesFromNetwork.append(contentsOf: self.parser.parseArticle(data: data))
-                group.leave()
+                switch result {
+                case .success:
+                    guard let data = try? result.get() else { return }
+                    articlesFromNetwork.append(contentsOf: self.parser.parseArticle(data: data))
+                    group.leave()
+                case .failure:
+                    articlesFromNetwork = articlesFromCache
+                    group.leave()
+                }
             }
         }
         
         group.notify(queue: .main) {
             if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
-                self.cacheService.setArtcles(data: self.articleCoder.encodeArticleObjects(articles: articlesFromNetwork), source: "All")
+                self.cacheService.setArtcles(data: self.articleCoder.encodeArticleObjects(articles: articlesFromNetwork), source: "all")
                 self.output?.didReceive(articles: articlesFromNetwork)
                 return
             }
