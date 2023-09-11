@@ -2,7 +2,7 @@
 
 import UIKit
 
-class ArticleShortCell: UICollectionViewCell {
+final class ArticleShortCell: UICollectionViewCell {
     private let articleTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false

@@ -4,7 +4,7 @@ import Foundation
 import Kingfisher
 import UIKit
 
-class TrendingCell: UICollectionViewCell {
+final class TrendingCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 10

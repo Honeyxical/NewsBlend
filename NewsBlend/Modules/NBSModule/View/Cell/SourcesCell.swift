@@ -3,7 +3,7 @@
 import Foundation
 import UIKit
 
-class SourcesCell: SourceCell {
+final class SourcesCell: SourceCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.cornerRadius = 20

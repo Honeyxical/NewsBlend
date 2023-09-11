@@ -3,7 +3,7 @@
 import Foundation
 import UIKit
 
-class SettingsCell: UITableViewCell {
+final class SettingsCell: UITableViewCell {
     private let image: UIImageView = {
         let image = UIImageView()
         image.tintColor = .black

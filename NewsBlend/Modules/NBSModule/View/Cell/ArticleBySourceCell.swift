@@ -2,7 +2,7 @@
 
 import UIKit
 
-class ArticleBySourceCell: UICollectionViewCell {
+final class ArticleBySourceCell: UICollectionViewCell {
     weak var output: NBSViewOutputProtocol?
     private var articles: [ArticleModel] = []
     private lazy var loader = ReusableViews.getLoader()

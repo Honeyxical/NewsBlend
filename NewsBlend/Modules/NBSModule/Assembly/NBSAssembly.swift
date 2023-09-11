@@ -3,7 +3,7 @@
 import Foundation
 import UIKit
 
-class NBSAssembly {
+final class NBSAssembly {
     static func build() -> UIViewController {
         let interactor = NBSInteractor(networkService: NBSNetworService(),
                                        cacheService: NBSUserDefaultsService(),
