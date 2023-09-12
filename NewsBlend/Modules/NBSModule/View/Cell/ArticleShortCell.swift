@@ -28,6 +28,13 @@ final class ArticleShortCell: UICollectionViewCell {
         label.numberOfLines = 1
         return label
     }()
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        articleTitleLabel.text = nil
+        articleAuthorLabel.text = nil
+        publishedAtLabel.text = nil
+    }
 }
 
 extension ArticleShortCell {

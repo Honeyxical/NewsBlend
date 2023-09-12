@@ -48,6 +48,14 @@ final class ArticleCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+        titleLabel.text = nil
+        authorLabel.text = nil
+        publishedTimeLabel.text = nil
+    }
+
     func setData(title: String?, author: String?, imageUrl: String, publishedTime: String?) {
         self.titleLabel.text = title
         self.authorLabel.text = "By " + (author ?? "unknown author")

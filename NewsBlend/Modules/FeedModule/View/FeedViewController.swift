@@ -61,19 +61,7 @@ final class FeedViewController: UIViewController {
     }
 }
 
-extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        articles.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item", for: indexPath) as? TrendingCell else {
-            return UICollectionViewCell()
-        }
-        cell.setData(title: articles[indexPath.item].title, timeSincePublication: articles[indexPath.item].timeSincePublication, imageUrl: articles[indexPath.item].urlToImage)
-        return cell
-    }
-
+extension FeedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         output?.openArticleDetail(article: articles[indexPath.item])
     }
@@ -85,6 +73,20 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         layout.minimumLineSpacing = 15
         layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 15)
         return layout
+    }
+}
+
+extension FeedViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        articles.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item", for: indexPath) as? TrendingCell else {
+            return UICollectionViewCell()
+        }
+        cell.setData(title: articles[indexPath.item].title, timeSincePublication: articles[indexPath.item].timeSincePublication, imageUrl: articles[indexPath.item].urlToImage)
+        return cell
     }
 }
 

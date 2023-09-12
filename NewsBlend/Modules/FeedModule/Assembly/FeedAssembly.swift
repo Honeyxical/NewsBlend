@@ -8,7 +8,7 @@ final class FeedAssembly {
         let view = FeedViewController(childView: NBSAssembly.build())
         let interactor = FeedInteractor(networkService: FeedNetworkService(),
                                         cacheService: Storage.shared,
-                                        parser: FeedParser(converter: FeedConverter()),
+                                        parser: FeedParser(converter: FeedArticleConverter()),
                                         articleCoder: ArticleCoding(),
                                         sourceCoder: SourceCoding(),
                                         initialSource: SourceModel(id: "abc-news",

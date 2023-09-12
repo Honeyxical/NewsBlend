@@ -8,19 +8,22 @@ final class SettingsInteractor {
     private let networkService: SettingNetworkServiceProtocol
     private let parser: SettingParserProtocol
     private let defaultLanguage = "en"
-    private let converter: SettingConverterProtocol
     private let sourceCoder: SourceCodingProtocol
+    private let articleConverter: SettingArticleConverterProtocol
+    private let sourceConverter: SettingSourceConverterProtocol
 
     init(cacheService: SettingStorageProtocol,
          networkService: SettingNetworkServiceProtocol,
          parser: SettingParserProtocol,
-         converter: SettingConverterProtocol,
-         sourceCoder: SourceCodingProtocol) {
+         sourceCoder: SourceCodingProtocol,
+         articleConverter: SettingArticleConverterProtocol,
+         sourceConverter: SettingSourceConverterProtocol) {
         self.cacheService = cacheService
         self.networkService = networkService
         self.parser = parser
-        self.converter = converter
         self.sourceCoder = sourceCoder
+        self.articleConverter = articleConverter
+        self.sourceConverter = sourceConverter
     }
 }
 

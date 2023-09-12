@@ -2,11 +2,11 @@
 
 import Foundation
 
-protocol SettingSourceConverterProtocol {
+protocol NBSSourceConverterProtocol {
     func transferSourceObject(sources: [Sources]) -> [SourceModel]
 }
 
-final class SettingSourceConverter: SettingSourceConverterProtocol {
+final class NBSSourceConverter: NBSSourceConverterProtocol {
     func transferSourceObject(sources: [Sources]) -> [SourceModel] {
         var sourceModels: [SourceModel] = []
         for source in sources {

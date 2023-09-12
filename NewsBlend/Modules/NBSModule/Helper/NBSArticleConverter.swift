@@ -1,12 +1,12 @@
-//  Created by илья on 11.09.23.
+//  Created by илья on 12.09.23.
 
 import Foundation
 
-protocol FeedArticleConverterProtocol {
+protocol NBSArticleConverterProtocol {
     func transferDTOToModel(articlesArray: [Article]) -> [ArticleModel]
 }
 
-final class FeedArticleConverter: FeedArticleConverterProtocol {
+final class NBSArticleConverter: NBSArticleConverterProtocol {
     func transferDTOToModel(articlesArray: [Article]) -> [ArticleModel] {
         var articleModels: [ArticleModel] = []
         for article in articlesArray {

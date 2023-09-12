@@ -7,9 +7,9 @@ protocol FeedParserProtocol {
 }
 
 final class FeedParser: FeedParserProtocol {
-    private let converter: FeedConverterProtocol
+    private let converter: FeedArticleConverterProtocol
 
-    init(converter: FeedConverterProtocol) {
+    init(converter: FeedArticleConverterProtocol) {
         self.converter = converter
     }
 

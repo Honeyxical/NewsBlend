@@ -28,6 +28,11 @@ class SourceCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        sourceNameLabel.text = nil
+    }
     
     func setSourceName(name: String, isSelected: Bool) {
         self.sourceNameLabel.text = name

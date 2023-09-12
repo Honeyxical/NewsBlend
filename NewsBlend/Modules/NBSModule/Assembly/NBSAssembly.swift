@@ -7,10 +7,11 @@ final class NBSAssembly {
     static func build() -> UIViewController {
         let interactor = NBSInteractor(networkService: NBSNetworkService(),
                                        cacheService: Storage.shared,
-                                       parser: NBSParser(converter: NBSConverter()),
-                                       converter: NBSConverter(),
+                                       parser: NBSParser(articleConverter: NBSArticleConverter()),
+                                       articleConverter: NBSArticleConverter(),
                                        articleCoder: ArticleCoding(),
-                                       sourceCoder: SourceCoding())
+                                       sourceCoder: SourceCoding(),
+                                       sourceConverter: NBSSourceConverter())
         let view = NBSViewController()
         let router = NBSRouter()
         let presenter = NBSPresenter(interactor: interactor,

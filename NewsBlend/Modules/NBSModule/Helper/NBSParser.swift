@@ -7,14 +7,14 @@ protocol NBSParserProtocol {
 }
 
 final class NBSParser: NBSParserProtocol {
-    private let converter: NBSConverterProtocol
+    private let articleConverter: NBSArticleConverterProtocol
 
-    init(converter: NBSConverterProtocol) {
-        self.converter = converter
+    init(articleConverter: NBSArticleConverterProtocol) {
+        self.articleConverter = articleConverter
     }
 
     func parseArticle(data: Data) -> [ArticleModel] {
         guard let articlesDTO = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else { return [] }
-        return converter.transferDTOToModel(articlesArray: articlesDTO.articles)
+        return articleConverter.transferDTOToModel(articlesArray: articlesDTO.articles)
     }
 }

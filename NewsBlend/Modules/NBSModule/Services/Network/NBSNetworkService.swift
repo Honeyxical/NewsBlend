@@ -23,7 +23,7 @@ final class NBSNetworkService: NBSNetworkServiceProtocol {
 
     func getArticlesBySource(source: SourceModel, pageSize: Int, completion: @escaping GetNBSArticlesResponse) {
         let queryItems = [
-            URLQueryItem(name: "apiKey", value: NBSConstants.reserveApiKey.rawValue),
+            URLQueryItem(name: "apiKey", value: NBSConstants.apiKey.rawValue),
             URLQueryItem(name: "pageSize", value: pageSize.description),
             URLQueryItem(name: "sources", value: source.id)
         ]

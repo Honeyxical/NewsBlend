@@ -22,7 +22,7 @@ final class SettingNetworkService: SettingNetworkServiceProtocol {
 
     func getSources(sourceLanguage: String, completion: @escaping GetSourcesResponse) {
         let queryItems = [
-            URLQueryItem(name: "apiKey", value: SettingsConstants.reserveApiKey.rawValue),
+            URLQueryItem(name: "apiKey", value: SettingsConstants.apiKey.rawValue),
             URLQueryItem(name: "language", value: sourceLanguage)
         ]
         AF.request(URL(string: SettingsConstants.sources.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in

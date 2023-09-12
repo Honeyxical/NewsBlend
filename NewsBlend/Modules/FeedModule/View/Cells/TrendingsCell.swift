@@ -48,6 +48,13 @@ final class TrendingCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+        titleLabel.text = nil
+        publishedTimeLabel.text = nil
+    }
+
     func setData(title: String?, timeSincePublication: String?, imageUrl: String) {
         titleLabel.text = title
         publishedTimeLabel.text = timeSincePublication

@@ -7,24 +7,27 @@ final class NBSInteractor {
     private let networkService: NBSNetworkServiceProtocol
     private let cacheService: NBSStorageProtocol
     private let parser: NBSParserProtocol
-    private let converter: NBSConverterProtocol
+    private let articleConverter: NBSArticleConverterProtocol
     private let articleCoder: ArticleCodingProtocol
     private let sourceCoder: SourceCodingProtocol
+    private let sourceConverter: NBSSourceConverterProtocol
     
     private let defaultPageSize = 10
 
     init(networkService: NBSNetworkServiceProtocol,
          cacheService: NBSStorageProtocol,
          parser: NBSParserProtocol,
-         converter: NBSConverterProtocol,
+         articleConverter: NBSArticleConverterProtocol,
          articleCoder: ArticleCodingProtocol,
-         sourceCoder: SourceCodingProtocol) {
+         sourceCoder: SourceCodingProtocol,
+         sourceConverter: NBSSourceConverterProtocol) {
         self.networkService = networkService
         self.cacheService = cacheService
         self.parser = parser
-        self.converter = converter
+        self.articleConverter = articleConverter
         self.articleCoder = articleCoder
         self.sourceCoder = sourceCoder
+        self.sourceConverter = sourceConverter
     }
 }
 
