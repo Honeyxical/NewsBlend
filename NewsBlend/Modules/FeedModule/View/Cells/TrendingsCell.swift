@@ -21,7 +21,7 @@ final class TrendingCell: UICollectionViewCell {
         return title
     }()
 
-    private let sectionTitlelabel: UILabel = {
+    private let sectionTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Trending news"
@@ -64,7 +64,7 @@ final class TrendingCell: UICollectionViewCell {
     private func setupLayout() {
         addSubview(imageView)
         addSubview(titleLabel)
-        addSubview(sectionTitlelabel)
+        addSubview(sectionTitleLabel)
         addSubview(publishedTimeLabel)
 
         NSLayoutConstraint.activate([
@@ -77,8 +77,8 @@ final class TrendingCell: UICollectionViewCell {
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 15),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
 
-            sectionTitlelabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            sectionTitlelabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
+            sectionTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            sectionTitleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
 
             publishedTimeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             publishedTimeLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15)

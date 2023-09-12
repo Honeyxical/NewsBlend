@@ -4,7 +4,7 @@ import Foundation
 
 protocol NBSConverterProtocol {
     func transferSourceObject(sources: [Sources]) -> [SourceModel]
-    func transferDTOtoModel(articlesArray: [Article]) -> [ArticleModel]
+    func transferDTOToModel(articlesArray: [Article]) -> [ArticleModel]
 }
 
 final class NBSConverter: NBSConverterProtocol {
@@ -16,7 +16,7 @@ final class NBSConverter: NBSConverterProtocol {
         return sourceModels
     }
     
-    func transferDTOtoModel(articlesArray: [Article]) -> [ArticleModel] {
+    func transferDTOToModel(articlesArray: [Article]) -> [ArticleModel] {
         var articleModels: [ArticleModel] = []
         for article in articlesArray {
             articleModels.append(article.map(article: article))

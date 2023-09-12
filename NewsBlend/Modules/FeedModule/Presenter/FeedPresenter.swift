@@ -45,7 +45,7 @@ extension FeedPresenter: FeedInteractorOutputProtocol {
     }
 
     func didReceiveFail() {
-        view?.displayLotty()
+        view?.displayLottie()
     }
 }
 

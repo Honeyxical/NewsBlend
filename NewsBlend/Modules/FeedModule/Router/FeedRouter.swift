@@ -14,7 +14,7 @@ extension FeedRouter: FeedRouterInputProtocol {
     }
 
     func openArticleDetail(article: ArticleModel) {
-        let detailViewController = DetailAssembly.build(artile: article)
+        let detailViewController = DetailAssembly.build(artiсle: article)
         viewController?.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

@@ -26,15 +26,15 @@ final class SettingsInteractor {
 
 extension SettingsInteractor: SettingsInteractorInputProtocol {
     func getAllSources() {
-        let sourcesFromCahce = sourceCoder.decodeSourceObjects(data: cacheService.getSources())
+        let sourcesFromCache = sourceCoder.decodeSourceObjects(data: cacheService.getSources())
         networkService.getSources(sourceLanguage: defaultLanguage) { result in
             guard let data = try? result.get() else {
-                self.output?.didReceive(sources: sourcesFromCahce)
+                self.output?.didReceive(sources: sourcesFromCache)
                 return
             }
             let sourcesFromNetwork = self.parser.parseSource(data: data)
             if !sourcesFromNetwork.isEmpty {
-                self.output?.didReceive(sources: self.combiningSourceResults(storage: sourcesFromCahce,
+                self.output?.didReceive(sources: self.combiningSourceResults(storage: sourcesFromCache,
                                                                              network: sourcesFromNetwork))
             }
         }
@@ -50,7 +50,7 @@ extension SettingsInteractor: SettingsInteractorInputProtocol {
     }
 
     func setInterval(interval: UpdateIntervals) {
-        cacheService.setUpdateUnterval(interval: interval)
+        cacheService.setUpdateInterval(interval: interval)
     }
 
     func setFollowedSource(source: SourceModel) {

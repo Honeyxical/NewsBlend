@@ -4,7 +4,7 @@ import Foundation
 
 protocol NBSStorageProtocol{
     func getSources() -> Data
-    func setArtcles(data: Data, source: String)
+    func setArticles(data: Data, source: String)
     func getArticles(source: String) -> Data
 }
 
@@ -18,7 +18,7 @@ final class NBSUserDefaultsService: NBSStorageProtocol {
         return data
     }
     
-    func setArtcles(data: Data, source: String) {
+    func setArticles(data: Data, source: String) {
         userDefaults.set(data, forKey: source)
     }
     

@@ -5,22 +5,22 @@ import UIKit
 
 enum UpdateIntervals: Int, CaseIterable {
     case oneMin = 60
-    case threMin = 180
+    case threeMin = 180
     case fiveMin = 300
     case tenMin = 600
-    case fiveteenMin = 1900
+    case fiveTeenMin = 1900
 
     func stringValue() -> String {
         switch self {
         case .oneMin:
             return "1 min"
-        case .threMin:
+        case .threeMin:
             return "3 min"
         case .fiveMin:
             return "5 min"
         case .tenMin:
             return "10 min"
-        case .fiveteenMin:
+        case .fiveTeenMin:
             return "15 min"
         }
     }

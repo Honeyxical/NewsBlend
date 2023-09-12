@@ -41,13 +41,14 @@ final class FeedViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configuringNavigationBar()
+        setupLayout()
         addChild(childViewVC)
         output?.viewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadData()
+//        reloadData()
     }
 
     init(childView: UIViewController) {
@@ -107,22 +108,21 @@ extension FeedViewController: FeedViewInputProtocol {
 
     func hideLoader() {
         loader.isHidden = true
-        setupLayout()
     }
 
-    func displayLotty() {
-        let lotty = UILabel()
-        lotty.translatesAutoresizingMaskIntoConstraints = false
-        lotty.text = "Fail get data"
-        lotty.font = UIFont.systemFont(ofSize: 36)
+    func displayLottie() {
+        let lottie = UILabel()
+        lottie.translatesAutoresizingMaskIntoConstraints = false
+        lottie.text = "Fail get data"
+        lottie.font = UIFont.systemFont(ofSize: 36)
 
         hotNewsCollection.removeFromSuperview()
         sectionNameLabel.removeFromSuperview()
 
-        view.addSubview(lotty)
+        view.addSubview(lottie)
 
-        lotty.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        lotty.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        lottie.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        lottie.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 }
 

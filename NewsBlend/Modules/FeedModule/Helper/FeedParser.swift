@@ -15,6 +15,6 @@ final class FeedParser: FeedParserProtocol {
 
     func parseArticle(data: Data) -> [ArticleModel] {
         guard let articlesDTO = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else { return [] }
-        return converter.transferDTOtoModel(articlesArray: articlesDTO.articles)
+        return converter.transferDTOToModel(articlesArray: articlesDTO.articles)
     }
 }

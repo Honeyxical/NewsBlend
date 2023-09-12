@@ -4,7 +4,7 @@ import Foundation
 
 protocol SettingConverterProtocol {
     func transferSourceObject(sources: [Sources]) -> [SourceModel]
-    func transferDTOtoModel(articlesArray: [Article]) -> [ArticleModel]
+    func transferDTOToModel(articlesArray: [Article]) -> [ArticleModel]
 }
 
 final class SettingConverter: SettingConverterProtocol {
@@ -16,7 +16,7 @@ final class SettingConverter: SettingConverterProtocol {
         return sourceModels
     }
     
-    func transferDTOtoModel(articlesArray: [Article]) -> [ArticleModel] {
+    func transferDTOToModel(articlesArray: [Article]) -> [ArticleModel] {
         var articleModels: [ArticleModel] = []
         for article in articlesArray {
             articleModels.append(article.map(article: article))

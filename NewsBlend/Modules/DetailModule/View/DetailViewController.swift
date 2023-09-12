@@ -35,10 +35,10 @@ final class DetailViewController: UIViewController {
     }()
 
     private let publishedAtLabel: UILabel = {
-        let publisheAt = UILabel()
-        publisheAt.translatesAutoresizingMaskIntoConstraints = false
-        publisheAt.font = UIFont.systemFont(ofSize: 12)
-        return publisheAt
+        let publishedAt = UILabel()
+        publishedAt.translatesAutoresizingMaskIntoConstraints = false
+        publishedAt.font = UIFont.systemFont(ofSize: 12)
+        return publishedAt
     }()
 
     private let articleTitleLabel: UILabel = {

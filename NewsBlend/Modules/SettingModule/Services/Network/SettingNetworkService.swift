@@ -7,22 +7,22 @@ protocol SettingNetworkServiceProtocol {
     func getSources(sourceLanguage: String, completion: @escaping GetSourcesResponse)
 }
 
-enum SourceResponceErrors: Error {
+enum SourceResponseErrors: Error {
     case noInternet
 }
 
-typealias GetSourcesResponse = (Result<Data, SourceResponceErrors>) -> Void
+typealias GetSourcesResponse = (Result<Data, SourceResponseErrors>) -> Void
 
 final class SettingNetworkService: SettingNetworkServiceProtocol {
     private enum SettingsConstants: String {
         case sources = "https://newsapi.org/v2/top-headlines/sources"
         case apiKey = "bc613432d94c448da6d678dad9c8806e"
-        case reservApiKey = "134f24f4624347d4964bfdbb07479eac"
+        case reserveApiKey = "134f24f4624347d4964bfdbb07479eac"
     }
 
     func getSources(sourceLanguage: String, completion: @escaping GetSourcesResponse) {
         let queryItems = [
-            URLQueryItem(name: "apiKey", value: SettingsConstants.reservApiKey.rawValue),
+            URLQueryItem(name: "apiKey", value: SettingsConstants.reserveApiKey.rawValue),
             URLQueryItem(name: "language", value: sourceLanguage)
         ]
         AF.request(URL(string: SettingsConstants.sources.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in

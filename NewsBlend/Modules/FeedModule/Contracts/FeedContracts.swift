@@ -14,7 +14,7 @@ protocol FeedViewInputProtocol: AnyObject {
     func reloadData()
     func showLoader()
     func hideLoader()
-    func displayLotty()
+    func displayLottie()
 }
 
 // View Output

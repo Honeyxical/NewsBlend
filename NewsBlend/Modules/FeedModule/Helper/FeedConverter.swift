@@ -3,11 +3,11 @@
 import Foundation
 
 protocol FeedConverterProtocol {
-    func transferDTOtoModel(articlesArray: [Article]) -> [ArticleModel]
+    func transferDTOToModel(articlesArray: [Article]) -> [ArticleModel]
 }
 
 final class FeedConverter: FeedConverterProtocol {
-    func transferDTOtoModel(articlesArray: [Article]) -> [ArticleModel] {
+    func transferDTOToModel(articlesArray: [Article]) -> [ArticleModel] {
         var articleModels: [ArticleModel] = []
         for article in articlesArray {
             articleModels.append(article.map(article: article))

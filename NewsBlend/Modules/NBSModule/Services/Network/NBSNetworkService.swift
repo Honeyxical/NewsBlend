@@ -7,23 +7,23 @@ protocol NBSNetworkServiceProtocol {
     func getArticlesBySource(source: SourceModel, pageSize: Int, completion: @escaping GetNBSArticlesResponse)
 }
 
-enum NBSArticlesResponceErrors: Error {
+enum NBSArticlesResponseErrors: Error {
     case noInternet
     case failedToGetData
 }
 
-typealias GetNBSArticlesResponse = (Result<Data, NBSArticlesResponceErrors>) -> Void
+typealias GetNBSArticlesResponse = (Result<Data, NBSArticlesResponseErrors>) -> Void
 
-final class NBSNetworService: NBSNetworkServiceProtocol {
+final class NBSNetworkService: NBSNetworkServiceProtocol {
     private enum NBSConstants: String {
         case topHeadlines = "https://newsapi.org/v2/top-headlines/"
         case apiKey = "bc613432d94c448da6d678dad9c8806e"
-        case reservApiKey = "134f24f4624347d4964bfdbb07479eac"
+        case reserveApiKey = "134f24f4624347d4964bfdbb07479eac"
     }
 
     func getArticlesBySource(source: SourceModel, pageSize: Int, completion: @escaping GetNBSArticlesResponse) {
         let queryItems = [
-            URLQueryItem(name: "apiKey", value: NBSConstants.reservApiKey.rawValue),
+            URLQueryItem(name: "apiKey", value: NBSConstants.reserveApiKey.rawValue),
             URLQueryItem(name: "pageSize", value: pageSize.description),
             URLQueryItem(name: "sources", value: source.id)
         ]
