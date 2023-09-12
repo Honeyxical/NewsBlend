@@ -29,7 +29,12 @@ enum UpdateIntervals: Int, CaseIterable {
 final class NewsSettingViewController: UIViewController {
     var output: SettingsViewOutputProtocol?
     var sources: [SourceModel] = []
-    private lazy var loader = ReusableViews.getLoader()
+
+    private lazy var loader: UIView = {
+        let loader = ReusableViews.getLoader()
+        loader.backgroundColor = .white
+        return loader
+    }()
 
     private let intervalsLabel: UILabel = {
         let label = UILabel()
@@ -68,13 +73,10 @@ final class NewsSettingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupLayout()
+        output?.viewDidLoad()
         title = "News Settings"
         view.backgroundColor = .white
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        output?.viewWillAppear()
     }
 }
 
@@ -105,7 +107,7 @@ extension NewsSettingViewController {
         ])
     }
 
-    func collectionLayout() -> UICollectionViewFlowLayout {
+    private func collectionLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: view.frame.width / 2.5, height: 50)
@@ -114,6 +116,15 @@ extension NewsSettingViewController {
         layout.minimumLineSpacing = 25
         layout.sectionInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
         return layout
+    }
+
+    private func setupLoaderLayout() {
+        NSLayoutConstraint.activate([
+            loader.heightAnchor.constraint(equalToConstant: view.frame.height),
+            loader.widthAnchor.constraint(equalToConstant: view.frame.width),
+            loader.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
 }
 
@@ -132,13 +143,13 @@ extension NewsSettingViewController: SettingsViewInputProtocol {
             loader.isHidden = false
         } else {
             view.addSubview(loader)
+            setupLoaderLayout()
         }
     }
 
     func hideLoader() {
         loader.isHidden = true
         sourcesCollection.reloadData()
-        setupLayout()
     }
 }
 

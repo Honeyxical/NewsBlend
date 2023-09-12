@@ -29,8 +29,9 @@ extension SettingsPresenter: SettingsViewOutputProtocol {
         interactor.setFollowedSource(source: source)
     }
 
-    func viewWillAppear() {
+    func viewDidLoad() {
         newsSettingsView?.showLoader()
+        interactor.getIntervals()
         interactor.getAllSources()
     }
 }
@@ -41,7 +42,6 @@ extension SettingsPresenter: SettingsInteractorOutputProtocol {
     }
 
     func didReceive(sources: [SourceModel]) {
-        interactor.getIntervals()
         newsSettingsView?.set(source: sources)
         newsSettingsView?.hideLoader()
     }

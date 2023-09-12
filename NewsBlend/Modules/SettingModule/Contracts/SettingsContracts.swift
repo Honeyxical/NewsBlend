@@ -18,7 +18,7 @@ protocol SettingsViewInputProtocol: AnyObject {
 
 // View Output
 protocol SettingsViewOutputProtocol {
-    func viewWillAppear()
+    func viewDidLoad()
     func setInterval(interval: UpdateIntervals)
     func setFollowedSource(source: SourceModel)
     func deleteFollowedSource(source: SourceModel)
