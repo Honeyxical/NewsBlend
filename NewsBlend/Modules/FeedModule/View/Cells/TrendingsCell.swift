@@ -43,6 +43,10 @@ final class TrendingCell: UICollectionViewCell {
         layerSetup()
         setupLayout()
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     func setData(title: String?, timeSincePublication: String?, imageUrl: String) {
         titleLabel.text = title
@@ -79,9 +83,5 @@ final class TrendingCell: UICollectionViewCell {
             publishedTimeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             publishedTimeLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15)
         ])
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

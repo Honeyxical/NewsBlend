@@ -44,6 +44,10 @@ final class ArticleCell: UICollectionViewCell {
         setupLayout()
     }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     func setData(title: String?, author: String?, imageUrl: String, publishedTime: String?) {
         self.titleLabel.text = title
         self.authorLabel.text = "By " + (author ?? "unknown author")
@@ -74,9 +78,5 @@ final class ArticleCell: UICollectionViewCell {
             publishedTimeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             publishedTimeLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
         ])
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
