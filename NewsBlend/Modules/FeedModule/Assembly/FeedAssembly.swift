@@ -7,7 +7,7 @@ final class FeedAssembly {
     static func build() -> UIViewController {
         let view = FeedViewController(childView: NBSAssembly.build())
         let interactor = FeedInteractor(networkService: FeedNetworkService(),
-                                        cacheService: FeedUserDefaultsService(),
+                                        cacheService: Storage.shared,
                                         parser: FeedParser(converter: FeedConverter()),
                                         articleCoder: ArticleCoding(),
                                         sourceCoder: SourceCoding(),

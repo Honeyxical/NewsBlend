@@ -6,7 +6,7 @@ import UIKit
 final class NBSAssembly {
     static func build() -> UIViewController {
         let interactor = NBSInteractor(networkService: NBSNetworkService(),
-                                       cacheService: NBSUserDefaultsService(),
+                                       cacheService: Storage.shared,
                                        parser: NBSParser(converter: NBSConverter()),
                                        converter: NBSConverter(),
                                        articleCoder: ArticleCoding(),
