@@ -59,7 +59,6 @@ final class NBSViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         output?.viewWillAppear()
-        sourcesCollection.reloadData()
         articlesCollection.reloadData()
     }
 }
