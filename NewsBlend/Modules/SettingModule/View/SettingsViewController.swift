@@ -24,7 +24,7 @@ final class SettingsViewController: UIViewController {
     private let userView: UIView = {
         let view = UIView()
         let label = UILabel(frame: CGRect(x: 125, y: 50, width: 125, height: 100))
-        label.text = "Cooming soon"
+        label.text = "Coming soon"
         view.addSubview(label)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 1

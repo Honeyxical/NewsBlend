@@ -6,9 +6,14 @@ import UIKit
 final class FeedViewController: UIViewController {
     var output: FeedViewOutputProtocol?
     private let childViewVC: UIViewController
-    private lazy var loader = ReusableViews.getLoader()
     private var articles: [ArticleModel] = []
 
+    private lazy var loader: UIView = {
+        let loader = ReusableViews.getLoader()
+        loader.bounds = view.bounds
+        loader.backgroundColor = .white
+        return loader
+    }()
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -44,11 +49,6 @@ final class FeedViewController: UIViewController {
         setupLayout()
         addChild(childViewVC)
         output?.viewDidLoad()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        reloadData()
     }
 
     init(childView: UIViewController) {
@@ -169,6 +169,8 @@ extension FeedViewController {
 
     private func setupLoaderLayout() {
         NSLayoutConstraint.activate([
+            loader.heightAnchor.constraint(equalToConstant: view.frame.height),
+            loader.widthAnchor.constraint(equalToConstant: view.frame.width),
             loader.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])

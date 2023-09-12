@@ -22,6 +22,7 @@ final class FeedPresenter {
 
 extension FeedPresenter: FeedViewOutputProtocol {
     func viewDidLoad() {
+        view?.showLoader()
         interactor.startUpdateTimer()
         interactor.loadData()
         interactor.isFirstStart()
