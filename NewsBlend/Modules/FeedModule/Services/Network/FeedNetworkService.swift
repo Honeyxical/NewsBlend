@@ -28,7 +28,7 @@ final class FeedNetworkService: FeedNetworkServiceProtocol {
         ]
         AF.request(URL(string: NetworkConstants.everything.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in
                 guard let data = response.data else {
-                    completion(.failure(.))
+                    completion(.failure(.noInternet))
                     return
                 }
                 DispatchQueue.main.async {
