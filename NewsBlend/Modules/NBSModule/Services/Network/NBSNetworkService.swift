@@ -9,7 +9,6 @@ protocol NBSNetworkServiceProtocol {
 
 enum NBSArticlesResponseErrors: Error {
     case noInternet
-    case failedToGetData
 }
 
 typealias GetNBSArticlesResponse = (Result<Data, NBSArticlesResponseErrors>) -> Void
@@ -28,17 +27,12 @@ final class NBSNetworkService: NBSNetworkServiceProtocol {
             URLQueryItem(name: "sources", value: source.id)
         ]
         AF.request(URL(string: NBSConstants.topHeadlines.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in
-            switch response.result {
-            case .success:
-                guard let data = response.data else {
-                    completion(.failure(.failedToGetData))
-                    return
-                }
-                DispatchQueue.main.async {
-                    completion(.success(data))
-                }
-            case .failure:
+            guard let data = response.data else {
                 completion(.failure(.noInternet))
+                return
+            }
+            DispatchQueue.main.async {
+                completion(.success(data))
             }
         }
     }

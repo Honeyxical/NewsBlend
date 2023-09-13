@@ -27,15 +27,13 @@ final class FeedNetworkService: FeedNetworkServiceProtocol {
             URLQueryItem(name: "apiKey", value: NetworkConstants.apiKey.rawValue)
         ]
         AF.request(URL(string: NetworkConstants.everything.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in
-            switch response.result {
-            case .success:
-                guard let data = response.data else { return }
+                guard let data = response.data else {
+                    completion(.failure(.))
+                    return
+                }
                 DispatchQueue.main.async {
                     completion(.success(data))
                 }
-            case .failure:
-                completion(.failure(.noInternet))
-            }
         }
     }
 }
