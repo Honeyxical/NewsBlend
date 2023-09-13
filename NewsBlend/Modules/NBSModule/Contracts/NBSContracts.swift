@@ -3,10 +3,10 @@
 import UIKit
 
 // Module Input
-public protocol NBSModuleInputProtocol {}
+protocol NBSModuleInputProtocol {}
 
 // Module Output
-public protocol NBSModuleOutputProtocol {}
+protocol NBSModuleOutputProtocol {}
 
 // View Input
 protocol NBSViewInputProtocol: AnyObject {

@@ -3,10 +3,10 @@
 import Foundation
 
 // Module Input
-public protocol SettingsModuleInputProtocol {}
+protocol SettingsModuleInputProtocol {}
 
 // Module Output
-public protocol SettingsModuleOutputProtocol {}
+protocol SettingsModuleOutputProtocol {}
 
 // View Input
 protocol SettingsViewInputProtocol: AnyObject {

@@ -3,10 +3,10 @@
 import Foundation
 
 // Module Input
-public protocol FeedModuleInputProtocol {}
+protocol FeedModuleInputProtocol {}
 
 // Module Output
-public protocol FeedModuleOutputProtocol {}
+protocol FeedModuleOutputProtocol {}
 
 // View Input
 protocol FeedViewInputProtocol: AnyObject {
