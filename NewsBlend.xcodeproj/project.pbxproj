@@ -379,7 +379,6 @@
 				69833A472A76B1AC00909649 /* Interactor */,
 				69833A482A76B1B300909649 /* Presenter */,
 				69833A492A76B1BA00909649 /* Router */,
-				69833A4A2A76B1C000909649 /* Services */,
 				69833A4B2A76B1C900909649 /* View */,
 			);
 			path = DetailModule;
@@ -555,13 +554,6 @@
 				691C01702A7BBC97004E22FB /* DetailRouter.swift */,
 			);
 			path = Router;
-			sourceTree = "<group>";
-		};
-		69833A4A2A76B1C000909649 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		69833A4B2A76B1C900909649 /* View */ = {
