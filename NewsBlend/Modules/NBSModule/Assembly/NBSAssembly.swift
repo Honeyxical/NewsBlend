@@ -21,6 +21,7 @@ final class NBSAssembly {
         view.output = presenter
         interactor.output = presenter
         router.output = presenter
+        router.viewController = view
         return view
     }
 }

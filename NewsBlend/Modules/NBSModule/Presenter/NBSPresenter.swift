@@ -32,8 +32,8 @@ extension NBSPresenter: NBSInteractorOutputProtocol {
 }
 
 extension NBSPresenter: NBSViewOutputProtocol {
-    func openArticleDetail(article: ArticleModel, controller: UIViewController) {
-        router.openArticleDetail(article: article, controller: controller)
+    func openArticleDetail(article: ArticleModel) {
+        router.openArticleDetail(article: article)
     }
 
     func getArticlesBySource(source: SourceModel){

@@ -2,11 +2,14 @@
 
 import UIKit
 
+protocol DidTapProtocol: AnyObject {
+    func didTap(article: ArticleModel)
+}
+
 final class ArticleBySourceCell: UICollectionViewCell {
-    weak var output: NBSViewOutputProtocol?
+    weak var delegate: DidTapProtocol?
     private var articles: [ArticleModel] = []
     private lazy var loader = ReusableViews.getLoader()
-    private var controller: UIViewController? // Придумать способ получше ибо это херня
     var isDefaultCell = true
 
     private lazy var collection: UICollectionView = {
@@ -30,10 +33,8 @@ final class ArticleBySourceCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setArticle(articles: [ArticleModel], output: NBSViewOutputProtocol, controller: UIViewController) {
+    func setArticle(articles: [ArticleModel]) {
         self.articles = articles
-        self.output = output
-        self.controller = controller
         setupLayout()
         loader.removeFromSuperview()
     }
@@ -80,8 +81,7 @@ extension ArticleBySourceCell: UICollectionViewDelegate, UICollectionViewDataSou
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let controller = controller else { return }
-        output?.openArticleDetail(article: articles[indexPath.item], controller: controller)
+        delegate?.didTap(article: articles[indexPath.row])
     }
 
     private func collectionLayout() -> UICollectionViewLayout {

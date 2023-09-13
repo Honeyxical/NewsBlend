@@ -20,7 +20,7 @@ protocol NBSViewInputProtocol: AnyObject {
 protocol NBSViewOutputProtocol: AnyObject {
     func viewWillAppear()
     func getArticlesBySource(source: SourceModel)
-    func openArticleDetail(article: ArticleModel, controller: UIViewController)
+    func openArticleDetail(article: ArticleModel)
 }
 
 // Interactor Input
@@ -38,7 +38,7 @@ protocol NBSInteractorOutputProtocol: AnyObject {
 
 // Router Input
 protocol NBSRouterInputProtocol {
-    func openArticleDetail(article: ArticleModel, controller: UIViewController)
+    func openArticleDetail(article: ArticleModel)
 }
 
 // Router Output

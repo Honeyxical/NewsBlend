@@ -8,8 +8,8 @@ final class NBSRouter {
 }
 
 extension NBSRouter: NBSRouterInputProtocol {
-    func openArticleDetail(article: ArticleModel, controller: UIViewController) {
+    func openArticleDetail(article: ArticleModel) {
         let detailViewController = DetailAssembly.build(artiсle: article)
-        controller.navigationController?.pushViewController(detailViewController, animated: true)
+        viewController?.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

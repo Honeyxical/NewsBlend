@@ -172,13 +172,6 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		6917487E2A77F947003F00D6 /* UserDefaults */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UserDefaults;
-			sourceTree = "<group>";
-		};
 		69242EE52A88B869008F040E /* NBSModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,7 +412,6 @@
 		69833A362A76AE4B00909649 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				6917487E2A77F947003F00D6 /* UserDefaults */,
 				6917487D2A77F942003F00D6 /* Network */,
 				69833A072A76A6E100909649 /* NewsModelDTO.swift */,
 			);

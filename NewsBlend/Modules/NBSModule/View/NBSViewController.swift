@@ -63,6 +63,12 @@ final class NBSViewController: UIViewController {
     }
 }
 
+extension NBSViewController: DidTapProtocol {
+    func didTap(article: ArticleModel) {
+        output?.openArticleDetail(article: article)
+    }
+}
+
 extension NBSViewController: NBSViewInputProtocol {
     func setSources(sources: [SourceModel]) {
         self.sources = sources
@@ -71,8 +77,7 @@ extension NBSViewController: NBSViewInputProtocol {
 
     func setArticle(articles: [ArticleModel]) {
         let cell = articlesCollection.cellForItem(at: articlesCollection.indexPathsForVisibleItems.first ?? IndexPath()) as? ArticleBySourceCell
-        guard let output = output else { return }
-        cell?.setArticle(articles: articles, output: output, controller: self)
+        cell?.setArticle(articles: articles)
     }
 
     func showLoader() {
@@ -107,6 +112,7 @@ extension NBSViewController: UICollectionViewDelegate, UICollectionViewDataSourc
                 return UICollectionViewCell()
             }
             output?.getArticlesBySource(source: sources[indexPath.item])
+            cell.delegate = self
             return cell
 
         default:
