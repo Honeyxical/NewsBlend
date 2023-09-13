@@ -12,7 +12,8 @@ final class NBSAssembly {
                                        articleCoder: ArticleCoding(),
                                        sourceCoder: SourceCoding(),
                                        sourceConverter: NBSSourceConverter())
-        let view = NBSViewController()
+        let childView = NBSArticleView()
+        let view = NBSViewController(childView: childView)
         let router = NBSRouter()
         let presenter = NBSPresenter(interactor: interactor,
                                      router: router,

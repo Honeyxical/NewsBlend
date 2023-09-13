@@ -4,7 +4,7 @@ import Foundation
 import Kingfisher
 import UIKit
 
-final class ArticleCell: UICollectionViewCell {
+final class ArticleFullCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,11 +56,11 @@ final class ArticleCell: UICollectionViewCell {
         publishedTimeLabel.text = nil
     }
 
-    func setData(title: String?, author: String?, imageUrl: String, publishedTime: String?) {
-        self.titleLabel.text = title
-        self.authorLabel.text = "By " + (author ?? "unknown author")
-        self.imageView.kf.setImage(with: URL(string: imageUrl))
-        self.publishedTimeLabel.text = publishedTime
+    func setData(article: ArticleModel) {
+        self.titleLabel.text = article.title
+        self.authorLabel.text = "By " + (article.author ?? "unknown author")
+        self.imageView.kf.setImage(with: URL(string: article.urlToImage))
+        self.publishedTimeLabel.text = article.timeSincePublication
     }
 
     private func setupLayout() {

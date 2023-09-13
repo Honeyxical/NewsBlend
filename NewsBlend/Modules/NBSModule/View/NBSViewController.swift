@@ -5,9 +5,9 @@ import UIKit
 
 final class NBSViewController: UIViewController {
     var output: NBSViewOutputProtocol?
+    private let childView: UIView
     private var sources: [SourceModel] = []
-
-    private lazy var loader = ReusableViews.getLoader()
+    private var isShortArticleCell = true
 
     private let sectionNameLabel: UILabel = {
         let label = UILabel()
@@ -27,25 +27,18 @@ final class NBSViewController: UIViewController {
         return collection
     }()
 
-    private lazy var articlesCollection: UICollectionView = {
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: collectionArticlesLayout())
-        collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.dataSource = self
-        collection.delegate = self
-        collection.register(ArticleBySourceCell.self, forCellWithReuseIdentifier: "articleCell")
-        collection.showsVerticalScrollIndicator = false
-        collection.showsHorizontalScrollIndicator = false
-        collection.isPagingEnabled = true
-        return collection
-    }()
-
     private lazy var cellTypeButton: UIButton = {
         let button = UIButton(type: .system)
+        button.restorationIdentifier = "CellTypeButton"
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
         button.layer.borderColor = UIColor.systemBlue.cgColor
         button.layer.borderWidth = 1
-        button.setTitle("Full", for: .normal)
+        if isShortArticleCell {
+            button.setTitle("Full", for: .normal)
+        } else {
+            button.setTitle("Short", for: .normal)
+        }
         button.tintColor = .lightGray
         button.addTarget(self, action: #selector(changeViewMode), for: .touchUpInside)
         return button
@@ -53,13 +46,22 @@ final class NBSViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        output?.viewDidLoad()
         setupLayout()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         output?.viewWillAppear()
-        articlesCollection.reloadData()
+    }
+
+    init(childView: UIView) {
+        self.childView = childView
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -76,20 +78,10 @@ extension NBSViewController: NBSViewInputProtocol {
     }
 
     func setArticle(articles: [ArticleModel]) {
-        let cell = articlesCollection.cellForItem(at: articlesCollection.indexPathsForVisibleItems.first ?? IndexPath()) as? ArticleBySourceCell
-        cell?.setArticle(articles: articles)
-    }
-
-    func showLoader() {
-        if loader.isHidden {
-            loader.isHidden = false
-        } else {
-            view.addSubview(loader)
-        }
-    }
-
-    func hideLoader() {
-        loader.isHidden = true
+        let childView = childView as? NBSArticleView
+        childView?.delegate = self
+        childView?.setArticle(articles: articles, cellType: isShortArticleCell)
+        
     }
 }
 
@@ -99,32 +91,17 @@ extension NBSViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch collectionView {
-        case sourcesCollection:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sourceCell", for: indexPath) as? SourcesCell else {
-                return UICollectionViewCell()
-            }
-            cell.setSourceName(name: sources[indexPath.item].name)
-            return cell
-
-        case articlesCollection:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as? ArticleBySourceCell else {
-                return UICollectionViewCell()
-            }
-            output?.getArticlesBySource(source: sources[indexPath.item])
-            cell.delegate = self
-            return cell
-
-        default:
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sourceCell", for: indexPath) as? SourcesCell else {
             return UICollectionViewCell()
         }
+        cell.setSourceName(name: sources[indexPath.item].name)
+        return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-        articlesCollection.scrollToItem(at: indexPath,
-                                        at: .centeredHorizontally,
-                                        animated: true)
+        let selectedSource = sources[indexPath.item]
+        output?.getArticlesBySource(source: selectedSource)
     }
 
     private func collectionSourcesLayout() -> UICollectionViewLayout {
@@ -135,14 +112,6 @@ extension NBSViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 15)
         return layout
     }
-
-    private func collectionArticlesLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: view.frame.width, height: 650)
-        layout.minimumLineSpacing = 0
-        return layout
-    }
 }
 
 extension NBSViewController {
@@ -150,7 +119,7 @@ extension NBSViewController {
         view.addSubview(sectionNameLabel)
         view.addSubview(cellTypeButton)
         view.addSubview(sourcesCollection)
-        view.addSubview(articlesCollection)
+        view.addSubview(childView)
 
         NSLayoutConstraint.activate([
             sectionNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
@@ -166,23 +135,23 @@ extension NBSViewController {
             sourcesCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             sourcesCollection.heightAnchor.constraint(equalToConstant: 50),
 
-            articlesCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            articlesCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            articlesCollection.topAnchor.constraint(equalTo: sourcesCollection.bottomAnchor, constant: 15),
-            articlesCollection.heightAnchor.constraint(equalToConstant: 650)
+            childView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            childView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            childView.topAnchor.constraint(equalTo: sourcesCollection.bottomAnchor, constant: 15),
+            childView.heightAnchor.constraint(equalToConstant: 650)
         ])
     }
 
     @objc private func changeViewMode() {
-        guard let cell = articlesCollection.visibleCells.first as? ArticleBySourceCell else {
-            return
-        }
-        if cell.isDefaultCell == true {
-            cellTypeButton.setTitle("Short", for: .normal)
-            cell.changeCellView(isDefaultCell: false)
-        } else {
+        let childView = childView as? NBSArticleView
+        if !isShortArticleCell {
             cellTypeButton.setTitle("Full", for: .normal)
-            cell.changeCellView(isDefaultCell: true)
+            childView?.reloadView()
+            isShortArticleCell.toggle()
+        } else {
+            cellTypeButton.setTitle("Short", for: .normal)
+            childView?.reloadView()
+            isShortArticleCell.toggle()
         }
     }
 }

@@ -35,14 +35,22 @@ final class ArticleShortCell: UICollectionViewCell {
         articleAuthorLabel.text = nil
         publishedAtLabel.text = nil
     }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupLayout()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 extension ArticleShortCell {
-    func setData(articleTitle: String?, articleAuthor: String?, publishedAt: String?) {
-        self.articleTitleLabel.text = articleTitle
-        self.articleAuthorLabel.text = "By " + (articleAuthor ?? "unknown author")
-        self.publishedAtLabel.text = publishedAt
-        setupLayout()
+    func setData(article: ArticleModel) {
+        self.articleTitleLabel.text = article.title
+        self.articleAuthorLabel.text = "By " + (article.author ?? "unknown author")
+        self.publishedAtLabel.text = article.timeSincePublication
     }
 
     private func setupLayout() {

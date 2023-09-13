@@ -44,6 +44,12 @@ extension NBSPresenter: NBSViewOutputProtocol {
         }
     }
 
+    func viewDidLoad() {
+        interactor.startUpdateTimer()
+        interactor.loadData()
+        interactor.getArticlesByAllSource()
+    }
+
     func viewWillAppear() {
         interactor.getSources()
     }

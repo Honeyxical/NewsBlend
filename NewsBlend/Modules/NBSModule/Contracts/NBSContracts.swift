@@ -12,13 +12,12 @@ protocol NBSModuleOutputProtocol {}
 protocol NBSViewInputProtocol: AnyObject {
     func setSources(sources: [SourceModel])
     func setArticle(articles: [ArticleModel])
-    func showLoader()
-    func hideLoader()
 }
 
 // View Output
 protocol NBSViewOutputProtocol: AnyObject {
     func viewWillAppear()
+    func viewDidLoad()
     func getArticlesBySource(source: SourceModel)
     func openArticleDetail(article: ArticleModel)
 }
@@ -28,6 +27,8 @@ protocol NBSInteractorInputProtocol {
     func getSources()
     func getArticlesBySource(source: SourceModel)
     func getArticlesByAllSource()
+    func startUpdateTimer()
+    func loadData()
 }
 
 // Interactor Output

@@ -34,56 +34,54 @@ final class NBSInteractor {
 extension NBSInteractor: NBSInteractorInputProtocol {
     func getArticlesBySource(source: SourceModel) {
         let articlesFromCache = articleCoder.decodeArticleObjects(data: cacheService.getArticles(source: source.id))
-        networkService.getArticlesBySource(source: source, pageSize: 10) { result in
-            guard let data = try? result.get() else {
-                self.output?.didReceive(articles: articlesFromCache)
-                return
-            }
-            let articlesFromNetwork = self.parser.parseArticle(data: data)
-            if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
-                self.cacheService.setArticles(data: self.articleCoder.encodeArticleObjects(articles: articlesFromNetwork), source: source.id)
-                self.output?.didReceive(articles: articlesFromNetwork)
-            } else {
-                self.output?.didReceive(articles: articlesFromCache)
-            }
-        }
+        output?.didReceive(articles: articlesFromCache)
     }
 
     func getArticlesByAllSource() {
         let sources = sourceCoder.decodeSourceObjects(data: cacheService.getSources())
-        let articlesFromCache = articleCoder.decodeArticleObjects(data: cacheService.getArticles(source: "all"))
-        let group = DispatchGroup()
-        var articlesFromNetwork: [ArticleModel] = []
-
+        var articlesFromCache: [ArticleModel] = []
         for source in sources {
-            group.enter()
+            let article = articleCoder.decodeArticleObjects(data: cacheService.getArticles(source: source.id))
+            articlesFromCache.append(contentsOf: article)
+        }
+        self.output?.didReceive(articles: articlesFromCache)
+    }
+
+    func loadData() {
+        let sources = sourceCoder.decodeSourceObjects(data: cacheService.getSources())
+        for source in sources {
             networkService.getArticlesBySource(source: source, pageSize: defaultPageSize) { result in
                 switch result {
                 case .success:
                     guard let data = try? result.get() else { return }
-                    articlesFromNetwork.append(contentsOf: self.parser.parseArticle(data: data))
-                    group.leave()
+                    let parsedArticlesFromNetwork = self.parser.parseArticle(data: data)
+                    let encodedArticle = self.articleCoder.encodeArticleObjects(articles: parsedArticlesFromNetwork)
+                    self.cacheService.setArticles(data: encodedArticle, source: source.id)
                 case .failure:
-                    articlesFromNetwork = articlesFromCache
-                    group.leave()
+                    print("fail") // Обработать ошибку
                 }
             }
         }
-        
-        group.notify(queue: .main) {
-            if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
-                self.cacheService.setArticles(data: self.articleCoder.encodeArticleObjects(articles: articlesFromNetwork), source: "all")
-                self.output?.didReceive(articles: articlesFromNetwork)
-                return
-            }
-            self.output?.didReceive(articles: articlesFromCache)
-        }
-        
     }
-
+        
     func getSources() {
         var sourcesFromCache = [SourceModel(id: "all", name: "All", category: "", language: "", country: "", isSelected: true)]
         sourcesFromCache += sourceCoder.decodeSourceObjects(data: cacheService.getSources())
         output?.didReceive(sources: sourcesFromCache)
+    }
+
+    func startUpdateTimer() {
+        let timer = Timer.scheduledTimer(withTimeInterval: Double(getInterval()), repeats: true) { _ in
+            self.loadData()
+        }
+        RunLoop.current.add(timer, forMode: .common)
+    }
+
+    private func getInterval() -> Int{
+        let interval = cacheService.getUpdateInterval()
+        if interval == 0 {
+            return 600
+        }
+        return interval
     }
 }

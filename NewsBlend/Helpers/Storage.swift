@@ -14,6 +14,7 @@ protocol NBSStorageProtocol{
     func getSources() -> Data
     func setArticles(data: Data, source: String)
     func getArticles(source: String) -> Data
+    func getUpdateInterval() -> Int
 }
 
 protocol FeedStorageProtocol{
