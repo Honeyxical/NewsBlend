@@ -36,7 +36,7 @@ final class NewsSettingViewController: UIViewController {
     private var sources: [SourceModel] = []
     private var sourcesAreChange = false
     private var addedSources: [SourceModel] = []
-    private let loader: UIView = Loader()
+    private let loader: UIView
 
     private let warningAlert: UIAlertController = {
         let alert = UIAlertController(title: "Warning",
@@ -94,6 +94,15 @@ final class NewsSettingViewController: UIViewController {
         if sourcesAreChange {
             delegate?.sourcesAreChanged(newSources: addedSources)
         }
+    }
+
+    init(loader: UIView) {
+        self.loader = loader
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 

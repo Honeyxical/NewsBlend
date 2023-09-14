@@ -8,7 +8,7 @@ final class FeedViewController: UIViewController {
     private let childViewVC: UIViewController
     private let lottieChildView: UIView
     private var articles: [ArticleModel] = []
-    private let loader: UIView = Loader()
+    private let loader: UIView
 
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -46,9 +46,10 @@ final class FeedViewController: UIViewController {
         output?.viewDidLoad()
     }
 
-    init(childView: UIViewController, lottieChildView: UIView) {
+    init(childView: UIViewController, lottieChildView: UIView, loader: UIView) {
         self.childViewVC = childView
         self.lottieChildView = lottieChildView
+        self.loader = loader
         super.init(nibName: nil, bundle: nil)
     }
     
