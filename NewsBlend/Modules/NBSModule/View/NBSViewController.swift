@@ -72,6 +72,10 @@ extension NBSViewController: DidTapProtocol {
 }
 
 extension NBSViewController: NBSViewInputProtocol {
+    func noInternet() {
+        
+    }
+
     func setSources(sources: [SourceModel]) {
         self.sources = sources
         sourcesCollection.reloadData()

@@ -9,6 +9,8 @@ protocol FeedNetworkServiceProtocol {
 
 enum ArticleResponseErrors: Error {
     case noInternet
+    case parseFailed
+    case errorUrlConfiguring
 }
 
 typealias GetArticlesResponse = (Result<Data, ArticleResponseErrors>) -> Void
@@ -20,20 +22,32 @@ final class FeedNetworkService: FeedNetworkServiceProtocol {
         case reserveApiKey = "134f24f4624347d4964bfdbb07479eac"
     }
 
+    let reachabilityManager = Alamofire.NetworkReachabilityManager(host: "www.google.com")
+
     func getArticles(source: SourceModel, articlesCount: Int, completion: @escaping GetArticlesResponse) {
-        let queryItems = [
-            URLQueryItem(name: "domains", value: source.id),
-            URLQueryItem(name: "pageSize", value: articlesCount.description),
-            URLQueryItem(name: "apiKey", value: NetworkConstants.reserveApiKey.rawValue)
-        ]
-        AF.request(URL(string: NetworkConstants.everything.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in
+        if let isReachable = reachabilityManager?.isReachable, isReachable {
+            let queryItems = [
+                URLQueryItem(name: "domains", value: source.id),
+                URLQueryItem(name: "pageSize", value: articlesCount.description),
+                URLQueryItem(name: "apiKey", value: NetworkConstants.reserveApiKey.rawValue)
+            ]
+
+            guard let url = URL(string: NetworkConstants.everything.rawValue)?.appending(queryItems: queryItems) else {
+                completion(.failure(.errorUrlConfiguring))
+                return
+            }
+
+            AF.request(url).response { response in
                 guard let data = response.data else {
-                    completion(.failure(.noInternet))
+                    completion(.failure(.parseFailed))
                     return
                 }
                 DispatchQueue.main.async {
                     completion(.success(data))
                 }
+            }
+        } else {
+            completion(.failure(.noInternet))
         }
     }
 }

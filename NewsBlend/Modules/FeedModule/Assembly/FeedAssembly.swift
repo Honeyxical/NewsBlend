@@ -5,7 +5,8 @@ import UIKit
 
 final class FeedAssembly {
     static func build() -> UIViewController {
-        let view = FeedViewController(childView: NBSAssembly.build(newSourcesList: []))
+        let lottieUnknownError = LottieUnknownError()
+        let view = FeedViewController(childView: NBSAssembly.build(newSourcesList: []), lottieChildView: lottieUnknownError)
         let interactor = FeedInteractor(networkService: FeedNetworkService(),
                                         cacheService: Storage.shared,
                                         parser: FeedParser(converter: FeedArticleConverter()),
@@ -29,6 +30,7 @@ final class FeedAssembly {
                                       router: router)
         interactor.output = presenter
         view.output = presenter
+        lottieUnknownError.delegate = view
         router.viewController = view
         return view
     }

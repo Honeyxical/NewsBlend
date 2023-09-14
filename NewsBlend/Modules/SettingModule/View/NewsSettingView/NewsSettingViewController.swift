@@ -38,7 +38,7 @@ final class NewsSettingViewController: UIViewController {
     private var addedSources: [SourceModel] = []
 
     private lazy var loader: UIView = {
-        let loader = ReusableViews.getLoader()
+        let loader = Loader().getLoader()
         loader.backgroundColor = .white
         return loader
     }()

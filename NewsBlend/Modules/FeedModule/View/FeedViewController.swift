@@ -6,14 +6,16 @@ import UIKit
 final class FeedViewController: UIViewController {
     var output: FeedViewOutputProtocol?
     private let childViewVC: UIViewController
+    private let lottieChildView: UIView
     private var articles: [ArticleModel] = []
 
     private lazy var loader: UIView = {
-        let loader = ReusableViews.getLoader()
+        let loader = Loader().getLoader()
         loader.bounds = view.bounds
         loader.backgroundColor = .white
         return loader
     }()
+
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -51,8 +53,9 @@ final class FeedViewController: UIViewController {
         output?.viewDidLoad()
     }
 
-    init(childView: UIViewController) {
+    init(childView: UIViewController, lottieChildView: UIView) {
         self.childViewVC = childView
+        self.lottieChildView = lottieChildView
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -113,18 +116,18 @@ extension FeedViewController: FeedViewInputProtocol {
     }
 
     func displayLottie() {
-        let lottie = UILabel()
-        lottie.translatesAutoresizingMaskIntoConstraints = false
-        lottie.text = "Fail get data"
-        lottie.font = UIFont.systemFont(ofSize: 36)
+        lottieChildView.isHidden = false
+        loader.isHidden = true
+    }
 
-        hotNewsCollection.removeFromSuperview()
-        sectionNameLabel.removeFromSuperview()
+    func hideLottie() {
+        lottieChildView.isHidden = true
+    }
+}
 
-        view.addSubview(lottie)
-
-        lottie.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        lottie.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+extension FeedViewController: LottieUnknownErrorDelegate {
+    func reloadPage() {
+        output?.reloadData()
     }
 }
 
@@ -145,6 +148,7 @@ extension FeedViewController {
         scrollView.addSubview(childViewVC.view)
         scrollView.addSubview(hotNewsCollection)
         scrollView.addSubview(sectionNameLabel)
+        scrollView.addSubview(lottieChildView)
         childViewVC.view.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -165,7 +169,12 @@ extension FeedViewController {
             childViewVC.view.topAnchor.constraint(equalTo: hotNewsCollection.bottomAnchor),
             childViewVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             childViewVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 15),
-            childViewVC.view.widthAnchor.constraint(equalToConstant: view.frame.width)
+            childViewVC.view.widthAnchor.constraint(equalToConstant: view.frame.width),
+
+            lottieChildView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            lottieChildView.topAnchor.constraint(equalTo: view.topAnchor),
+            lottieChildView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            lottieChildView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 

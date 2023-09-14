@@ -15,6 +15,7 @@ protocol FeedViewInputProtocol: AnyObject {
     func showLoader()
     func hideLoader()
     func displayLottie()
+    func hideLottie()
 }
 
 // View Output
@@ -22,6 +23,7 @@ protocol FeedViewOutputProtocol: AnyObject {
     func openArticleDetail(article: ArticleModel)
     func openSettings()
     func viewDidLoad()
+    func reloadData()
 }
 
 // Interactor Input

@@ -21,6 +21,17 @@ final class NBSPresenter {
 }
 
 extension NBSPresenter: NBSInteractorOutputProtocol {
+    func noInternet() {
+        interactor.getArticlesByAllSource()
+    }
+
+    func filedParseData() {
+        interactor.getArticlesByAllSource()
+    }
+
+    func filedUrlConfigure() {
+    }
+
     func didReceive(articles: [ArticleModel]) {
         let preparedArticles = prepareArticles(articles: articles)
         view?.setArticle(articles: preparedArticles)

@@ -35,16 +35,33 @@ extension FeedInteractor: FeedInteractorInputProtocol {
     func loadData() {
         let articlesFromCache = articleCoder.decodeArticleObjects(data: cacheService.getArticles())
         networkService.getArticles(source: defaultSourceHotNews, articlesCount: articlesEstimate) { result in
-            guard let data = try? result.get() else {
-                self.output?.didReceive(articles: articlesFromCache)
-                return
-            }
-            let articlesFromNetwork = self.parser.parseArticle(data: data)
-            if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
-                self.setArticlesIntoCache(articles: articlesFromNetwork)
-                self.output?.didReceive(articles: articlesFromNetwork)
-            } else {
-                self.output?.didReceive(articles: articlesFromCache)
+            switch result {
+            case .success(let data):
+                let articlesFromNetwork = self.parser.parseArticle(data: data)
+                if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
+                    self.setArticlesIntoCache(articles: articlesFromNetwork)
+                    self.output?.didReceive(articles: articlesFromNetwork)
+                } else {
+                    self.output?.didReceive(articles: articlesFromCache)
+                }
+            case .failure(let error):
+                switch error {
+                case .errorUrlConfiguring:
+                    // я не придумал как обработать
+                    break
+                case .noInternet:
+                    if !articlesFromCache.isEmpty {
+                        self.output?.didReceive(articles: articlesFromCache)
+                    } else {
+                        self.output?.didReceiveFail()
+                    }
+                case .parseFailed:
+                    if !articlesFromCache.isEmpty {
+                        self.output?.didReceive(articles: articlesFromCache)
+                    } else {
+                        self.output?.didReceiveFail()
+                    }
+                }
             }
         }
     }

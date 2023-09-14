@@ -41,8 +41,9 @@ extension NBSInteractor: NBSInteractorInputProtocol {
                     let parsedArticlesFromNetwork = self.parser.parseArticle(data: data)
                     let encodedArticle = self.articleCoder.encodeArticleObjects(articles: parsedArticlesFromNetwork)
                     self.cacheService.setArticles(data: encodedArticle, source: source.id)
-                case .failure:
-                    print("fail") // Обработать ошибку
+                case .failure(let error):
+                    print("Printing error")
+                    print(error)
                 }
             }
         }
@@ -68,13 +69,19 @@ extension NBSInteractor: NBSInteractorInputProtocol {
         for source in sources {
             networkService.getArticlesBySource(source: source, pageSize: defaultPageSize) { result in
                 switch result {
-                case .success:
-                    guard let data = try? result.get() else { return }
+                case .success(let data):
                     let parsedArticlesFromNetwork = self.parser.parseArticle(data: data)
                     let encodedArticle = self.articleCoder.encodeArticleObjects(articles: parsedArticlesFromNetwork)
                     self.cacheService.setArticles(data: encodedArticle, source: source.id)
-                case .failure:
-                    print("fail") // Обработать ошибку
+                case .failure(let error):
+                    switch error {
+                    case .noInternet:
+                        self.output?.noInternet()
+                    case .parseFailed:
+                        self.output?.filedParseData()
+                    case .errorUrlConfiguring:
+                        self.output?.filedUrlConfigure()
+                    }
                 }
             }
         }

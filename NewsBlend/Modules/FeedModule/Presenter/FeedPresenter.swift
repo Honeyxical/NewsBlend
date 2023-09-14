@@ -28,6 +28,12 @@ extension FeedPresenter: FeedViewOutputProtocol {
         interactor.isFirstStart()
     }
 
+    func reloadData() {
+        interactor.loadData()
+        view?.hideLottie()
+        view?.showLoader()
+    }
+
     func openSettings() {
         router.openSettings()
     }
@@ -46,6 +52,7 @@ extension FeedPresenter: FeedInteractorOutputProtocol {
     }
 
     func didReceiveFail() {
+        view?.hideLoader()
         view?.displayLottie()
     }
 }

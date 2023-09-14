@@ -3,8 +3,8 @@
 import Foundation
 import UIKit
 
-final class ReusableViews {
-    static func getLoader() -> UIActivityIndicatorView {
+final class Loader {
+    func getLoader() -> UIActivityIndicatorView {
         let loader = UIActivityIndicatorView()
         loader.style = .medium
         loader.startAnimating()
