@@ -43,6 +43,10 @@ extension SettingsPresenter: SettingsViewOutputProtocol {
 }
 
 extension SettingsPresenter: SettingsInteractorOutputProtocol {
+    func failDeletingSource() {
+        newsSettingsView?.displayAlert()
+    }
+
     func didReceive(interval: Int) {
         newsSettingsView?.set(interval: interval)
     }

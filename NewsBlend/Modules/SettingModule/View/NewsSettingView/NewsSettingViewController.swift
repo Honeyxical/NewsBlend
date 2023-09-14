@@ -43,6 +43,14 @@ final class NewsSettingViewController: UIViewController {
         return loader
     }()
 
+    private let warningAlert: UIAlertController = {
+        let alert = UIAlertController(title: "Warning",
+                                      message: "The last source cannot be deleted. Select another one to delete this source.",
+                                      preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        return alert
+    }()
+
     private let intervalsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -164,6 +172,10 @@ extension NewsSettingViewController: SettingsViewInputProtocol {
     func hideLoader() {
         loader.isHidden = true
         sourcesCollection.reloadData()
+    }
+
+    func displayAlert() {
+        self.present(warningAlert, animated: true)
     }
 }
 

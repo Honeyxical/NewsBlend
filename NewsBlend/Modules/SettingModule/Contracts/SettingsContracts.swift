@@ -14,6 +14,7 @@ protocol SettingsViewInputProtocol: AnyObject {
     func set(interval: Int)
     func showLoader()
     func hideLoader()
+    func displayAlert()
 }
 
 // View Output
@@ -39,6 +40,7 @@ protocol SettingsInteractorInputProtocol {
 protocol SettingsInteractorOutputProtocol: AnyObject {
     func didReceive(sources: [SourceModel])
     func didReceive(interval: Int)
+    func failDeletingSource()
 }
 
 // Router Input

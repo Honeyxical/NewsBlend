@@ -64,8 +64,12 @@ extension SettingsInteractor: SettingsInteractorInputProtocol {
 
     func deleteFollowedSource(source: SourceModel) {
         var sources = getFollowedSources()
-        sources.remove(at: sources.firstIndex(of: source) ?? 0)
-        cacheService.saveChangedListSources(sources: sourceCoder.encodeSourceObjects(sourceModels: sources))
+        if sources.count > 1{
+            sources.remove(at: sources.firstIndex(of: source) ?? 0)
+            cacheService.saveChangedListSources(sources: sourceCoder.encodeSourceObjects(sourceModels: sources))
+            return
+        }
+        output?.failDeletingSource()
     }
     
     private func combiningSourceResults(storage: [SourceModel], network: [SourceModel]) -> [SourceModel] {
