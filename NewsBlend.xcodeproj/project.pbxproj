@@ -286,7 +286,6 @@
 			isa = PBXGroup;
 			children = (
 				695F7FBA2A836BAF003EC2F9 /* NewsSettingViewController.swift */,
-				69B59FA02A87863C00B80CD4 /* SourceCell.swift */,
 			);
 			path = NewsSettingView;
 			sourceTree = "<group>";
@@ -578,6 +577,7 @@
 			isa = PBXGroup;
 			children = (
 				69B2BFB02A823591000465BC /* SettingsCell.swift */,
+				69B59FA02A87863C00B80CD4 /* SourceCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";

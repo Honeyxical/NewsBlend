@@ -8,13 +8,7 @@ final class FeedViewController: UIViewController {
     private let childViewVC: UIViewController
     private let lottieChildView: UIView
     private var articles: [ArticleModel] = []
-
-    private lazy var loader: UIView = {
-        let loader = Loader().getLoader()
-        loader.bounds = view.bounds
-        loader.backgroundColor = .white
-        return loader
-    }()
+    private let loader: UIView = Loader()
 
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -49,7 +43,6 @@ final class FeedViewController: UIViewController {
         view.backgroundColor = .systemBackground
         configuringNavigationBar()
         setupLayout()
-        addChild(childViewVC)
         output?.viewDidLoad()
     }
 
@@ -103,12 +96,7 @@ extension FeedViewController: FeedViewInputProtocol {
     }
 
     func showLoader() {
-        if loader.isHidden {
-            loader.isHidden = false
-        } else {
-            view.addSubview(loader)
-            setupLoaderLayout()
-        }
+        loader.isHidden = false
     }
 
     func hideLoader() {
@@ -144,11 +132,13 @@ extension FeedViewController {
     }
 
     private func setupLayout() {
+        addChild(childViewVC)
         view.addSubview(scrollView)
         scrollView.addSubview(childViewVC.view)
         scrollView.addSubview(hotNewsCollection)
         scrollView.addSubview(sectionNameLabel)
         scrollView.addSubview(lottieChildView)
+        scrollView.addSubview(loader)
         childViewVC.view.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -174,16 +164,12 @@ extension FeedViewController {
             lottieChildView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             lottieChildView.topAnchor.constraint(equalTo: view.topAnchor),
             lottieChildView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            lottieChildView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-    }
+            lottieChildView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-    private func setupLoaderLayout() {
-        NSLayoutConstraint.activate([
-            loader.heightAnchor.constraint(equalToConstant: view.frame.height),
-            loader.widthAnchor.constraint(equalToConstant: view.frame.width),
-            loader.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            loader.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loader.topAnchor.constraint(equalTo: view.topAnchor),
+            loader.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            loader.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }

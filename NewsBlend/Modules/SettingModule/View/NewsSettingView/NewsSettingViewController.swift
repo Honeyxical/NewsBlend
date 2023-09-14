@@ -36,12 +36,7 @@ final class NewsSettingViewController: UIViewController {
     private var sources: [SourceModel] = []
     private var sourcesAreChange = false
     private var addedSources: [SourceModel] = []
-
-    private lazy var loader: UIView = {
-        let loader = Loader().getLoader()
-        loader.backgroundColor = .white
-        return loader
-    }()
+    private let loader: UIView = Loader()
 
     private let warningAlert: UIAlertController = {
         let alert = UIAlertController(title: "Warning",
@@ -108,6 +103,7 @@ extension NewsSettingViewController {
         view.addSubview(pickerView)
         view.addSubview(sourcesLabel)
         view.addSubview(sourcesCollection)
+        view.addSubview(loader)
 
         NSLayoutConstraint.activate([
             intervalsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
@@ -125,7 +121,12 @@ extension NewsSettingViewController {
             sourcesCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             sourcesCollection.topAnchor.constraint(equalTo: sourcesLabel.bottomAnchor, constant: 15),
             sourcesCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            sourcesCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            sourcesCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            loader.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loader.topAnchor.constraint(equalTo: view.topAnchor),
+            loader.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            loader.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 
@@ -139,15 +140,6 @@ extension NewsSettingViewController {
         layout.sectionInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
         return layout
     }
-
-    private func setupLoaderLayout() {
-        NSLayoutConstraint.activate([
-            loader.heightAnchor.constraint(equalToConstant: view.frame.height),
-            loader.widthAnchor.constraint(equalToConstant: view.frame.width),
-            loader.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-    }
 }
 
 extension NewsSettingViewController: SettingsViewInputProtocol {
@@ -158,20 +150,15 @@ extension NewsSettingViewController: SettingsViewInputProtocol {
 
     func set(source: [SourceModel]) {
         self.sources = source
+        sourcesCollection.reloadData()
     }
 
     func showLoader() {
-        if loader.isHidden {
-            loader.isHidden = false
-        } else {
-            view.addSubview(loader)
-            setupLoaderLayout()
-        }
+        loader.isHidden = false
     }
 
     func hideLoader() {
         loader.isHidden = true
-        sourcesCollection.reloadData()
     }
 
     func displayAlert() {
