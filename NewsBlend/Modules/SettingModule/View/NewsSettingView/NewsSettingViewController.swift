@@ -26,9 +26,15 @@ enum UpdateIntervals: Int, CaseIterable {
     }
 }
 
+protocol UpdateSourceProtocol: AnyObject {
+    func sourcesAreChanged()
+}
+
 final class NewsSettingViewController: UIViewController {
     var output: SettingsViewOutputProtocol?
-    var sources: [SourceModel] = []
+    weak var delegate: UpdateSourceProtocol?
+    private var sources: [SourceModel] = []
+    private var sourcesAreChange = false
 
     private lazy var loader: UIView = {
         let loader = ReusableViews.getLoader()
@@ -77,6 +83,13 @@ final class NewsSettingViewController: UIViewController {
         output?.viewDidLoad()
         title = "News Settings"
         view.backgroundColor = .white
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if sourcesAreChange {
+            delegate?.sourcesAreChanged()
+        }
     }
 }
 
@@ -191,11 +204,13 @@ extension NewsSettingViewController: UICollectionViewDelegate, UICollectionViewD
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if sources[indexPath.item].isSelected == false {
+            sourcesAreChange = true
             sources[indexPath.item].isSelected = true
             output?.setFollowedSource(source: sources[indexPath.item])
             collectionView.reloadData()
         } else {
             output?.deleteFollowedSource(source: sources[indexPath.item])
+            sourcesAreChange = true
             sources[indexPath.item].isSelected = false
             collectionView.reloadData()
         }

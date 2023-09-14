@@ -3,7 +3,7 @@
 import UIKit
 
 // Module Input
-protocol NBSModuleInputProtocol {}
+protocol NBSModuleInputProtocol: AnyObject {}
 
 // Module Output
 protocol NBSModuleOutputProtocol {}

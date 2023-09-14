@@ -21,6 +21,7 @@ final class SettingsAssembly {
 
         interactor.output = presenter
         newsSettingsViewController.output = presenter
+        newsSettingsViewController.delegate = view
         view.newsSettingView = newsSettingsViewController
         view.output = presenter
         router.output = presenter

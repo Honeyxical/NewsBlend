@@ -13,3 +13,9 @@ extension NBSRouter: NBSRouterInputProtocol {
         viewController?.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
+
+extension NBSModuleInputProtocol {
+    func needToUpdateSources() {
+
+    }
+}

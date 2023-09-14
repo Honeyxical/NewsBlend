@@ -22,6 +22,7 @@ protocol SettingsViewOutputProtocol {
     func setInterval(interval: UpdateIntervals)
     func setFollowedSource(source: SourceModel)
     func deleteFollowedSource(source: SourceModel)
+    func isNeedToUpdateSources(isNeed: Bool)
 }
 
 // Interactor Input
@@ -41,7 +42,9 @@ protocol SettingsInteractorOutputProtocol: AnyObject {
 }
 
 // Router Input
-protocol SettingsRouterInputProtocol {}
+protocol SettingsRouterInputProtocol {
+    func updateSource()
+}
 
 // Router Output
 protocol SettingsRouterOutputProtocol: AnyObject {}

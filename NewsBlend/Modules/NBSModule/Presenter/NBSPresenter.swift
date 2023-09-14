@@ -58,6 +58,11 @@ extension NBSPresenter: NBSViewOutputProtocol {
 extension NBSPresenter: NBSRouterOutputProtocol {}
 
 extension NBSPresenter {
+    func updateSourceAndArticles() {
+        interactor.loadData()
+        interactor.getArticlesByAllSource()
+    }
+
     private func prepareArticles(articles: [ArticleModel]) -> [ArticleModel] {
         var articles = articles
         for (index, var article) in articles.enumerated() {

@@ -24,7 +24,7 @@ final class FeedNetworkService: FeedNetworkServiceProtocol {
         let queryItems = [
             URLQueryItem(name: "domains", value: source.id),
             URLQueryItem(name: "pageSize", value: articlesCount.description),
-            URLQueryItem(name: "apiKey", value: NetworkConstants.apiKey.rawValue)
+            URLQueryItem(name: "apiKey", value: NetworkConstants.reserveApiKey.rawValue)
         ]
         AF.request(URL(string: NetworkConstants.everything.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in
                 guard let data = response.data else {

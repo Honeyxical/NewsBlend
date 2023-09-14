@@ -164,6 +164,14 @@
 			path = Article;
 			sourceTree = "<group>";
 		};
+		6906D3002AB2EA2A004E052F /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				6980B6312AB0A167002385A6 /* Storage.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		6917487D2A77F942003F00D6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -268,7 +276,6 @@
 			children = (
 				09617C132AADEEDC00954FC8 /* Article */,
 				09617C122AADEECF00954FC8 /* Source */,
-				6980B6312AB0A167002385A6 /* Storage.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -331,6 +338,7 @@
 				09617C112AADDC2200954FC8 /* CommonModels */,
 				697270E42AA1C67A002F6A10 /* Modules */,
 				694012BB2A8E12E90099F727 /* Helpers */,
+				6906D3002AB2EA2A004E052F /* Storage */,
 				698339DB2A76882C00909649 /* Application */,
 				698339DC2A76884400909649 /* Resources */,
 				69E298B12A7D0DFE001BFBB4 /* ReusableViews */,

@@ -110,6 +110,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension SettingsViewController: UpdateSourceProtocol {
+    func sourcesAreChanged() {
+        output?.isNeedToUpdateSources(isNeed: true)
+    }
+}
+
 extension SettingsViewController: MenuViewProtocol {
 }
 

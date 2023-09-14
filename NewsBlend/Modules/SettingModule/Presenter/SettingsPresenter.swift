@@ -34,6 +34,12 @@ extension SettingsPresenter: SettingsViewOutputProtocol {
         interactor.getIntervals()
         interactor.getAllSources()
     }
+
+    func isNeedToUpdateSources(isNeed: Bool) {
+        if isNeed {
+            router.updateSource()
+        }
+    }
 }
 
 extension SettingsPresenter: SettingsInteractorOutputProtocol {
