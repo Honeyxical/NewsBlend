@@ -32,6 +32,22 @@ final class NBSInteractor {
 }
 
 extension NBSInteractor: NBSInteractorInputProtocol {
+    func loadDataForNewSource(newSourceList: [SourceModel]) {
+        for source in newSourceList {
+            networkService.getArticlesBySource(source: source, pageSize: defaultPageSize) { result in
+                switch result {
+                case .success:
+                    guard let data = try? result.get() else { return }
+                    let parsedArticlesFromNetwork = self.parser.parseArticle(data: data)
+                    let encodedArticle = self.articleCoder.encodeArticleObjects(articles: parsedArticlesFromNetwork)
+                    self.cacheService.setArticles(data: encodedArticle, source: source.id)
+                case .failure:
+                    print("fail") // Обработать ошибку
+                }
+            }
+        }
+    }
+
     func getArticlesBySource(source: SourceModel) {
         let articlesFromCache = articleCoder.decodeArticleObjects(data: cacheService.getArticles(source: source.id))
         output?.didReceive(articles: articlesFromCache)

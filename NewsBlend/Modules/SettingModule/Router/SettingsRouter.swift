@@ -8,8 +8,8 @@ final class SettingsRouter {
 }
 
 extension SettingsRouter: SettingsRouterInputProtocol {
-    func updateSource(){
-        let NBSModule = NBSAssembly.build(isNeedUpdateSource: true)
+    func updateSource(newListSources: [SourceModel]){
+        let NBSModule = NBSAssembly.build(newSourcesList: newListSources)
         viewController?.navigationController?.pushViewController(NBSModule, animated: true)
     }
 }

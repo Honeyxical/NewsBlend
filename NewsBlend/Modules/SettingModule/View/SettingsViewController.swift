@@ -111,8 +111,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SettingsViewController: UpdateSourceProtocol {
-    func sourcesAreChanged() {
-        output?.isNeedToUpdateSources(isNeed: true)
+    func sourcesAreChanged(newSources: [SourceModel]) {
+        output?.isNeedToUpdateSources(isNeed: true, newSources: newSources)
     }
 }
 

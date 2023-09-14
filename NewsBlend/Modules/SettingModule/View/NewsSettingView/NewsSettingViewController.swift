@@ -27,7 +27,7 @@ enum UpdateIntervals: Int, CaseIterable {
 }
 
 protocol UpdateSourceProtocol: AnyObject {
-    func sourcesAreChanged()
+    func sourcesAreChanged(newSources: [SourceModel])
 }
 
 final class NewsSettingViewController: UIViewController {
@@ -35,6 +35,7 @@ final class NewsSettingViewController: UIViewController {
     weak var delegate: UpdateSourceProtocol?
     private var sources: [SourceModel] = []
     private var sourcesAreChange = false
+    private var addedSources: [SourceModel] = []
 
     private lazy var loader: UIView = {
         let loader = ReusableViews.getLoader()
@@ -88,7 +89,7 @@ final class NewsSettingViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         if sourcesAreChange {
-            delegate?.sourcesAreChanged()
+            delegate?.sourcesAreChanged(newSources: addedSources)
         }
     }
 }
@@ -206,6 +207,7 @@ extension NewsSettingViewController: UICollectionViewDelegate, UICollectionViewD
         if sources[indexPath.item].isSelected == false {
             sourcesAreChange = true
             sources[indexPath.item].isSelected = true
+            addedSources.append(sources[indexPath.item])
             output?.setFollowedSource(source: sources[indexPath.item])
             collectionView.reloadData()
         } else {

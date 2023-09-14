@@ -35,9 +35,9 @@ extension SettingsPresenter: SettingsViewOutputProtocol {
         interactor.getAllSources()
     }
 
-    func isNeedToUpdateSources(isNeed: Bool) {
+    func isNeedToUpdateSources(isNeed: Bool, newSources: [SourceModel]) {
         if isNeed {
-            router.updateSource()
+            router.updateSource(newListSources: newSources)
         }
     }
 }

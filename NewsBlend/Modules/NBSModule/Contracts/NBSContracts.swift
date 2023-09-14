@@ -29,6 +29,7 @@ protocol NBSInteractorInputProtocol {
     func getArticlesByAllSource()
     func startUpdateTimer()
     func loadData()
+    func loadDataForNewSource(newSourceList: [SourceModel])
 }
 
 // Interactor Output

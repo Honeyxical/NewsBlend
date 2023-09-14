@@ -5,7 +5,7 @@ import UIKit
 
 final class FeedAssembly {
     static func build() -> UIViewController {
-        let view = FeedViewController(childView: NBSAssembly.build(isNeedUpdateSource: false))
+        let view = FeedViewController(childView: NBSAssembly.build(newSourcesList: []))
         let interactor = FeedInteractor(networkService: FeedNetworkService(),
                                         cacheService: Storage.shared,
                                         parser: FeedParser(converter: FeedArticleConverter()),

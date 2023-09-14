@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 
 final class NBSAssembly {
-    static func build(isNeedUpdateSource: Bool) -> UIViewController {
+    static func build(newSourcesList: [SourceModel]) -> UIViewController {
         let interactor = NBSInteractor(networkService: NBSNetworkService(),
                                        cacheService: Storage.shared,
                                        parser: NBSParser(articleConverter: NBSArticleConverter()),
@@ -18,8 +18,8 @@ final class NBSAssembly {
         let presenter = NBSPresenter(interactor: interactor,
                                      router: router,
                                      view: view)
-        if isNeedUpdateSource {
-            presenter.updateSourceAndArticles()
+        if  !newSourcesList.isEmpty {
+            presenter.updateSourceAndArticles(newSourceList: newSourcesList)
         }
         view.output = presenter
         interactor.output = presenter
