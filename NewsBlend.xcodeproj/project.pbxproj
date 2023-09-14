@@ -141,6 +141,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0945E8BB2AB35C9A00ABA0B4 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				69FD96822AAF243C007F3A4B /* Helper */,
+				69833A3B2A76AE7400909649 /* Assembly */,
+				69833A3A2A76AE6B00909649 /* Contracts */,
+				69833A392A76AE6300909649 /* Interactor */,
+				69833A382A76AE5900909649 /* Presenter */,
+				69833A372A76AE5200909649 /* Router */,
+				69833A362A76AE4B00909649 /* Services */,
+				69833A352A76AE4000909649 /* View */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		0945E8BC2AB35CA400ABA0B4 /* Submodule */ = {
+			isa = PBXGroup;
+			children = (
+				69242EE52A88B869008F040E /* NBSModule */,
+			);
+			path = Submodule;
+			sourceTree = "<group>";
+		};
 		09617C112AADDC2200954FC8 /* CommonModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,7 +318,6 @@
 			children = (
 				69833A332A76AE0700909649 /* DetailModule */,
 				69833A322A76ADFC00909649 /* FeedModule */,
-				69242EE52A88B869008F040E /* NBSModule */,
 				69833A342A76AE1100909649 /* SettingModule */,
 			);
 			path = Modules;
@@ -368,14 +390,8 @@
 		69833A322A76ADFC00909649 /* FeedModule */ = {
 			isa = PBXGroup;
 			children = (
-				69FD96822AAF243C007F3A4B /* Helper */,
-				69833A3B2A76AE7400909649 /* Assembly */,
-				69833A3A2A76AE6B00909649 /* Contracts */,
-				69833A392A76AE6300909649 /* Interactor */,
-				69833A382A76AE5900909649 /* Presenter */,
-				69833A372A76AE5200909649 /* Router */,
-				69833A362A76AE4B00909649 /* Services */,
-				69833A352A76AE4000909649 /* View */,
+				0945E8BB2AB35C9A00ABA0B4 /* Module */,
+				0945E8BC2AB35CA400ABA0B4 /* Submodule */,
 			);
 			path = FeedModule;
 			sourceTree = "<group>";

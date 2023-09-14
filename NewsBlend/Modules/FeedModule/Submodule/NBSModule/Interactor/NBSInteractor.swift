@@ -36,8 +36,7 @@ extension NBSInteractor: NBSInteractorInputProtocol {
         for source in newSourceList {
             networkService.getArticlesBySource(source: source, pageSize: defaultPageSize) { result in
                 switch result {
-                case .success:
-                    guard let data = try? result.get() else { return }
+                case .success(let data):
                     let parsedArticlesFromNetwork = self.parser.parseArticle(data: data)
                     let encodedArticle = self.articleCoder.encodeArticleObjects(articles: parsedArticlesFromNetwork)
                     self.cacheService.setArticles(data: encodedArticle, source: source.id)
@@ -72,7 +71,9 @@ extension NBSInteractor: NBSInteractorInputProtocol {
                 case .success(let data):
                     let parsedArticlesFromNetwork = self.parser.parseArticle(data: data)
                     let encodedArticle = self.articleCoder.encodeArticleObjects(articles: parsedArticlesFromNetwork)
+                    print(parsedArticlesFromNetwork)
                     self.cacheService.setArticles(data: encodedArticle, source: source.id)
+                    self.output?.articlesLoaded()
                 case .failure(let error):
                     switch error {
                     case .noInternet:

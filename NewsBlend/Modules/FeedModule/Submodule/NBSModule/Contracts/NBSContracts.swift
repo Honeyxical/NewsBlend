@@ -40,6 +40,7 @@ protocol NBSInteractorOutputProtocol: AnyObject {
     func noInternet()
     func filedParseData()
     func filedUrlConfigure()
+    func articlesLoaded()
 }
 
 // Router Input

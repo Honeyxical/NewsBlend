@@ -42,8 +42,8 @@ final class FeedViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configuringNavigationBar()
-        setupLayout()
         output?.viewDidLoad()
+        setupLayout()
     }
 
     init(childView: UIViewController, lottieChildView: UIView, loader: UIView) {

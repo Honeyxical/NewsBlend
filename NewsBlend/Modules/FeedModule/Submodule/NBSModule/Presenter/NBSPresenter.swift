@@ -21,6 +21,10 @@ final class NBSPresenter {
 }
 
 extension NBSPresenter: NBSInteractorOutputProtocol {
+    func articlesLoaded() {
+        interactor.getArticlesByAllSource()
+    }
+    
     func noInternet() {
         interactor.getArticlesByAllSource()
     }
@@ -58,7 +62,6 @@ extension NBSPresenter: NBSViewOutputProtocol {
     func viewDidLoad() {
         interactor.startUpdateTimer()
         interactor.loadData()
-        interactor.getArticlesByAllSource()
     }
 
     func viewWillAppear() {
