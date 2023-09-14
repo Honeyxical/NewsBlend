@@ -87,4 +87,8 @@ extension SettingsInteractor: SettingsInteractorInputProtocol {
         }
         return network
     }
+
+    private func deleteSourceArticles(source: SourceModel) {
+        cacheService.deleteSourceArticles(sourceId: source.id)
+    }
 }

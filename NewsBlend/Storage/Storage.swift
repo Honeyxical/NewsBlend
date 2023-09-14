@@ -8,6 +8,7 @@ protocol SettingStorageProtocol{
     func getSources() -> Data
     func setSource(sources: Data)
     func saveChangedListSources(sources: Data)
+    func deleteSourceArticles(sourceId: String)
 }
 
 protocol NBSStorageProtocol{
@@ -41,6 +42,10 @@ final class Storage {
 }
 
 extension Storage: SettingStorageProtocol {
+    func deleteSourceArticles(sourceId: String) {
+        userDefaults.removeObject(forKey: sourceId)
+    }
+
     func getUpdateInterval() -> Int {
         userDefaults.integer(forKey: Constants.updateInterval)
     }
