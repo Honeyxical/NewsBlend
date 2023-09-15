@@ -12,7 +12,7 @@ final class NBSArticleView: UIView {
     private var isShortCell = true
 
     private lazy var articlesCollection: UICollectionView = {
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: collectionArticlesLayout())
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.dataSource = self
         collection.delegate = self
@@ -41,7 +41,8 @@ extension NBSArticleView {
         isShortCell = cellType
     }
 
-    func reloadView() {
+    func reloadView(isShortCell: Bool) {
+        self.isShortCell = isShortCell
         articlesCollection.reloadData()
     }
 
@@ -69,6 +70,12 @@ extension NBSArticleView {
 extension NBSArticleView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.didTap(article: articles[indexPath.item])
+    }
+}
+
+extension NBSArticleView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: bounds.width, height: 100)
     }
 }
 

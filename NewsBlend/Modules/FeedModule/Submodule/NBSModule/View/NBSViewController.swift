@@ -28,22 +28,7 @@ final class NBSViewController: UIViewController {
         return collection
     }()
 
-    private lazy var cellTypeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.restorationIdentifier = "CellTypeButton"
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 10
-        button.layer.borderColor = UIColor.systemBlue.cgColor
-        button.layer.borderWidth = 1
-        if isShortArticleCell {
-            button.setTitle("Full", for: .normal)
-        } else {
-            button.setTitle("Short", for: .normal)
-        }
-        button.tintColor = .lightGray
-        button.addTarget(self, action: #selector(changeViewMode), for: .touchUpInside)
-        return button
-    }()
+    private lazy var cellTypeButton = UIButton(type: .system)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -158,18 +143,31 @@ extension NBSViewController {
             childView.topAnchor.constraint(equalTo: sourcesCollection.bottomAnchor, constant: 15),
             childView.heightAnchor.constraint(equalToConstant: 650)
         ])
+        configureButton()
     }
 
     @objc private func changeViewMode() {
         let childView = childView as? NBSArticleView
-        if !isShortArticleCell {
+        isShortArticleCell.toggle()
+        getButtonTitle()
+        childView?.reloadView(isShortCell: isShortArticleCell)
+    }
+
+    private func getButtonTitle() {
+        if isShortArticleCell {
             cellTypeButton.setTitle("Full", for: .normal)
-            childView?.reloadView()
-            isShortArticleCell.toggle()
         } else {
             cellTypeButton.setTitle("Short", for: .normal)
-            childView?.reloadView()
-            isShortArticleCell.toggle()
         }
+    }
+
+    private func configureButton() {
+        cellTypeButton.translatesAutoresizingMaskIntoConstraints = false
+        cellTypeButton.layer.cornerRadius = 10
+        cellTypeButton.layer.borderColor = UIColor.systemBlue.cgColor
+        cellTypeButton.layer.borderWidth = 1
+        cellTypeButton.tintColor = .lightGray
+        cellTypeButton.addTarget(self, action: #selector(changeViewMode), for: .touchUpInside)
+        getButtonTitle()
     }
 }
