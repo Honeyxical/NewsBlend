@@ -109,30 +109,33 @@ extension DetailViewController {
         scrollView.addSubview(tagStack)
         scrollView.addSubview(contentLabel)
 
+        let horizontalOffset = 25.0
+        let topOffset = 25.0
+
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -100),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 400),
 
-            authorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            authorLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
+            authorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalOffset),
+            authorLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: topOffset),
             authorLabel.widthAnchor.constraint(equalToConstant: 300),
 
-            publishedAtLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
-            publishedAtLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            publishedAtLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: topOffset),
+            publishedAtLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalOffset),
 
-            articleTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            articleTitleLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 20),
-            articleTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            articleTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalOffset),
+            articleTitleLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: topOffset),
+            articleTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalOffset),
 
-            tagStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            tagStack.topAnchor.constraint(equalTo: articleTitleLabel.bottomAnchor, constant: 20),
-            tagStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            tagStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalOffset),
+            tagStack.topAnchor.constraint(equalTo: articleTitleLabel.bottomAnchor, constant: topOffset),
+            tagStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalOffset),
 
-            contentLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            contentLabel.topAnchor.constraint(equalTo: tagStack.bottomAnchor, constant: 20),
-            contentLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            contentLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalOffset),
+            contentLabel.topAnchor.constraint(equalTo: tagStack.bottomAnchor, constant: topOffset),
+            contentLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalOffset)
         ])
     }
 

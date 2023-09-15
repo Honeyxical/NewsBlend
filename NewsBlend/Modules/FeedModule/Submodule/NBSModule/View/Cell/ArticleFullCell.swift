@@ -69,22 +69,26 @@ final class ArticleFullCell: UICollectionViewCell {
         addSubview(authorLabel)
         addSubview(publishedTimeLabel)
 
+        let trailingOffset = 15.0
+        let leadingOffset = 10.0
+        let verticalOffset = 5.0
+
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leadingOffset),
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             imageView.widthAnchor.constraint(equalToConstant: 100),
 
-            titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: leadingOffset),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: verticalOffset),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -trailingOffset),
 
-            authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
-            authorLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
-            authorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: verticalOffset),
+            authorLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: leadingOffset),
+            authorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -trailingOffset),
 
-            publishedTimeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            publishedTimeLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
+            publishedTimeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -trailingOffset),
+            publishedTimeLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -verticalOffset)
         ])
     }
 }

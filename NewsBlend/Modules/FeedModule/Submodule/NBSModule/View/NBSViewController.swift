@@ -137,12 +137,14 @@ extension NBSViewController {
         view.addSubview(sourcesCollection)
         view.addSubview(childView)
 
+        let horizontalOffset = 16.0
+
         NSLayoutConstraint.activate([
-            sectionNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            sectionNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalOffset),
             sectionNameLabel.topAnchor.constraint(equalTo: view.topAnchor),
 
             cellTypeButton.topAnchor.constraint(equalTo: view.topAnchor),
-            cellTypeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            cellTypeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalOffset),
             cellTypeButton.heightAnchor.constraint(equalToConstant: 25),
             cellTypeButton.widthAnchor.constraint(equalToConstant: 45),
 

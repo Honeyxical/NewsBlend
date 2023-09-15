@@ -58,17 +58,20 @@ extension ArticleShortCell {
         addSubview(articleAuthorLabel)
         addSubview(publishedAtLabel)
 
-        NSLayoutConstraint.activate([
-            articleTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            articleTitleLabel.topAnchor.constraint(equalTo: topAnchor),
-            articleTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+        let horizontalOffset = 15.0
+        let verticalOffset = 10.0
 
-            articleAuthorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
-            articleAuthorLabel.topAnchor.constraint(equalTo: articleTitleLabel.bottomAnchor, constant: 10),
+        NSLayoutConstraint.activate([
+            articleTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalOffset),
+            articleTitleLabel.topAnchor.constraint(equalTo: topAnchor),
+            articleTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalOffset),
+
+            articleAuthorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalOffset),
+            articleAuthorLabel.topAnchor.constraint(equalTo: articleTitleLabel.bottomAnchor, constant: verticalOffset),
             articleAuthorLabel.widthAnchor.constraint(equalToConstant: frame.width / 1.50),
 
-            publishedAtLabel.topAnchor.constraint(equalTo: articleTitleLabel.bottomAnchor, constant: 10),
-            publishedAtLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
+            publishedAtLabel.topAnchor.constraint(equalTo: articleTitleLabel.bottomAnchor, constant: verticalOffset),
+            publishedAtLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalOffset)
         ])
     }
 }

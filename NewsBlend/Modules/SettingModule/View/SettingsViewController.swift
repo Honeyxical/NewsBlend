@@ -125,17 +125,19 @@ extension SettingsViewController {
         view.addSubview(userView)
         view.addSubview(tableView)
 
+        let topOffset = 15.0
+
         NSLayoutConstraint.activate([
             screenTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             screenTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
 
             userView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            userView.topAnchor.constraint(equalTo: screenTitleLabel.bottomAnchor, constant: 15),
+            userView.topAnchor.constraint(equalTo: screenTitleLabel.bottomAnchor, constant: topOffset),
             userView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             userView.heightAnchor.constraint(equalToConstant: 200),
 
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.topAnchor.constraint(equalTo: userView.bottomAnchor, constant: 15),
+            tableView.topAnchor.constraint(equalTo: userView.bottomAnchor, constant: topOffset),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])

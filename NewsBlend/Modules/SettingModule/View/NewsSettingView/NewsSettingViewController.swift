@@ -114,21 +114,24 @@ extension NewsSettingViewController {
         view.addSubview(sourcesCollection)
         view.addSubview(loader)
 
-        NSLayoutConstraint.activate([
-            intervalsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            intervalsLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-            intervalsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+        let horizontalOffset = 15.0
+        let topOffset = 10.0
 
-            pickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            pickerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            pickerView.topAnchor.constraint(equalTo: intervalsLabel.bottomAnchor, constant: 0),
+        NSLayoutConstraint.activate([
+            intervalsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalOffset),
+            intervalsLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topOffset),
+            intervalsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalOffset),
+
+            pickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalOffset),
+            pickerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalOffset),
+            pickerView.topAnchor.constraint(equalTo: intervalsLabel.bottomAnchor),
             pickerView.heightAnchor.constraint(equalToConstant: 100),
 
-            sourcesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            sourcesLabel.topAnchor.constraint(equalTo: pickerView.bottomAnchor, constant: 15),
+            sourcesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalOffset),
+            sourcesLabel.topAnchor.constraint(equalTo: pickerView.bottomAnchor, constant: topOffset),
 
             sourcesCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            sourcesCollection.topAnchor.constraint(equalTo: sourcesLabel.bottomAnchor, constant: 15),
+            sourcesCollection.topAnchor.constraint(equalTo: sourcesLabel.bottomAnchor, constant: topOffset),
             sourcesCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             sourcesCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
