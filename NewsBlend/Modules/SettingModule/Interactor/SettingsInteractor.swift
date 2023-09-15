@@ -31,14 +31,22 @@ extension SettingsInteractor: SettingsInteractorInputProtocol {
     func getAllSources() {
         let sourcesFromCache = sourceCoder.decodeSourceObjects(data: cacheService.getSources())
         networkService.getSources(sourceLanguage: defaultLanguage) { result in
-            guard let data = try? result.get() else {
-                self.output?.didReceive(sources: sourcesFromCache)
-                return
-            }
-            let sourcesFromNetwork = self.parser.parseSource(data: data)
-            if !sourcesFromNetwork.isEmpty {
-                self.output?.didReceive(sources: self.combiningSourceResults(storage: sourcesFromCache,
-                                                                             network: sourcesFromNetwork))
+            switch result {
+            case .success(let data):
+                let sourcesFromNetwork = self.parser.parseSource(data: data)
+                if !sourcesFromNetwork.isEmpty {
+                    self.output?.didReceive(sources: self.combiningSourceResults(storage: sourcesFromCache,
+                                                                                 network: sourcesFromNetwork))
+                }
+            case .failure(let error):
+                switch error {
+                case .errorConfigureUrl:
+                    self.output?.didReceive(sources: self.getFollowedSources())
+                case .errorParsingData:
+                    self.output?.didReceive(sources: self.getFollowedSources())
+                case .noInternet:
+                    self.output?.didReceive(sources: self.getFollowedSources())
+                }
             }
         }
     }

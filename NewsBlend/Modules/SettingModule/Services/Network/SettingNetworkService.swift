@@ -7,11 +7,13 @@ protocol SettingNetworkServiceProtocol {
     func getSources(sourceLanguage: String, completion: @escaping GetSourcesResponse)
 }
 
-enum SourceResponseErrors: Error {
+enum SettingsResponseErrors: Error {
     case noInternet
+    case errorConfigureUrl
+    case errorParsingData
 }
 
-typealias GetSourcesResponse = (Result<Data, SourceResponseErrors>) -> Void
+typealias GetSourcesResponse = (Result<Data, SettingsResponseErrors>) -> Void
 
 final class SettingNetworkService: SettingNetworkServiceProtocol {
     private enum SettingsConstants: String {
@@ -20,19 +22,31 @@ final class SettingNetworkService: SettingNetworkServiceProtocol {
         case reserveApiKey = "134f24f4624347d4964bfdbb07479eac"
     }
 
+    let reachabilityManager = Alamofire.NetworkReachabilityManager(host: "www.google.com")
+
     func getSources(sourceLanguage: String, completion: @escaping GetSourcesResponse) {
-        let queryItems = [
-            URLQueryItem(name: "apiKey", value: SettingsConstants.apiKey.rawValue),
-            URLQueryItem(name: "language", value: sourceLanguage)
-        ]
-        AF.request(URL(string: SettingsConstants.sources.rawValue)?.appending(queryItems: queryItems) ?? "").response { response in
-            guard let data = response.data else {
-                completion(.failure(.noInternet))
+        if let isReachable = reachabilityManager?.isReachable, isReachable {
+            let queryItems = [
+                URLQueryItem(name: "apiKey", value: SettingsConstants.apiKey.rawValue),
+                URLQueryItem(name: "language", value: sourceLanguage)
+            ]
+
+            guard let url = URL(string: SettingsConstants.sources.rawValue)?.appending(queryItems: queryItems) else {
+                completion(.failure(.errorConfigureUrl))
                 return
             }
-            DispatchQueue.main.async {
-                completion(.success(data))
+
+            AF.request(url).response { response in
+                guard let data = response.data else {
+                    completion(.failure(.errorParsingData))
+                    return
+                }
+                DispatchQueue.main.async {
+                    completion(.success(data))
+                }
             }
+        } else {
+            completion(.failure(.noInternet))
         }
     }
 }
