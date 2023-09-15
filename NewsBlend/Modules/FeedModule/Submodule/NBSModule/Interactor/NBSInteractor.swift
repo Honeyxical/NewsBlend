@@ -70,9 +70,11 @@ extension NBSInteractor: NBSInteractorInputProtocol {
                 switch result {
                 case .success(let data):
                     let parsedArticlesFromNetwork = self.parser.parseArticle(data: data)
-                    let encodedArticle = self.articleCoder.encodeArticleObjects(articles: parsedArticlesFromNetwork)
-                    print(parsedArticlesFromNetwork)
-                    self.cacheService.setArticles(data: encodedArticle, source: source.id)
+                    if !parsedArticlesFromNetwork.isEmpty{
+                        let encodedArticle = self.articleCoder.encodeArticleObjects(articles: parsedArticlesFromNetwork)
+                        self.cacheService.setArticles(data: encodedArticle, source: source.id)
+                        self.output?.articlesLoaded()
+                    }
                     self.output?.articlesLoaded()
                 case .failure(let error):
                     switch error {
@@ -89,7 +91,7 @@ extension NBSInteractor: NBSInteractorInputProtocol {
     }
         
     func getSources() {
-        var sourcesFromCache = [SourceModel(id: "all", name: "All", category: "", language: "", country: "", isSelected: true)]
+        var sourcesFromCache = [SourceModel(id: "all", name: "All", isSelected: true)]
         sourcesFromCache += sourceCoder.decodeSourceObjects(data: cacheService.getSources())
         output?.didReceive(sources: sourcesFromCache)
     }

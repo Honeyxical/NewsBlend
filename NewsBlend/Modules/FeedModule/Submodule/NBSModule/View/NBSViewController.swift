@@ -66,7 +66,7 @@ final class NBSViewController: UIViewController {
     }
 }
 
-extension NBSViewController: DidTapProtocol {
+extension NBSViewController: NBSArticleViewDelegate {
     func didTap(article: ArticleModel) {
         output?.openArticleDetail(article: article)
     }
@@ -100,16 +100,19 @@ extension NBSViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             return UICollectionViewCell()
         }
         cell.setSourceName(name: sources[indexPath.item].name)
+        if indexPath.item == 0 {
+            cell.isSelected = true
+        }
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if lastSelectedIndex != indexPath {
             let newCell = collectionView.cellForItem(at: indexPath)
-            newCell?.layer.borderColor = UIColor.systemBlue.cgColor
-            
+            newCell?.isSelected = true
+
             let prevCell = collectionView.cellForItem(at: lastSelectedIndex)
-            prevCell?.layer.borderColor = UIColor.lightGray.cgColor
+            prevCell?.isSelected = false
             lastSelectedIndex = indexPath
         }
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)

@@ -2,12 +2,12 @@
 
 import UIKit
 
-protocol DidTapProtocol: AnyObject {
+protocol NBSArticleViewDelegate: AnyObject {
     func didTap(article: ArticleModel)
 }
 
 final class NBSArticleView: UIView {
-    weak var delegate: DidTapProtocol?
+    weak var delegate: NBSArticleViewDelegate?
     private var articles: [ArticleModel] = []
     private var isShortCell = true
 
@@ -48,7 +48,7 @@ extension NBSArticleView {
     private func collectionArticlesLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: 400, height: 130)
+        layout.itemSize = CGSize(width: 393, height: 130)
 //        layout.itemSize = CGSize(width: frame.width, height: 100)
         layout.minimumLineSpacing = 15
         return layout

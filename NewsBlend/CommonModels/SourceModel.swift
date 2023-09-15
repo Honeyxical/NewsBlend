@@ -5,8 +5,5 @@ import Foundation
 struct SourceModel: Equatable, Encodable, Decodable {
     let id: String
     let name: String
-    let category: String
-    let language: String
-    let country: String
     var isSelected: Bool
 }

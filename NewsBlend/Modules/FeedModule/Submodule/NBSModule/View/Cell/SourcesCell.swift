@@ -10,6 +10,12 @@ final class SourcesCell: SourceCell {
         layer.borderColor = UIColor.lightGray.cgColor
     }
 
+    override var isSelected: Bool {
+        willSet {
+            layer.borderColor = isSelected ? UIColor.systemBlue.cgColor : UIColor.lightGray.cgColor
+        }
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

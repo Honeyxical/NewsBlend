@@ -16,9 +16,6 @@ struct Sources: Decodable {
     func map(source: Sources) -> SourceModel {
         SourceModel(id: id ?? "",
                     name: name ?? "",
-                    category: category ?? "",
-                    language: language ?? "",
-                    country: country ?? "",
                     isSelected: false)
     }
 }

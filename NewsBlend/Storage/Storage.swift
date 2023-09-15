@@ -69,6 +69,8 @@ extension Storage: SettingStorageProtocol {
 
 extension Storage: NBSStorageProtocol {
     func setArticles(data: Data, source: String) {
+        let data = data
+        let source = source
         userDefaults.set(data, forKey: source)
     }
 
