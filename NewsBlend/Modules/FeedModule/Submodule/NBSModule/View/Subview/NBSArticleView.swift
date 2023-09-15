@@ -46,15 +46,6 @@ extension NBSArticleView {
         articlesCollection.reloadData()
     }
 
-    private func collectionArticlesLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: 393, height: 130)
-//        layout.itemSize = CGSize(width: frame.width, height: 100)
-        layout.minimumLineSpacing = 15
-        return layout
-    }
-
     private func setupLayout() {
         addSubview(articlesCollection)
 

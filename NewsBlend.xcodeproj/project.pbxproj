@@ -263,7 +263,7 @@
 		69242EEE2A88BB5B008F040E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				69D475412AB22D39007589A4 /* NBSArticleView.swift */,
+				698A61252AB46A560099006B /* Subview */,
 				69242EF12A88BBEA008F040E /* NBSViewController.swift */,
 				69242F092A890E22008F040E /* Cell */,
 			);
@@ -587,6 +587,14 @@
 				691C016C2A7BBC42004E22FB /* DetailViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		698A61252AB46A560099006B /* Subview */ = {
+			isa = PBXGroup;
+			children = (
+				69D475412AB22D39007589A4 /* NBSArticleView.swift */,
+			);
+			path = Subview;
 			sourceTree = "<group>";
 		};
 		69B2BFAF2A82357B000465BC /* Cell */ = {
