@@ -8,6 +8,7 @@ final class NBSViewController: UIViewController {
     private let childView: UIView
     private var sources: [SourceModel] = []
     private var isShortArticleCell = true
+    private var lastSelectedIndex = IndexPath(row: 0, section: 0)
 
     private let sectionNameLabel: UILabel = {
         let label = UILabel()
@@ -103,6 +104,14 @@ extension NBSViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if lastSelectedIndex != indexPath {
+            let newCell = collectionView.cellForItem(at: indexPath)
+            newCell?.layer.borderColor = UIColor.systemBlue.cgColor
+            
+            let prevCell = collectionView.cellForItem(at: lastSelectedIndex)
+            prevCell?.layer.borderColor = UIColor.lightGray.cgColor
+            lastSelectedIndex = indexPath
+        }
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
         let selectedSource = sources[indexPath.item]
         output?.getArticlesBySource(source: selectedSource)
