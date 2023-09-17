@@ -3,16 +3,14 @@
 import Foundation
 
 final class SettingsPresenter {
-    weak var view: MenuViewProtocol?
+    weak var view: SettingsViewInputProtocol?
     private let interactor: SettingsInteractorInputProtocol
     private let router: SettingsRouterInputProtocol
-    weak var newsSettingsView: SettingsViewInputProtocol?
 
-    init(view: MenuViewProtocol, interactor: SettingsInteractorInputProtocol, router: SettingsRouterInputProtocol, newsSettingsProtocol: SettingsViewInputProtocol) {
+    init(view: SettingsViewInputProtocol, interactor: SettingsInteractorInputProtocol, router: SettingsRouterInputProtocol) {
         self.view = view
         self.interactor = interactor
         self.router = router
-        self.newsSettingsView = newsSettingsProtocol
     }
 }
 
@@ -30,30 +28,24 @@ extension SettingsPresenter: SettingsViewOutputProtocol {
     }
 
     func viewDidLoad() {
-        newsSettingsView?.showLoader()
+        view?.showLoader()
         interactor.getIntervals()
         interactor.getAllSources()
-    }
-
-    func isNeedToUpdateSources(isNeed: Bool, newSources: [SourceModel]) {
-        if isNeed {
-            router.updateSource(newListSources: newSources)
-        }
     }
 }
 
 extension SettingsPresenter: SettingsInteractorOutputProtocol {
     func failDeletingSource() {
-        newsSettingsView?.displayAlert()
+        view?.displayAlert()
     }
 
     func didReceive(interval: Int) {
-        newsSettingsView?.set(interval: interval)
+        view?.set(interval: interval)
     }
 
     func didReceive(sources: [SourceModel]) {
-        newsSettingsView?.set(source: sources)
-        newsSettingsView?.hideLoader()
+        view?.set(source: sources)
+        view?.hideLoader()
     }
 }
 

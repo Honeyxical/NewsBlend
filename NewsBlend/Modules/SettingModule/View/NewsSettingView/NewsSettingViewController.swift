@@ -26,16 +26,10 @@ enum UpdateIntervals: Int, CaseIterable {
     }
 }
 
-protocol UpdateSourceProtocol: AnyObject {
-    func sourcesAreChanged(newSources: [SourceModel])
-}
-
 final class NewsSettingViewController: UIViewController {
     var output: SettingsViewOutputProtocol?
-    weak var delegate: UpdateSourceProtocol?
     private var sources: [SourceModel] = []
     private var sourcesAreChange = false
-    private var addedSources: [SourceModel] = []
     private let loader: UIView
 
     private let warningAlert: UIAlertController = {
@@ -89,10 +83,11 @@ final class NewsSettingViewController: UIViewController {
         view.backgroundColor = .white
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         if sourcesAreChange {
-            delegate?.sourcesAreChanged(newSources: addedSources)
+            let prevVC = navigationController?.viewControllers[0] as? FeedViewController
+            prevVC?.updateNBSSources()
         }
     }
 
@@ -218,7 +213,6 @@ extension NewsSettingViewController: UICollectionViewDelegate, UICollectionViewD
         if sources[indexPath.item].isSelected == false {
             sourcesAreChange = true
             sources[indexPath.item].isSelected = true
-            addedSources.append(sources[indexPath.item])
             output?.setFollowedSource(source: sources[indexPath.item])
             collectionView.reloadData()
         } else {

@@ -49,7 +49,6 @@
 		69B59FA12A87863C00B80CD4 /* SourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B59FA02A87863C00B80CD4 /* SourceCell.swift */; };
 		69B59FA62A87C5DE00B80CD4 /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B59FA52A87C5DE00B80CD4 /* ArticleModel.swift */; };
 		69B59FA82A87D16B00B80CD4 /* SourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B59FA72A87D16B00B80CD4 /* SourceModel.swift */; };
-		69BB2B2F2A7984AE00B5BDE1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B2E2A7984AE00B5BDE1 /* SettingsViewController.swift */; };
 		69BB2B342A7984F400B5BDE1 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B332A7984F400B5BDE1 /* SettingsRouter.swift */; };
 		69BB2B362A79850B00B5BDE1 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B352A79850B00B5BDE1 /* SettingsPresenter.swift */; };
 		69BB2B382A79851D00B5BDE1 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B372A79851D00B5BDE1 /* SettingsInteractor.swift */; };
@@ -109,7 +108,6 @@
 		69B59FA02A87863C00B80CD4 /* SourceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCell.swift; sourceTree = "<group>"; };
 		69B59FA52A87C5DE00B80CD4 /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		69B59FA72A87D16B00B80CD4 /* SourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceModel.swift; sourceTree = "<group>"; };
-		69BB2B2E2A7984AE00B5BDE1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		69BB2B332A7984F400B5BDE1 /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
 		69BB2B352A79850B00B5BDE1 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		69BB2B372A79851D00B5BDE1 /* SettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
@@ -536,7 +534,6 @@
 			children = (
 				695F7FB92A836A2A003EC2F9 /* NewsSettingView */,
 				69B2BFAF2A82357B000465BC /* Cell */,
-				69BB2B2E2A7984AE00B5BDE1 /* SettingsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -794,7 +791,6 @@
 				6980B6362AB0B59A002385A6 /* SettingArticleConverter.swift in Sources */,
 				69242EFF2A88C007008F040E /* NBSPresenter.swift in Sources */,
 				69242F082A8907F4008F040E /* SourcesCell.swift in Sources */,
-				69BB2B2F2A7984AE00B5BDE1 /* SettingsViewController.swift in Sources */,
 				69BB2B382A79851D00B5BDE1 /* SettingsInteractor.swift in Sources */,
 				69242EFC2A88BF79008F040E /* NBSInteractor.swift in Sources */,
 				69796EC02A78CF9E00EB6714 /* FeedPresenter.swift in Sources */,

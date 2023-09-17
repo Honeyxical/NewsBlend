@@ -6,7 +6,6 @@ import UIKit
 final class SettingsAssembly {
     static func build() -> UIViewController {
         let newsSettingsViewController = NewsSettingViewController(loader: Loader())
-        let view = SettingsViewController()
         let interactor = SettingsInteractor(cacheService: Storage.shared,
                                             networkService: SettingNetworkService(),
                                             parser: SettingParser(articleConverter: SettingArticleConverter(), sourceConverter: SettingSourceConverter()),
@@ -14,17 +13,13 @@ final class SettingsAssembly {
                                             articleConverter: SettingArticleConverter(),
                                             sourceConverter: SettingSourceConverter())
         let router = SettingsRouter()
-        let presenter = SettingsPresenter(view: view,
+        let presenter = SettingsPresenter(view: newsSettingsViewController,
                                           interactor: interactor,
-                                          router: router,
-                                          newsSettingsProtocol: newsSettingsViewController)
+                                          router: router)
 
         interactor.output = presenter
         newsSettingsViewController.output = presenter
-        newsSettingsViewController.delegate = view
-        view.newsSettingView = newsSettingsViewController
-        view.output = presenter
         router.output = presenter
-        return view
+        return newsSettingsViewController
     }
 }

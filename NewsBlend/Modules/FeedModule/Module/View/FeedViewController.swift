@@ -100,6 +100,13 @@ extension FeedViewController: FeedViewInputProtocol {
         }
     }
 
+    func updateNBSSources() {
+        if childViewVC is NBSViewController {
+            let childViewVC = childViewVC as? NBSViewController
+            childViewVC?.moduleInput?.updateSourceAndArticles()
+        }
+    }
+
     func showLoader() {
         loader.isHidden = false
     }

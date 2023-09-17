@@ -62,9 +62,6 @@ extension NBSPresenter: NBSViewOutputProtocol {
     func viewDidLoad() {
         interactor.startUpdateTimer()
         interactor.loadData()
-    }
-
-    func viewWillAppear() {
         interactor.getSources()
     }
 }
@@ -73,16 +70,17 @@ extension NBSPresenter: NBSModuleInputProtocol {
     func reloadData() {
         interactor.loadData()
     }
+
+    func updateSourceAndArticles() {
+        interactor.getSources()
+        interactor.loadData()
+        interactor.getArticlesByAllSource()
+    }
 }
 
 extension NBSParser: NBSModuleOutputProtocol {}
 
 extension NBSPresenter {
-    func updateSourceAndArticles(newSourceList: [SourceModel]) {
-        interactor.loadDataForNewSource(newSourceList: newSourceList)
-        interactor.getArticlesByAllSource()
-    }
-
     private func prepareArticles(articles: [ArticleModel]) -> [ArticleModel] {
         var articles = articles
         for (index, var article) in articles.enumerated() {

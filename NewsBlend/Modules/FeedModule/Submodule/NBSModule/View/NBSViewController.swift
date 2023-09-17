@@ -37,11 +37,11 @@ final class NBSViewController: UIViewController {
         output?.viewDidLoad()
         setupLayout()
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        output?.viewWillAppear()
-    }
+//
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        output?.viewWillAppear()
+//    }
 
     init(childView: UIView) {
         self.childView = childView

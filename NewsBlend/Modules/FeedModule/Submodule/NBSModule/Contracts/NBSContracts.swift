@@ -5,6 +5,7 @@ import UIKit
 // Module Input
 protocol NBSModuleInputProtocol: AnyObject {
     func reloadData()
+    func updateSourceAndArticles()
 }
 
 // Module Output
@@ -19,7 +20,6 @@ protocol NBSViewInputProtocol: AnyObject {
 
 // View Output
 protocol NBSViewOutputProtocol: AnyObject {
-    func viewWillAppear()
     func viewDidLoad()
     func getArticlesBySource(source: SourceModel)
     func openArticleDetail(article: ArticleModel)
