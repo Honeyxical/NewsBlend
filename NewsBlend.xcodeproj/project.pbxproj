@@ -23,7 +23,9 @@
 		69242EFF2A88C007008F040E /* NBSPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69242EFE2A88C007008F040E /* NBSPresenter.swift */; };
 		69242F012A88C0E1008F040E /* NBSAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69242F002A88C0E1008F040E /* NBSAssembly.swift */; };
 		69242F042A88C1D5008F040E /* NBSRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69242F032A88C1D5008F040E /* NBSRouter.swift */; };
-		69242F082A8907F4008F040E /* SourcesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69242F072A8907F4008F040E /* SourcesCell.swift */; };
+		69242F082A8907F4008F040E /* NBSSourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69242F072A8907F4008F040E /* NBSSourceCell.swift */; };
+		69441A952AB71F7B009CA9C5 /* PresenterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69441A942AB71F7B009CA9C5 /* PresenterModel.swift */; };
+		69441A972AB722EA009CA9C5 /* ArticlesPreparation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69441A962AB722EA009CA9C5 /* ArticlesPreparation.swift */; };
 		695F7FBB2A836BAF003EC2F9 /* NewsSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F7FBA2A836BAF003EC2F9 /* NewsSettingViewController.swift */; };
 		695F7FBD2A836DC8003EC2F9 /* SourcesModelDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F7FBC2A836DC8003EC2F9 /* SourcesModelDTO.swift */; };
 		696197492A8EA62C00602213 /* ArticleShortCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696197482A8EA62C00602213 /* ArticleShortCell.swift */; };
@@ -45,8 +47,7 @@
 		698339DA2A76857F00909649 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 698339D92A76857F00909649 /* Alamofire */; };
 		69833A082A76A6E100909649 /* NewsModelDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69833A072A76A6E100909649 /* NewsModelDTO.swift */; };
 		69833A3D2A76AEA400909649 /* FeedContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69833A3C2A76AEA400909649 /* FeedContracts.swift */; };
-		69B2BFB12A823591000465BC /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B2BFB02A823591000465BC /* SettingsCell.swift */; };
-		69B59FA12A87863C00B80CD4 /* SourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B59FA02A87863C00B80CD4 /* SourceCell.swift */; };
+		69B59FA12A87863C00B80CD4 /* SettingSourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B59FA02A87863C00B80CD4 /* SettingSourceCell.swift */; };
 		69B59FA62A87C5DE00B80CD4 /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B59FA52A87C5DE00B80CD4 /* ArticleModel.swift */; };
 		69B59FA82A87D16B00B80CD4 /* SourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B59FA72A87D16B00B80CD4 /* SourceModel.swift */; };
 		69BB2B342A7984F400B5BDE1 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB2B332A7984F400B5BDE1 /* SettingsRouter.swift */; };
@@ -83,7 +84,9 @@
 		69242EFE2A88C007008F040E /* NBSPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBSPresenter.swift; sourceTree = "<group>"; };
 		69242F002A88C0E1008F040E /* NBSAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBSAssembly.swift; sourceTree = "<group>"; };
 		69242F032A88C1D5008F040E /* NBSRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBSRouter.swift; sourceTree = "<group>"; };
-		69242F072A8907F4008F040E /* SourcesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesCell.swift; sourceTree = "<group>"; };
+		69242F072A8907F4008F040E /* NBSSourceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBSSourceCell.swift; sourceTree = "<group>"; };
+		69441A942AB71F7B009CA9C5 /* PresenterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterModel.swift; sourceTree = "<group>"; };
+		69441A962AB722EA009CA9C5 /* ArticlesPreparation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesPreparation.swift; sourceTree = "<group>"; };
 		695F7FBA2A836BAF003EC2F9 /* NewsSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSettingViewController.swift; sourceTree = "<group>"; };
 		695F7FBC2A836DC8003EC2F9 /* SourcesModelDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesModelDTO.swift; sourceTree = "<group>"; };
 		696197482A8EA62C00602213 /* ArticleShortCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleShortCell.swift; sourceTree = "<group>"; };
@@ -104,8 +107,7 @@
 		698339CB2A767DB900909649 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69833A072A76A6E100909649 /* NewsModelDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModelDTO.swift; sourceTree = "<group>"; };
 		69833A3C2A76AEA400909649 /* FeedContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContracts.swift; sourceTree = "<group>"; };
-		69B2BFB02A823591000465BC /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
-		69B59FA02A87863C00B80CD4 /* SourceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCell.swift; sourceTree = "<group>"; };
+		69B59FA02A87863C00B80CD4 /* SettingSourceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSourceCell.swift; sourceTree = "<group>"; };
 		69B59FA52A87C5DE00B80CD4 /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		69B59FA72A87D16B00B80CD4 /* SourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceModel.swift; sourceTree = "<group>"; };
 		69BB2B332A7984F400B5BDE1 /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				69FD96872AAF28A3007F3A4B /* ArticleCoding.swift */,
+				69441A962AB722EA009CA9C5 /* ArticlesPreparation.swift */,
 			);
 			path = Article;
 			sourceTree = "<group>";
@@ -262,8 +265,8 @@
 			isa = PBXGroup;
 			children = (
 				698A61252AB46A560099006B /* Subview */,
-				69242EF12A88BBEA008F040E /* NBSViewController.swift */,
 				69242F092A890E22008F040E /* Cell */,
+				69242EF12A88BBEA008F040E /* NBSViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -288,8 +291,8 @@
 			isa = PBXGroup;
 			children = (
 				69796EC72A78FBE500EB6714 /* ArticleFullCell.swift */,
-				69242F072A8907F4008F040E /* SourcesCell.swift */,
 				696197482A8EA62C00602213 /* ArticleShortCell.swift */,
+				69242F072A8907F4008F040E /* NBSSourceCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				69796EBF2A78CF9E00EB6714 /* FeedPresenter.swift */,
+				69441A942AB71F7B009CA9C5 /* PresenterModel.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -597,8 +601,7 @@
 		69B2BFAF2A82357B000465BC /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				69B2BFB02A823591000465BC /* SettingsCell.swift */,
-				69B59FA02A87863C00B80CD4 /* SourceCell.swift */,
+				69B59FA02A87863C00B80CD4 /* SettingSourceCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -751,7 +754,7 @@
 				691C016D2A7BBC42004E22FB /* DetailViewController.swift in Sources */,
 				69D475422AB22D39007589A4 /* NBSArticleView.swift in Sources */,
 				69796EC82A78FBE500EB6714 /* ArticleFullCell.swift in Sources */,
-				69B59FA12A87863C00B80CD4 /* SourceCell.swift in Sources */,
+				69B59FA12A87863C00B80CD4 /* SettingSourceCell.swift in Sources */,
 				69242F042A88C1D5008F040E /* NBSRouter.swift in Sources */,
 				691C01712A7BBC97004E22FB /* DetailRouter.swift in Sources */,
 				69B59FA62A87C5DE00B80CD4 /* ArticleModel.swift in Sources */,
@@ -769,6 +772,7 @@
 				69771FB52A820C4C007D608F /* SettingNetworkService.swift in Sources */,
 				691C01732A7BBCB2004E22FB /* DetailPresenter.swift in Sources */,
 				69796EC22A78D0BC00EB6714 /* FeedInteractor.swift in Sources */,
+				69441A972AB722EA009CA9C5 /* ArticlesPreparation.swift in Sources */,
 				695F7FBD2A836DC8003EC2F9 /* SourcesModelDTO.swift in Sources */,
 				69796EC62A78E35B00EB6714 /* FeedRouter.swift in Sources */,
 				69FD96812AAF207F007F3A4B /* SettingParser.swift in Sources */,
@@ -780,7 +784,6 @@
 				69BB2B342A7984F400B5BDE1 /* SettingsRouter.swift in Sources */,
 				698339C02A767DB800909649 /* SceneDelegate.swift in Sources */,
 				691C01792A7BBD1B004E22FB /* DetailAssembly.swift in Sources */,
-				69B2BFB12A823591000465BC /* SettingsCell.swift in Sources */,
 				6980B6342AB0B56E002385A6 /* NBSArticleConverter.swift in Sources */,
 				69FD968E2AAF2A55007F3A4B /* SettingConverter.swift in Sources */,
 				6980B6322AB0A167002385A6 /* Storage.swift in Sources */,
@@ -789,8 +792,9 @@
 				69242EF72A88BE9C008F040E /* NBSNetworkService.swift in Sources */,
 				69FD96882AAF28A3007F3A4B /* ArticleCoding.swift in Sources */,
 				6980B6362AB0B59A002385A6 /* SettingArticleConverter.swift in Sources */,
+				69441A952AB71F7B009CA9C5 /* PresenterModel.swift in Sources */,
 				69242EFF2A88C007008F040E /* NBSPresenter.swift in Sources */,
-				69242F082A8907F4008F040E /* SourcesCell.swift in Sources */,
+				69242F082A8907F4008F040E /* NBSSourceCell.swift in Sources */,
 				69BB2B382A79851D00B5BDE1 /* SettingsInteractor.swift in Sources */,
 				69242EFC2A88BF79008F040E /* NBSInteractor.swift in Sources */,
 				69796EC02A78CF9E00EB6714 /* FeedPresenter.swift in Sources */,

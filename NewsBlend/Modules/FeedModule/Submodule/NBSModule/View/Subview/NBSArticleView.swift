@@ -3,12 +3,12 @@
 import UIKit
 
 protocol NBSArticleViewDelegate: AnyObject {
-    func didTap(article: ArticleModel)
+    func didTap(article: PresenterModel)
 }
 
 final class NBSArticleView: UIView {
     weak var delegate: NBSArticleViewDelegate?
-    private var articles: [ArticleModel] = []
+    private var articles: [PresenterModel] = []
     private var isShortCell = true
 
     private lazy var articlesCollection: UICollectionView = {
@@ -35,7 +35,7 @@ final class NBSArticleView: UIView {
 }
 
 extension NBSArticleView {
-    func setArticle(articles: [ArticleModel], cellType: Bool){
+    func setArticle(articles: [PresenterModel], cellType: Bool){
         self.articles = articles
         articlesCollection.reloadData()
         isShortCell = cellType

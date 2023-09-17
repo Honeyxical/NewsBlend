@@ -6,9 +6,9 @@ final class DetailPresenter {
     weak var view: DetailViewInputProtocol?
     private let interactor: DetailInteractorInputProtocol
     private let router: DetailRouterInputProtocol
-    private let article: ArticleModel
+    private let article: PresenterModel
 
-    init(view: DetailViewInputProtocol, interactor: DetailInteractorInputProtocol, router: DetailRouterInputProtocol, article: ArticleModel) {
+    init(view: DetailViewInputProtocol, interactor: DetailInteractorInputProtocol, router: DetailRouterInputProtocol, article: PresenterModel) {
         self.view = view
         self.interactor = interactor
         self.router = router

@@ -10,7 +10,7 @@ protocol DetailModuleOutputProtocol {}
 
 // View Input
 protocol DetailViewInputProtocol: AnyObject {
-    func setArticle(article: ArticleModel)
+    func setArticle(article: PresenterModel)
 }
 
 // View Output

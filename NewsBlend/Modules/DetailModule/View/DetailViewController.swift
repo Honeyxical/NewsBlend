@@ -91,12 +91,12 @@ final class DetailViewController: UIViewController {
 }
 
 extension DetailViewController: DetailViewInputProtocol {
-    func setArticle(article: ArticleModel) {
+    func setArticle(article: PresenterModel) {
         imageView.kf.setImage(with: URL(string: article.urlToImage))
         articleTitleLabel.text = article.title
         contentLabel.text = article.description
-        authorLabel.text = "By \(article.author ?? "unknown author")"
-        publishedAtLabel.text = article.timeSincePublication
+        authorLabel.text = article.author
+        publishedAtLabel.text = article.publishedAt
     }
 }
 
@@ -120,7 +120,7 @@ extension DetailViewController {
 
             authorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalOffset),
             authorLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: topOffset),
-            authorLabel.widthAnchor.constraint(equalToConstant: 300),
+            authorLabel.widthAnchor.constraint(equalToConstant: 250),
 
             publishedAtLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: topOffset),
             publishedAtLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalOffset),

@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 
 final class SettingsAssembly {
-    static func build() -> UIViewController {
+    func build() -> UIViewController {
         let newsSettingsViewController = NewsSettingViewController(loader: Loader())
         let interactor = SettingsInteractor(cacheService: Storage.shared,
                                             networkService: SettingNetworkService(),

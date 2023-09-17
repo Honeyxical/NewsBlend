@@ -7,7 +7,7 @@ final class FeedViewController: UIViewController {
     var output: FeedViewOutputProtocol?
     private let childViewVC: UIViewController
     private let lottieChildView: UIView
-    private var articles: [ArticleModel] = []
+    private var articles: [PresenterModel] = []
     private let loader: UIView
 
     private lazy var scrollView: UIScrollView = {
@@ -82,13 +82,13 @@ extension FeedViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item", for: indexPath) as? TrendingCell else {
             return UICollectionViewCell()
         }
-        cell.setData(title: articles[indexPath.item].title, timeSincePublication: articles[indexPath.item].timeSincePublication, imageUrl: articles[indexPath.item].urlToImage)
+        cell.setData(title: articles[indexPath.item].title, timeSincePublication: articles[indexPath.item].publishedAt, imageUrl: articles[indexPath.item].urlToImage)
         return cell
     }
 }
 
 extension FeedViewController: FeedViewInputProtocol {
-    func setArticles(articles: [ArticleModel]) {
+    func setArticles(articles: [PresenterModel]) {
         self.articles = articles
     }
 

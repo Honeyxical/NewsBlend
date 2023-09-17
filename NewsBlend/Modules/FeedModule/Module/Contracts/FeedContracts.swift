@@ -10,7 +10,7 @@ protocol FeedModuleOutputProtocol {}
 
 // View Input
 protocol FeedViewInputProtocol: AnyObject {
-    func setArticles(articles: [ArticleModel])
+    func setArticles(articles: [PresenterModel])
     func reloadData()
     func showLoader()
     func hideLoader()
@@ -20,7 +20,7 @@ protocol FeedViewInputProtocol: AnyObject {
 
 // View Output
 protocol FeedViewOutputProtocol: AnyObject {
-    func openArticleDetail(article: ArticleModel)
+    func openArticleDetail(article: PresenterModel)
     func openSettings()
     func viewDidLoad()
     func reloadData()
@@ -43,7 +43,7 @@ protocol FeedInteractorOutputProtocol: AnyObject {
 
 // Router Input
 protocol FeedRouterInputProtocol {
-    func openArticleDetail(article: ArticleModel)
+    func openArticleDetail(article: PresenterModel)
     func openSettings()
 }
 

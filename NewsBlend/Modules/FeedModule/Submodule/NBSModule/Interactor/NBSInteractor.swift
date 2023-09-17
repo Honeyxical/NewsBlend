@@ -105,9 +105,6 @@ extension NBSInteractor: NBSInteractorInputProtocol {
 
     private func getInterval() -> Int{
         let interval = cacheService.getUpdateInterval()
-        if interval == 0 {
-            return 600
-        }
-        return interval
+        return interval == 0 ? 600 : interval
     }
 }

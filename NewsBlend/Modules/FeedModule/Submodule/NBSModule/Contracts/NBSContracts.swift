@@ -14,7 +14,7 @@ protocol NBSModuleOutputProtocol: AnyObject {}
 // View Input
 protocol NBSViewInputProtocol: AnyObject {
     func setSources(sources: [SourceModel])
-    func setArticle(articles: [ArticleModel])
+    func setArticle(articles: [PresenterModel])
     func noInternet()
 }
 
@@ -22,7 +22,7 @@ protocol NBSViewInputProtocol: AnyObject {
 protocol NBSViewOutputProtocol: AnyObject {
     func viewDidLoad()
     func getArticlesBySource(source: SourceModel)
-    func openArticleDetail(article: ArticleModel)
+    func openArticleDetail(article: PresenterModel)
 }
 
 // Interactor Input
@@ -47,7 +47,7 @@ protocol NBSInteractorOutputProtocol: AnyObject {
 
 // Router Input
 protocol NBSRouterInputProtocol {
-    func openArticleDetail(article: ArticleModel)
+    func openArticleDetail(article: PresenterModel)
 }
 
 // Router Output

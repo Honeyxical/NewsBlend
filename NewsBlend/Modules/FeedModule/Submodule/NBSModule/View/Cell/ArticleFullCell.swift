@@ -56,11 +56,11 @@ final class ArticleFullCell: UICollectionViewCell {
         publishedTimeLabel.text = nil
     }
 
-    func setData(article: ArticleModel) {
+    func setData(article: PresenterModel) {
         self.titleLabel.text = article.title
-        self.authorLabel.text = "By " + (article.author ?? "unknown author")
+        self.authorLabel.text = article.author
         self.imageView.kf.setImage(with: URL(string: article.urlToImage))
-        self.publishedTimeLabel.text = article.timeSincePublication
+        self.publishedTimeLabel.text = article.publishedAt
     }
 
     private func setupLayout() {

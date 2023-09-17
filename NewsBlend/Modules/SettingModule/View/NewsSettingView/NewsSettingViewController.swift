@@ -28,15 +28,25 @@ enum UpdateIntervals: Int, CaseIterable {
 
 final class NewsSettingViewController: UIViewController {
     var output: SettingsViewOutputProtocol?
+    
     private var sources: [SourceModel] = []
     private var sourcesAreChange = false
+    private var selectedItemIndex: Int?
+
     private let loader: UIView
 
-    private let warningAlert: UIAlertController = {
+    private lazy var warningAlert: UIAlertController = {
         let alert = UIAlertController(title: "Warning",
                                       message: "The last source cannot be deleted. Select another one to delete this source.",
                                       preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        let action = UIAlertAction(title: "Ok", style: .default) { _ in
+            guard let selectedItemIndex = self.selectedItemIndex else {
+                return
+            }
+            self.sources[selectedItemIndex].isSelected = true
+            self.sourcesCollection.reloadData()
+        }
+        alert.addAction(action)
         return alert
     }()
 
@@ -71,9 +81,18 @@ final class NewsSettingViewController: UIViewController {
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.dataSource = self
         collection.delegate = self
-        collection.register(SourceCell.self, forCellWithReuseIdentifier: "cell")
+        collection.register(SettingSourceCell.self, forCellWithReuseIdentifier: "cell")
         return collection
     }()
+
+    init(loader: UIView) {
+        self.loader = loader
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,15 +108,6 @@ final class NewsSettingViewController: UIViewController {
             let prevVC = navigationController?.viewControllers[0] as? FeedViewController
             prevVC?.updateNBSSources()
         }
-    }
-
-    init(loader: UIView) {
-        self.loader = loader
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -201,7 +211,7 @@ extension NewsSettingViewController: UICollectionViewDelegate, UICollectionViewD
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? SourceCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? SettingSourceCell else {
             return UICollectionViewCell()
         }
 
@@ -219,6 +229,7 @@ extension NewsSettingViewController: UICollectionViewDelegate, UICollectionViewD
             output?.deleteFollowedSource(source: sources[indexPath.item])
             sourcesAreChange = true
             sources[indexPath.item].isSelected = false
+            selectedItemIndex = indexPath.item
             collectionView.reloadData()
         }
     }

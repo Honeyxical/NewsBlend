@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 
 final class NBSAssembly {
-    static func build() -> UIViewController {
+    func build() -> UIViewController {
         let interactor = NBSInteractor(networkService: NBSNetworkService(),
                                        cacheService: Storage.shared,
                                        parser: NBSParser(articleConverter: NBSArticleConverter()),
@@ -17,7 +17,8 @@ final class NBSAssembly {
         let router = NBSRouter()
         let presenter = NBSPresenter(interactor: interactor,
                                      router: router,
-                                     view: view)
+                                     view: view,
+                                     articlesPreparation: ArticlesPreparations())
         view.output = presenter
         view.moduleInput = presenter
         interactor.output = presenter

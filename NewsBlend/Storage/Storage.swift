@@ -21,7 +21,7 @@ protocol NBSStorageProtocol{
 protocol FeedStorageProtocol{
     func getSource() -> Data
     func setSource(data: Data)
-    func getInterval() -> Int
+    func getUpdateInterval() -> Int
     func setInterval(interval: UpdateIntervals)
     func getInitValue() -> Bool
     func setInitValue(initValue: Bool)
@@ -69,8 +69,6 @@ extension Storage: SettingStorageProtocol {
 
 extension Storage: NBSStorageProtocol {
     func setArticles(data: Data, source: String) {
-        let data = data
-        let source = source
         userDefaults.set(data, forKey: source)
     }
 
@@ -81,10 +79,6 @@ extension Storage: NBSStorageProtocol {
 }
 
 extension Storage: FeedStorageProtocol {
-    func getInterval() -> Int {
-        userDefaults.integer(forKey: Constants.updateInterval)
-    }
-
     func setInterval(interval: UpdateIntervals) {
         userDefaults.set(interval, forKey: Constants.updateInterval)
     }

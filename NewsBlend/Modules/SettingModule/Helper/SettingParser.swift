@@ -19,7 +19,7 @@ final class SettingParser: SettingParserProtocol {
     func parseFeedSource(data: Data) -> [ArticleModel] {
         guard let articlesDTO = try? JSONDecoder().decode(NewsModelDTO.self, from: data) else { return []}
         let articles = articleConverter.transferDTOToModel(articlesArray: articlesDTO.articles)
-        return articles.sorted { $0.publishedAt ?? "" > $1.publishedAt ?? "" }
+        return articles
     }
 
     func parseSource(data: Data) -> [SourceModel] {

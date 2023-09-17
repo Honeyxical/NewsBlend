@@ -4,13 +4,14 @@ import Foundation
 import UIKit
 
 final class DetailAssembly {
-    static func build(artiсle: ArticleModel) -> UIViewController {
+    func build(artiсle: PresenterModel) -> UIViewController {
         let view = DetailViewController()
         let interactor = DetailInteractor()
         let router = DetailRouter()
         let presenter = DetailPresenter(view: view,
                                         interactor: interactor,
-                                        router: router, article: artiсle)
+                                        router: router,
+                                        article: artiсle)
         router.output = presenter
         interactor.output = presenter
         view.output = presenter

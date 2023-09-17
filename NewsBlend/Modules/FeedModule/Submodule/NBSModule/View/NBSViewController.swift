@@ -7,10 +7,12 @@ final class NBSViewController: UIViewController {
     var output: NBSViewOutputProtocol?
     var moduleInput: NBSModuleInputProtocol?
     var moduleOutput: NBSModuleOutputProtocol?
-    private let childView: UIView
+
     private var sources: [SourceModel] = []
     private var isShortArticleCell = true
     private var lastSelectedIndex = IndexPath(row: 0, section: 0)
+
+    private let childView: UIView
 
     private let sectionNameLabel: UILabel = {
         let label = UILabel()
@@ -25,23 +27,12 @@ final class NBSViewController: UIViewController {
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.dataSource = self
         collection.delegate = self
-        collection.register(SourcesCell.self, forCellWithReuseIdentifier: "sourceCell")
+        collection.register(NBSSourceCell.self, forCellWithReuseIdentifier: "sourceCell")
         collection.showsHorizontalScrollIndicator = false
         return collection
     }()
 
     private lazy var cellTypeButton = UIButton(type: .system)
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        output?.viewDidLoad()
-        setupLayout()
-    }
-//
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        output?.viewWillAppear()
-//    }
 
     init(childView: UIView) {
         self.childView = childView
@@ -51,10 +42,16 @@ final class NBSViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        output?.viewDidLoad()
+        setupLayout()
+    }
 }
 
 extension NBSViewController: NBSArticleViewDelegate {
-    func didTap(article: ArticleModel) {
+    func didTap(article: PresenterModel) {
         output?.openArticleDetail(article: article)
     }
 }
@@ -69,14 +66,10 @@ extension NBSViewController: NBSViewInputProtocol {
         sourcesCollection.reloadData()
     }
 
-    func setArticle(articles: [ArticleModel]) {
+    func setArticle(articles: [PresenterModel]) {
         let childView = childView as? NBSArticleView
         childView?.delegate = self
         childView?.setArticle(articles: articles, cellType: isShortArticleCell)
-    }
-
-    func reloadData() {
-        
     }
 }
 
@@ -86,7 +79,7 @@ extension NBSViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sourceCell", for: indexPath) as? SourcesCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sourceCell", for: indexPath) as? NBSSourceCell else {
             return UICollectionViewCell()
         }
         cell.setSourceName(name: sources[indexPath.item].name)
@@ -120,8 +113,8 @@ extension NBSViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     }
 }
 
-extension NBSViewController {
-    private func setupLayout() {
+private extension NBSViewController {
+    func setupLayout() {
         view.addSubview(sectionNameLabel)
         view.addSubview(cellTypeButton)
         view.addSubview(sourcesCollection)
@@ -151,14 +144,14 @@ extension NBSViewController {
         configureButton()
     }
 
-    @objc private func changeViewMode() {
+    @objc func changeViewMode() {
         let childView = childView as? NBSArticleView
         isShortArticleCell.toggle()
         getButtonTitle()
         childView?.reloadView(isShortCell: isShortArticleCell)
     }
 
-    private func getButtonTitle() {
+    func getButtonTitle() {
         if isShortArticleCell {
             cellTypeButton.setTitle("Full", for: .normal)
         } else {
@@ -166,7 +159,7 @@ extension NBSViewController {
         }
     }
 
-    private func configureButton() {
+    func configureButton() {
         cellTypeButton.translatesAutoresizingMaskIntoConstraints = false
         cellTypeButton.layer.cornerRadius = 10
         cellTypeButton.layer.borderColor = UIColor.systemBlue.cgColor

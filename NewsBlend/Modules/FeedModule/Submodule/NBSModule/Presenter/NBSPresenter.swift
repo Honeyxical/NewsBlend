@@ -6,17 +6,16 @@ final class NBSPresenter {
     private let interactor: NBSInteractorInputProtocol
     private let router: NBSRouterInputProtocol
     weak var view: NBSViewInputProtocol?
-    private let dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        dateFormatter.locale = Locale(identifier: "en_US")
-        return dateFormatter
-    }()
+    private let articlesPreparation: ArticlesPreparationsProtocol
 
-    init(interactor: NBSInteractorInputProtocol, router: NBSRouterInputProtocol, view: NBSViewInputProtocol) {
+    init(interactor: NBSInteractorInputProtocol,
+         router: NBSRouterInputProtocol,
+         view: NBSViewInputProtocol,
+         articlesPreparation: ArticlesPreparationsProtocol) {
         self.interactor = interactor
         self.router = router
         self.view = view
+        self.articlesPreparation = articlesPreparation
     }
 }
 
@@ -37,7 +36,7 @@ extension NBSPresenter: NBSInteractorOutputProtocol {
     }
 
     func didReceive(articles: [ArticleModel]) {
-        let preparedArticles = prepareArticles(articles: articles)
+        let preparedArticles = articlesPreparation.prepareArticles(articles: articles)
         view?.setArticle(articles: preparedArticles)
     }
 
@@ -47,7 +46,7 @@ extension NBSPresenter: NBSInteractorOutputProtocol {
 }
 
 extension NBSPresenter: NBSViewOutputProtocol {
-    func openArticleDetail(article: ArticleModel) {
+    func openArticleDetail(article: PresenterModel) {
         router.openArticleDetail(article: article)
     }
 
@@ -79,15 +78,3 @@ extension NBSPresenter: NBSModuleInputProtocol {
 }
 
 extension NBSParser: NBSModuleOutputProtocol {}
-
-extension NBSPresenter {
-    private func prepareArticles(articles: [ArticleModel]) -> [ArticleModel] {
-        var articles = articles
-        for (index, var article) in articles.enumerated() {
-            let targetDate = dateFormatter.date(from: article.publishedAt ?? "") ?? Date()
-            article.timeSincePublication = RelativeDateTimeFormatter().localizedString(for: targetDate, relativeTo: Date())
-            articles[index] = article
-        }
-        return articles
-    }
-}

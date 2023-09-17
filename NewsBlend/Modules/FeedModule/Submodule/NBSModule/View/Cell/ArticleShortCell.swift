@@ -47,10 +47,10 @@ final class ArticleShortCell: UICollectionViewCell {
 }
 
 extension ArticleShortCell {
-    func setData(article: ArticleModel) {
+    func setData(article: PresenterModel) {
         self.articleTitleLabel.text = article.title
         self.articleAuthorLabel.text = "By " + (article.author ?? "unknown author")
-        self.publishedAtLabel.text = article.timeSincePublication
+        self.publishedAtLabel.text = article.publishedAt
     }
 
     private func setupLayout() {

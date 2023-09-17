@@ -67,7 +67,7 @@ extension FeedInteractor: FeedInteractorInputProtocol {
     }
 
     func isFirstStart() {
-        if cacheService.getInitValue() == false {
+        if !cacheService.getInitValue() {
             cacheService.setInitValue(initValue: true)
             setSource(sources: [initialSource])
         }
@@ -78,11 +78,8 @@ extension FeedInteractor: FeedInteractorInputProtocol {
     }
 
     func getUpdateInterval() -> Int {
-        let interval = cacheService.getInterval()
-        if interval == 0 {
-            return 600
-        }
-        return interval
+        let interval = cacheService.getUpdateInterval()
+        return interval == 0 ? 600 : interval
     }
     
     func startUpdateTimer() {
