@@ -43,9 +43,7 @@ protocol SettingsInteractorOutputProtocol: AnyObject {
 }
 
 // Router Input
-protocol SettingsRouterInputProtocol {
-//    func updateSource(newListSources: [SourceModel])
-}
+protocol SettingsRouterInputProtocol {}
 
 // Router Output
 protocol SettingsRouterOutputProtocol: AnyObject {}

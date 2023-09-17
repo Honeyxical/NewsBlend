@@ -8,7 +8,7 @@ final class ArticleFullCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 20
+        imageView.layer.cornerRadius = 20.0
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         return imageView
@@ -17,7 +17,7 @@ final class ArticleFullCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
-        title.font = UIFont.systemFont(ofSize: 14)
+        title.font = UIFont.systemFont(ofSize: 14.0)
         title.numberOfLines = 3
         return title
     }()
@@ -25,7 +25,7 @@ final class ArticleFullCell: UICollectionViewCell {
     private let authorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 11)
+        label.font = UIFont.systemFont(ofSize: 12.0)
         label.textColor = .lightGray
         label.numberOfLines = 2
         return label
@@ -34,7 +34,7 @@ final class ArticleFullCell: UICollectionViewCell {
     private let publishedTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12, weight: .thin)
+        label.font = UIFont.systemFont(ofSize: 12.0, weight: .thin)
         label.textColor = .systemBlue
         return label
     }()
@@ -69,15 +69,15 @@ final class ArticleFullCell: UICollectionViewCell {
         addSubview(authorLabel)
         addSubview(publishedTimeLabel)
 
-        let trailingOffset = 15.0
-        let leadingOffset = 10.0
-        let verticalOffset = 5.0
+        let trailingOffset = 16.0
+        let leadingOffset = 12.0
+        let verticalOffset = 4.0
 
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leadingOffset),
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: 100),
+            imageView.widthAnchor.constraint(equalToConstant: 100.0),
 
             titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: leadingOffset),
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: verticalOffset),

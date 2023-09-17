@@ -46,9 +46,6 @@ extension FeedInteractor: FeedInteractorInputProtocol {
                 }
             case .failure(let error):
                 switch error {
-                case .errorUrlConfiguring:
-                    // я не придумал как обработать
-                    break
                 case .noInternet:
                     if !articlesFromCache.isEmpty {
                         self.output?.didReceive(articles: articlesFromCache)

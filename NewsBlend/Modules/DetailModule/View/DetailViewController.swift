@@ -28,7 +28,7 @@ final class DetailViewController: UIViewController {
     private let authorLabel: UILabel = {
         let author = UILabel()
         author.translatesAutoresizingMaskIntoConstraints = false
-        author.font = UIFont.systemFont(ofSize: 14)
+        author.font = UIFont.systemFont(ofSize: 14.0)
         author.textColor = .gray
         author.numberOfLines = 2
         return author
@@ -37,14 +37,14 @@ final class DetailViewController: UIViewController {
     private let publishedAtLabel: UILabel = {
         let publishedAt = UILabel()
         publishedAt.translatesAutoresizingMaskIntoConstraints = false
-        publishedAt.font = UIFont.systemFont(ofSize: 12)
+        publishedAt.font = UIFont.systemFont(ofSize: 12.0)
         return publishedAt
     }()
 
     private let articleTitleLabel: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
-        title.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 24)
+        title.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 24.0)
         title.numberOfLines = 0
         return title
     }()
@@ -58,7 +58,7 @@ final class DetailViewController: UIViewController {
     private let tagLabel: UILabel = {
         let tag = UILabel()
         tag.translatesAutoresizingMaskIntoConstraints = false
-        tag.font = UIFont.systemFont(ofSize: 12, weight: .thin)
+        tag.font = UIFont.systemFont(ofSize: 12.0, weight: .thin)
         tag.text = "\u{1F525} Trending news"
         return tag
     }()
@@ -77,6 +77,7 @@ final class DetailViewController: UIViewController {
         setupLayout()
         setupScrollView()
         scrollView.contentSize = contentRect.size
+        output?.viewDidLoad()
     }
 
     func setupLayout() {
@@ -109,18 +110,18 @@ extension DetailViewController {
         scrollView.addSubview(tagStack)
         scrollView.addSubview(contentLabel)
 
-        let horizontalOffset = 25.0
-        let topOffset = 25.0
+        let horizontalOffset = 16.0
+        let topOffset = 24.0
 
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -100),
+            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -100.0),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 400),
+            imageView.heightAnchor.constraint(equalToConstant: 400.0),
 
             authorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalOffset),
             authorLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: topOffset),
-            authorLabel.widthAnchor.constraint(equalToConstant: 250),
+            authorLabel.widthAnchor.constraint(equalToConstant: 240.0),
 
             publishedAtLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: topOffset),
             publishedAtLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalOffset),

@@ -66,10 +66,8 @@ extension NBSArticleView: UICollectionViewDelegate {
 
 extension NBSArticleView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if isShortCell {
-            return CGSize(width: bounds.width, height: 80)
-        }
-        return CGSize(width: bounds.width, height: 130)
+        let height = isShortCell ? 80.0 : 130.0
+        return CGSize(width: bounds.width, height: height)
     }
 }
 

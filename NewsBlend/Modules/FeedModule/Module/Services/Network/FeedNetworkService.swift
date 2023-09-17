@@ -10,7 +10,6 @@ protocol FeedNetworkServiceProtocol {
 enum ArticleResponseErrors: Error {
     case noInternet
     case parseFailed
-    case errorUrlConfiguring
 }
 
 typealias GetArticlesResponse = (Result<Data, ArticleResponseErrors>) -> Void
@@ -22,7 +21,7 @@ final class FeedNetworkService: FeedNetworkServiceProtocol {
         case reserveApiKey = "134f24f4624347d4964bfdbb07479eac"
     }
 
-    let reachabilityManager = Alamofire.NetworkReachabilityManager(host: "www.google.com")
+    let reachabilityManager = NetworkReachabilityManager(host: "www.google.com")
 
     func getArticles(source: SourceModel, articlesCount: Int, completion: @escaping GetArticlesResponse) {
         if let isReachable = reachabilityManager?.isReachable, isReachable {
@@ -33,7 +32,6 @@ final class FeedNetworkService: FeedNetworkServiceProtocol {
             ]
 
             guard let url = URL(string: NetworkConstants.everything.rawValue)?.appending(queryItems: queryItems) else {
-                completion(.failure(.errorUrlConfiguring))
                 return
             }
 

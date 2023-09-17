@@ -17,7 +17,7 @@ final class NBSViewController: UIViewController {
     private let sectionNameLabel: UILabel = {
         let label = UILabel()
         label.text = "News"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 20.0, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -57,10 +57,6 @@ extension NBSViewController: NBSArticleViewDelegate {
 }
 
 extension NBSViewController: NBSViewInputProtocol {
-    func noInternet() {
-        
-    }
-
     func setSources(sources: [SourceModel]) {
         self.sources = sources
         sourcesCollection.reloadData()
@@ -106,9 +102,9 @@ extension NBSViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     private func collectionSourcesLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 100, height: 40)
-        layout.minimumLineSpacing = 15
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 15)
+        layout.itemSize = CGSize(width: 100.0, height: 40.0)
+        layout.minimumLineSpacing = 15.0
+        layout.sectionInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 15.0)
         return layout
     }
 }
@@ -128,18 +124,18 @@ private extension NBSViewController {
 
             cellTypeButton.topAnchor.constraint(equalTo: view.topAnchor),
             cellTypeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalOffset),
-            cellTypeButton.heightAnchor.constraint(equalToConstant: 25),
-            cellTypeButton.widthAnchor.constraint(equalToConstant: 45),
+            cellTypeButton.heightAnchor.constraint(equalToConstant: 24.0),
+            cellTypeButton.widthAnchor.constraint(equalToConstant: 44.0),
 
             sourcesCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            sourcesCollection.topAnchor.constraint(equalTo: sectionNameLabel.bottomAnchor, constant: 10),
+            sourcesCollection.topAnchor.constraint(equalTo: sectionNameLabel.bottomAnchor, constant: 12.0),
             sourcesCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            sourcesCollection.heightAnchor.constraint(equalToConstant: 50),
+            sourcesCollection.heightAnchor.constraint(equalToConstant: 48.0),
 
             childView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             childView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            childView.topAnchor.constraint(equalTo: sourcesCollection.bottomAnchor, constant: 15),
-            childView.heightAnchor.constraint(equalToConstant: 650)
+            childView.topAnchor.constraint(equalTo: sourcesCollection.bottomAnchor, constant: 16.0),
+            childView.heightAnchor.constraint(equalToConstant: 648.0)
         ])
         configureButton()
     }
@@ -161,9 +157,9 @@ private extension NBSViewController {
 
     func configureButton() {
         cellTypeButton.translatesAutoresizingMaskIntoConstraints = false
-        cellTypeButton.layer.cornerRadius = 10
+        cellTypeButton.layer.cornerRadius = 12.0
         cellTypeButton.layer.borderColor = UIColor.systemBlue.cgColor
-        cellTypeButton.layer.borderWidth = 1
+        cellTypeButton.layer.borderWidth = 1.0
         cellTypeButton.tintColor = .lightGray
         cellTypeButton.addTarget(self, action: #selector(changeViewMode), for: .touchUpInside)
         getButtonTitle()

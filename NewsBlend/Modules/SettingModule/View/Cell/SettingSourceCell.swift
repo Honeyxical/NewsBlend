@@ -13,7 +13,7 @@ class SettingSourceCell: UICollectionViewCell {
     private let sourceNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "HoeflerText-Italic", size: 16)
+        label.font = UIFont(name: "HoeflerText-Italic", size: 16.0)
         label.textAlignment = .center
         label.numberOfLines = 2
         return label
@@ -35,27 +35,27 @@ class SettingSourceCell: UICollectionViewCell {
     
     func setSourceName(name: String, isSelected: Bool) {
         self.sourceNameLabel.text = name
-        self.indicatorImageView.image = isSelected == false ? UIImage() : UIImage(systemName: "circle.fill")
+        self.indicatorImageView.image = !isSelected ? UIImage() : UIImage(systemName: "circle.fill")
     }
 
     private func setupLayout() {
         addSubview(sourceNameLabel)
         addSubview(indicatorImageView)
 
-        layer.borderWidth = 1
+        layer.borderWidth = 1.0
         layer.borderColor = UIColor.systemBlue.cgColor
-        layer.cornerRadius = 10
+        layer.cornerRadius = 12.0
 
         NSLayoutConstraint.activate([
-            indicatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            indicatorImageView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            indicatorImageView.heightAnchor.constraint(equalToConstant: 10),
-            indicatorImageView.widthAnchor.constraint(equalToConstant: 10),
+            indicatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4.0),
+            indicatorImageView.topAnchor.constraint(equalTo: topAnchor, constant: 4.0),
+            indicatorImageView.heightAnchor.constraint(equalToConstant: 12.0),
+            indicatorImageView.widthAnchor.constraint(equalToConstant: 12.0),
 
             sourceNameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             sourceNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            sourceNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            sourceNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+            sourceNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12.0),
+            sourceNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12.0)
         ])
     }
 }

@@ -15,7 +15,6 @@ protocol NBSModuleOutputProtocol: AnyObject {}
 protocol NBSViewInputProtocol: AnyObject {
     func setSources(sources: [SourceModel])
     func setArticle(articles: [PresenterModel])
-    func noInternet()
 }
 
 // View Output
@@ -32,16 +31,13 @@ protocol NBSInteractorInputProtocol {
     func getArticlesByAllSource()
     func startUpdateTimer()
     func loadData()
-    func loadDataForNewSource(newSourceList: [SourceModel])
 }
 
 // Interactor Output
 protocol NBSInteractorOutputProtocol: AnyObject {
     func didReceive(sources: [SourceModel])
     func didReceive(articles: [ArticleModel])
-    func noInternet()
     func filedParseData()
-    func filedUrlConfigure()
     func articlesLoaded()
 }
 

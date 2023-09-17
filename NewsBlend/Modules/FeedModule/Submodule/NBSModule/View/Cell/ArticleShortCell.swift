@@ -6,7 +6,7 @@ final class ArticleShortCell: UICollectionViewCell {
     private let articleTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 14.0)
         label.numberOfLines = 2
         return label
     }()
@@ -14,7 +14,7 @@ final class ArticleShortCell: UICollectionViewCell {
     private let articleAuthorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 12.0)
         label.textColor = .lightGray
         label.numberOfLines = 1
         return label
@@ -23,18 +23,11 @@ final class ArticleShortCell: UICollectionViewCell {
     private let publishedAtLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 12, weight: .thin)
+        label.font = .systemFont(ofSize: 12.0, weight: .thin)
         label.textColor = .systemBlue
         label.numberOfLines = 1
         return label
     }()
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        articleTitleLabel.text = nil
-        articleAuthorLabel.text = nil
-        publishedAtLabel.text = nil
-    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,12 +37,19 @@ final class ArticleShortCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        articleTitleLabel.text = nil
+        articleAuthorLabel.text = nil
+        publishedAtLabel.text = nil
+    }
 }
 
 extension ArticleShortCell {
     func setData(article: PresenterModel) {
         self.articleTitleLabel.text = article.title
-        self.articleAuthorLabel.text = "By " + (article.author ?? "unknown author")
+        self.articleAuthorLabel.text = article.author
         self.publishedAtLabel.text = article.publishedAt
     }
 
@@ -58,8 +58,8 @@ extension ArticleShortCell {
         addSubview(articleAuthorLabel)
         addSubview(publishedAtLabel)
 
-        let horizontalOffset = 15.0
-        let verticalOffset = 10.0
+        let horizontalOffset = 16.0
+        let verticalOffset = 12.0
 
         NSLayoutConstraint.activate([
             articleTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalOffset),
@@ -68,7 +68,7 @@ extension ArticleShortCell {
 
             articleAuthorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalOffset),
             articleAuthorLabel.topAnchor.constraint(equalTo: articleTitleLabel.bottomAnchor, constant: verticalOffset),
-            articleAuthorLabel.widthAnchor.constraint(equalToConstant: frame.width / 1.50),
+            articleAuthorLabel.widthAnchor.constraint(equalToConstant: bounds.width / 1.50),
 
             publishedAtLabel.topAnchor.constraint(equalTo: articleTitleLabel.bottomAnchor, constant: verticalOffset),
             publishedAtLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalOffset)

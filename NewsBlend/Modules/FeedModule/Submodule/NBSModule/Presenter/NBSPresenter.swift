@@ -23,16 +23,9 @@ extension NBSPresenter: NBSInteractorOutputProtocol {
     func articlesLoaded() {
         interactor.getArticlesByAllSource()
     }
-    
-    func noInternet() {
-        interactor.getArticlesByAllSource()
-    }
 
     func filedParseData() {
         interactor.getArticlesByAllSource()
-    }
-
-    func filedUrlConfigure() {
     }
 
     func didReceive(articles: [ArticleModel]) {

@@ -34,8 +34,6 @@ extension SettingsInteractor: SettingsInteractorInputProtocol {
                 }
             case .failure(let error):
                 switch error {
-                case .errorConfigureUrl:
-                    self.output?.didReceive(sources: self.getFollowedSources())
                 case .errorParsingData:
                     self.output?.didReceive(sources: self.getFollowedSources())
                 case .noInternet:

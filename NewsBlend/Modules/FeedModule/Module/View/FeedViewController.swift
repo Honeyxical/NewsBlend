@@ -15,7 +15,7 @@ final class FeedViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.delegate = self
-        scrollView.contentSize = CGSize(width: view.frame.width, height: 1060)
+        scrollView.contentSize = CGSize(width: view.bounds.width, height: 1060.0)
         return scrollView
     }()
 
@@ -23,7 +23,7 @@ final class FeedViewController: UIViewController {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
         title.text = "Hot News"
-        title.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        title.font = UIFont.systemFont(ofSize: 20.0, weight: .semibold)
         title.textColor = .systemBlue
         return title
     }()
@@ -66,9 +66,9 @@ extension FeedViewController: UICollectionViewDelegate {
     func collectionLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: view.frame.width - 50, height: view.frame.height / 3.5)
-        layout.minimumLineSpacing = 15
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 15)
+        layout.itemSize = CGSize(width: view.bounds.width - 48.0, height: view.bounds.height / 3.5)
+        layout.minimumLineSpacing = 16.0
+        layout.sectionInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 15.0)
         return layout
     }
 }
@@ -117,7 +117,6 @@ extension FeedViewController: FeedViewInputProtocol {
 
     func displayLottie() {
         lottieChildView.isHidden = false
-        loader.isHidden = true
     }
 
     func hideLottie() {
@@ -160,18 +159,18 @@ extension FeedViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
             sectionNameLabel.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            sectionNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            sectionNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0),
 
             hotNewsCollection.topAnchor.constraint(equalTo: sectionNameLabel.bottomAnchor),
             hotNewsCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             hotNewsCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            hotNewsCollection.heightAnchor.constraint(equalToConstant: view.frame.height / 3),
+            hotNewsCollection.heightAnchor.constraint(equalToConstant: view.bounds.height / 3.0),
 
             childViewVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             childViewVC.view.topAnchor.constraint(equalTo: hotNewsCollection.bottomAnchor),
             childViewVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            childViewVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 16),
-            childViewVC.view.widthAnchor.constraint(equalToConstant: view.frame.width),
+            childViewVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 16.0),
+            childViewVC.view.widthAnchor.constraint(equalToConstant: view.bounds.width),
 
             lottieChildView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             lottieChildView.topAnchor.constraint(equalTo: view.topAnchor),

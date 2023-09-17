@@ -54,7 +54,7 @@ final class NewsSettingViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Select the news update interval: "
-        label.font = UIFont.systemFont(ofSize: 16, weight: .thin)
+        label.font = UIFont.systemFont(ofSize: 16.0, weight: .thin)
         label.textColor = .gray
         return label
     }()
@@ -71,7 +71,7 @@ final class NewsSettingViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Select news sources: "
-        label.font = UIFont.systemFont(ofSize: 16, weight: .thin)
+        label.font = UIFont.systemFont(ofSize: 16.0, weight: .thin)
         label.textColor = .gray
         return label
     }()
@@ -119,8 +119,8 @@ extension NewsSettingViewController {
         view.addSubview(sourcesCollection)
         view.addSubview(loader)
 
-        let horizontalOffset = 15.0
-        let topOffset = 10.0
+        let horizontalOffset = 16.0
+        let topOffset = 12.0
 
         NSLayoutConstraint.activate([
             intervalsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalOffset),
@@ -130,7 +130,7 @@ extension NewsSettingViewController {
             pickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalOffset),
             pickerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalOffset),
             pickerView.topAnchor.constraint(equalTo: intervalsLabel.bottomAnchor),
-            pickerView.heightAnchor.constraint(equalToConstant: 100),
+            pickerView.heightAnchor.constraint(equalToConstant: 100.0),
 
             sourcesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalOffset),
             sourcesLabel.topAnchor.constraint(equalTo: pickerView.bottomAnchor, constant: topOffset),
@@ -150,11 +150,10 @@ extension NewsSettingViewController {
     private func collectionLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: view.frame.width / 2.5, height: 50)
-        layout.minimumLineSpacing = 15
-        layout.minimumInteritemSpacing = 20
-        layout.minimumLineSpacing = 25
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
+        layout.itemSize = CGSize(width: view.bounds.width / 2.5, height: 48.0)
+        layout.minimumInteritemSpacing = 20.0
+        layout.minimumLineSpacing = 26.0
+        layout.sectionInset = UIEdgeInsets(top: 0.0, left: 24.0, bottom: 0.0, right: 24.0)
         return layout
     }
 }

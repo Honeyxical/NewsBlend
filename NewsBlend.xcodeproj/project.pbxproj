@@ -158,6 +158,7 @@
 		09617C112AADDC2200954FC8 /* CommonModels */ = {
 			isa = PBXGroup;
 			children = (
+				69441A942AB71F7B009CA9C5 /* PresenterModel.swift */,
 				69B59FA72A87D16B00B80CD4 /* SourceModel.swift */,
 				69B59FA52A87C5DE00B80CD4 /* ArticleModel.swift */,
 			);
@@ -448,7 +449,6 @@
 			isa = PBXGroup;
 			children = (
 				69796EBF2A78CF9E00EB6714 /* FeedPresenter.swift */,
-				69441A942AB71F7B009CA9C5 /* PresenterModel.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";

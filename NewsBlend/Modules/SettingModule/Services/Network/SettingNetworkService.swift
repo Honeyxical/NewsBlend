@@ -9,7 +9,6 @@ protocol SettingNetworkServiceProtocol {
 
 enum SettingsResponseErrors: Error {
     case noInternet
-    case errorConfigureUrl
     case errorParsingData
 }
 
@@ -22,7 +21,7 @@ final class SettingNetworkService: SettingNetworkServiceProtocol {
         case reserveApiKey = "134f24f4624347d4964bfdbb07479eac"
     }
 
-    let reachabilityManager = Alamofire.NetworkReachabilityManager(host: "www.google.com")
+    let reachabilityManager = NetworkReachabilityManager(host: "www.google.com")
 
     func getSources(sourceLanguage: String, completion: @escaping GetSourcesResponse) {
         if let isReachable = reachabilityManager?.isReachable, isReachable {
@@ -32,7 +31,6 @@ final class SettingNetworkService: SettingNetworkServiceProtocol {
             ]
 
             guard let url = URL(string: SettingsConstants.sources.rawValue)?.appending(queryItems: queryItems) else {
-                completion(.failure(.errorConfigureUrl))
                 return
             }
 
