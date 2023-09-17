@@ -15,7 +15,6 @@ final class Loader: UIView {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
         setupLayout()
-        isHidden = true
         backgroundColor = .white
     }
 

@@ -12,8 +12,7 @@ protocol SettingsModuleOutputProtocol {}
 protocol SettingsViewInputProtocol: AnyObject {
     func set(source: [SourceModel])
     func set(interval: Int)
-    func showLoader()
-    func hideLoader()
+    func loaderIsHidden(_ state: Bool)
     func displayAlert()
 }
 

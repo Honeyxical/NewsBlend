@@ -21,7 +21,7 @@ final class FeedPresenter {
 
 extension FeedPresenter: FeedViewOutputProtocol {
     func viewDidLoad() {
-        view?.showLoader()
+        view?.loaderIsHidden(false)
         interactor.startUpdateTimer()
         interactor.loadData()
         interactor.isFirstStart()
@@ -29,8 +29,8 @@ extension FeedPresenter: FeedViewOutputProtocol {
 
     func reloadData() {
         interactor.loadData()
-        view?.hideLottie()
-        view?.showLoader()
+        view?.lottieIsHidden(false)
+        view?.loaderIsHidden(false)
     }
 
     func openSettings() {
@@ -47,12 +47,12 @@ extension FeedPresenter: FeedInteractorOutputProtocol {
         let preparedArticles = articlesPreparation.prepareArticles(articles: articles)
         view?.setArticles(articles: preparedArticles)
         view?.reloadData()
-        view?.hideLoader()
+        view?.loaderIsHidden(true)
     }
 
     func didReceiveFail() {
-        view?.hideLoader()
-        view?.displayLottie()
+        view?.loaderIsHidden(true)
+        view?.lottieIsHidden(false)
     }
 }
 

@@ -88,6 +88,14 @@ extension FeedViewController: UICollectionViewDataSource {
 }
 
 extension FeedViewController: FeedViewInputProtocol {
+    func loaderIsHidden(_ state: Bool) {
+        loader.isHidden = state
+    }
+
+    func lottieIsHidden(_ state: Bool) {
+        lottieChildView.isHidden = state
+    }
+
     func setArticles(articles: [PresenterModel]) {
         self.articles = articles
     }
@@ -105,22 +113,6 @@ extension FeedViewController: FeedViewInputProtocol {
             let childViewVC = childViewVC as? NBSViewController
             childViewVC?.moduleInput?.updateSourceAndArticles()
         }
-    }
-
-    func showLoader() {
-        loader.isHidden = false
-    }
-
-    func hideLoader() {
-        loader.isHidden = true
-    }
-
-    func displayLottie() {
-        lottieChildView.isHidden = false
-    }
-
-    func hideLottie() {
-        lottieChildView.isHidden = true
     }
 }
 

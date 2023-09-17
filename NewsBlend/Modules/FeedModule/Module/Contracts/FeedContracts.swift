@@ -12,10 +12,8 @@ protocol FeedModuleOutputProtocol {}
 protocol FeedViewInputProtocol: AnyObject {
     func setArticles(articles: [PresenterModel])
     func reloadData()
-    func showLoader()
-    func hideLoader()
-    func displayLottie()
-    func hideLottie()
+    func loaderIsHidden(_ state: Bool)
+    func lottieIsHidden(_ state: Bool)
 }
 
 // View Output

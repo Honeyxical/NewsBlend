@@ -28,7 +28,7 @@ extension SettingsPresenter: SettingsViewOutputProtocol {
     }
 
     func viewDidLoad() {
-        view?.showLoader()
+        view?.loaderIsHidden(false)
         interactor.getIntervals()
         interactor.getAllSources()
     }
@@ -45,7 +45,7 @@ extension SettingsPresenter: SettingsInteractorOutputProtocol {
 
     func didReceive(sources: [SourceModel]) {
         view?.set(source: sources)
-        view?.hideLoader()
+        view?.loaderIsHidden(true)
     }
 }
 

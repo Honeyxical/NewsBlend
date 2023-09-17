@@ -188,12 +188,8 @@ extension NewsSettingViewController: SettingsViewInputProtocol {
         sourcesCollection.reloadData()
     }
 
-    func showLoader() {
-        loader.isHidden = false
-    }
-
-    func hideLoader() {
-        loader.isHidden = true
+    func loaderIsHidden(_ state: Bool) {
+        loader.isHidden = state
     }
 
     func displayAlert() {
