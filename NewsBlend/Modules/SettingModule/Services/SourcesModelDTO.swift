@@ -16,6 +16,7 @@ struct Sources: Decodable {
     func map(source: Sources) -> SourceModel {
         SourceModel(id: id ?? "",
                     name: name ?? "",
+                    type: .common,
                     isSelected: false)
     }
 }

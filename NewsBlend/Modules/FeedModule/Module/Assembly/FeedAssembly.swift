@@ -14,9 +14,11 @@ final class FeedAssembly {
                                         sourceCoder: SourceCoding(),
                                         initialSource: SourceModel(id: "abc-news",
                                                                    name: "ABC News",
+                                                                   type: .common,
                                                                    isSelected: true),
                                         defaultSourceHotNews: SourceModel(id: "techcrunch.com",
                                                                           name: "TechCrunch",
+                                                                          type: .common,
                                                                           isSelected: false))
         let router = FeedRouter()
         let presenter = FeedPresenter(view: view,

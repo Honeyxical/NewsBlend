@@ -10,7 +10,7 @@ enum UpdateIntervals: Int, CaseIterable {
     case tenMin = 600
     case fiveTeenMin = 1900
 
-    func stringValue() -> String {
+    var stringValue: String {
         switch self {
         case .oneMin:
             return "1 min"
@@ -32,6 +32,8 @@ final class NewsSettingViewController: UIViewController {
     private var sources: [SourceModel] = []
     private var sourcesAreChange = false
     private var selectedItemIndex: Int?
+    private var selectedInterval: Int?
+    private var newInterval: Int?
 
     private let loader: UIView
 
@@ -83,6 +85,22 @@ final class NewsSettingViewController: UIViewController {
         collection.delegate = self
         collection.register(SettingSourceCell.self, forCellWithReuseIdentifier: "cell")
         return collection
+    }()
+
+    private lazy var pickerAlert: UIAlertController = {
+        let alert = UIAlertController(title: "Warning", message: "Did you want change update interval?", preferredStyle: .actionSheet)
+        let confirmAction = UIAlertAction(title: "Yes", style: .default) { _ in
+            guard let newInterval = self.newInterval else { return }
+            self.selectedInterval = newInterval
+            self.output?.setInterval(interval: UpdateIntervals.allCases[newInterval])
+        }
+        let cancelAction = UIAlertAction(title: "No", style: .cancel) { _ in
+            guard let selectedInterval = self.selectedInterval, let intervalValue = UpdateIntervals(rawValue: selectedInterval) else { return }
+            self.pickerView.selectRow(UpdateIntervals.allCases.firstIndex(of: intervalValue) ?? 0, inComponent: 0, animated: true)
+        }
+        alert.addAction(confirmAction)
+        alert.addAction(cancelAction)
+        return alert
     }()
 
     init(loader: UIView) {
@@ -161,6 +179,7 @@ extension NewsSettingViewController {
 extension NewsSettingViewController: SettingsViewInputProtocol {
     func set(interval: Int) {
         let intervalValue = UpdateIntervals(rawValue: interval) ?? .tenMin
+        selectedInterval = interval
         pickerView.selectRow(UpdateIntervals.allCases.firstIndex(of: intervalValue) ?? 0, inComponent: 0, animated: true)
     }
 
@@ -194,11 +213,12 @@ extension NewsSettingViewController: UIPickerViewDataSource, UIPickerViewDelegat
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        UpdateIntervals.allCases[row].stringValue()
+        UpdateIntervals.allCases[row].stringValue
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        output?.setInterval(interval: UpdateIntervals.allCases[row])
+        newInterval = row
+        self.present(pickerAlert, animated: true)
     }
 }
 

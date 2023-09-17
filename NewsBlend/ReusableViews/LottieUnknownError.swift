@@ -8,6 +8,7 @@ protocol LottieUnknownErrorDelegate: AnyObject {
 
 final class LottieUnknownError: UIView {
     weak var delegate: LottieUnknownErrorDelegate?
+
     private let lottie: UILabel = {
         let lottie = UILabel()
         lottie.translatesAutoresizingMaskIntoConstraints = false
@@ -37,8 +38,8 @@ final class LottieUnknownError: UIView {
     }
 }
 
-extension LottieUnknownError {
-    private func setupLayout() {
+private extension LottieUnknownError {
+    func setupLayout() {
         addSubview(lottie)
         addSubview(updateButton)
 
@@ -47,11 +48,11 @@ extension LottieUnknownError {
             lottie.centerYAnchor.constraint(equalTo: centerYAnchor),
 
             updateButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            updateButton.topAnchor.constraint(equalTo: lottie.bottomAnchor, constant: 15)
+            updateButton.topAnchor.constraint(equalTo: lottie.bottomAnchor, constant: 16)
         ])
     }
 
-    @objc private func updateButtonHandler() {
+    @objc func updateButtonHandler() {
         delegate?.reloadPage()
     }
 }

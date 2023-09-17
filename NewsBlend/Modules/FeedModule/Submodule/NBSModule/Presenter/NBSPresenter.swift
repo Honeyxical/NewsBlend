@@ -44,7 +44,7 @@ extension NBSPresenter: NBSViewOutputProtocol {
     }
 
     func getArticlesBySource(source: SourceModel){
-        if  source.name == "All" {
+        if  source.type == .all {
             interactor.getArticlesByAllSource()
         } else {
             interactor.getArticlesBySource(source: source)

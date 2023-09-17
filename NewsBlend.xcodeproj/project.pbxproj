@@ -301,14 +301,6 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		695F7FB92A836A2A003EC2F9 /* NewsSettingView */ = {
-			isa = PBXGroup;
-			children = (
-				695F7FBA2A836BAF003EC2F9 /* NewsSettingViewController.swift */,
-			);
-			path = NewsSettingView;
-			sourceTree = "<group>";
-		};
 		697270E42AA1C67A002F6A10 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -529,8 +521,8 @@
 		69833A442A76B18B00909649 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				695F7FB92A836A2A003EC2F9 /* NewsSettingView */,
 				69B2BFAF2A82357B000465BC /* Cell */,
+				695F7FBA2A836BAF003EC2F9 /* NewsSettingViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
