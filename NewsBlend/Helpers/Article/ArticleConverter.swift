@@ -1,12 +1,12 @@
-//  Created by илья on 12.09.23.
+//  Created by илья on 17.09.23.
 
 import Foundation
 
-protocol SettingArticleConverterProtocol {
+protocol ArticleConverterProtocol {
     func transferDTOToModel(articlesArray: [Article]) -> [ArticleModel]
 }
 
-final class SettingArticleConverter: SettingArticleConverterProtocol {
+final class ArticleConverter: ArticleConverterProtocol {
     func transferDTOToModel(articlesArray: [Article]) -> [ArticleModel] {
         var articleModels: [ArticleModel] = []
         for article in articlesArray {

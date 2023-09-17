@@ -1,15 +1,15 @@
-//  Created by илья on 11.09.23.
+//  Created by илья on 17.09.23.
 
 import Foundation
 
-protocol NBSParserProtocol {
+protocol ArticleParserProtocol {
     func parseArticle(data: Data) -> [ArticleModel]
 }
 
-final class NBSParser: NBSParserProtocol {
-    private let articleConverter: NBSArticleConverterProtocol
+final class ArticleParser: ArticleParserProtocol {
+    private let articleConverter: ArticleConverterProtocol
 
-    init(articleConverter: NBSArticleConverterProtocol) {
+    init(articleConverter: ArticleConverterProtocol) {
         self.articleConverter = articleConverter
     }
 

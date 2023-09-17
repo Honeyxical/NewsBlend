@@ -6,28 +6,22 @@ final class NBSInteractor {
     weak var output: NBSInteractorOutputProtocol?
     private let networkService: NBSNetworkServiceProtocol
     private let cacheService: NBSStorageProtocol
-    private let parser: NBSParserProtocol
-    private let articleConverter: NBSArticleConverterProtocol
+    private let articleParser: ArticleParserProtocol
     private let articleCoder: ArticleCodingProtocol
     private let sourceCoder: SourceCodingProtocol
-    private let sourceConverter: NBSSourceConverterProtocol
-    
+
     private let defaultPageSize = 10
 
     init(networkService: NBSNetworkServiceProtocol,
          cacheService: NBSStorageProtocol,
-         parser: NBSParserProtocol,
-         articleConverter: NBSArticleConverterProtocol,
+         articleParser: ArticleParserProtocol,
          articleCoder: ArticleCodingProtocol,
-         sourceCoder: SourceCodingProtocol,
-         sourceConverter: NBSSourceConverterProtocol) {
+         sourceCoder: SourceCodingProtocol) {
         self.networkService = networkService
         self.cacheService = cacheService
-        self.parser = parser
-        self.articleConverter = articleConverter
+        self.articleParser = articleParser
         self.articleCoder = articleCoder
         self.sourceCoder = sourceCoder
-        self.sourceConverter = sourceConverter
     }
 }
 
@@ -37,7 +31,7 @@ extension NBSInteractor: NBSInteractorInputProtocol {
             networkService.getArticlesBySource(source: source, pageSize: defaultPageSize) { result in
                 switch result {
                 case .success(let data):
-                    let parsedArticlesFromNetwork = self.parser.parseArticle(data: data)
+                    let parsedArticlesFromNetwork = self.articleParser.parseArticle(data: data)
                     let encodedArticle = self.articleCoder.encodeArticleObjects(articles: parsedArticlesFromNetwork)
                     self.cacheService.setArticles(data: encodedArticle, source: source.id)
                 case .failure(let error):
@@ -69,7 +63,7 @@ extension NBSInteractor: NBSInteractorInputProtocol {
             networkService.getArticlesBySource(source: source, pageSize: defaultPageSize) { result in
                 switch result {
                 case .success(let data):
-                    let parsedArticlesFromNetwork = self.parser.parseArticle(data: data)
+                    let parsedArticlesFromNetwork = self.articleParser.parseArticle(data: data)
                     if !parsedArticlesFromNetwork.isEmpty{
                         let encodedArticle = self.articleCoder.encodeArticleObjects(articles: parsedArticlesFromNetwork)
                         self.cacheService.setArticles(data: encodedArticle, source: source.id)

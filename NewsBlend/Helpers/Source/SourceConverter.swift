@@ -1,12 +1,12 @@
-//  Created by илья on 11.09.23.
+//  Created by илья on 17.09.23.
 
 import Foundation
 
-protocol SettingSourceConverterProtocol {
+protocol SourceConverterProtocol {
     func transferSourceObject(sources: [Sources]) -> [SourceModel]
 }
 
-final class SettingSourceConverter: SettingSourceConverterProtocol {
+final class SourceConverter: SourceConverterProtocol {
     func transferSourceObject(sources: [Sources]) -> [SourceModel] {
         var sourceModels: [SourceModel] = []
         for source in sources {

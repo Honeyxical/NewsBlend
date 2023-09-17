@@ -6,7 +6,7 @@ final class FeedInteractor {
     weak var output: FeedInteractorOutputProtocol?
     private let networkService: FeedNetworkServiceProtocol
     private let cacheService: FeedStorageProtocol
-    private let parser: FeedParserProtocol
+    private let articleParser: ArticleParser
     private let articleCoder: ArticleCodingProtocol
     private let sourceCoder: SourceCodingProtocol
     
@@ -16,14 +16,14 @@ final class FeedInteractor {
     
     init(networkService: FeedNetworkServiceProtocol,
          cacheService: FeedStorageProtocol,
-         parser: FeedParserProtocol,
+         articleParser: ArticleParser,
          articleCoder: ArticleCodingProtocol,
          sourceCoder: SourceCodingProtocol,
          initialSource: SourceModel,
          defaultSourceHotNews: SourceModel) {
         self.networkService = networkService
         self.cacheService = cacheService
-        self.parser = parser
+        self.articleParser = articleParser
         self.articleCoder = articleCoder
         self.sourceCoder = sourceCoder
         self.initialSource = initialSource
@@ -37,7 +37,7 @@ extension FeedInteractor: FeedInteractorInputProtocol {
         networkService.getArticles(source: defaultSourceHotNews, articlesCount: articlesEstimate) { result in
             switch result {
             case .success(let data):
-                let articlesFromNetwork = self.parser.parseArticle(data: data)
+                let articlesFromNetwork = self.articleParser.parseArticle(data: data)
                 if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
                     self.setArticlesIntoCache(articles: articlesFromNetwork)
                     self.output?.didReceive(articles: articlesFromNetwork)

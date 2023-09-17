@@ -76,5 +76,3 @@ extension NBSPresenter: NBSModuleInputProtocol {
         interactor.getArticlesByAllSource()
     }
 }
-
-extension NBSParser: NBSModuleOutputProtocol {}

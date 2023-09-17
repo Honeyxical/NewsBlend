@@ -8,10 +8,8 @@ final class SettingsAssembly {
         let newsSettingsViewController = NewsSettingViewController(loader: Loader())
         let interactor = SettingsInteractor(cacheService: Storage.shared,
                                             networkService: SettingNetworkService(),
-                                            parser: SettingParser(articleConverter: SettingArticleConverter(), sourceConverter: SettingSourceConverter()),
-                                            sourceCoder: SourceCoding(),
-                                            articleConverter: SettingArticleConverter(),
-                                            sourceConverter: SettingSourceConverter())
+                                            sourceParser: SourceParser(sourceConverter: SourceConverter()),
+                                            sourceCoder: SourceCoding())
         let router = SettingsRouter()
         let presenter = SettingsPresenter(view: newsSettingsViewController,
                                           interactor: interactor,

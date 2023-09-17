@@ -6,24 +6,18 @@ final class SettingsInteractor {
     weak var output: SettingsInteractorOutputProtocol?
     private let cacheService: SettingStorageProtocol
     private let networkService: SettingNetworkServiceProtocol
-    private let parser: SettingParserProtocol
-    private let defaultLanguage = "en"
+    private let sourceParser: SourceParserProtocol
     private let sourceCoder: SourceCodingProtocol
-    private let articleConverter: SettingArticleConverterProtocol
-    private let sourceConverter: SettingSourceConverterProtocol
+    private let defaultLanguage = "en"
 
     init(cacheService: SettingStorageProtocol,
          networkService: SettingNetworkServiceProtocol,
-         parser: SettingParserProtocol,
-         sourceCoder: SourceCodingProtocol,
-         articleConverter: SettingArticleConverterProtocol,
-         sourceConverter: SettingSourceConverterProtocol) {
+         sourceParser: SourceParserProtocol,
+         sourceCoder: SourceCodingProtocol) {
         self.cacheService = cacheService
         self.networkService = networkService
-        self.parser = parser
+        self.sourceParser = sourceParser
         self.sourceCoder = sourceCoder
-        self.articleConverter = articleConverter
-        self.sourceConverter = sourceConverter
     }
 }
 
@@ -33,7 +27,7 @@ extension SettingsInteractor: SettingsInteractorInputProtocol {
         networkService.getSources(sourceLanguage: defaultLanguage) { result in
             switch result {
             case .success(let data):
-                let sourcesFromNetwork = self.parser.parseSource(data: data)
+                let sourcesFromNetwork = self.sourceParser.parseSource(data: data)
                 if !sourcesFromNetwork.isEmpty {
                     self.output?.didReceive(sources: self.combiningSourceResults(storage: sourcesFromCache,
                                                                                  network: sourcesFromNetwork))

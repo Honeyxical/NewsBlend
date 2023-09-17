@@ -7,11 +7,9 @@ final class NBSAssembly {
     func build() -> UIViewController {
         let interactor = NBSInteractor(networkService: NBSNetworkService(),
                                        cacheService: Storage.shared,
-                                       parser: NBSParser(articleConverter: NBSArticleConverter()),
-                                       articleConverter: NBSArticleConverter(),
+                                       articleParser: ArticleParser(articleConverter: ArticleConverter()),
                                        articleCoder: ArticleCoding(),
-                                       sourceCoder: SourceCoding(),
-                                       sourceConverter: NBSSourceConverter())
+                                       sourceCoder: SourceCoding())
         let childView = NBSArticleView()
         let view = NBSViewController(childView: childView)
         let router = NBSRouter()

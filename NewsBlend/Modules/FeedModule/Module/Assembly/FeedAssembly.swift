@@ -9,7 +9,7 @@ final class FeedAssembly {
         let view = FeedViewController(childView: NBSAssembly().build(), lottieChildView: lottieUnknownError, loader: Loader())
         let interactor = FeedInteractor(networkService: FeedNetworkService(),
                                         cacheService: Storage.shared,
-                                        parser: FeedParser(converter: FeedArticleConverter()),
+                                        articleParser: ArticleParser(articleConverter: ArticleConverter()),
                                         articleCoder: ArticleCoding(),
                                         sourceCoder: SourceCoding(),
                                         initialSource: SourceModel(id: "abc-news",
