@@ -3,10 +3,12 @@
 import UIKit
 
 // Module Input
-protocol NBSModuleInputProtocol: AnyObject {}
+protocol NBSModuleInputProtocol: AnyObject {
+    func reloadData()
+}
 
 // Module Output
-protocol NBSModuleOutputProtocol {}
+protocol NBSModuleOutputProtocol: AnyObject {}
 
 // View Input
 protocol NBSViewInputProtocol: AnyObject {

@@ -10,7 +10,7 @@ struct Article: Decodable {
     let author: String?
     let title: String?
     let urlToImage: String?
-    var publishedAt: String?
+    let publishedAt: String?
     let content: String?
 
     func map(article: Article) -> ArticleModel {

@@ -69,7 +69,13 @@ extension NBSPresenter: NBSViewOutputProtocol {
     }
 }
 
-extension NBSPresenter: NBSRouterOutputProtocol {}
+extension NBSPresenter: NBSModuleInputProtocol {
+    func reloadData() {
+        interactor.loadData()
+    }
+}
+
+extension NBSParser: NBSModuleOutputProtocol {}
 
 extension NBSPresenter {
     func updateSourceAndArticles(newSourceList: [SourceModel]) {

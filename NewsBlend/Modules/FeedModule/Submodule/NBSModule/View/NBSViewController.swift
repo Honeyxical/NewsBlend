@@ -5,6 +5,8 @@ import UIKit
 
 final class NBSViewController: UIViewController {
     var output: NBSViewOutputProtocol?
+    var moduleInput: NBSModuleInputProtocol?
+    var moduleOutput: NBSModuleOutputProtocol?
     private let childView: UIView
     private var sources: [SourceModel] = []
     private var isShortArticleCell = true
@@ -71,6 +73,9 @@ extension NBSViewController: NBSViewInputProtocol {
         let childView = childView as? NBSArticleView
         childView?.delegate = self
         childView?.setArticle(articles: articles, cellType: isShortArticleCell)
+    }
+
+    func reloadData() {
         
     }
 }

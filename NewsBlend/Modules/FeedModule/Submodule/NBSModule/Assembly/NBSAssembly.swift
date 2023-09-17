@@ -22,8 +22,8 @@ final class NBSAssembly {
             presenter.updateSourceAndArticles(newSourceList: newSourcesList)
         }
         view.output = presenter
+        view.moduleInput = presenter
         interactor.output = presenter
-        router.output = presenter
         router.viewController = view
         return view
     }

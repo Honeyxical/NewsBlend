@@ -15,7 +15,6 @@ extension NBSRouter: NBSRouterInputProtocol {
 }
 
 extension NBSModuleInputProtocol {
-    func needToUpdateSources() {
-
-    }
+//    func needToUpdateSources() {
+//    }
 }

@@ -94,6 +94,10 @@ extension FeedViewController: FeedViewInputProtocol {
 
     func reloadData() {
         hotNewsCollection.reloadData()
+        if childViewVC is NBSViewController {
+            let childViewVC = childViewVC as? NBSViewController
+            childViewVC?.moduleInput?.reloadData()
+        }
     }
 
     func showLoader() {
@@ -149,7 +153,7 @@ extension FeedViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
             sectionNameLabel.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            sectionNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            sectionNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
 
             hotNewsCollection.topAnchor.constraint(equalTo: sectionNameLabel.bottomAnchor),
             hotNewsCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -159,7 +163,7 @@ extension FeedViewController {
             childViewVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             childViewVC.view.topAnchor.constraint(equalTo: hotNewsCollection.bottomAnchor),
             childViewVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            childViewVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 15),
+            childViewVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 16),
             childViewVC.view.widthAnchor.constraint(equalToConstant: view.frame.width),
 
             lottieChildView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
