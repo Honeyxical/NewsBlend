@@ -8,7 +8,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = FeedAssembly().build()
+        let navigationController = UINavigationController(rootViewController: FeedAssembly().build())
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true
     }
