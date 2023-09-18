@@ -64,7 +64,7 @@ extension FeedInteractor: FeedInteractorInputProtocol {
     }
 
     func setSource(sources: [SourceModel]) {
-        cacheService.setSource(data: sourceCoder.encodeSourceObjects(sourceModels: sources)) // Да, так надо. Чтобы его убрать нужно делать новый модуль с экраном загрузки
+        cacheService.setSource(data: sourceCoder.encodeSourceObjects(sourceModels: sources))
     }
 
     func getUpdateInterval() -> Int {
