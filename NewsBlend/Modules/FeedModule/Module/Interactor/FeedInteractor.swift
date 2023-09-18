@@ -33,23 +33,24 @@ final class FeedInteractor {
 
 extension FeedInteractor: FeedInteractorInputProtocol {
     func loadData() {
-        let articlesFromCache = articleCoder.decodeArticleObjects(data: cacheService.getArticles())
-        networkService.getArticles(source: defaultSourceHotNews, articlesCount: articlesEstimate) { result in
+        var articlesFromCache = articleCoder.decodeArticleObjects(data: cacheService.getArticles())
+        articlesFromCache.sort { $0.publishedAt ?? "" < $1.publishedAt ?? "" }
+        networkService.getArticles(source: defaultSourceHotNews, articlesCount: articlesEstimate) { [self] result in
             switch result {
             case .success(let data):
-                let articlesFromNetwork = self.articleParser.parseArticle(data: data)
+                let articlesFromNetwork = articleParser.parseArticle(data: data)
                 if articlesFromNetwork != articlesFromCache && !articlesFromNetwork.isEmpty {
-                    self.setArticlesIntoCache(articles: articlesFromNetwork)
-                    self.output?.didReceive(articles: articlesFromNetwork)
+                    setArticlesIntoCache(articles: articlesFromNetwork)
+                    output?.didReceive(articles: articlesFromNetwork)
                 } else {
-                    self.output?.didReceive(articles: articlesFromCache)
+                    output?.didReceive(articles: articlesFromCache)
                 }
             case .failure(let error):
                 switch error {
                 case .noInternet:
-                    self.errorHandling(articlesFromCache: articlesFromCache)
+                    errorHandling(articlesFromCache: articlesFromCache)
                 case .parseFailed:
-                    self.errorHandling(articlesFromCache: articlesFromCache)
+                    errorHandling(articlesFromCache: articlesFromCache)
                 }
             }
         }

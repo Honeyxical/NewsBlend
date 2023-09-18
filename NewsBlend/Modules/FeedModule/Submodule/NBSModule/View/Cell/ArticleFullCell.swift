@@ -57,10 +57,10 @@ final class ArticleFullCell: UICollectionViewCell {
     }
 
     func setData(article: PresenterModel) {
-        self.titleLabel.text = article.title
-        self.authorLabel.text = article.author
-        self.imageView.kf.setImage(with: URL(string: article.urlToImage))
-        self.publishedTimeLabel.text = article.publishedAt
+        titleLabel.text = article.title
+        authorLabel.text = article.author
+        imageView.kf.setImage(with: URL(string: article.urlToImage))
+        publishedTimeLabel.text = article.publishedAt
     }
 
     private func setupLayout() {

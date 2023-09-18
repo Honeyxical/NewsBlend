@@ -44,20 +44,20 @@ extension NBSInteractor: NBSInteractorInputProtocol {
     func loadData() {
         let sources = sourceCoder.decodeSourceObjects(data: cacheService.getSources())
         for source in sources {
-            networkService.getArticlesBySource(source: source, pageSize: defaultPageSize) { result in
+            networkService.getArticlesBySource(source: source, pageSize: defaultPageSize) { [self] result in
                 switch result {
                 case .success(let data):
-                    let parsedArticlesFromNetwork = self.articleParser.parseArticle(data: data)
+                    let parsedArticlesFromNetwork = articleParser.parseArticle(data: data)
                     if !parsedArticlesFromNetwork.isEmpty{
                         let encodedArticle = self.articleCoder.encodeArticleObjects(articles: parsedArticlesFromNetwork)
-                        self.cacheService.setArticles(data: encodedArticle, source: source.id)
-                        self.output?.articlesLoaded()
+                        cacheService.setArticles(data: encodedArticle, source: source.id)
+                        output?.articlesLoaded()
                     }
-                    self.output?.articlesLoaded()
+                    output?.articlesLoaded()
                 case .failure(let error):
                     switch error {
                     case .parseFailed:
-                        self.output?.filedParseData()
+                        output?.filedParseData()
                     }
                 }
             }

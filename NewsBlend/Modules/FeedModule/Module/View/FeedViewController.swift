@@ -38,23 +38,23 @@ final class FeedViewController: UIViewController {
         return collection
     }()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        configuringNavigationBar()
-        output?.viewDidLoad()
-        setupLayout()
-    }
-
     init(childView: UIViewController, lottieChildView: UIView, loader: UIView) {
         self.childViewVC = childView
         self.lottieChildView = lottieChildView
         self.loader = loader
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+        configuringNavigationBar()
+        setupLayout()
+        output?.viewDidLoad()
     }
 }
 

@@ -35,7 +35,7 @@ final class NBSArticleView: UIView {
 }
 
 extension NBSArticleView {
-    func setArticle(articles: [PresenterModel], cellType: Bool){
+    func setArticle(articles: [PresenterModel], cellType: Bool) {
         self.articles = articles
         articlesCollection.reloadData()
         isShortCell = cellType

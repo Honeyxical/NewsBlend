@@ -21,6 +21,6 @@ final class ArticlesPreparations: ArticlesPreparationsProtocol {
             tempArticle.timeSincePublication = RelativeDateTimeFormatter().localizedString(for: targetDate, relativeTo: Date())
             result.append(article.map(articleModel: tempArticle))
         }
-        return result.sorted { $0.publishedAt ?? "" < $1.publishedAt ?? "" }
+        return result
     }
 }
