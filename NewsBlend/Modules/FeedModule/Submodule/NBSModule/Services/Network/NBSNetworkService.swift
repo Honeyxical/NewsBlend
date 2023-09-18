@@ -32,7 +32,9 @@ final class NBSNetworkService: NBSNetworkServiceProtocol {
 
         AF.request(url).response { response in
             guard let data = response.data else {
-                completion(.failure(.parseFailed))
+                DispatchQueue.main.async {
+                    completion(.failure(.parseFailed))
+                }
                 return
             }
             DispatchQueue.main.async {

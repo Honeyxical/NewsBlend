@@ -37,7 +37,9 @@ final class FeedNetworkService: FeedNetworkServiceProtocol {
 
             AF.request(url).response { response in
                 guard let data = response.data else {
-                    completion(.failure(.parseFailed))
+                    DispatchQueue.main.async {
+                        completion(.failure(.parseFailed))
+                    }
                     return
                 }
                 DispatchQueue.main.async {
@@ -45,7 +47,9 @@ final class FeedNetworkService: FeedNetworkServiceProtocol {
                 }
             }
         } else {
-            completion(.failure(.noInternet))
+            DispatchQueue.main.async {
+                completion(.failure(.noInternet))
+            }
         }
     }
 }

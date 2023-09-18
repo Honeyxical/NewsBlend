@@ -47,17 +47,9 @@ extension FeedInteractor: FeedInteractorInputProtocol {
             case .failure(let error):
                 switch error {
                 case .noInternet:
-                    if !articlesFromCache.isEmpty {
-                        self.output?.didReceive(articles: articlesFromCache)
-                    } else {
-                        self.output?.didReceiveFail()
-                    }
+                    self.errorHandling(articlesFromCache: articlesFromCache)
                 case .parseFailed:
-                    if !articlesFromCache.isEmpty {
-                        self.output?.didReceive(articles: articlesFromCache)
-                    } else {
-                        self.output?.didReceiveFail()
-                    }
+                    self.errorHandling(articlesFromCache: articlesFromCache)
                 }
             }
         }
@@ -88,5 +80,13 @@ extension FeedInteractor: FeedInteractorInputProtocol {
     
     private func setArticlesIntoCache(articles: [ArticleModel]) {
         cacheService.setArticles(data: articleCoder.encodeArticleObjects(articles: articles))
+    }
+
+    private func errorHandling(articlesFromCache: [ArticleModel]) {
+        if !articlesFromCache.isEmpty {
+            self.output?.didReceive(articles: articlesFromCache)
+        } else {
+            self.output?.didReceiveFail()
+        }
     }
 }

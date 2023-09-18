@@ -36,7 +36,9 @@ final class SettingNetworkService: SettingNetworkServiceProtocol {
 
             AF.request(url).response { response in
                 guard let data = response.data else {
-                    completion(.failure(.errorParsingData))
+                    DispatchQueue.main.async {
+                        completion(.failure(.errorParsingData))
+                    }
                     return
                 }
                 DispatchQueue.main.async {
@@ -44,7 +46,9 @@ final class SettingNetworkService: SettingNetworkServiceProtocol {
                 }
             }
         } else {
-            completion(.failure(.noInternet))
+            DispatchQueue.main.async {
+                completion(.failure(.noInternet))
+            }
         }
     }
 }

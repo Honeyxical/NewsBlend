@@ -65,9 +65,16 @@ extension NBSInteractor: NBSInteractorInputProtocol {
     }
 
     func getSources() {
-        var sourcesFromCache = [SourceModel(id: "all", name: "All", type: .all, isSelected: true)]
-        sourcesFromCache += sourceCoder.decodeSourceObjects(data: cacheService.getSources())
-        output?.didReceive(sources: sourcesFromCache)
+        var sourcesWithAll = [SourceModel(id: "all", name: "All", type: .all, isSelected: true)]
+        var sourcesWithoutAll: [SourceModel] = []
+        let sourcesFromCache = sourceCoder.decodeSourceObjects(data: cacheService.getSources())
+        if sourcesFromCache.count > 1 {
+            sourcesWithAll += sourcesFromCache
+            output?.didReceive(sources: sourcesWithAll)
+            return
+        }
+        sourcesWithoutAll += sourcesFromCache
+        output?.didReceive(sources: sourcesWithoutAll)
     }
 
     func startUpdateTimer() {
